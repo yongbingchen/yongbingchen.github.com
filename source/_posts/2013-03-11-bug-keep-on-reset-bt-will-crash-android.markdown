@@ -9,10 +9,10 @@ footer: true
 ---
 **Bug: Keep on resetting BT adapter cause Android crash**
 
-Bug description: In GTV/Honeycomb's System Setting UI, keep on turn on/off Bluetooth for about 270 times, Android will crash, and UI restart from blackscreen.
+Bug description: In GTV/Honeycomb's System Setting UI, keep on turning on/off Bluetooth for about 270 times, Android will crash, and UI restart from blackscreen.
 
 My analyze:
-From logcat, located where Android system crashed, there must be something related to zygote, then I found this:
+First thing is to located where Android system crashed from logcat, there must be something related to zygote, then I found this:
 {% codeblock %}
 	03-08 20:15:00.026 I/Zygote  ( 3749): Exit zygote because system server (3780) has terminated
 {% endcodeblock %}
@@ -24,7 +24,7 @@ then all system service died like below:
 {% codeblock %}
 03-08 20:14:59.316 I/ServiceManager(  690): service 'usagestats' died
 {% endcodeblock %}
-Tracing down the fatal error message in Android Xref, it occurs when creating a new Looper instance, in Honeycomb/frameworks/base/libs/utils/Looper.cpp, where 3 new pips need to be created for one new Looper object.
+Tracing down the fatal error message in Android XRef, the error occurs when creating a new Looper instance, in Honeycomb/frameworks/base/libs/utils/Looper.cpp, where 3 new pips need to be created for one new Looper object.
 So I guess the isssue is kind of file/socket/pipe handle leakage issue, to verify this, compare "lsof" result after turn on/off Bluetooth once, I can see there's 3 newly opened pipes in system_service everytime I performed a turn on/off Bluetooth. Then I found from website that someone reported similar issue on [Android Bug List](https://code.google.com/p/android/issues/detail?id=24414 "Android Bug List")
 {% codeblock %}
 / # lsof |grep system_se >/data/debug/after_turn_off_bt.txt
@@ -38,8 +38,9 @@ So I guess the isssue is kind of file/socket/pipe handle leakage issue, to verif
 {% endcodeblock %}
 
 The symptom is quite clear now, but how to locate leakage position in Android?
-a. The first clue is Looper object is used for Android Handler object, it's hard to dump call stack in Android native C++ service, but it's easy to do that in Java.
-b. So I add a dump stack in Handler's construction method, caught below message when I turn on Bluetooth:
+
+The first clue is that Looper object is used for Android Handler object, it's hard to dump call stack in Android native C++ service, but it's easy to do that in Java.
+So I added a dump stack in Handler's construction method, caught below message when I turn on Bluetooth:
 {% codeblock %}
 03-11 05:14:07.806 D/Handler (  898):android.os.Handler
 03-11 05:14:07.806 D/Handler (  898):com.android.internal.util.HierarchicalStateMachine$HsmHandler
@@ -52,14 +53,15 @@ b. So I add a dump stack in Handler's construction method, caught below message 
 03-11 05:14:07.806 D/Handler (  898):android.server.BluetoothService
 03-11 05:14:07.806 D/Handler (  898):android.server.BluetoothService$EnableThread
 {% endcodeblock %}
-c. Doing some source code search, I reached the place in BluetoothService.java when problem occurs:
-c.1 When turn off BT, BluetoothService will do:
+After doing some source code search, I reached the place in BluetoothService.java when problem occurs:
+When turn off BT, BluetoothService will do:
 {% codeblock lang:java %}
 2146     void removeProfileState(String address) {
 2147         mDeviceProfileState.remove(address); //Comment out this line so BluetoothService will not create a new BluetoothDeviceProfileState every time BT reset.
 2148     }
 {% endcodeblock %}
-c.2 Then when turn on BT again, it will do:
+
+Then when turn on BT again, it will do:
 {% codeblock lang:java %}
 2136     BluetoothDeviceProfileState addProfileState(String address) {
 2137         BluetoothDeviceProfileState state = mDeviceProfileState.get(address);
@@ -68,10 +70,10 @@ c.2 Then when turn on BT again, it will do:
 2144     }
 {% endcodeblock %}
 
-c.3 Problem here is, we only need do a reset when turn off BT, then we can resue the BluetoothDeviceProfileState object after we turn it on again, but instead we removed it, so we need to create a new BluetoothDeviceProfileState object next time. If we did not remove the object every time we turn off BT, then the issue disappeared.
+Problem here is, we only need do a reset when turn off BT, then we can reuse the BluetoothDeviceProfileState object after we turn it on again, but Android removed it instead, then need to create a new BluetoothDeviceProfileState object next time. If we did not remove the object every time we turn off BT, then the issue disappeared.
 
-My comments:
-1. For Java class who will claim system resource, we must declare corresponding interface to release them, GC can not do this job for us. 
+*My comments:*
+For Java class who claims system resource in its construction method, we must declare corresponding interface to release them, GC can not do this job for us. 
 
 
 
