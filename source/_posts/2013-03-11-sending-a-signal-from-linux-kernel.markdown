@@ -117,5 +117,5 @@ POXIS and BSD will handle this situation differently. POXIS will fail these prim
 Programmer need to take care of this issue.
 
 Reference:
-http://www.cs.utah.edu/dept/old/texinfo/glibc-manual-0.02/library_21.html#SEC349
-http://www.makelinux.net/ldd3/chp-6-sect-2
+<http://www.cs.utah.edu/dept/old/texinfo/glibc-manual-0.02/library_21.html#SEC349>?
+<http://www.makelinux.net/ldd3/chp-6-sect-2>?
