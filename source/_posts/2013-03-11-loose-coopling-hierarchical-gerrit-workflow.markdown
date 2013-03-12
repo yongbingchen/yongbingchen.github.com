@@ -6,7 +6,7 @@ comments: true
 categories: [gerrit, git]
 ---
 
-As we are working on an Android project, we are facing the very large scale source tree (10GB level), including works from BSP team (bootloader, linux kernel), midware team (A/V codec, media framework),  and Android team (Android HAL, vendor specific Apks). We need to do weekly relaese for several products from single source tree, without any quality degradation. 
+As we are working on an Android project, we are facing a very large scale source tree (10GB level), including works from BSP team (bootloader, linux kernel), midware team (A/V codec, media framework),  and Android team (Android HAL, vendor specific Apks). We need to do weekly relaese for several products from single source tree, ensured no quality degradation in the mean time. 
 
 A work flow serves these requirement needs to:
 
