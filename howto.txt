@@ -1,0 +1,32 @@
+//To save current version to github:
+git add . //set .ignore properly to avoid adding tmp files.
+git commit
+git push git@github.com:yongbingchen/yongbingchen.github.com.git HEAD:yongbing/master
+
+//To get current version from other working place:(need ssh key pair in $HOME/.ssh)
+git clone git@github.com:yongbingchen/yongbingchen.github.com.git
+git checkout -b yongbing/local/master origin/yongbing/master
+
+//Create a new blog post:
+rake new_post["Bug: keep on reset BT will crash Android"] //This will generate source/_posts/2013-03-11-bug-keep-on-reset-bt-will-crash-android.markdown 
+//Edit the markdown file, after finish, generate and post it:
+rake generate
+rake deploy
+
+//Add ref to a picture:
+mkdir source/images/edid
+cp ~/d/write_0x60_clock_stretch.jpg source/images/edid/
+{% img http://yongbingchen.github.com/images/edid/write_0x60_clock_stretch.jpg  %}
+
+//Add ref to source code block:
+http://octopress.org/docs/plugins/codeblock/
+
+//markdown format editing tutorial
+http://stackoverflow.com/editing-help
+
+
+//Install Octopress:
+http://octopress.org/docs/setup/
+chosse RVM to install ruby.
+curl -L https://get.rvm.io | bash -s stable --ruby
+rvm install ruby-1.9.3-p392
