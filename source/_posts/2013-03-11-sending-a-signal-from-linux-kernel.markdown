@@ -107,6 +107,7 @@ int main(int argc, char *argv[])
 +               usr_action.sa_mask = block_mask;//do not receive any signal inside signal handler.
 +               usr_action.sa_flags = 0;
 +               int fd = open("/dev/target_device_name", O_RDWR);
++               int my_pid = getpid();
 +               ioctl(fd, 0x111, &my_pid);
 +               close(fd);
 {% endcodeblock %}
@@ -117,5 +118,7 @@ POXIS and BSD will handle this situation differently. POXIS will fail these prim
 Programmer need to take care of this issue.
 
 Reference:
-<http://www.cs.utah.edu/dept/old/texinfo/glibc-manual-0.02/library_21.html#SEC349>?
-<http://www.makelinux.net/ldd3/chp-6-sect-2>?
+{% blockquote @glibc-manual-0.02 http://www.cs.utah.edu/dept/old/texinfo/glibc-manual-0.02/library_21.html#sec349%}
+{% endblockquote %}
+{% blockquote @ldd3 http://www.makelinux.net/ldd3/chp-6-sect-2%}
+{% endblockquote %}
