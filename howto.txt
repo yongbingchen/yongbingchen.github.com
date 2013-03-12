@@ -30,3 +30,8 @@ http://octopress.org/docs/setup/
 chosse RVM to install ruby.
 curl -L https://get.rvm.io | bash -s stable --ruby
 rvm install ruby-1.9.3-p392
+
+//Add a list in post:
+http://www.macdrifter.com/2012/04/writing-in-markdown-lists.html
+git show 26f0e319b9068ccd3d60bf1cbdb8330a4edfdb4b
+add empty line above list.
