@@ -21,9 +21,9 @@ cp ~/d/write_0x60_clock_stretch.jpg source/images/edid/
 //Add ref to source code block:
 http://octopress.org/docs/plugins/codeblock/
 
-//markdown format editing tutorial
-http://stackoverflow.com/editing-help
-
+//Add raw url reference:
+http://octopress.org/docs/plugins/blockquote
+git show 0df10a992a12f6bf98f158245b41937be01d921f
 
 //Install Octopress:
 http://octopress.org/docs/setup/
