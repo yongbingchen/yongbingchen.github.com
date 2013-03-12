@@ -13,7 +13,7 @@ In my MHL project, this first write will always get an I2C NO_ACK error(E-DDC ne
 
 From below signal, we found the ACK actually came, but master did not acquire it at that time, that's exactly what clock stretching targeted at.
 
-{% img images/edid/write_0x60_clock_stretch.jpg  %}
+{% img http://yongbingchen.github.com/images/edid/write_0x60_clock_stretch.jpg  %}
 
 Add clock stretching logic in our GPIO simulation function, then can successfully read all e-EDID segments.
 
