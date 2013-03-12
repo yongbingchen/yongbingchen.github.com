@@ -6,12 +6,12 @@ comments: true
 categories: [gerrit, git]
 ---
 
-As we are working on an Android project, we are facing a very large scale source tree (10GB level), including works from BSP team (bootloader, linux kernel), midware team (A/V codec, media framework),  and Android team (Android HAL, vendor specific Apks). We need to do weekly relaese for several products from single source tree, ensured no quality degradation in the mean time. 
+As we are working on an Android project, we are handling a very large scale source tree (10GB level), including works from BSP team (bootloader, linux kernel), midware team (A/V codec, media framework),  and Android team (Android HAL, vendor specific Apks). We need to do weekly relaese for several products from single source tree, ensuring no quality degradation in the mean time. 
 
 A work flow serves these requirement needs to:
 
 1. have least cross team dependancy.
-2. provide tight collaboration inside team.
+2. provide tight collaboration in developers.
 3. easily locate bad node when doing release.
 
 To achive these requirements, I defined below branches:
