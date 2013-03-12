@@ -26,5 +26,5 @@ And a workflow based on these branches:
 2. After submit window closed, integrators merge these developing branches into one integration branch, perform full test on the result, if failed, apply the failed case on all tail nodes of developing branches, this step picks out the failed developing branch. Then use binary search method on this developing branch to cull out the bad node, and update the developing branch. Iterate untill integration result pass full test.
 3. Push the passed result into release branch, open submit window, start next developing/release cycle.
 
-*Braches:*
+*Branches:*
 {% img http://yongbingchen.github.com/images/gerrit/branches.png  %}
