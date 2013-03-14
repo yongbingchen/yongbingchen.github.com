@@ -38,3 +38,9 @@ add empty line above list.
 
 //Add an item in navigation bar
 git show e6c0a2723da572f3d0c6094f5d5ab8110449535d
+
+//Enable disqus:
+git show f403b37506d3a498e624e67c87edbc15ec43456f
+register an account in disqus, get a shot name;check all comments on disqus:
+http://yongbingchengithub.disqus.com/admin/moderate/#/all
+
