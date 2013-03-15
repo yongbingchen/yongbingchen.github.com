@@ -27,4 +27,4 @@ And a workflow based on these branches:
 3. Push the passed result into release branch, open submit window, start next developing/release cycle.
 
 *Branches:*
-{% img http://yongbingchen.github.com/images/gerrit/branches.png  %}
+{% img http://yongbingchen.github.com/images/gerrit/branches.jpg  %}
