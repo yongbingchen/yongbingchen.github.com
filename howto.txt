@@ -44,3 +44,6 @@ git show f403b37506d3a498e624e67c87edbc15ec43456f
 register an account in disqus, get a shot name;check all comments on disqus:
 http://yongbingchengithub.disqus.com/admin/moderate/#/all
 
+//Change backgroud images
+git show d36d845767fae9e0bbb490a2e62df297fb94f551
+ref to http://www.electrictoolbox.com/wide-background-image-header-css/
