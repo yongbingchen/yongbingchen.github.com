@@ -12,6 +12,7 @@ rake new_post["Bug: keep on reset BT will crash Android"] //This will generate s
 //Edit the markdown file, after finish, generate and post it:
 rake generate
 rake deploy
+rake preview //generate local preview before deploy, view it through 127.0.0.1:4000
 
 //Add ref to a picture:
 mkdir source/images/edid
