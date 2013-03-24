@@ -36,6 +36,9 @@ rvm install ruby-1.9.3-p392
 http://www.macdrifter.com/2012/04/writing-in-markdown-lists.html
 git show 26f0e319b9068ccd3d60bf1cbdb8330a4edfdb4b
 add empty line above list.
+add nested list:
+git show 7b182d77e139cfdd62de91fc6706ffd9acc626da
+make indent by 4 space characters, not 8 characters (will generate effect like source block).
 
 //Add an item in navigation bar
 git show e6c0a2723da572f3d0c6094f5d5ab8110449535d
