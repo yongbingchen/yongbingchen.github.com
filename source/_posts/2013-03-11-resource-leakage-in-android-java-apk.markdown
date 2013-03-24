@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "bug: keep on reset bt will crash android"
+title: "Resource leakage in Android Java Apk"
 date: 2013-03-11 02:12
 comments: true
 sharing: true
