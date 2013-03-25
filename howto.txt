@@ -51,3 +51,6 @@ http://yongbingchengithub.disqus.com/admin/moderate/#/all
 //Change backgroud images
 git show d36d845767fae9e0bbb490a2e62df297fb94f551
 ref to http://www.electrictoolbox.com/wide-background-image-header-css/
+
+//Rename a post:
+git show 2371e9ea86c05fc78cc20fc8e41ab0536f067ab4 --name-status
