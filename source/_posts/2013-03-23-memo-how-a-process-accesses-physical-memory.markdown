@@ -3,7 +3,7 @@ layout: post
 title: "Refresh memo: how a process accesses physical memory"
 date: 2013-03-23 21:39
 comments: true
-categories: 
+categories: [linux]
 ---
 Scenario: a process acquired a new block of memory, then try to access part of this block:
 {% codeblock lang:c %}
