@@ -5,12 +5,12 @@ date: 2013-03-25 22:59
 comments: true
 categories: [git] 
 ---
-If you want to check your code base, it's wrong to rely on whether the output of "git log $CODE_BASE_TAG..HEAD" is empty.
+If you want to check your code base, it's wrong to rely on whether the output of <code>git log $CODE_BASE_TAG..HEAD</code> is empty.
 
 Suppose we have a git version tree as below:
 {% img http://yongbingchen.github.com/images/git/version-graph.jpg  %}
 
-DevBranch0 is branched out from Trunk, merged Trunk node C and DevBranch0 node b, current HEAD is DevBranch0_c.
+DevBranch0 is branched out from Trunk, merged <code>Trunk</code> node C and <code>DevBranch0</code> node b, current HEAD is <code>DevBranch0_c</code>.
 
 The git history is as below:
 {% codeblock %}
@@ -27,7 +27,7 @@ yongbing@ubuntu:~/work/git_ancestor$ git log --oneline --graph
 * 0d3b0bd Init state
 {% endcodeblock %}
 
-Clearly version Trunk_D is not an ancestor of DevBranch0_c, but "git log $Trunk_D..HEAD" is not empty:
+Clearly version <code>Trunk_D</code> is not an ancestor of <code>DevBranch0_c</code>, but <code>git log $Trunk_D..HEAD</code> is not empty:
 {% codeblock %}
 yongbing@ubuntu:~/work/git_ancestor$ git tag Trunk_D b25477d
 yongbing@ubuntu:~/work/git_ancestor$ git log Trunk_D..HEAD --oneline
@@ -37,7 +37,7 @@ yongbing@ubuntu:~/work/git_ancestor$ git log Trunk_D..HEAD --oneline
 38f9ec9 DevBranch0_a
 {% endcodeblock %}
 
-The correct way is to use "git rev-list" command, then grep the result to see if the code base in really in the ancestor list:
+The correct way is to use <code>git rev-list</code> command, then grep the result to see if the code base in really in the ancestor list:
 {% codeblock %}
 yongbing@ubuntu:~/work/git_ancestor$ git log -g --oneline
 b25477d HEAD@{1}: commit: Trunk_D
