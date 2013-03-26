@@ -54,3 +54,12 @@ ref to http://www.electrictoolbox.com/wide-background-image-header-css/
 
 //Rename a post:
 git show 2371e9ea86c05fc78cc20fc8e41ab0536f067ab4 --name-status
+
+//How to make a string bold out like relief
+git show 320eced0446482c2dfdbf9827521c573ded40381
+<code>string</code>
+
+//How to change text color:
+<font color = "red">string</font>
+<font color = "green">string</font>
+<font color = "blue">string</font>
