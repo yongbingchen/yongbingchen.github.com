@@ -69,3 +69,7 @@ http://octopress.org/docs/plugins/blockquote/
 {% blockquote Seth Godin http://sethgodin.typepad.com/seths_blog/2009/07/welcome-to-island-marketing.html Welcome to Island Marketing %}
 Every interaction is both precious and an opportunity to delight.
 {% endblockquote %}
+
+
+//Add categories in side bar
+refer to http://www.dotnetguy.co.uk/post/2012/06/25/octopress-category-list-plugin/
