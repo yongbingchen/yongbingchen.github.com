@@ -63,3 +63,9 @@ git show 320eced0446482c2dfdbf9827521c573ded40381
 <font color = "red">string</font>
 <font color = "green">string</font>
 <font color = "blue">string</font>
+
+//Use block quote:
+http://octopress.org/docs/plugins/blockquote/
+{% blockquote Seth Godin http://sethgodin.typepad.com/seths_blog/2009/07/welcome-to-island-marketing.html Welcome to Island Marketing %}
+Every interaction is both precious and an opportunity to delight.
+{% endblockquote %}
