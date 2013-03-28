@@ -3,7 +3,7 @@ layout: post
 title: "Sending a signal from Linux kernel"
 date: 2013-03-11 06:17
 comments: true
-categories: [Linux]
+categories: [linux]
 ---
 **Send SIGUSR1 from kernel**
 
