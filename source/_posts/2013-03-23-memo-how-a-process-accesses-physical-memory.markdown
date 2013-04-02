@@ -25,3 +25,6 @@ What happens next when try to access the memory:
    * Allocate a physical page, update process's Page Table for this page.
 4. After the exception handler returned, and the process get scheduled to execute again, it will retry the instruction that caused the Page Fault, this time will get correct physical address pointed to the new page. Update TLB entry for this new map.
 5. Select proper line in Cache for this physical address, write the new value to Cache, then hardware will write back this new value from Cache to real memory at proper time. 
+
+{% blockquote @How Xscale Handle Cache Miss http://www.cs.uiuc.edu/homes/luddy/PROCESSORS/XScaleMMX.pdf %}
+{% endblockquote %}
