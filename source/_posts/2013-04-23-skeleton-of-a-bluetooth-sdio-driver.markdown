@@ -49,3 +49,51 @@ Source Code:
 {% endblockquote %}
 {% blockquote @btmrvl_main.c http://lxr.linux.no/linux+v3.8.8/drivers/bluetooth/btmrvl_main.c %}
 {% endblockquote %}
+
+##Note: How to load firmware for a SDIO device##
+{% codeblock 1. Disable interrupt from this SDIO device. lang:c %}
+sdio_claim_host(card->func);
+btmrvl_sdio_disable_host_int(card);
+	host_int_mask = sdio_readb(card->func, card->reg->host_int_mask, &ret);
+	host_int_mask &= ~HIM_DISABLE;
+	sdio_writeb(card->func, host_int_mask, card->reg->host_int_mask, &ret);
+sdio_release_host(card->func);
+{% endcodeblock %}
+
+{% codeblock 2. Get and Write firmware. lang:c %}
+sdio_claim_host(card->func);
+	//Get firmware from user space.
+	request_firmware(&fw_firmware, card->firmware,//name of firmware file, = "mrvl/sd8787_uapsta.bin",
+			&card->func->dev);
+	//Write firmware into SDIO device, check firmware status.
+	tmpfwbufsz = ALIGN_SZ(BTM_UPLD_SIZE, BTSDIO_DMA_ALIGN);
+	fwbuf = (u8 *) ALIGN_ADDR(tmpfwbuf, BTSDIO_DMA_ALIGN);
+	memcpy(fwbuf, &firmware[offset], txlen);
+	sdio_writesb(card->func, card->ioport, fwbuf,tx_blocks * blksz_dl);
+	
+	//Release firmware related resource in kernel.
+	release_firmware(fw_firmware);
+sdio_release_host(card->func);
+{% endcodeblock %}
+Alternatively, you can use request_firmware_nowait() if current thread is not allowed to sleep for a long time.
+
+
+{% codeblock 3. Enable SDIO device interrupt. lang:c %}
+btmrvl_sdio_enable_host_int(card);
+{% endcodeblock %}
+
+
+Reference:
+{% blockquote @How request_firmware() works http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/firmware_class/README?id=HEAD %}
+{% endblockquote %}
+{% blockquote @Default firmware search path in Android http://stackoverflow.com/questions/6019915/kernel-module-cannot-find-firmware-file-where-should-it-be %}
+{% endblockquote %}
+{% codeblock $Jellybean/system/core/init/devices.c lang:c %}
+#define SYSFS_PREFIX    "/sys"
+#define FIRMWARE_DIR1   "/etc/firmware"
+asprintf(&root, SYSFS_PREFIX"%s/", uevent->path);
+asprintf(&file1, FIRMWARE_DIR1"/%s", uevent->firmware);
+fw_fd = open(file1, O_RDONLY);
+{% endcodeblock %}
+
+
