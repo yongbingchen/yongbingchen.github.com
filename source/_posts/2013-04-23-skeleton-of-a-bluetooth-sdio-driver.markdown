@@ -96,4 +96,7 @@ asprintf(&file1, FIRMWARE_DIR1"/%s", uevent->firmware);
 fw_fd = open(file1, O_RDONLY);
 {% endcodeblock %}
 
-
+#Footnote: sdio_claim_host(card->func)#
+1. card->func means an independent function residues in same card (there maybe different functions implemented in same card simultaneously, like BT and Wifi in MRVL 8787 module. The device field in struct sdio_device_id is used as function id to distinguish these functions, in this driver, the device field in driver is 0x911B for MRVL_BT_SD8787, it reflected as:
+0x911b in /sys/class/mmc_host/mmc1/mmc1\:0001/mmc1\:0001\:3/device.
+2. sdio_claim_host() is acting like a lock, I guess this will serialize access to same SD device between different functions, and also between different threads inside same function.
