@@ -15,3 +15,7 @@ In Bluedroid's A2DP hardware implementation, it will use two sockets to communic
 Reference:
 {% blockquote Source Code http://androidxref.com/4.2.2_r1 %}
 {% endblockquote %}
+{% blockquote logcat:A2DP http://yongbingchen.github.com/txt/bluedroid/a2dp-init-logcat.txt %}
+{% endblockquote %}
+
+

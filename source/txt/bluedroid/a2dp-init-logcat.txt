@@ -1,0 +1,199 @@
+﻿//Launch A2DP service
+04-25 01:56:29.760 D/BluetoothManagerService( 1526): Auto-enabling Bluetooth.
+04-25 01:56:30.380 D/AdapterServiceConfig( 2093): Adding A2dpService
+04-25 01:56:30.530 D/BluetoothA2dp( 1526): Proxy object connected
+04-25 01:56:30.530 D/A2dpService( 2093): Received start request. Starting profile...
+04-25 01:56:30.530 I/BluetoothA2dpServiceJni( 2093): classInitNative: succeeds
+04-25 01:56:30.530 D/A2dpStateMachine( 2093): make
+04-25 01:56:30.530 D/BluetoothAdapterService(1087379648)( 2093): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@40d031e8
+04-25 01:56:30.530 I/bluedroid( 2093): get_profile_interface a2dp
+04-25 01:56:30.530 I/bt-btif ( 2093): btif_av_get_interface
+04-25 01:56:30.530 I/bt-btif ( 2093): init
+04-25 01:56:30.530 I/bt-btif ( 2093): ## A2DP START MEDIA TASK ##
+04-25 01:56:30.540 I/GKI_LINUX( 2093): gki_task_entry: gki_task_entry task_id=2 [A2DP-MEDIA] starting
+04-25 01:56:30.540 D/bt-btif ( 2093): UIPC_Init
+04-25 01:56:30.540 I/bt-btif ( 2093): ### uipc_main_init ###
+04-25 01:56:30.540 D/bt-btif ( 2093): UIPC_Open : ch_id 0, p_cback 5c7eabcd
+04-25 01:56:30.540 I/bt-btif ( 2093): SETUP CHANNEL SERVER 0
+04-25 01:56:30.540 I/bt-btif ( 2093): create_server_socket /data/misc/bluedroid/.a2dp_ctrl
+04-25 01:56:30.540 I/bt-btif ( 2093): created socket fd 52
+04-25 01:56:30.540 I/bt-btif ( 2093): ADD SERVER FD TO ACTIVE SET 52
+04-25 01:56:30.540 I/bt-btif ( 2093): UIPC SEND WAKE UP
+04-25 01:56:30.540 I/bt-btif ( 2093): ## A2DP MEDIA TASK STARTED ##
+04-25 01:56:30.540 E/bt-btif ( 2093): btif_enable_service: current services:0x40040
+04-25 01:56:30.540 D/bt-btif ( 2093): btif_rc_init
+04-25 01:56:30.540 D/bt-btif ( 2093): btif_av_state_idle_handler event:BTIF_SM_ENTER_EVT flags 0
+04-25 01:56:30.540 I/bt-btif ( 2093): ## ON A2DP IDLE ##
+04-25 01:56:30.540 D/bt-btif ( 2093): bta_av_co_init
+04-25 01:56:30.540 D/bt-btif ( 2093): bta_av_co_cp_set_flag
+04-25 01:56:30.540 D/bt-btif ( 2093): bta_av_co_audio_codec_reset
+04-25 01:56:30.540 D/bt-btif ( 2093): btif_media_task_aa_stop_tx is timer: 0
+04-25 01:56:30.540 D/bt-btif ( 2093): UIPC_Close : ch_id 1
+04-25 01:56:30.540 I/bt-btif ( 2093): CHANNEL 1 ALREADY CLOSED
+04-25 01:56:30.550 D/A2dpStateMachine( 2093): Enter Disconnected: -2
+04-25 01:56:30.730 D/BTIF_STORAGE( 2093): btif_in_fetch_bonded_devices(L423): Remote device:50:c9:71:0d:d2:d9, size:18
+04-25 01:56:30.730 D/bt-avp  ( 2093): avdt_scb_alloc hdl=1, psc_mask:0x2
+04-25 01:56:30.730 I/bt-avp  ( 2093): AVCT_CreateConn: 1, control:1
+04-25 01:56:30.730 D/bt-avp  ( 2093): avct_ccb_alloc 0
+
+
+04-25 01:56:31.080 D/BluetoothAdapterService(1087379648)( 2093): Get Bonded Devices being called
+04-25 01:56:31.080 D/BluetoothAdapterService( 2093): Auto Connecting A2DP Profile with device 50:C9:71:0D:D2:D9
+04-25 01:56:31.080 D/A2dpStateMachine( 2093): Disconnected process message: 1
+04-25 01:56:31.090 I/BluetoothA2dpServiceJni( 2093): connectA2dpNative: sBluetoothA2dpInterface: 0x5c873968
+04-25 01:56:31.090 D/A2dpStateMachine( 2093): Exit Disconnected: 1
+04-25 01:56:31.090 D/A2dpStateMachine( 2093): Enter Pending: 1
+04-25 01:56:31.090 D/A2dpStateMachine( 2093): Connection state 50:C9:71:0D:D2:D9: 0->1
+04-25 01:56:31.100 D/BluetoothA2dp( 1526): onBluetoothStateChange: up=true
+04-25 01:56:31.330 D/BluetoothA2dp( 1683): Proxy object connected
+04-25 01:56:31.330 D/A2dpProfile( 1683): Bluetooth service connected
+
+//Connect A2DP
+05-02 01:54:28.202 I/BluetoothA2dpServiceJni( 2093): bta2dp_connection_state_callback
+05-02 01:54:28.202 D/A2dpStateMachine( 2093): Pending process message: 101
+05-02 01:54:28.202 D/A2dpStateMachine( 2093): Stack and target device are connecting
+05-02 01:54:33.342 D/bt-avp  ( 2093): No ccb for addr 50-c9-71-0d-d2-d9
+05-02 01:54:33.342 D/bt-avp  ( 2093): avdt_ccb_alloc 0
+05-02 01:54:33.342 I/bt-avp  ( 2093): CCB ccb=0 event=API_CONNECT_REQ_EVT state=CCB_IDLE_ST
+05-02 01:54:33.342 D/bt-avp  ( 2093): avdt_ad_open_req: type: 0, role: 0, tcid:0
+05-02 01:54:33.342 D/bt-avp  ( 2093): avdt_ad_tc_tbl_to_idx: 0
+05-02 01:54:33.342 D/bt-avp  ( 2093): avdt_ad_tc_tbl_to_idx: 0
+05-02 01:54:33.342 D/bt-avp  ( 2093): avdt_cb.ad.lcid_tbl[2] = 0
+05-02 01:54:33.342 D/bt-avp  ( 2093): avdt_cb.ad.rt_tbl[0][0].lcid = 0x42
+05-02 01:54:35.002 D/bt-avp  ( 2093): avdt_l2c_connect_cfm_cback lcid: 66, result: 0
+05-02 01:54:35.002 D/bt-avp  ( 2093): avdt_sec_check_complete_orig res: 0
+05-02 01:54:35.022 D/bt-avp  ( 2093): peer_mtu: 895, lcid: x42
+05-02 01:54:35.042 I/bt-avp  ( 2093): CCB ccb=0 event=LL_OPEN_EVT state=CCB_OPENING_ST
+05-02 01:54:35.042 I/bt-avp  ( 2093): CCB ccb=0 event=API_DISCOVER_REQ_EVT state=CCB_OPEN_ST
+05-02 01:54:35.042 I/bt-avp  ( 2093): CCB ccb=0 event=SENDMSG_EVT state=CCB_OPEN_ST
+05-02 01:54:35.042 D/bt-avp  ( 2093): avdt_msg_send label:0, msg:0, sig:1
+05-02 01:54:35.042 E/bt-btif ( 2093): bta_av_rc_create ACP handle exist for shdl:0
+05-02 01:54:35.162 D/bt-avp  ( 2093): tcid: 0, type: 0
+05-02 01:54:35.162 I/bt-avp  ( 2093): CCB ccb=0 event=MSG_DISCOVER_RSP_EVT state=CCB_OPEN_ST
+05-02 01:54:35.162 I/bt-avp  ( 2093): CCB ccb=0 event=RCVRSP_EVT state=CCB_OPEN_ST
+05-02 01:54:35.162 I/bt-avp  ( 2093): CCB ccb=0 event=API_GETCAP_REQ_EVT state=CCB_OPEN_ST
+05-02 01:54:35.162 I/bt-avp  ( 2093): CCB ccb=0 event=SENDMSG_EVT state=CCB_OPEN_ST
+05-02 01:54:35.162 D/bt-avp  ( 2093): avdt_msg_send label:1, msg:0, sig:2
+05-02 01:54:35.192 D/bt-avp  ( 2093): tcid: 0, type: 0
+05-02 01:54:35.192 D/bt-avp  ( 2093): elem=1 elem_len: 0 psc_mask=0x2
+05-02 01:54:35.192 D/bt-avp  ( 2093): elem=7 elem_len: 6 psc_mask=0x82
+05-02 01:54:35.192 D/bt-avp  ( 2093): elem=4 elem_len: 2 psc_mask=0x12
+05-02 01:54:35.192 D/bt-avp  ( 2093): err=0x0, elem:0x4 psc_mask=0x2
+05-02 01:54:35.192 I/bt-avp  ( 2093): CCB ccb=0 event=MSG_GETCAP_RSP_EVT state=CCB_OPEN_ST
+05-02 01:54:35.192 I/bt-avp  ( 2093): CCB ccb=0 event=RCVRSP_EVT state=CCB_OPEN_ST
+05-02 01:54:35.192 I/bt-avp  ( 2093): SCB hdl=1 event=4/API_SETCONFIG_REQ_EVT state=SCB_IDLE_ST
+05-02 01:54:35.192 I/bt-avp  ( 2093): CCB ccb=0 event=SENDMSG_EVT state=CCB_OPEN_ST
+05-02 01:54:35.192 D/bt-avp  ( 2093): avdt_msg_send label:2, msg:0, sig:3
+05-02 01:54:35.192 I/bt-avp  ( 2093): CCB ccb=0 event=UL_OPEN_EVT state=CCB_OPEN_ST
+05-02 01:54:35.222 D/bt-avp  ( 2093): tcid: 0, type: 0
+05-02 01:54:35.222 I/bt-avp  ( 2093): SCB hdl=1 event=29/MSG_SETCONFIG_RSP_EVT state=SCB_IDLE_ST
+05-02 01:54:35.222 I/bt-avp  ( 2093): SCB hdl=1 event=5/API_OPEN_REQ_EVT state=SCB_CONF_ST
+05-02 01:54:35.222 I/bt-avp  ( 2093): CCB ccb=0 event=SENDMSG_EVT state=CCB_OPEN_ST
+05-02 01:54:35.222 I/bt-avp  ( 2093): CCB ccb=0 event=RCVRSP_EVT state=CCB_OPEN_ST
+05-02 01:54:35.222 D/bt-avp  ( 2093): avdt_msg_send label:3, msg:0, sig:6
+05-02 01:54:35.242 D/bt-avp  ( 2093): tcid: 0, type: 0
+05-02 01:54:35.242 I/bt-avp  ( 2093): SCB hdl=1 event=31/MSG_OPEN_RSP_EVT state=SCB_CONF_ST
+05-02 01:54:35.242 D/bt-avp  ( 2093): avdt_ad_open_req: type: 1, role: 0, tcid:1
+05-02 01:54:35.242 D/bt-avp  ( 2093): avdt_cb.ad.rt_tbl[0][1].scb_hdl = 1
+05-02 01:54:35.242 D/bt-avp  ( 2093): avdt_ad_tc_tbl_to_idx: 1
+05-02 01:54:35.242 D/bt-avp  ( 2093): avdt_ad_tc_tbl_to_idx: 1
+05-02 01:54:35.242 D/bt-avp  ( 2093): avdt_cb.ad.lcid_tbl[3] = 1
+05-02 01:54:35.242 D/bt-avp  ( 2093): avdt_cb.ad.rt_tbl[0][1].lcid = 0x43
+05-02 01:54:35.242 I/bt-avp  ( 2093): CCB ccb=0 event=RCVRSP_EVT state=CCB_OPEN_ST
+05-02 01:54:35.282 D/bt-avp  ( 2093): avdt_l2c_connect_cfm_cback lcid: 67, result: 0
+05-02 01:54:35.282 D/bt-avp  ( 2093): peer_mtu: 895, lcid: x43
+05-02 01:54:35.302 D/bt-avp  ( 2093): tcid: 1, type: 1
+05-02 01:54:35.302 I/bt-avp  ( 2093): SCB hdl=1 event=43/TC_OPEN_EVT state=SCB_OPENING_ST
+05-02 01:54:35.302 D/bt-avp  ( 2093): psc_mask: cfg: 0x2, req:0x2, cur: 0x2
+05-02 01:54:35.302 I/BluetoothA2dpServiceJni( 2093): bta2dp_connection_state_callback
+05-02 01:54:35.302 D/A2dpStateMachine( 2093): Pending process message: 101
+05-02 01:54:35.312 E/AudioPolicyManagerBase( 1465): setDeviceConnectionState() invalid A2DP device: 80
+05-02 01:54:35.312 D/A2dpStateMachine( 2093): Enter Connected: 101
+05-02 01:54:35.312 D/A2dpStateMachine( 2093): Connection state 50:C9:71:0D:D2:D9: 1->2
+05-02 01:54:35.312 D/A2dpStateMachine( 2093): A2DP Playing state : device: 50:C9:71:0D:D2:D9 State:10->11
+05-02 01:54:35.312 D/CachedBluetoothDevice( 1683): onProfileStateChanged: profile A2DP newProfileState 2
+
+//Connect AVRCP
+05-02 01:54:38.882 I/bt-avp  ( 2093): AVCT_CreateConn: 0, control:1
+05-02 01:54:38.882 D/bt-avp  ( 2093): avct_ccb_alloc 1
+05-02 01:54:38.882 D/bt-avp  ( 2093): No lcb for addr 50-c9-71-0d-d2-d9
+05-02 01:54:38.882 D/bt-avp  ( 2093): avct_lcb_alloc 1
+05-02 01:54:38.882 D/bt-avp  ( 2093): ch_state: 0
+05-02 01:54:38.882 I/bt-avp  ( 2093): LCB lcb=1 event=0 state=0
+05-02 01:54:39.042 D/bt-avp  ( 2093): avct_l2c_connect_cfm_cback lcid:0x45 result: 0 ch_state: 1, conflict_lcid:0x0
+05-02 01:54:39.042 D/bt-avp  ( 2093): avct_l2c snd Cfg Req
+05-02 01:54:39.042 D/bt-avp  ( 2093): ch_state cnc: 2
+05-02 01:54:39.082 D/bt-avp  ( 2093): avct_l2c_config_cfm_cback: 0x45, ch_state: 2, res: 0
+05-02 01:54:39.082 D/bt-avp  ( 2093): ch_state cfc: 2
+05-02 01:54:39.092 D/bt-avp  ( 2093): avct_l2c_config_ind_cback: 0x45, ch_state: 2
+05-02 01:54:39.092 I/bt-avp  ( 2093): LCB lcb=1 event=4 state=1
+05-02 01:54:39.092 D/bt-avp  ( 2093): ch_state cfi: 3
+05-02 01:54:39.092 E/bt-btif ( 2093): use_rc:1
+05-02 01:54:39.092 E/bt-btif ( 2093): bta_av_rc_opened rcb[1] shdl:1 lidx:1/0
+05-02 01:54:39.102 D/EventHub( 1526): No input device configuration file found for device 'AVRCP'.
+05-02 01:54:39.102 I/EventHub( 1526): New device: id=4, fd=204, path='/dev/input/event3', name='AVRCP', classes=0x80000001, configuration='', keyLayout='/system/usr/keylayout/AVRCP.kl', keyCharacterMap='/system/usr/keychars/Generic.kcm', builtinKeyboard=false, usingSuspendBlockIoctl=true, usingClockIoctl=true
+
+
+
+//Open A2DP client
+05-02 01:13:06.924 D/audio_a2dp_hw( 2677): adev_open:  adev_open in A2dp_hw module
+05-02 01:13:06.924 D/audio_a2dp_hw( 2677): adev_open
+05-02 01:13:06.924 D/audio_a2dp_hw( 2677): adev_init_check
+05-02 01:13:06.924 D/audio_a2dp_hw( 2677): adev_open_output_stream: opening output
+05-02 01:13:06.924 D/audio_a2dp_hw( 2677): a2dp_stream_out_init
+05-02 01:13:06.924 D/audio_a2dp_hw( 2677): out_get_format: format 0x1
+05-02 01:13:06.924 D/audio_a2dp_hw( 2677): out_get_sample_rate: rate 44100
+05-02 01:13:06.924 D/audio_a2dp_hw( 2677): out_get_channels: channels 0x3
+05-02 01:13:06.924 D/audio_a2dp_hw( 2677): skt_connect: connect to /data/misc/bluedroid/.a2dp_ctrl (sz 10240)
+05-02 01:13:06.924 D/audio_a2dp_hw( 2677): skt_connect: connected to stack fd = 7
+05-02 01:13:06.924 D/audio_a2dp_hw( 2677): check_a2dp_ready: state 3
+05-02 01:13:06.924 D/audio_a2dp_hw( 2677): a2dp_command: A2DP COMMAND A2DP_CTRL_CMD_CHECK_READY
+05-02 01:13:06.924 D/audio_a2dp_hw( 2677): a2dp_command: A2DP COMMAND A2DP_CTRL_CMD_CHECK_READY DONE STATUS 0
+05-02 01:13:06.924 D/audio_a2dp_hw( 2677): adev_open_output_stream: success
+
+
+//Send start command to A2DP server
+05-02 01:13:06.924 D/audio_a2dp_hw( 2677): out_get_buffer_size: buffer_size : 10240
+05-02 01:13:06.924 D/audio_a2dp_hw( 2677): out_write: write 10240 bytes (fd -1)
+05-02 01:13:06.924 D/audio_a2dp_hw( 2677): start_audio_datapath: state 3
+05-02 01:13:06.924 D/audio_a2dp_hw( 2677): a2dp_command: A2DP COMMAND A2DP_CTRL_CMD_START
+05-02 01:13:06.924 I/bt-avp  ( 2139): CCB ccb=0 event=API_START_REQ_EVT state=CCB_OPEN_ST
+05-02 01:13:06.924 D/bt-avp  ( 2139): avdt_scb_verify state 0
+05-02 01:13:06.924 D/bt-avp  ( 2139): avdt_scb_verify state 3, nsc_mask0x0, ret: 0
+05-02 01:13:06.924 I/bt-avp  ( 2139): CCB ccb=0 event=SENDMSG_EVT state=CCB_OPEN_ST
+05-02 01:13:06.924 D/bt-avp  ( 2139): avdt_msg_send label:4, msg:0, sig:7
+05-02 01:13:06.984 D/bt-avp  ( 2139): tcid: 0, type: 0
+05-02 01:13:06.984 I/bt-avp  ( 2139): CCB ccb=0 event=MSG_START_RSP_EVT state=CCB_OPEN_ST
+05-02 01:13:06.984 I/bt-avp  ( 2139): SCB hdl=1 event=32/MSG_START_RSP_EVT state=SCB_OPEN_ST
+05-02 01:13:06.984 I/bt-avp  ( 2139): CCB ccb=0 event=RCVRSP_EVT state=CCB_OPEN_ST
+05-02 01:13:06.984 E/bt-btif ( 2139): bta_av_link_role_ok hndl:x41 role:0, conn_audio:x1, bits:1, features:x8001
+05-02 01:13:06.984 I/BluetoothA2dpServiceJni( 2139): bta2dp_audio_state_callback
+05-02 01:13:06.984 D/A2dpStateMachine( 2139): Connected process message: 101
+05-02 01:13:06.984 D/A2dpStateMachine( 2139): A2DP Playing state : device: 50:C9:71:0D:D2:D9 State:11->10
+
+//Start to write output data into A2DP server's data socket
+05-02 01:13:06.984 D/audio_a2dp_hw( 2677): a2dp_command: A2DP COMMAND A2DP_CTRL_CMD_START DONE STATUS 0
+05-02 01:13:06.984 D/audio_a2dp_hw( 2677): skt_connect: connect to /data/misc/bluedroid/.a2dp_data (sz 10240)
+05-02 01:13:06.984 D/audio_a2dp_hw( 2677): skt_connect: connected to stack fd = 9
+05-02 01:13:06.984 D/audio_a2dp_hw( 2677): skt_write
+05-02 01:13:06.984 D/audio_a2dp_hw( 2677): ts_log: [skt_write] ts 250574355, diff 250574355, val 10240
+05-02 01:13:06.984 D/audio_a2dp_hw( 2677): out_write: wrote 10240 bytes out of 10240 bytes
+05-02 01:13:06.984 D/audio_a2dp_hw( 2677): out_write: write 10240 bytes (fd 9)
+05-02 01:13:06.984 D/audio_a2dp_hw( 2677): skt_write
+05-02 01:13:06.994 I/bt-avp  ( 2139): SCB hdl=1 event=1/API_WRITE_REQ_EVT state=SCB_STREAM_ST
+05-02 01:13:07.014 I/bt-avp  ( 2139): SCB hdl=1 event=1/API_WRITE_REQ_EVT state=SCB_STREAM_ST
+05-02 01:13:07.034 I/bt-avp  ( 2139): SCB hdl=1 event=1/API_WRITE_REQ_EVT state=SCB_STREAM_ST
+05-02 01:13:07.054 D/audio_a2dp_hw( 2677): ts_log: [skt_write] ts 250648966, diff 00074610, val 10240
+05-02 01:13:07.054 D/audio_a2dp_hw( 2677): out_write: wrote 10240 bytes out of 10240 bytes
+05-02 01:13:07.054 D/audio_a2dp_hw( 2677): out_write: write 10240 bytes (fd 9)
+
+
+//Close output
+05-02 01:14:03.134 D/audio_a2dp_hw( 2677): adev_close_output_stream: closing output (state 1)
+05-02 01:14:03.134 D/audio_a2dp_hw( 2677): stop_audio_datapath: state 1
+05-02 01:14:03.134 D/audio_a2dp_hw( 2677): a2dp_command: A2DP COMMAND A2DP_CTRL_CMD_STOP
+05-02 01:14:03.134 I/bt-avp  ( 2139): SCB hdl=1 event=1/API_WRITE_REQ_EVT state=SCB_STREAM_ST
+05-02 01:14:03.134 E/bt-btif ( 2139): bta_av_str_stopped:audio_open_cnt=1, p_data 5af90c90
+05-02 01:14:03.134 I/bt-avp  ( 2139): CCB ccb=0 event=API_SUSPEND_REQ_EVT state=CCB_OPEN_ST
+05-02 01:14:03.134 D/bt-avp  ( 2139): avdt_scb_verify state 1
+05-02 01:14:03.134 D/bt-avp  ( 2139): avdt_scb_verify state 4, nsc_mask0x0, ret: 0

@@ -7,7 +7,7 @@ categories: [Android, Bluetooth]
 ---
 Item A. Connect a remote A2DP device:
 {% img center http://yongbingchen.github.com/images/bluedroid/a2dp_connect.jpg  %}
-1. Android system will try to reconnect paired A2DP device automatically after BT enable.
+1 Android system will try to reconnect paired A2DP device automatically after BT enable.
 {% codeblock lang:cpp %}
 04-25 01:56:31.080 D/BluetoothAdapterService( 2093): Auto Connecting A2DP Profile with device 50:C9:71:0D:D2:D9
 	packages/apps/Bluetooth/jni/com_android_bluetooth_a2dp.cpp	
@@ -19,11 +19,11 @@ Item A. Connect a remote A2DP device:
 			btif_queue_connect(UUID_SERVCLASS_AUDIO_SOURCE, bd_addr, connect_int);//This will trigger an event in btu_task, now the caller thread returned.
 				GKI_send_msg(BTIF_TASK, BTU_BTIF_MBOX, p_msg);
 {% endcodeblock %}
-2. This will later trigger a A2DP server event API_CONNECT_REQ_EVT in state CCB_IDLE_ST:
+2 This will later trigger a A2DP server event API_CONNECT_REQ_EVT in state CCB_IDLE_ST:
 {% codeblock lang:cpp %}
 05-02 01:54:33.342 I/bt-avp  ( 2093): CCB ccb=0 event=API_CONNECT_REQ_EVT state=CCB_IDLE_ST
 {% endcodeblock %}
-3. A2DP server handle this event in bellow two actions:
+3 A2DP server handle this event in bellow two actions:
 {% codeblock lang:cpp %}
 external/bluetooth/bluedroid/stack/avdt/avdt_ccb.c
 129 const UINT8 avdt_ccb_st_idle[][AVDT_CCB_NUM_COLS] = {
@@ -61,7 +61,7 @@ external/bluetooth/bluedroid/stack/l2cap/l2c_api.c
 
 Item B. a2dp_write data path:
 {% img center http://yongbingchen.github.com/images/bluedroid/a2dp_write.jpg  %}
-1. A2DP client write to A2DP data socket will trigger API_WRITE_REQ_EVT in SCB_STREAM_ST state:
+1 A2DP client write to A2DP data socket will trigger API_WRITE_REQ_EVT in SCB_STREAM_ST state:
 {% codeblock lang:cpp %}
 05-02 01:14:03.134 I/bt-avp  ( 2139): SCB hdl=1 event=1/API_WRITE_REQ_EVT state=SCB_STREAM_ST
 394 /* state table for streaming state */
@@ -69,20 +69,20 @@ Item B. a2dp_write data path:
 396 /* Event                     Action 1                       Action 2                    Next state */
 398 /* API_WRITE_REQ_EVT */     {AVDT_SCB_HDL_WRITE_REQ,        AVDT_SCB_CHK_SND_PKT,       AVDT_SCB_STREAM_ST},
 {% endcodeblock %}
-2. A2DP server handle this in bellow two action:
+2 A2DP server handle this with bellow two actions:
 {% codeblock lang:cpp %}
-//2.1 builds a new media packet and stores it in the SCB.
+//2.1 build a new media packet and stores it in the SCB.
 external/bluetooth/bluedroid/stack/avdt/avdt_scb_act.c
 1320 void avdt_scb_hdl_write_req(tAVDT_SCB *p_scb, tAVDT_SCB_EVT *p_data) 
 
-//2.2 sends this stored media packet to L2CAP layer.
+//2.2 send this stored media packet to L2CAP layer.
 1921 void avdt_scb_chk_snd_pkt(tAVDT_SCB *p_scb, tAVDT_SCB_EVT *p_data)
 	avdt_ad_write_req(AVDT_CHAN_MEDIA, p_scb->p_ccb, p_scb, p_pkt);
 		L2CA_DataWrite(avdt_cb.ad.rt_tbl[avdt_ccb_to_idx(p_ccb)][tcid].lcid, p_buf);
 {% endcodeblock %}
-3. L2CAP to HCI layer
+3 L2CAP to HCI layer
 {% codeblock lang:cpp %}
-	bluedroid/stack/l2cap/l2c_api.c
+bluedroid/stack/l2cap/l2c_api.c
 1633 UINT8 L2CA_DataWrite (UINT16 cid, BT_HDR *p_data)
 1634 {
 1636     return l2c_data_write (cid, p_data, L2CAP_FLUSHABLE_CH_BASED);
@@ -115,3 +115,55 @@ external/bluetooth/bluedroid/stack/avdt/avdt_scb_act.c
 				bytes_sent = userial_write(event,(uint8_t *) p,bytes_to_send);
 					 ret = write(userial_cb.fd, p_data+total, len);
 {% endcodeblock %}
+
+Item C. Incoming data path:
+0 Init vendor (BT chip vendor, like MRVL/TI) implement of bt_vendor_interface_t interface.
+{% codeblock lang:cpp %}
+	187 void init_vnd_if(unsigned char *local_bdaddr)
+			dlhandle = dlopen("libbt-vendor.so", RTLD_NOW);				
+			GLOBAL bt_vendor_interface_t *bt_vnd_if = (bt_vendor_interface_t *) dlsym(dlhandle, "BLUETOOTH_VENDOR_LIB_INTERFACE");
+			bt_vnd_if->init(&vnd_callbacks, local_bdaddr);
+			
+	306 uint8_t userial_open(uint8_t port)
+			result = bt_vendor_interface_t * bt_vnd_if->op(BT_VND_OP_USERIAL_OPEN, &fd_array);
+				int bt_vnd_mrvl_if_op(bt_vendor_opcode_t opcode, void *param)
+					mchar_fd = open("/dev/mbtchar0", O_RDWR);
+	363     pthread_create(&(userial_cb.read_thread), &thread_attr, userial_read_thread, NULL) != 0 );
+{% endcodeblock %}
+1 Got a packet from hardware device driver, in HCI layer.
+{% codeblock lang:cpp %}
+bluedroid/hci/src/userial.c:210 static void *userial_read_thread(void *arg)
+	rx_length = select_read(userial_cb.fd, p, READ_LIMIT);
+		ret = read(fd, pbuf, (size_t)len);
+	utils_enqueue(&(userial_cb.rx_q), p_buf);
+	//bluedroid/hci/src/bt_hci_bdroid.c
+	bthc_signal_event(HC_EVENT_RX);
+{% endcodeblock %}
+
+2 Transfer this to L2CAP layer.
+{% codeblock lang:cpp %}
+bluedroid/hci/src/bt_hci_bdroid.c	
+339 static void *bt_hc_worker_thread(void *arg)
+	if (events & HC_EVENT_RX)
+		 p_hci_if->rcv();
+			uint16_t hci_h4_receive_msg(void)//Construct HCI EVENT/ACL packets and send them to stack
+ 957             if (p_cb->p_rcv_msg->event != MSG_HC_TO_STACK_HCI_ACL)
+ 958                 btsnoop_capture(p_cb->p_rcv_msg, TRUE);
+ 959
+ 960             if (p_cb->p_rcv_msg->event == MSG_HC_TO_STACK_HCI_EVT)
+ 961                 intercepted = internal_event_intercept();//intercept the event if it is the result of an early issued internal command.
+						p_cb->int_cmd[p_cb->int_cmd_rd_idx].cback(p_cb->p_rcv_msg);//deactive timer here? NO
+ 965                 bt_hc_cbacks->data_ind((TRANSAC) p_cb->p_rcv_msg, (char *) (p_cb->p_rcv_msg + 1), p_cb->p_rcv_msg->len + BT_HC_HDR_SIZE);
+							bluedroid/main/bte_main.c:504 static int data_ind(TRANSAC transac, char *p_buf, int len)
+								GKI_send_msg (BTU_TASK, BTU_HCI_RCV_MBOX, transac);//handle in btu_task.
+{% endcodeblock %}
+
+Reference:
+{% blockquote logcat:A2DP http://yongbingchen.github.com/txt/bluedroid/a2dp-init-logcat.txt %}
+{% endblockquote %}
+{% blockquote air log: LMP http://yongbingchen.github.com/images/bluedroid/A2DP-connect-LMP.jpg %}
+{% endblockquote %}
+{% blockquote air log: L2CAP http://yongbingchen.github.com/images/bluedroid/A2DP-connect-L2CAP.jpg %}
+{% endblockquote %}
+{% blockquote source code reading note http://yongbingchen.github.com/txt/bluedroid/a2dp-source-code-reading-note.txt %}
+{% endblockquote %}
