@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Dissect Bluedroid from A2DP: Part IV: A2DP traffic"
+title: "Dissect Bluedroid from A2DP: Part IV: connect and communication"
 date: 2013-05-07 04:50
 comments: true
 categories: [Android, Bluetooth]
 ---
-Item A. Connect a remote A2DP device:
+###Item A. Connect a remote A2DP device:##
 {% img center http://yongbingchen.github.com/images/bluedroid/a2dp_connect.jpg  %}
 1 Android system will try to reconnect paired A2DP device automatically after BT enable.
 {% codeblock lang:cpp %}
@@ -54,14 +54,13 @@ external/bluetooth/bluedroid/stack/l2cap/l2c_api.c
 						utils_enqueue(&tx_q, (void *) transac);
 						 bthc_signal_event(HC_EVENT_TX);
 			btu_start_timer (&p_lcb->timer_entry, BTU_TTYPE_L2CAP_LINK,L2CAP_LINK_CONNECT_TOUT);
-	if (p_lcb->link_state == LST_CONNECTED)
-		l2c_csm_execute (p_ccb, L2CEVT_L2CA_CONNECT_REQ, NULL);
 {% endcodeblock %}
+5 This command will trigger connection establish process between local and remote device, accomplished by a event-driven state machine in BT stack.
 
 
-Item B. a2dp_write data path:
+###Item B. a2dp_write data path:##
 {% img center http://yongbingchen.github.com/images/bluedroid/a2dp_write.jpg  %}
-1 A2DP client write to A2DP data socket will trigger API_WRITE_REQ_EVT in SCB_STREAM_ST state:
+1 A2DP client writes to A2DP data socket will trigger API_WRITE_REQ_EVT in SCB_STREAM_ST state:
 {% codeblock lang:cpp %}
 05-02 01:14:03.134 I/bt-avp  ( 2139): SCB hdl=1 event=1/API_WRITE_REQ_EVT state=SCB_STREAM_ST
 394 /* state table for streaming state */
@@ -84,7 +83,6 @@ external/bluetooth/bluedroid/stack/avdt/avdt_scb_act.c
 {% codeblock lang:cpp %}
 bluedroid/stack/l2cap/l2c_api.c
 1633 UINT8 L2CA_DataWrite (UINT16 cid, BT_HDR *p_data)
-1634 {
 1636     return l2c_data_write (cid, p_data, L2CAP_FLUSHABLE_CH_BASED);
 					p_ccb = l2cu_find_ccb_by_cid (NULL, cid);
 					l2c_csm_execute (p_ccb, L2CEVT_L2CA_DATA_WRITE, p_data);
@@ -116,7 +114,7 @@ bluedroid/stack/l2cap/l2c_api.c
 					 ret = write(userial_cb.fd, p_data+total, len);
 {% endcodeblock %}
 
-Item C. Incoming data path:
+###Item C. Incoming data/event path:
 0 Init vendor (BT chip vendor, like MRVL/TI) implement of bt_vendor_interface_t interface.
 {% codeblock lang:cpp %}
 	187 void init_vnd_if(unsigned char *local_bdaddr)
@@ -132,7 +130,8 @@ Item C. Incoming data path:
 {% endcodeblock %}
 1 Got a packet from hardware device driver, in HCI layer.
 {% codeblock lang:cpp %}
-bluedroid/hci/src/userial.c:210 static void *userial_read_thread(void *arg)
+bluedroid/hci/src/userial.c:210 
+static void *userial_read_thread(void *arg)
 	rx_length = select_read(userial_cb.fd, p, READ_LIMIT);
 		ret = read(fd, pbuf, (size_t)len);
 	utils_enqueue(&(userial_cb.rx_q), p_buf);
@@ -148,11 +147,8 @@ bluedroid/hci/src/bt_hci_bdroid.c
 		 p_hci_if->rcv();
 			uint16_t hci_h4_receive_msg(void)//Construct HCI EVENT/ACL packets and send them to stack
  957             if (p_cb->p_rcv_msg->event != MSG_HC_TO_STACK_HCI_ACL)
- 958                 btsnoop_capture(p_cb->p_rcv_msg, TRUE);
- 959
+ 958                 btsnoop_capture(p_cb->p_rcv_msg, TRUE);//dump to HCI trace file/socket.
  960             if (p_cb->p_rcv_msg->event == MSG_HC_TO_STACK_HCI_EVT)
- 961                 intercepted = internal_event_intercept();//intercept the event if it is the result of an early issued internal command.
-						p_cb->int_cmd[p_cb->int_cmd_rd_idx].cback(p_cb->p_rcv_msg);//deactive timer here? NO
  965                 bt_hc_cbacks->data_ind((TRANSAC) p_cb->p_rcv_msg, (char *) (p_cb->p_rcv_msg + 1), p_cb->p_rcv_msg->len + BT_HC_HDR_SIZE);
 							bluedroid/main/bte_main.c:504 static int data_ind(TRANSAC transac, char *p_buf, int len)
 								GKI_send_msg (BTU_TASK, BTU_HCI_RCV_MBOX, transac);//handle in btu_task.
