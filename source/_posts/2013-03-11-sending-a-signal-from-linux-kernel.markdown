@@ -76,8 +76,6 @@ In user space application, set its pid to kernel module, then listen on the sign
 +
 +void sig_handler_event1(int sig)
 +{
-+       LOGD("%s,%d, received signale %d, interested_event.\n",
-+                       __func__, __LINE__, sig);
 +       interested_event = 1;
 +       sem_post(&event_sem);
 +}
@@ -97,7 +95,7 @@ In user space application, set its pid to kernel module, then listen on the sign
 int main(int argc, char *argv[])
 +               pthread_t event_thread;
 +               if (pthread_create(&event_thread, NULL, event_handler_thread_func, NULL) != 0){
-+               	perror("Thread create failed");
+                        printf("Thread create failed%s.\n", strerror(errno));
 +               	exit(1);
 +               }
 +               sem_init(&event_sem, 0, 0);
@@ -106,8 +104,8 @@ int main(int argc, char *argv[])
 +               sigset_t block_mask;
 +               sigfillset (&block_mask);
 +               usr_action.sa_handler = sig_handler_event1;
-+               usr_action.sa_mask = block_mask;//do not receive any signal inside signal handler.
-+               usr_action.sa_flags = 0;
++               usr_action.sa_mask = block_mask;//block all signal inside signal handler.
++               usr_action.sa_flags = SA_NODEFER;//do not block SIGUSR1 within sig_handler_int.
 +               sigaction (SIGUSR1, &usr_action, NULL);
 +               int fd = open("/dev/target_device_name", O_RDWR);
 +               int my_pid = getpid();
@@ -142,8 +140,6 @@ In receiver process, create a share memory, write receiver's pid to it, then wai
 +
 +static void sig_handler_int(int sig)
 +{
-+       printf("%s,%d, received signale %d, interested_event.\n",
-+                       __func__, __LINE__, sig);
 +       interested_event = 1;
 +       sem_post(&event_sem);
 +}
@@ -162,8 +158,8 @@ In receiver process, create a share memory, write receiver's pid to it, then wai
 +       sigset_t block_mask;
 +       sigfillset (&block_mask);
 +       usr_action.sa_handler = sig_handler_int;
-+       usr_action.sa_mask = block_mask;
-+       usr_action.sa_flags = 0;
++       usr_action.sa_mask = block_mask;//block all signal inside signal handler.
++       usr_action.sa_flags = SA_NODEFER;//do not block SIGUSR1 within sig_handler_int.
 +       sigaction (SIGINT, &usr_action, NULL);
 +
 +       sem_init(&event_sem, 0, 0);
@@ -207,7 +203,11 @@ In sender process, acquire the receiver process'spid through the share memory ob
 +       shmdt(share_mem);
 +
 +       if (pid > 0){
-+               kill(pid, SIGINT);
++               int ret = sigquue(pid, SIGINT, 0);
+                if (ret != 0 ){
+                        printf("send signal failed %s.\n", strerror(errno));
+                        return;
+                }
 +               printf("%s,%d, send signale to pid %d\n", __func__, __LINE__, pid);
 +       }
 +       else{
@@ -225,3 +225,15 @@ A note: shmget() is not available in Android, so this is not a valid IPC for And
 Reference:
 {% blockquote http://www.csl.mtu.edu/cs4411.ck/www/NOTES/signal/kill.html%}
 {% endblockquote %}
+
+##Footnote: signal lost
+1 unreliable signal:
+earlier version of UNIX signal is unreliable
+{% blockquote unreliable signals http://codeidol.com/community/nix/unreliable-signals/5031 %}{% endblockquote %}
+2 real-time signal:
+{% blockquote man page http://man7.org/linux/man-pages/man7/signal.7.html%}{% endblockquote %}
+POSIX added signals, and {% blockquote why signal is a bad AIO than poll http://stackoverflow.com/questions/6345973/who-uses-posix-realtime-signals-and-why%}{% endblockquote %}
+3 signal lost:
+
+*. when signal handler is running, blocked signals is "lost" (?!)
+*. when signal handler is running, the same signal is blocked by default, add SA_NODEFER in sigaction.sa_flags unblock it. {% blockquote man page http://man7.org/linux/man-pages/man2/sigaction.2.html%}{% endblockquote %}
