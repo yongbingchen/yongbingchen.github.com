@@ -73,3 +73,6 @@ Every interaction is both precious and an opportunity to delight.
 
 //Add categories in side bar
 refer to http://www.dotnetguy.co.uk/post/2012/06/25/octopress-category-list-plugin/
+
+//Add downloadable source code reference in post:
+git show d972013672f691be03d333cd731bbbe826bfd965

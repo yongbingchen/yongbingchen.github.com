@@ -73,11 +73,13 @@ static int add_inotify_to_epoll(int epoll_fd, int inotify_fd)
 static void process_add_event(char *hidraw_file_name)
 {
 	printf("%s, %s\n", __func__, hidraw_file_name);
+	//may add the file to epoll here.
 }
 
 static void process_remove_event(char *hidraw_file_name)
 {
 	printf("%s, %s\n", __func__, hidraw_file_name);
+	//may remove the file from epoll here.
 }
 
 //Cite from Android EventHub.cpp

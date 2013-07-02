@@ -40,6 +40,7 @@ static void defuse_the_fire_alarm(wrapper_class_t p)
 static void trigger_alarm(union sigval sigev_val)
 {
 	wrapper_class_t p = (wrapper_class_t)sigev_val.sival_ptr;
+	//TODO: may need mutex to protect object p.
 	if (p->is_alarm_fired){
 		something_is_on_fire(p);
 	}
