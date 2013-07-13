@@ -76,3 +76,7 @@ refer to http://www.dotnetguy.co.uk/post/2012/06/25/octopress-category-list-plug
 
 //Add downloadable source code reference in post:
 git show d972013672f691be03d333cd731bbbe826bfd965
+
+
+//Add raw href hyperlink in post:
+anymore, see <a href ="http://yongbingchen.github.com/logs/andoird-hid/SDP-fail-cause-HID-pair-fail.txt ">pairing failed by SDP</a> for example.

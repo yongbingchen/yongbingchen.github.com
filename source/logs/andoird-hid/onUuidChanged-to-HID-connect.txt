@@ -1,0 +1,105 @@
+﻿//LOGS
+//1. SDP inside bluedroid caused onUuidChanged event callback to Android
+07-10 02:54:49.961 I/bt-btif ( 2098): btif_dm_search_services_evt:  event = 2
+07-10 02:54:49.961 D/bt-btif ( 2098): btif_dm_search_services_evt:(result=0x0, services 0x100000)
+07-10 02:54:49.961 E/bt-btif ( 2098): Index: 0 uuid:00001124-0000-1000-8000-00805f9b34fb
+07-10 02:54:49.961 D/bt-btif ( 2098): btif_dm_search_services_evt Remote Service SDP done. Call bond_state_changed_cb BONDED
+07-10 02:54:49.961 D/bt-btif ( 2098): bond_state_changed: state=2 prev_state=1
+07-10 02:54:49.961 I/bt-btif ( 2098): HAL bt_hal_cbacks->bond_state_changed_cb
+07-10 02:54:49.961 I/bt-btif ( 2098): HAL bt_hal_cbacks->remote_device_properties_cb
+
+				   I/BluetoothBondStateMachine( 2098): bondStateChangeCallback: Status: 0 Address: 00:22:48:87:ED:BF newState: 2
+07-10 02:54:49.971 D/CachedBluetoothDevice( 2020): No profiles. Maybe we will connect later
+
+
+
+07-10 02:54:49.971 I/BluetoothBondStateMachine( 2098): Bond State Change Intent:00:22:48:87:ED:BF OldState: 11 NewState: 12
+07-10 02:54:50.131 I/bt-btif ( 2098): btif_dm_search_services_evt:  event = 4 //BTA_DM_DISC_CMPL_EVT
+07-10 02:54:50.141 I/BluetoothBondStateMachine( 2098): StableState(): Entering Off State
+
+//2. onUuidChanged triggered HID connect command send from Android to Bluedroid.
+07-10 02:54:50.161 D/BluetoothInputDevice( 2020): connect(00:22:48:87:ED:BF)				   
+07-10 02:54:50.161 I/bt-btif ( 2098): BTHH: btif_hh_connect
+07-10 02:54:50.161 D/bt-btif ( 2098): Connect _hh
+07-10 02:54:50.171 I/bt-btif ( 2098): BTA got event 0x1700
+
+//3. This time SDP for HID descriptor
+07-10 02:54:50.171 I/bt-sdp  ( 2098): SDP - Originate started
+07-10 02:54:50.171 I/bt-btif ( 2098): HAL bt_hh_callbacks->connection_state_cb
+07-10 02:54:50.171 D/HidService( 2098): Connection state 00:22:48:87:ED:BF: 0->1
+07-10 02:54:50.171 D/CachedBluetoothDevice( 2020): Command sent successfully:CONNECT Address:00:22:48:87:ED:BF Profile:HID
+
+
+//Source code call stack
+//1. SDP event BTA_DM_DISC_RES_EVT triggered remote_device_properties_cb() to Android 
+http://androidxref.com/4.2_r1/xref/external/bluetooth/bluedroid/btif/src/btif_dm.c#953
+953static void btif_dm_search_services_evt(UINT16 event, char *p_param)
+960        case BTA_DM_DISC_RES_EVT:
+986            /* onUuidChanged requires getBondedDevices to be populated.
+987            ** bond_state_changed needs to be sent prior to remote_device_property
+988            */
+996             bond_state_changed(BT_STATUS_SUCCESS, &bd_addr, BT_BOND_STATE_BONDED);
+1003            HAL_CBACK(bt_hal_cbacks, remote_device_properties_cb,
+1004                             BT_STATUS_SUCCESS, &bd_addr, 1, &prop);
+
+//2. This calback will generate an ACTION_UUID intent.
+http://androidxref.com/4.2_r1/xref/packages/apps/Bluetooth/jni/com_android_bluetooth_btservice_AdapterService.cpp#478
+446bt_callbacks_t sBluetoothCallbacks = {
+450    remote_device_properties_callback,
+184static void remote_device_properties_callback(bt_status_t status, bt_bdaddr_t *bd_addr,
+185                                              int num_properties, bt_property_t *properties) {
+245    callbackEnv->CallVoidMethod(sJniCallbacksObj, method_devicePropertyChangedCallback, addr,
+246                                types, props);
+
+
+http://androidxref.com/4.2_r1/xref/packages/apps/Bluetooth/src/com/android/bluetooth/btservice/RemoteDevices.java#235
+235    void devicePropertyChangedCallback(byte[] address, int[] types, byte[][] values) {
+287                        case AbstractionLayer.BT_PROPERTY_UUIDS:
+290                            sendUuidIntent(bdDevice);
+http://androidxref.com/4.2_r1/xref/packages/apps/Bluetooth/src/com/android/bluetooth/btservice/RemoteDevices.java#sendUuidIntent
+215    private void sendUuidIntent(BluetoothDevice device) {
+216        DeviceProperties prop = getDeviceProperties(device);
+217        Intent intent = new Intent(BluetoothDevice.ACTION_UUID);
+
+
+//3. BluetoothSettings Apk response to this intent, connect HID profile to this remote device.
+http://androidxref.com/4.2_r1/xref/packages/apps/Settings/src/com/android/settings/bluetooth/BluetoothEventManager.java#99
+99        addHandler(BluetoothDevice.ACTION_UUID, new UuidChangedHandler());
+http://androidxref.com/4.2_r1/xref/packages/apps/Settings/src/com/android/settings/bluetooth/CachedBluetoothDeviceManager.java#131
+131    public synchronized void onUuidChanged(BluetoothDevice device) {
+132        CachedBluetoothDevice cachedDevice = findDevice(device);
+133        if (cachedDevice != null) {
+134            cachedDevice.onUuidChanged();
+135        }
+http://androidxref.com/4.2_r1/xref/packages/apps/Settings/src/com/android/settings/bluetooth/CachedBluetoothDevice.java#492
+492    void onUuidChanged() {
+493        updateProfiles();
+507            connectWithoutResettingTimer(false);
+219                    connectInt(profile);
+263        if (profile.connect(mDevice)) {
+	
+http://androidxref.com/4.2_r1/xref/packages/apps/Settings/src/com/android/settings/bluetooth/HidProfile.java#79
+38    private BluetoothInputDevice mService;
+79    public boolean connect(BluetoothDevice device) {
+81        return mService.connect(device);
+
+http://androidxref.com/4.2_r1/xref/frameworks/base/core/java/android/bluetooth/BluetoothInputDevice.java#290
+188    private IBluetoothInputDevice mService;
+290    public boolean connect(BluetoothDevice device) {
+294                return mService.connect(device);
+
+//3.2 This HID connect request will be handled by Android Bluetooth HID Service, finally call into native bthh_interface_t->connect().
+http://androidxref.com/4.2_r1/xref/packages/apps/Bluetooth/src/com/android/bluetooth/hid/HidService.java#381
+278    private static class BluetoothInputDeviceBinder extends IBluetoothInputDevice.Stub implements IProfileServiceBinder{
+381    boolean connect(BluetoothDevice device) {
+392        Message msg = mHandler.obtainMessage(MESSAGE_CONNECT, device);
+393        mHandler.sendMessage(msg);
+
+147        public void handleMessage(Message msg) {
+148            switch (msg.what) {
+149                case MESSAGE_CONNECT:
+152                    connectHidNative(Utils.getByteAddress(device));
+
+http://androidxref.com/4.2_r1/xref/packages/apps/Bluetooth/jni/com_android_bluetooth_hid.cpp#241
+41static const bthh_interface_t *sBluetoothHidInterface = NULL;
+253		status = sBluetoothHidInterface->connect((bt_bdaddr_t *) addr);

@@ -1,0 +1,67 @@
+﻿//SDP failed, cause HOST issued disconnect a L2CAP channel:
+07-05 05:42:05.775 W/bt-sdp  ( 2088): SDP - Bad type: 0x10 or len: 1 in attr_rsp
+07-05 05:42:05.775 I/bt-sdp  ( 2088): SDP - disconnect  CID: 0x41
+07-05 05:42:05.775 I/bt-l2cap( 2088): L2CA_DisconnectReq()  CID: 0x0041
+07-05 05:42:05.775 I/bt-l2cap( 2088): L2CAP - st: OPEN evt: 27
+07-05 05:42:05.775 I/bt-btm  ( 2088): BTM_SetPowerMode: pm_id 128 BDA: 4887edbf mode:0x0
+07-05 05:42:05.775 D/bt-btm  ( 2088): BTM_SetPowerMode: mode:0x0 interval 0 max:34, min:0
+07-05 05:42:05.775 D/bt-l2cap( 2088): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-05 05:42:05.775 D/bt-l2cap( 2088): RR scan pri=2, lcid=0x0041, q_cout=0
+07-05 05:42:05.795 D/bt-l2cap( 2088): RR scan pri=2, lcid=0x0041, q_cout=0
+07-05 05:42:05.795 D/bt-l2cap( 2088): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-05 05:42:05.795 D/bt-btif ( 2088): HC lib lpm deassertion return 0
+07-05 05:42:05.805 D/bt-btif ( 2088): HC lib lpm deassertion return 0
+
+//Received L2CAP disconnect response from remote device:
+07-05 05:42:05.805 I/bt-l2cap( 2088): L2CAP - st: W4_L2CAP_DISC_RSP evt: 18
+07-05 05:42:05.805 D/bt-l2cap( 2088): l2cu_release_ccb: cid 0x0041  in_use: 1
+07-05 05:42:05.805 D/bt-l2cap( 2088): l2cu_dequeue_ccb  CID: 0x0041
+
+//Before call DisconnectCfm_Cb(), set timeout to L2CAP IDLE (4s), if no further activity on L2CAP within 4s, disconnect the ACL connection:
+07-05 05:42:05.805 D/bt-l2cap( 2088): l2cu_no_dynamic_ccbs() starting IDLE timeout: 4
+
+//Call the DisconnectCfm_Cb()
+07-05 05:42:05.805 I/bt-l2cap( 2088): L2CAP - Calling DisconnectCfm_Cb(), CID: 0x0041
+07-05 05:42:05.805 I/bt-sdp  ( 2088): SDP - Rcvd L2CAP disc cfm, CID: 0x41
+07-05 05:42:05.805 D/bt-sdp  ( 2088): releasing SDP rsp_list
+07-05 05:42:05.805 I/bt-btif ( 2088): BTA got event 0x205
+07-05 05:42:05.805 I/bt-btif ( 2088): bta_dm_search_sm_execute state:3, event:0x205
+07-05 05:42:05.805 D/bt-btif ( 2088): sdp_result::0xfff4
+07-05 05:42:05.805 D/bt-btif ( 2088): bta_dm_sdp_result services_found = 0000
+07-05 05:42:05.805 D/bt-btif ( 2088): bta_dm_sdp_result (raw_data used = 0x264 raw_data_ptr = 0x4735b770)
+07-05 05:42:05.805 I/bt-btif ( 2088): BTA got event 0x207
+07-05 05:42:05.805 I/bt-btif ( 2088): bta_dm_search_sm_execute state:3, event:0x207
+07-05 05:42:05.805 D/bt-btif ( 2088): bta_dm_disc_result
+07-05 05:42:05.805 D/bt-btif ( 2088): btif_transfer_context event 2, len 284
+07-05 05:42:05.805 I/bt-btif ( 2088): BTA got event 0x206
+07-05 05:42:05.805 I/bt-btif ( 2088): bta_dm_search_sm_execute state:3, event:0x206
+07-05 05:42:05.805 D/bt-btif ( 2088): bta_dm_search_cmpl
+07-05 05:42:05.805 D/bt-btif ( 2088): btif_transfer_context event 4, len 0
+07-05 05:42:05.805 D/bt-btif ( 2088): btif task fetched event a001
+07-05 05:42:05.805 D/bt-btif ( 2088): btif_context_switched
+07-05 05:42:05.805 I/bt-btif ( 2088): btif_dm_search_services_evt:  event = 2
+07-05 05:42:05.805 D/bt-btif ( 2088): btif_dm_search_services_evt:(result=0x0, services 0x0)
+07-05 05:42:05.805 D/bt-btif ( 2088): btif_dm_search_services_evt Remote Service SDP done. Call bond_state_changed_cb BONDED
+07-05 05:42:05.805 D/bt-btif ( 2088): bond_state_changed: state=2 prev_state=1
+07-05 05:42:05.805 I/bt-btif ( 2088): HAL bt_hal_cbacks->bond_state_changed_cb
+07-05 05:42:05.805 I/BluetoothBondStateMachine( 2088): bondStateChangeCallback: Status: 0 Address: 00:22:48:87:ED:BF newState: 2
+07-05 05:42:05.805 D/bt-btif ( 2088): in, bd addr:00:22:48:87:ed:bf, prop type:3, len:0
+07-05 05:42:05.805 E/bt-btif ( 2088): property type:3, len:0 is invalid
+07-05 05:42:05.805 E/        ( 2088): ### ASSERT : external/bluetooth/bluedroid/main/../btif/src/btif_dm.c line 1001 storing remote services failed (1) ###
+07-05 05:42:05.805 I/bt-btif ( 2088): HAL bt_hal_cbacks->remote_device_properties_cb
+07-05 05:42:05.805 E/BluetoothRemoteDevices( 2088): devicePropertyChangedCallback: bdDevice: 00:22:48:87:ED:BF, value is empty for type: 3
+07-05 05:42:05.805 D/bt-btif ( 2088): btif task fetched event a001
+07-05 05:42:05.805 D/bt-btif ( 2088): btif_context_switched
+07-05 05:42:05.805 I/bt-btif ( 2088): btif_dm_search_services_evt:  event = 4
+
+//No profile found from SDP process, due to previous fail:
+//In normal case, will start profile (HID) connect here.
+07-05 05:42:05.815 D/CachedBluetoothDevice( 1982): No profiles. Maybe we will connect later
+
+
+07-05 05:42:05.815 I/BluetoothBondStateMachine( 2088): Bond State Change Intent:00:22:48:87:ED:BF OldState: 11 NewState: 12
+07-05 05:42:06.115 I/BluetoothBondStateMachine( 2088): StableState(): Entering Off State
+
+//Because no HID connect initiated due to error in line 69 , L2CAP timeout set in line 21 will fired finally: 
+07-05 05:42:09.475 I/bt-l2cap( 2088): L2CAP - l2c_link_timeout() link state 4 first CCB 0x0 is_bonding:0
+07-05 05:42:09.475 I/bt-btm  ( 2088): btm_sec_send_hci_disconnect:  handle:0x1, reason=0x13

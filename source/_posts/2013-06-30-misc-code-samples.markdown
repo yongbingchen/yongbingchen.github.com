@@ -3,7 +3,7 @@ layout: post
 title: "misc code samples"
 date: 2013-06-30 22:49
 comments: true
-categories: [Linux]
+categories: [linux]
 ---
 
 1 inotify: monitoring hidraw device file add/remove events:
