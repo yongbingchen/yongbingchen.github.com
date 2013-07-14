@@ -7,6 +7,7 @@ categories: [linux, Bluetooth]
 ---
 
 A Bluetooth SDIO card driver talks with hardware through SDIO interface, providing R/W method for Bluetooth Adapter layer, here's the class diagram for this relationship:
+
 {% img http://yongbingchen.github.com/images/bt_drv/bt_drv_class_diagram.jpg  %}
 
 The outbound Bluetooth data path:

@@ -8,6 +8,7 @@ categories: [git]
 If you want to check your code base, it's wrong to rely on whether the output of <code>git log $CODE_BASE_TAG..HEAD</code> is empty.
 
 Suppose we have a git version tree as below:
+
 {% img http://yongbingchen.github.com/images/git/version-graph.jpg  %}
 
 DevBranch0 is branched out from Trunk, merged <code>Trunk</code> node C and <code>DevBranch0</code> node b, current HEAD is <code>DevBranch0_c</code>.
