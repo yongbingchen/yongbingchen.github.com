@@ -70,3 +70,26 @@ This result can be verified as the same as addr2line:
 $ arm-eabi-addr2line -e ../../../out/target/product/bg2ct_dmp_emmc/symbols/system/lib/hw/bluetooth.default.so 0004c310
 external/bluetooth/bluedroid/bta/./sys/bta_sys_conn.c:236
 {% endcodeblock %}
+
+#Update: Peek stack of a running process
+Android debuggerd can be used to dump a running process's stack:
+{% codeblock lang:c %}  
+ALOGD("peeking stack of process %d\n", pid);
+kill(pid, SIGSTOP);
+ptrace(PTRACE_ATTACH, pid, 0,0);
+char *tombstone_path = engrave_tombstone(pid, 
+		pid, 
+		0/*no signal*/,
+		true /*dump_sibling_threads*/, 
+		false /*not quiet*/, 
+		&detach_failed,
+		&total_sleep_time_usec);
+ptrace(PTRACE_DETACH, pid, 0, 0);
+kill(pid, SIGCONT);
+{% endcodeblock %}
+
+The stack of main thread of the process will shown in logcat, and all others will be in the tombstone file.
+The target process will resume to execution right after the dump stack finished.
+This is useful when debugging some real time issues.
+
+{% blockquote source code and test log http://yongbingchen.github.com/downloads/code/peek_stack.tar.gz %} {% endblockquote %}
