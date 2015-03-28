@@ -130,12 +130,19 @@
 <li>Create my own repo config:
 
 <ol>
-<li>on a client working machine, checkout the manifest git first: <code>~$ git clone ssh://gerrit2@gerritreview.com:29418/container/repo_1/manifest</code></li>
-<li>add a new file manifest.xml to the git as below, and merge it to master branch:</li>
+<li>on a client working machine, checkout the manifest git first:</li>
 </ol>
 </li>
 </ol>
 
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>~<span class="nv">$ </span>git clone ssh://gerrit2@gerritreview.com:29418/container/repo_1/manifest
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p/>
+    2. add a new file manifest.xml to the git as below, and merge it to master branch:
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -166,8 +173,6 @@
 </span><span class='line'>        <span class="nt">&lt;project</span> <span class="na">path=</span><span class="s">&quot;container/repo_1/git_two&quot;</span> <span class="na">name=</span><span class="s">&quot;container/repo_1/git_two&quot;</span> <span class="nt">/&gt;</span>
 </span><span class='line'><span class="nt">&lt;/manifest&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
 <p/>
 3. On gerrit server, create a working &#8220;Branch Name&#8221; &#8220;my_working_branch&#8221; on these three projects, with &#8220;Initial Revision&#8221; set to &#8220;master&#8221; in https://gerritreview.com/gerrit/#/admin/projects/container/repo_1/${GIT_NAME},branches
 <p/>

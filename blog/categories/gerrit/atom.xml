@@ -4,7 +4,7 @@
   <title><![CDATA[Category: gerrit | Yongbing's Blog]]></title>
   <link href="http://yongbingchen.github.com/blog/categories/gerrit/atom.xml" rel="self"/>
   <link href="http://yongbingchen.github.com/"/>
-  <updated>2015-03-27T22:19:22-07:00</updated>
+  <updated>2015-03-27T22:31:27-07:00</updated>
   <id>http://yongbingchen.github.com/</id>
   <author>
     <name><![CDATA[Yongbing Chen]]></name>
@@ -33,33 +33,34 @@
 <li>Create my own repo config:
 
 <ol>
-<li>on a client working machine, checkout the manifest git first: <code>~$ git clone ssh://gerrit2@gerritreview.com:29418/container/repo_1/manifest</code></li>
-<li>add a new file manifest.xml to the git as below, and merge it to master branch:</li>
+<li>on a client working machine, checkout the manifest git first:
+<code>sh
+~$ git clone ssh://gerrit2@gerritreview.com:29418/container/repo_1/manifest
+</code></li>
 </ol>
 </li>
 </ol>
 
 
-<p>```xml</p>
+<p/>
+    2. add a new file manifest.xml to the git as below, and merge it to master branch:
 
-<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;manifest&gt;
-        &lt;remote  name="my_repo"
-                fetch="ssh://gerritreview.com:29418/"
-                review="http://gerritreview.com/gerrit/"
-                /&gt;
-        &lt;default revision="my_working_branch"
-                remote="my_repo"
-                sync-j="4"
-                /&gt;
-
-        &lt;project path="container/repo_1/git_one" name="container/repo_1/git_one" /&gt;
-        &lt;project path="container/repo_1/git_two" name="container/repo_1/git_two" /&gt;
-&lt;/manifest&gt;
-</code></pre>
-
-<p>```</p>
-
+```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <manifest>
+            <remote  name="my_repo"
+                    fetch="ssh://gerritreview.com:29418/"
+                    review="http://gerritreview.com/gerrit/"
+                    />
+            <default revision="my_working_branch"
+                    remote="my_repo"
+                    sync-j="4"
+                    />
+    
+            <project path="container/repo_1/git_one" name="container/repo_1/git_one" />
+            <project path="container/repo_1/git_two" name="container/repo_1/git_two" />
+    </manifest>
+```
 <p/>
 3. On gerrit server, create a working "Branch Name" "my_working_branch" on these three projects, with "Initial Revision" set to "master" in https://gerritreview.com/gerrit/#/admin/projects/container/repo_1/${GIT_NAME},branches
 <p/>
