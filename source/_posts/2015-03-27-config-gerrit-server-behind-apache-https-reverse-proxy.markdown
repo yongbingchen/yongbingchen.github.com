@@ -8,7 +8,7 @@ categories: [gerrit]
 
 I want to setup a secure gerrit server for a small developer group within intranet, I choose Apache as its reverse-proxy server, and use HTTP as gerrit server's auth type, becasue I only want a few selected people to see the server, so no LDAP.
 
-Here's the final web view from a registered developer:
+Here's the final web view from a registered developer:<br />
 {% img http://yongbingchen.github.com/images/git/repo/sample-cl-webpage.jpg  %}
 
 Here's the gerrit server config:
