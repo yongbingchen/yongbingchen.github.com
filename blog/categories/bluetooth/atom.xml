@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bluetooth | Yongbing's Blog]]></title>
   <link href="http://yongbingchen.github.com/blog/categories/bluetooth/atom.xml" rel="self"/>
   <link href="http://yongbingchen.github.com/"/>
-  <updated>2015-03-27T20:27:22-07:00</updated>
+  <updated>2015-03-27T22:06:54-07:00</updated>
   <id>http://yongbingchen.github.com/</id>
   <author>
     <name><![CDATA[Yongbing Chen]]></name>
@@ -18,7 +18,7 @@
     <link href="http://yongbingchen.github.com/blog/2013/07/12/android-bluetooth-pair-a-hid-device/"/>
     <updated>2013-07-12T23:06:00-07:00</updated>
     <id>http://yongbingchen.github.com/blog/2013/07/12/android-bluetooth-pair-a-hid-device</id>
-    <content type="html"><![CDATA[<p>{% img http://yongbingchen.github.com/images/android_bt/android-pair-hid-device.jpg  %}</p>
+    <content type="html"><![CDATA[<p><img src="http://yongbingchen.github.com/images/android_bt/android-pair-hid-device.jpg" title="" ></p>
 
 <ol>
 <li>User started scanning from Bluetooth Settings UI, Android Bluetooth service responded to this request, calling bluedroid to start discovery.</li>
@@ -33,15 +33,15 @@
 
 
 <p>Logs and call stack:
-{% blockquote scan to found device cb http://yongbingchen.github.com/logs/andoird-hid/start-discovery-to-found-device-callback.txt %} {% endblockquote %}
-{% blockquote pair to bonded cb http://yongbingchen.github.com/logs/andoird-hid/start-pairing-to-bonded.txt %} {% endblockquote %}
-{% blockquote on UUID changed to HID connect http://yongbingchen.github.com/logs/andoird-hid/onUuidChanged-to-HID-connect.txt %} {% endblockquote %}</p>
+<blockquote><p></p><footer><strong>scan to found device cb</strong> <cite><a href='http://yongbingchen.github.com/logs/andoird-hid/start-discovery-to-found-device-callback.txt'>yongbingchen.github.com/logs/&hellip;</a></cite></footer></blockquote>
+<blockquote><p></p><footer><strong>pair to bonded cb</strong> <cite><a href='http://yongbingchen.github.com/logs/andoird-hid/start-pairing-to-bonded.txt'>yongbingchen.github.com/logs/&hellip;</a></cite></footer></blockquote>
+<blockquote><p></p><footer><strong>on UUID changed to HID connect</strong> <cite><a href='http://yongbingchen.github.com/logs/andoird-hid/onUuidChanged-to-HID-connect.txt'>yongbingchen.github.com/logs/&hellip;</a></cite></footer></blockquote></p>
 
 <p>Full logs:
-{% blockquote scan http://yongbingchen.github.com/logs/andoird-hid/logs/scan.txt %} {% endblockquote %}
-{% blockquote pair http://yongbingchen.github.com/logs/andoird-hid/logs/pair.txt %} {% endblockquote %}
-{% blockquote hcidump http://yongbingchen.github.com/logs/andoird-hid/logs/hcidump.txt %} {% endblockquote %}
-{% blockquote air log http://yongbingchen.github.com/logs/andoird-hid/logs/scan-pair.cfa %} {% endblockquote %}</p>
+<blockquote><p></p><footer><strong>scan</strong> <cite><a href='http://yongbingchen.github.com/logs/andoird-hid/logs/scan.txt'>yongbingchen.github.com/logs/&hellip;</a></cite></footer></blockquote>
+<blockquote><p></p><footer><strong>pair</strong> <cite><a href='http://yongbingchen.github.com/logs/andoird-hid/logs/pair.txt'>yongbingchen.github.com/logs/&hellip;</a></cite></footer></blockquote>
+<blockquote><p></p><footer><strong>hcidump</strong> <cite><a href='http://yongbingchen.github.com/logs/andoird-hid/logs/hcidump.txt'>yongbingchen.github.com/logs/&hellip;</a></cite></footer></blockquote>
+<blockquote><p></p><footer><strong>air log</strong> <cite><a href='http://yongbingchen.github.com/logs/andoird-hid/logs/scan-pair.cfa'>yongbingchen.github.com/logs/&hellip;</a></cite></footer></blockquote></p>
 ]]></content>
   </entry>
   
@@ -57,10 +57,10 @@
 <p>QA reported a bug that TiVo remote control connected, but no key input captured by our host.</p>
 
 <p>Compared with the normal case (some other HID device), I found below message missed for TiVo case after BT connect:
-{% codeblock%}
-05-16 22:13:34.386 D/bt-btif ( 2146): UHID_START from uhid-dev
-05-16 22:13:34.386 D/bt-btif ( 2146): UHID_OPEN from uhid-dev
-{% endcodeblock %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>05-16 22:13:34.386 D/bt-btif ( 2146): UHID_START from uhid-dev
+</span><span class='line'>05-16 22:13:34.386 D/bt-btif ( 2146): UHID_OPEN from uhid-dev</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>That means the input device for this newly added HID device(TiVo remote) has never been opened by Android EventHub.cpp in failed case.</p>
 
@@ -73,10 +73,10 @@
 <h2>bug II: Lenovo BT mouse can not pair with our host.</h2>
 
 <p>The log shows below error when trying to pair Lenovo BT mouse:
-{% codeblock%}
-05-16 21:07:41.451 W/bt-sdp  ( 2146): result :36005A0900000A000100010200013503191200090004350D350619010009000135031900010902053503191002090009350835061912000901000902000901000902010917EF0902020960020902030902450902042801090205090002
-05-16 21:07:41.451 W/bt-sdp  ( 2146): SDP - Bad type: 0x02 or len: 4 in attr_rsp
-{% endcodeblock %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>05-16 21:07:41.451 W/bt-sdp  ( 2146): result :36005A0900000A000100010200013503191200090004350D350619010009000135031900010902053503191002090009350835061912000901000902000901000902010917EF0902020960020902030902450902042801090205090002
+</span><span class='line'>05-16 21:07:41.451 W/bt-sdp  ( 2146): SDP - Bad type: 0x02 or len: 4 in attr_rsp</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Compared with air log, I found that one byte of the SDP message is different:
 In air log, I found :0900000A00010001<font color = "red">02</font>0001,
@@ -89,10 +89,10 @@ while in dump message in the error message, it's 0900000A00010001<font color = "
 <p>QA found one HID device can not be unpaired: if the device is connected when doing unpair, the device remain connected after unpair, and can not be paired again after unpair.</p>
 
 <p>From the log, I found below error message when trying to re-piar:
-{% codeblock%}
-05-20 21:09:19.567  2125  2158 W bt-btif : btif_hh_connect: Device  already added, attr_mask = 0x8005
-05-20 21:09:19.567  2125  2158 E bt-btif : btif_hh_connect: Error, device  can only be reconnected from device side
-{% endcodeblock %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>05-20 21:09:19.567  2125  2158 W bt-btif : btif_hh_connect: Device  already added, attr_mask = 0x8005
+</span><span class='line'>05-20 21:09:19.567  2125  2158 E bt-btif : btif_hh_connect: Error, device  can only be reconnected from device side</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Compared with another HID device which can successfully do unpair/pair, I found that the success case can correctly response to host's BTA_HH_CTRL_VIRTUAL_CABLE_UNPLUG request as defined in HID spec 1.1, figure A.4.</p>
 
@@ -144,8 +144,7 @@ while in dump message in the error message, it's 0900000A00010001<font color = "
 <p>Serial Finished.</p>
 
 <p>Reference:
-{% blockquote source code reading note http://yongbingchen.github.com/txt/bluedroid/a2dp-source-code-reading-note.txt %}
-{% endblockquote %}</p>
+<blockquote><p></p><footer><strong>source code reading note</strong> <cite><a href='http://yongbingchen.github.com/txt/bluedroid/a2dp-source-code-reading-note.txt'>yongbingchen.github.com/txt/&hellip;</a></cite></footer></blockquote></p>
 ]]></content>
   </entry>
   
@@ -156,195 +155,336 @@ while in dump message in the error message, it's 0900000A00010001<font color = "
     <id>http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-iv-a2dp-traffic</id>
     <content type="html"><![CDATA[<h3>Item A. Connect a remote A2DP device:</h3>
 
-<p>{% img center http://yongbingchen.github.com/images/bluedroid/a2dp_connect.jpg  %}
+<p><img class="center" src="http://yongbingchen.github.com/images/bluedroid/a2dp_connect.jpg" title="" >
 1 Android system will try to reconnect paired A2DP device automatically after BT enable.
-{% codeblock lang:cpp %}
-04-25 01:56:31.080 D/BluetoothAdapterService( 2093): Auto Connecting A2DP Profile with device 50:C9:71:0D:D2:D9</p>
-
-<pre><code>packages/apps/Bluetooth/jni/com_android_bluetooth_a2dp.cpp  
-static jboolean connectA2dpNative(JNIEnv *env, jobject object, jbyteArray address)
-    const bt_interface_t* btInf= getBluetoothInterface();
-    const btav_interface_t *sBluetoothA2dpInterface = (btav_interface_t *)btInf-&gt;get_profile_interface(BT_PROFILE_ADVANCED_AUDIO_ID);
-    status = sBluetoothA2dpInterface-&gt;connect((bt_bdaddr_t *)addr)
-        external/bluetooth/bluedroid/btif/src/btif_av.c
-        btif_queue_connect(UUID_SERVCLASS_AUDIO_SOURCE, bd_addr, connect_int);//This will trigger an event in btu_task, now the caller thread returned.
-            GKI_send_msg(BTIF_TASK, BTU_BTIF_MBOX, p_msg);
-</code></pre>
-
-<p>{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="mo">04</span><span class="o">-</span><span class="mi">25</span> <span class="mo">01</span><span class="o">:</span><span class="mi">56</span><span class="o">:</span><span class="mf">31.080</span> <span class="n">D</span><span class="o">/</span><span class="n">BluetoothAdapterService</span><span class="p">(</span> <span class="mi">2093</span><span class="p">)</span><span class="o">:</span> <span class="n">Auto</span> <span class="n">Connecting</span> <span class="n">A2DP</span> <span class="n">Profile</span> <span class="n">with</span> <span class="n">device</span> <span class="mi">50</span><span class="o">:</span><span class="nl">C9:</span><span class="mi">71</span><span class="o">:</span><span class="mi">0</span><span class="nl">D:D2:</span><span class="n">D9</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">packages</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">Bluetooth</span><span class="o">/</span><span class="n">jni</span><span class="o">/</span><span class="n">com_android_bluetooth_a2dp</span><span class="p">.</span><span class="n">cpp</span>
+</span><span class='line'><span class="k">static</span> <span class="n">jboolean</span> <span class="n">connectA2dpNative</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jobject</span> <span class="n">object</span><span class="p">,</span> <span class="n">jbyteArray</span> <span class="n">address</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">const</span> <span class="n">bt_interface_t</span><span class="o">*</span> <span class="n">btInf</span><span class="o">=</span> <span class="n">getBluetoothInterface</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">const</span> <span class="n">btav_interface_t</span> <span class="o">*</span><span class="n">sBluetoothA2dpInterface</span> <span class="o">=</span> <span class="p">(</span><span class="n">btav_interface_t</span> <span class="o">*</span><span class="p">)</span><span class="n">btInf</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">get_profile_interface</span><span class="p">(</span><span class="n">BT_PROFILE_ADVANCED_AUDIO_ID</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">status</span> <span class="o">=</span> <span class="n">sBluetoothA2dpInterface</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">connect</span><span class="p">((</span><span class="n">bt_bdaddr_t</span> <span class="o">*</span><span class="p">)</span><span class="n">addr</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">external</span><span class="o">/</span><span class="n">bluetooth</span><span class="o">/</span><span class="n">bluedroid</span><span class="o">/</span><span class="n">btif</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">btif_av</span><span class="p">.</span><span class="n">c</span>
+</span><span class='line'>        <span class="n">btif_queue_connect</span><span class="p">(</span><span class="n">UUID_SERVCLASS_AUDIO_SOURCE</span><span class="p">,</span> <span class="n">bd_addr</span><span class="p">,</span> <span class="n">connect_int</span><span class="p">);</span><span class="c1">//This will trigger an event in btu_task, now the caller thread returned.</span>
+</span><span class='line'>            <span class="n">GKI_send_msg</span><span class="p">(</span><span class="n">BTIF_TASK</span><span class="p">,</span> <span class="n">BTU_BTIF_MBOX</span><span class="p">,</span> <span class="n">p_msg</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 2 This will later trigger a A2DP server event API_CONNECT_REQ_EVT in state CCB_IDLE_ST:
-{% codeblock lang:cpp %}
-05-02 01:54:33.342 I/bt-avp  ( 2093): CCB ccb=0 event=API_CONNECT_REQ_EVT state=CCB_IDLE_ST
-{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="mo">05</span><span class="o">-</span><span class="mo">02</span> <span class="mo">01</span><span class="o">:</span><span class="mi">54</span><span class="o">:</span><span class="mf">33.342</span> <span class="n">I</span><span class="o">/</span><span class="n">bt</span><span class="o">-</span><span class="n">avp</span>  <span class="p">(</span> <span class="mi">2093</span><span class="p">)</span><span class="o">:</span> <span class="n">CCB</span> <span class="n">ccb</span><span class="o">=</span><span class="mi">0</span> <span class="n">event</span><span class="o">=</span><span class="n">API_CONNECT_REQ_EVT</span> <span class="n">state</span><span class="o">=</span><span class="n">CCB_IDLE_ST</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 3 A2DP server handle this event in bellow two actions:
-{% codeblock lang:cpp %}
-external/bluetooth/bluedroid/stack/avdt/avdt_ccb.c
-129 const UINT8 avdt_ccb_st_idle[][AVDT_CCB_NUM_COLS] = {
-130 /<em> Event                      Action 1                    Action 2                    Next state </em>/
-139 /<em> API_CONNECT_REQ_EVT </em>/    {AVDT_CCB_SET_CONN,          AVDT_CCB_CHAN_OPEN,         AVDT_CCB_OPENING_ST},
-//3.1 Set CCB variables associated with AVDT_ConnectReq().
-996 void avdt_ccb_set_conn(tAVDT_CCB <em>p_ccb, tAVDT_CCB_EVT </em>p_data)</p>
-
-<pre><code>BTM_SetSecurityLevel(TRUE, "", BTM_SEC_SERVICE_AVDTP, p_data-&gt;connect.sec_mask,AVDT_PSM, BTM_SEC_PROTO_AVDT, AVDT_CHAN_SIG);
-</code></pre>
-
-<p>//3.2 initiate a signaling channel connection.
-87 void avdt_ccb_chan_open(tAVDT_CCB <em>p_ccb, tAVDT_CCB_EVT </em>p_data)</p>
-
-<pre><code>                BTM_SetOutService(p_ccb-&gt;peer_addr, BTM_SEC_SERVICE_AVDTP, AVDT_CHAN_SIG);
-                avdt_ad_open_req(AVDT_CHAN_SIG, p_ccb, NULL, AVDT_INT);
-</code></pre>
-
-<p>{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">external</span><span class="o">/</span><span class="n">bluetooth</span><span class="o">/</span><span class="n">bluedroid</span><span class="o">/</span><span class="n">stack</span><span class="o">/</span><span class="n">avdt</span><span class="o">/</span><span class="n">avdt_ccb</span><span class="p">.</span><span class="n">c</span>
+</span><span class='line'><span class="mi">129</span> <span class="k">const</span> <span class="n">UINT8</span> <span class="n">avdt_ccb_st_idle</span><span class="p">[][</span><span class="n">AVDT_CCB_NUM_COLS</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'><span class="mi">130</span> <span class="o">/&lt;</span><span class="n">em</span><span class="o">&gt;</span> <span class="n">Event</span>                      <span class="n">Action</span> <span class="mi">1</span>                    <span class="n">Action</span> <span class="mi">2</span>                    <span class="n">Next</span> <span class="n">state</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;/</span>
+</span><span class='line'><span class="mi">139</span> <span class="o">/&lt;</span><span class="n">em</span><span class="o">&gt;</span> <span class="n">API_CONNECT_REQ_EVT</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;/</span>    <span class="p">{</span><span class="n">AVDT_CCB_SET_CONN</span><span class="p">,</span>          <span class="n">AVDT_CCB_CHAN_OPEN</span><span class="p">,</span>         <span class="n">AVDT_CCB_OPENING_ST</span><span class="p">},</span>
+</span><span class='line'><span class="c1">//3.1 Set CCB variables associated with AVDT_ConnectReq().</span>
+</span><span class='line'><span class="mi">996</span> <span class="kt">void</span> <span class="n">avdt_ccb_set_conn</span><span class="p">(</span><span class="n">tAVDT_CCB</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">p_ccb</span><span class="p">,</span> <span class="n">tAVDT_CCB_EVT</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">p_data</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">BTM_SetSecurityLevel</span><span class="p">(</span><span class="n">TRUE</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">BTM_SEC_SERVICE_AVDTP</span><span class="p">,</span> <span class="n">p_data</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">connect</span><span class="p">.</span><span class="n">sec_mask</span><span class="p">,</span><span class="n">AVDT_PSM</span><span class="p">,</span> <span class="n">BTM_SEC_PROTO_AVDT</span><span class="p">,</span> <span class="n">AVDT_CHAN_SIG</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//3.2 initiate a signaling channel connection.</span>
+</span><span class='line'><span class="mi">87</span> <span class="kt">void</span> <span class="n">avdt_ccb_chan_open</span><span class="p">(</span><span class="n">tAVDT_CCB</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">p_ccb</span><span class="p">,</span> <span class="n">tAVDT_CCB_EVT</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">p_data</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>                <span class="n">BTM_SetOutService</span><span class="p">(</span><span class="n">p_ccb</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">peer_addr</span><span class="p">,</span> <span class="n">BTM_SEC_SERVICE_AVDTP</span><span class="p">,</span> <span class="n">AVDT_CHAN_SIG</span><span class="p">);</span>
+</span><span class='line'>                <span class="n">avdt_ad_open_req</span><span class="p">(</span><span class="n">AVDT_CHAN_SIG</span><span class="p">,</span> <span class="n">p_ccb</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">AVDT_INT</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 4 How L2CAP handle this channel connection:
-{% codeblock lang:cpp %}
-external/bluetooth/bluedroid/stack/l2cap/l2c_api.c                    <br/>
-229 UINT16 L2CA_ErtmConnectReq (UINT16 psm, BD_ADDR p_bd_addr, tL2CAP_ERTM_INFO *p_ertm_info)</p>
-
-<pre><code>p_lcb = l2cu_allocate_lcb (p_bd_addr, FALSE);
-l2cu_create_conn(p_lcb);//This function initiates an acl connection via HCI
-    2180 BOOLEAN l2cu_create_conn_after_switch (tL2C_LCB *p_lcb)
-        //external/bluetooth/bluedroid/stack/hcic/hcicmds.c
-        btsnd_hcic_create_conn (p_lcb-&gt;remote_bd_addr,HCI_PKT_TYPES_MASK_DM1 + HCI_PKT_TYPES_MASK_DH1,page_scan_rep_mode,page_scan_mode,clock_offset,allow_switch));
-            HCI_CMD_TO_LOWER(p_buf);
-                //external/bluetooth/bluedroid/main/bte_main.c
-                bt_hc_if-&gt;transmit_buf((TRANSAC)p_msg, \ (char *) (p_msg + 1), \p_msg-&gt;len);
-                    utils_enqueue(&amp;tx_q, (void *) transac);
-                     bthc_signal_event(HC_EVENT_TX);
-        btu_start_timer (&amp;p_lcb-&gt;timer_entry, BTU_TTYPE_L2CAP_LINK,L2CAP_LINK_CONNECT_TOUT);
-</code></pre>
-
-<p>{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">external</span><span class="o">/</span><span class="n">bluetooth</span><span class="o">/</span><span class="n">bluedroid</span><span class="o">/</span><span class="n">stack</span><span class="o">/</span><span class="n">l2cap</span><span class="o">/</span><span class="n">l2c_api</span><span class="p">.</span><span class="n">c</span>                    <span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
+</span><span class='line'><span class="mi">229</span> <span class="n">UINT16</span> <span class="n">L2CA_ErtmConnectReq</span> <span class="p">(</span><span class="n">UINT16</span> <span class="n">psm</span><span class="p">,</span> <span class="n">BD_ADDR</span> <span class="n">p_bd_addr</span><span class="p">,</span> <span class="n">tL2CAP_ERTM_INFO</span> <span class="o">*</span><span class="n">p_ertm_info</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">p_lcb</span> <span class="o">=</span> <span class="n">l2cu_allocate_lcb</span> <span class="p">(</span><span class="n">p_bd_addr</span><span class="p">,</span> <span class="n">FALSE</span><span class="p">);</span>
+</span><span class='line'><span class="n">l2cu_create_conn</span><span class="p">(</span><span class="n">p_lcb</span><span class="p">);</span><span class="c1">//This function initiates an acl connection via HCI</span>
+</span><span class='line'>    <span class="mi">2180</span> <span class="n">BOOLEAN</span> <span class="n">l2cu_create_conn_after_switch</span> <span class="p">(</span><span class="n">tL2C_LCB</span> <span class="o">*</span><span class="n">p_lcb</span><span class="p">)</span>
+</span><span class='line'>        <span class="c1">//external/bluetooth/bluedroid/stack/hcic/hcicmds.c</span>
+</span><span class='line'>        <span class="n">btsnd_hcic_create_conn</span> <span class="p">(</span><span class="n">p_lcb</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">remote_bd_addr</span><span class="p">,</span><span class="n">HCI_PKT_TYPES_MASK_DM1</span> <span class="o">+</span> <span class="n">HCI_PKT_TYPES_MASK_DH1</span><span class="p">,</span><span class="n">page_scan_rep_mode</span><span class="p">,</span><span class="n">page_scan_mode</span><span class="p">,</span><span class="n">clock_offset</span><span class="p">,</span><span class="n">allow_switch</span><span class="p">));</span>
+</span><span class='line'>            <span class="n">HCI_CMD_TO_LOWER</span><span class="p">(</span><span class="n">p_buf</span><span class="p">);</span>
+</span><span class='line'>                <span class="c1">//external/bluetooth/bluedroid/main/bte_main.c</span>
+</span><span class='line'>                <span class="n">bt_hc_if</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">transmit_buf</span><span class="p">((</span><span class="n">TRANSAC</span><span class="p">)</span><span class="n">p_msg</span><span class="p">,</span> <span class="err">\</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="p">(</span><span class="n">p_msg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="err">\</span><span class="n">p_msg</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">len</span><span class="p">);</span>
+</span><span class='line'>                    <span class="n">utils_enqueue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">tx_q</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span> <span class="n">transac</span><span class="p">);</span>
+</span><span class='line'>                     <span class="n">bthc_signal_event</span><span class="p">(</span><span class="n">HC_EVENT_TX</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">btu_start_timer</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">p_lcb</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">timer_entry</span><span class="p">,</span> <span class="n">BTU_TTYPE_L2CAP_LINK</span><span class="p">,</span><span class="n">L2CAP_LINK_CONNECT_TOUT</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 5 This command will trigger connection establish process between local and remote device, accomplished by a event-driven state machine in BT stack.</p>
 
 <h3>Item B. a2dp_write data path:</h3>
 
-<p>{% img center http://yongbingchen.github.com/images/bluedroid/a2dp_write.jpg  %}
+<p><img class="center" src="http://yongbingchen.github.com/images/bluedroid/a2dp_write.jpg" title="" >
 1 A2DP client writes to A2DP data socket will trigger API_WRITE_REQ_EVT in SCB_STREAM_ST state:
-{% codeblock lang:cpp %}
-05-02 01:14:03.134 I/bt-avp  ( 2139): SCB hdl=1 event=1/API_WRITE_REQ_EVT state=SCB_STREAM_ST
-394 /<em> state table for streaming state </em>/
-395 const UINT8 avdt_scb_st_stream[][AVDT_SCB_NUM_COLS] = {
-396 /<em> Event                     Action 1                       Action 2                    Next state </em>/
-398 /<em> API_WRITE_REQ_EVT </em>/     {AVDT_SCB_HDL_WRITE_REQ,        AVDT_SCB_CHK_SND_PKT,       AVDT_SCB_STREAM_ST},
-{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="mo">05</span><span class="o">-</span><span class="mo">02</span> <span class="mo">01</span><span class="o">:</span><span class="mi">14</span><span class="o">:</span><span class="mf">03.134</span> <span class="n">I</span><span class="o">/</span><span class="n">bt</span><span class="o">-</span><span class="n">avp</span>  <span class="p">(</span> <span class="mi">2139</span><span class="p">)</span><span class="o">:</span> <span class="n">SCB</span> <span class="n">hdl</span><span class="o">=</span><span class="mi">1</span> <span class="n">event</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">API_WRITE_REQ_EVT</span> <span class="n">state</span><span class="o">=</span><span class="n">SCB_STREAM_ST</span>
+</span><span class='line'><span class="mi">394</span> <span class="o">/&lt;</span><span class="n">em</span><span class="o">&gt;</span> <span class="n">state</span> <span class="n">table</span> <span class="k">for</span> <span class="n">streaming</span> <span class="n">state</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;/</span>
+</span><span class='line'><span class="mi">395</span> <span class="k">const</span> <span class="n">UINT8</span> <span class="n">avdt_scb_st_stream</span><span class="p">[][</span><span class="n">AVDT_SCB_NUM_COLS</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'><span class="mi">396</span> <span class="o">/&lt;</span><span class="n">em</span><span class="o">&gt;</span> <span class="n">Event</span>                     <span class="n">Action</span> <span class="mi">1</span>                       <span class="n">Action</span> <span class="mi">2</span>                    <span class="n">Next</span> <span class="n">state</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;/</span>
+</span><span class='line'><span class="mi">398</span> <span class="o">/&lt;</span><span class="n">em</span><span class="o">&gt;</span> <span class="n">API_WRITE_REQ_EVT</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;/</span>     <span class="p">{</span><span class="n">AVDT_SCB_HDL_WRITE_REQ</span><span class="p">,</span>        <span class="n">AVDT_SCB_CHK_SND_PKT</span><span class="p">,</span>       <span class="n">AVDT_SCB_STREAM_ST</span><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 2 A2DP server handle this with bellow two actions:
-{% codeblock lang:cpp %}
-//2.1 build a new media packet and stores it in the SCB.
-external/bluetooth/bluedroid/stack/avdt/avdt_scb_act.c
-1320 void avdt_scb_hdl_write_req(tAVDT_SCB <em>p_scb, tAVDT_SCB_EVT </em>p_data)</p>
-
-<p>//2.2 send this stored media packet to L2CAP layer.
-1921 void avdt_scb_chk_snd_pkt(tAVDT_SCB <em>p_scb, tAVDT_SCB_EVT </em>p_data)</p>
-
-<pre><code>avdt_ad_write_req(AVDT_CHAN_MEDIA, p_scb-&gt;p_ccb, p_scb, p_pkt);
-    L2CA_DataWrite(avdt_cb.ad.rt_tbl[avdt_ccb_to_idx(p_ccb)][tcid].lcid, p_buf);
-</code></pre>
-
-<p>{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="c1">//2.1 build a new media packet and stores it in the SCB.</span>
+</span><span class='line'><span class="n">external</span><span class="o">/</span><span class="n">bluetooth</span><span class="o">/</span><span class="n">bluedroid</span><span class="o">/</span><span class="n">stack</span><span class="o">/</span><span class="n">avdt</span><span class="o">/</span><span class="n">avdt_scb_act</span><span class="p">.</span><span class="n">c</span>
+</span><span class='line'><span class="mi">1320</span> <span class="kt">void</span> <span class="n">avdt_scb_hdl_write_req</span><span class="p">(</span><span class="n">tAVDT_SCB</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">p_scb</span><span class="p">,</span> <span class="n">tAVDT_SCB_EVT</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">p_data</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//2.2 send this stored media packet to L2CAP layer.</span>
+</span><span class='line'><span class="mi">1921</span> <span class="kt">void</span> <span class="n">avdt_scb_chk_snd_pkt</span><span class="p">(</span><span class="n">tAVDT_SCB</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">p_scb</span><span class="p">,</span> <span class="n">tAVDT_SCB_EVT</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">p_data</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">avdt_ad_write_req</span><span class="p">(</span><span class="n">AVDT_CHAN_MEDIA</span><span class="p">,</span> <span class="n">p_scb</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">p_ccb</span><span class="p">,</span> <span class="n">p_scb</span><span class="p">,</span> <span class="n">p_pkt</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">L2CA_DataWrite</span><span class="p">(</span><span class="n">avdt_cb</span><span class="p">.</span><span class="n">ad</span><span class="p">.</span><span class="n">rt_tbl</span><span class="p">[</span><span class="n">avdt_ccb_to_idx</span><span class="p">(</span><span class="n">p_ccb</span><span class="p">)][</span><span class="n">tcid</span><span class="p">].</span><span class="n">lcid</span><span class="p">,</span> <span class="n">p_buf</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 3 L2CAP to HCI layer
-{% codeblock lang:cpp %}
-bluedroid/stack/l2cap/l2c_api.c
-1633 UINT8 L2CA_DataWrite (UINT16 cid, BT_HDR *p_data)
-1636     return l2c_data_write (cid, p_data, L2CAP_FLUSHABLE_CH_BASED);</p>
-
-<pre><code>                p_ccb = l2cu_find_ccb_by_cid (NULL, cid);
-                l2c_csm_execute (p_ccb, L2CEVT_L2CA_DATA_WRITE, p_data);
-                    935 static void l2c_csm_open (tL2C_CCB *p_ccb, UINT16 event, void *p_data)//Just consider channel connected state
-                    1050     case L2CEVT_L2CA_DATA_WRITE:                    /* Upper layer data to send */
-                    1051         l2c_enqueue_peer_data (p_ccb, (BT_HDR *)p_data);
-                    1052         l2c_link_check_send_pkts (p_ccb-&gt;p_lcb, NULL, NULL);
-                    1053         break;
-                            l2c_link_check_send_pkts (p_lcb, NULL, NULL);
-                                l2c_link_send_to_lower (p_lcb, p_buf);
-                                1341 #if BLE_INCLUDED == TRUE
-                                1342         if (p_lcb-&gt;is_ble_link)
-                                1344             L2C_LINK_SEND_BLE_ACL_DATA(p_buf);
-                                1346         else
-                                1349             L2C_LINK_SEND_ACL_DATA (p_buf);
-                                                    bte_main_hci_send((BT_HDR *)(p), BT_EVT_TO_LM_HCI_ACL);
-                                                        bt_hc_if-&gt;transmit_buf((TRANSAC)p_msg, \(char *) (p_msg + 1),p_msg-&gt;len);
-                                                            bluedroid/hci/src/bt_hci_bdroid.c:249 static int transmit_buf(TRANSAC transac, char *p_buf, int len)
-                                                                utils_enqueue(&amp;tx_q, (void *) transac);
-                                                                bthc_signal_event(HC_EVENT_TX);
-</code></pre>
-
-<p>{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">bluedroid</span><span class="o">/</span><span class="n">stack</span><span class="o">/</span><span class="n">l2cap</span><span class="o">/</span><span class="n">l2c_api</span><span class="p">.</span><span class="n">c</span>
+</span><span class='line'><span class="mi">1633</span> <span class="n">UINT8</span> <span class="n">L2CA_DataWrite</span> <span class="p">(</span><span class="n">UINT16</span> <span class="n">cid</span><span class="p">,</span> <span class="n">BT_HDR</span> <span class="o">*</span><span class="n">p_data</span><span class="p">)</span>
+</span><span class='line'><span class="mi">1636</span>     <span class="k">return</span> <span class="n">l2c_data_write</span> <span class="p">(</span><span class="n">cid</span><span class="p">,</span> <span class="n">p_data</span><span class="p">,</span> <span class="n">L2CAP_FLUSHABLE_CH_BASED</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>                <span class="n">p_ccb</span> <span class="o">=</span> <span class="n">l2cu_find_ccb_by_cid</span> <span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="n">cid</span><span class="p">);</span>
+</span><span class='line'>                <span class="n">l2c_csm_execute</span> <span class="p">(</span><span class="n">p_ccb</span><span class="p">,</span> <span class="n">L2CEVT_L2CA_DATA_WRITE</span><span class="p">,</span> <span class="n">p_data</span><span class="p">);</span>
+</span><span class='line'>                    <span class="mi">935</span> <span class="k">static</span> <span class="kt">void</span> <span class="n">l2c_csm_open</span> <span class="p">(</span><span class="n">tL2C_CCB</span> <span class="o">*</span><span class="n">p_ccb</span><span class="p">,</span> <span class="n">UINT16</span> <span class="n">event</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">p_data</span><span class="p">)</span><span class="c1">//Just consider channel connected state</span>
+</span><span class='line'>                    <span class="mi">1050</span>     <span class="k">case</span> <span class="nl">L2CEVT_L2CA_DATA_WRITE:</span>                    <span class="cm">/* Upper layer data to send */</span>
+</span><span class='line'>                    <span class="mi">1051</span>         <span class="n">l2c_enqueue_peer_data</span> <span class="p">(</span><span class="n">p_ccb</span><span class="p">,</span> <span class="p">(</span><span class="n">BT_HDR</span> <span class="o">*</span><span class="p">)</span><span class="n">p_data</span><span class="p">);</span>
+</span><span class='line'>                    <span class="mi">1052</span>         <span class="n">l2c_link_check_send_pkts</span> <span class="p">(</span><span class="n">p_ccb</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">p_lcb</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'>                    <span class="mi">1053</span>         <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>                            <span class="n">l2c_link_check_send_pkts</span> <span class="p">(</span><span class="n">p_lcb</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'>                                <span class="n">l2c_link_send_to_lower</span> <span class="p">(</span><span class="n">p_lcb</span><span class="p">,</span> <span class="n">p_buf</span><span class="p">);</span>
+</span><span class='line'>                                <span class="mi">1341</span> <span class="err">#</span><span class="k">if</span> <span class="n">BLE_INCLUDED</span> <span class="o">==</span> <span class="n">TRUE</span>
+</span><span class='line'>                                <span class="mi">1342</span>         <span class="k">if</span> <span class="p">(</span><span class="n">p_lcb</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">is_ble_link</span><span class="p">)</span>
+</span><span class='line'>                                <span class="mi">1344</span>             <span class="n">L2C_LINK_SEND_BLE_ACL_DATA</span><span class="p">(</span><span class="n">p_buf</span><span class="p">);</span>
+</span><span class='line'>                                <span class="mi">1346</span>         <span class="k">else</span>
+</span><span class='line'>                                <span class="mi">1349</span>             <span class="n">L2C_LINK_SEND_ACL_DATA</span> <span class="p">(</span><span class="n">p_buf</span><span class="p">);</span>
+</span><span class='line'>                                                    <span class="n">bte_main_hci_send</span><span class="p">((</span><span class="n">BT_HDR</span> <span class="o">*</span><span class="p">)(</span><span class="n">p</span><span class="p">),</span> <span class="n">BT_EVT_TO_LM_HCI_ACL</span><span class="p">);</span>
+</span><span class='line'>                                                        <span class="n">bt_hc_if</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">transmit_buf</span><span class="p">((</span><span class="n">TRANSAC</span><span class="p">)</span><span class="n">p_msg</span><span class="p">,</span> <span class="err">\</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="p">(</span><span class="n">p_msg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span><span class="n">p_msg</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">len</span><span class="p">);</span>
+</span><span class='line'>                                                            <span class="n">bluedroid</span><span class="o">/</span><span class="n">hci</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">bt_hci_bdroid</span><span class="p">.</span><span class="nl">c:</span><span class="mi">249</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">transmit_buf</span><span class="p">(</span><span class="n">TRANSAC</span> <span class="n">transac</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">p_buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span>
+</span><span class='line'>                                                                <span class="n">utils_enqueue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">tx_q</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span> <span class="n">transac</span><span class="p">);</span>
+</span><span class='line'>                                                                <span class="n">bthc_signal_event</span><span class="p">(</span><span class="n">HC_EVENT_TX</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 4 HCI content write to hardware device driver
-{% codeblock lang:cpp %}
-339 static void <em>bt_hc_worker_thread(void </em>arg)</p>
-
-<pre><code>    if (events &amp; HC_EVENT_TX)
-        p_hci_if-&gt;send(sending_msg_que[i]);
-        593 void hci_h4_send_msg(HC_BT_HDR *p_msg)
-            bytes_sent = userial_write(event,(uint8_t *) p,bytes_to_send);
-                 ret = write(userial_cb.fd, p_data+total, len);
-</code></pre>
-
-<p>{% endcodeblock %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="mi">339</span> <span class="k">static</span> <span class="kt">void</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">bt_hc_worker_thread</span><span class="p">(</span><span class="kt">void</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">arg</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>    <span class="k">if</span> <span class="p">(</span><span class="n">events</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">HC_EVENT_TX</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">p_hci_if</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">send</span><span class="p">(</span><span class="n">sending_msg_que</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'>        <span class="mi">593</span> <span class="kt">void</span> <span class="n">hci_h4_send_msg</span><span class="p">(</span><span class="n">HC_BT_HDR</span> <span class="o">*</span><span class="n">p_msg</span><span class="p">)</span>
+</span><span class='line'>            <span class="n">bytes_sent</span> <span class="o">=</span> <span class="n">userial_write</span><span class="p">(</span><span class="n">event</span><span class="p">,(</span><span class="n">uint8_t</span> <span class="o">*</span><span class="p">)</span> <span class="n">p</span><span class="p">,</span><span class="n">bytes_to_send</span><span class="p">);</span>
+</span><span class='line'>                 <span class="n">ret</span> <span class="o">=</span> <span class="n">write</span><span class="p">(</span><span class="n">userial_cb</span><span class="p">.</span><span class="n">fd</span><span class="p">,</span> <span class="n">p_data</span><span class="o">+</span><span class="n">total</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h3>Item C. Incoming data/event path:</h3>
 
 <p>0 Init vendor (BT chip vendor, like MRVL/TI) implement of bt_vendor_interface_t interface.
-{% codeblock lang:cpp %}</p>
-
-<pre><code>187 void init_vnd_if(unsigned char *local_bdaddr)
-        dlhandle = dlopen("libbt-vendor.so", RTLD_NOW);             
-        GLOBAL bt_vendor_interface_t *bt_vnd_if = (bt_vendor_interface_t *) dlsym(dlhandle, "BLUETOOTH_VENDOR_LIB_INTERFACE");
-        bt_vnd_if-&gt;init(&amp;vnd_callbacks, local_bdaddr);
-
-306 uint8_t userial_open(uint8_t port)
-        result = bt_vendor_interface_t * bt_vnd_if-&gt;op(BT_VND_OP_USERIAL_OPEN, &amp;fd_array);
-            int bt_vnd_mrvl_if_op(bt_vendor_opcode_t opcode, void *param)
-                mchar_fd = open("/dev/mbtchar0", O_RDWR);
-363     pthread_create(&amp;(userial_cb.read_thread), &amp;thread_attr, userial_read_thread, NULL) != 0 );
-</code></pre>
-
-<p>{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="mi">187</span> <span class="kt">void</span> <span class="n">init_vnd_if</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">local_bdaddr</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">dlhandle</span> <span class="o">=</span> <span class="n">dlopen</span><span class="p">(</span><span class="s">&quot;libbt-vendor.so&quot;</span><span class="p">,</span> <span class="n">RTLD_NOW</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">GLOBAL</span> <span class="n">bt_vendor_interface_t</span> <span class="o">*</span><span class="n">bt_vnd_if</span> <span class="o">=</span> <span class="p">(</span><span class="n">bt_vendor_interface_t</span> <span class="o">*</span><span class="p">)</span> <span class="n">dlsym</span><span class="p">(</span><span class="n">dlhandle</span><span class="p">,</span> <span class="s">&quot;BLUETOOTH_VENDOR_LIB_INTERFACE&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">bt_vnd_if</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">vnd_callbacks</span><span class="p">,</span> <span class="n">local_bdaddr</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">306</span> <span class="n">uint8_t</span> <span class="n">userial_open</span><span class="p">(</span><span class="n">uint8_t</span> <span class="n">port</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">result</span> <span class="o">=</span> <span class="n">bt_vendor_interface_t</span> <span class="o">*</span> <span class="n">bt_vnd_if</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">op</span><span class="p">(</span><span class="n">BT_VND_OP_USERIAL_OPEN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">fd_array</span><span class="p">);</span>
+</span><span class='line'>            <span class="kt">int</span> <span class="n">bt_vnd_mrvl_if_op</span><span class="p">(</span><span class="n">bt_vendor_opcode_t</span> <span class="n">opcode</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">param</span><span class="p">)</span>
+</span><span class='line'>                <span class="n">mchar_fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&quot;/dev/mbtchar0&quot;</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span>
+</span><span class='line'><span class="mi">363</span>     <span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;(</span><span class="n">userial_cb</span><span class="p">.</span><span class="n">read_thread</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">thread_attr</span><span class="p">,</span> <span class="n">userial_read_thread</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 1 Got a packet from hardware device driver, in HCI layer.
-{% codeblock lang:cpp %}
-bluedroid/hci/src/userial.c:210
-static void <em>userial_read_thread(void </em>arg)</p>
-
-<pre><code>rx_length = select_read(userial_cb.fd, p, READ_LIMIT);
-    ret = read(fd, pbuf, (size_t)len);
-utils_enqueue(&amp;(userial_cb.rx_q), p_buf);
-//bluedroid/hci/src/bt_hci_bdroid.c
-bthc_signal_event(HC_EVENT_RX);
-</code></pre>
-
-<p>{% endcodeblock %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">bluedroid</span><span class="o">/</span><span class="n">hci</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">userial</span><span class="p">.</span><span class="nl">c:</span><span class="mi">210</span>
+</span><span class='line'><span class="k">static</span> <span class="kt">void</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">userial_read_thread</span><span class="p">(</span><span class="kt">void</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">arg</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">rx_length</span> <span class="o">=</span> <span class="n">select_read</span><span class="p">(</span><span class="n">userial_cb</span><span class="p">.</span><span class="n">fd</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">READ_LIMIT</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">ret</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">pbuf</span><span class="p">,</span> <span class="p">(</span><span class="n">size_t</span><span class="p">)</span><span class="n">len</span><span class="p">);</span>
+</span><span class='line'><span class="n">utils_enqueue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;(</span><span class="n">userial_cb</span><span class="p">.</span><span class="n">rx_q</span><span class="p">),</span> <span class="n">p_buf</span><span class="p">);</span>
+</span><span class='line'><span class="c1">//bluedroid/hci/src/bt_hci_bdroid.c</span>
+</span><span class='line'><span class="n">bthc_signal_event</span><span class="p">(</span><span class="n">HC_EVENT_RX</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>2 Transfer this to L2CAP layer.
-{% codeblock lang:cpp %}
-bluedroid/hci/src/bt_hci_bdroid.c <br/>
-339 static void <em>bt_hc_worker_thread(void </em>arg)</p>
-
-<pre><code>if (events &amp; HC_EVENT_RX)
-     p_hci_if-&gt;rcv();
-        uint16_t hci_h4_receive_msg(void)//Construct HCI EVENT/ACL packets and send them to stack
-</code></pre>
-
-<p> 957             if (p_cb->p_rcv_msg->event != MSG_HC_TO_STACK_HCI_ACL)
- 958                 btsnoop_capture(p_cb->p_rcv_msg, TRUE);//dump to HCI trace file/socket.
- 960             if (p_cb->p_rcv_msg->event == MSG_HC_TO_STACK_HCI_EVT)
- 965                 bt_hc_cbacks->data_ind((TRANSAC) p_cb->p_rcv_msg, (char *) (p_cb->p_rcv_msg + 1), p_cb->p_rcv_msg->len + BT_HC_HDR_SIZE);</p>
-
-<pre><code>                        bluedroid/main/bte_main.c:504 static int data_ind(TRANSAC transac, char *p_buf, int len)
-                            GKI_send_msg (BTU_TASK, BTU_HCI_RCV_MBOX, transac);//handle in btu_task.
-</code></pre>
-
-<p>{% endcodeblock %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">bluedroid</span><span class="o">/</span><span class="n">hci</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">bt_hci_bdroid</span><span class="p">.</span><span class="n">c</span> <span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
+</span><span class='line'><span class="mi">339</span> <span class="k">static</span> <span class="kt">void</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">bt_hc_worker_thread</span><span class="p">(</span><span class="kt">void</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">arg</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span> <span class="p">(</span><span class="n">events</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">HC_EVENT_RX</span><span class="p">)</span>
+</span><span class='line'>     <span class="n">p_hci_if</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">rcv</span><span class="p">();</span>
+</span><span class='line'>        <span class="n">uint16_t</span> <span class="n">hci_h4_receive_msg</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="c1">//Construct HCI EVENT/ACL packets and send them to stack</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span> <span class="mi">957</span>             <span class="k">if</span> <span class="p">(</span><span class="n">p_cb</span><span class="o">-&gt;</span><span class="n">p_rcv_msg</span><span class="o">-&gt;</span><span class="n">event</span> <span class="o">!=</span> <span class="n">MSG_HC_TO_STACK_HCI_ACL</span><span class="p">)</span>
+</span><span class='line'> <span class="mi">958</span>                 <span class="n">btsnoop_capture</span><span class="p">(</span><span class="n">p_cb</span><span class="o">-&gt;</span><span class="n">p_rcv_msg</span><span class="p">,</span> <span class="n">TRUE</span><span class="p">);</span><span class="c1">//dump to HCI trace file/socket.</span>
+</span><span class='line'> <span class="mi">960</span>             <span class="k">if</span> <span class="p">(</span><span class="n">p_cb</span><span class="o">-&gt;</span><span class="n">p_rcv_msg</span><span class="o">-&gt;</span><span class="n">event</span> <span class="o">==</span> <span class="n">MSG_HC_TO_STACK_HCI_EVT</span><span class="p">)</span>
+</span><span class='line'> <span class="mi">965</span>                 <span class="n">bt_hc_cbacks</span><span class="o">-&gt;</span><span class="n">data_ind</span><span class="p">((</span><span class="n">TRANSAC</span><span class="p">)</span> <span class="n">p_cb</span><span class="o">-&gt;</span><span class="n">p_rcv_msg</span><span class="p">,</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="p">(</span><span class="n">p_cb</span><span class="o">-&gt;</span><span class="n">p_rcv_msg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">p_cb</span><span class="o">-&gt;</span><span class="n">p_rcv_msg</span><span class="o">-&gt;</span><span class="n">len</span> <span class="o">+</span> <span class="n">BT_HC_HDR_SIZE</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>                        <span class="n">bluedroid</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">bte_main</span><span class="p">.</span><span class="nl">c:</span><span class="mi">504</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">data_ind</span><span class="p">(</span><span class="n">TRANSAC</span> <span class="n">transac</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">p_buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span>
+</span><span class='line'>                            <span class="n">GKI_send_msg</span> <span class="p">(</span><span class="n">BTU_TASK</span><span class="p">,</span> <span class="n">BTU_HCI_RCV_MBOX</span><span class="p">,</span> <span class="n">transac</span><span class="p">);</span><span class="c1">//handle in btu_task.</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Reference:
-{% blockquote logcat:A2DP http://yongbingchen.github.com/txt/bluedroid/a2dp-init-logcat.txt %}
-{% endblockquote %}
-{% blockquote air log: LMP http://yongbingchen.github.com/images/bluedroid/A2DP-connect-LMP.jpg %}
-{% endblockquote %}
-{% blockquote air log: L2CAP http://yongbingchen.github.com/images/bluedroid/A2DP-connect-L2CAP.jpg %}
-{% endblockquote %}
-{% blockquote source code reading note http://yongbingchen.github.com/txt/bluedroid/a2dp-source-code-reading-note.txt %}
-{% endblockquote %}</p>
+<blockquote><p></p><footer><strong>logcat:A2DP</strong> <cite><a href='http://yongbingchen.github.com/txt/bluedroid/a2dp-init-logcat.txt'>yongbingchen.github.com/txt/&hellip;</a></cite></footer></blockquote>
+<blockquote><p></p><footer><strong>air log: LMP</strong> <cite><a href='http://yongbingchen.github.com/images/bluedroid/A2DP-connect-LMP.jpg'>yongbingchen.github.com/images/&hellip;</a></cite></footer></blockquote>
+<blockquote><p></p><footer><strong>air log: L2CAP</strong> <cite><a href='http://yongbingchen.github.com/images/bluedroid/A2DP-connect-L2CAP.jpg'>yongbingchen.github.com/images/&hellip;</a></cite></footer></blockquote>
+<blockquote><p></p><footer><strong>source code reading note</strong> <cite><a href='http://yongbingchen.github.com/txt/bluedroid/a2dp-source-code-reading-note.txt'>yongbingchen.github.com/txt/&hellip;</a></cite></footer></blockquote></p>
 ]]></content>
   </entry>
   
@@ -353,23 +493,37 @@ bluedroid/hci/src/bt_hci_bdroid.c <br/>
     <link href="http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-iii-init-a2dp-service/"/>
     <updated>2013-05-07T04:17:00-07:00</updated>
     <id>http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-iii-init-a2dp-service</id>
-    <content type="html"><![CDATA[<p>{% img center http://yongbingchen.github.com/images/bluedroid/init_a2dp_service.jpg  %}
+    <content type="html"><![CDATA[<p><img class="center" src="http://yongbingchen.github.com/images/bluedroid/init_a2dp_service.jpg" title="" >
 1 Get Android defined A2DP interface btav_interface_t from bt_interface_t get_bluetooth_interface().
-{% codeblock lang:cpp %}
-04-25 01:56:30.530 I/BluetoothA2dpServiceJni( 2093): classInitNative: succeeds
-packages/apps/Bluetooth/jni/com_android_bluetooth_a2dp.cpp
-137 static void initNative(JNIEnv *env, jobject object)</p>
-
-<pre><code>GLOBAL const btav_interface_t *sBluetoothA2dpInterface = (btav_interface_t *)btInf-&gt;get_profile_interface(BT_PROFILE_ADVANCED_AUDIO_ID);
-sBluetoothA2dpInterface-&gt;init(&amp;sBluetoothA2dpCallbacks);
-    external/bluetooth/bluedroid/btif/src/btif_av.c
-    725 static bt_status_t init(btav_callbacks_t* callbacks )
-        686 int btif_a2dp_start_media_task(void)
-            GKI_create_task((TASKPTR)btif_media_task, A2DP_MEDIA_TASK,
-        btif_enable_service(BTA_A2DP_SERVICE_ID);//Upon BT enable, BTIF core shall invoke the BTA APIs to enable the profiles
-</code></pre>
-
-<p>{% endcodeblock %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="mo">04</span><span class="o">-</span><span class="mi">25</span> <span class="mo">01</span><span class="o">:</span><span class="mi">56</span><span class="o">:</span><span class="mf">30.530</span> <span class="n">I</span><span class="o">/</span><span class="n">BluetoothA2dpServiceJni</span><span class="p">(</span> <span class="mi">2093</span><span class="p">)</span><span class="o">:</span> <span class="nl">classInitNative:</span> <span class="n">succeeds</span>
+</span><span class='line'><span class="n">packages</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">Bluetooth</span><span class="o">/</span><span class="n">jni</span><span class="o">/</span><span class="n">com_android_bluetooth_a2dp</span><span class="p">.</span><span class="n">cpp</span>
+</span><span class='line'><span class="mi">137</span> <span class="k">static</span> <span class="kt">void</span> <span class="n">initNative</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jobject</span> <span class="n">object</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">GLOBAL</span> <span class="k">const</span> <span class="n">btav_interface_t</span> <span class="o">*</span><span class="n">sBluetoothA2dpInterface</span> <span class="o">=</span> <span class="p">(</span><span class="n">btav_interface_t</span> <span class="o">*</span><span class="p">)</span><span class="n">btInf</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">get_profile_interface</span><span class="p">(</span><span class="n">BT_PROFILE_ADVANCED_AUDIO_ID</span><span class="p">);</span>
+</span><span class='line'><span class="n">sBluetoothA2dpInterface</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">sBluetoothA2dpCallbacks</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">external</span><span class="o">/</span><span class="n">bluetooth</span><span class="o">/</span><span class="n">bluedroid</span><span class="o">/</span><span class="n">btif</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">btif_av</span><span class="p">.</span><span class="n">c</span>
+</span><span class='line'>    <span class="mi">725</span> <span class="k">static</span> <span class="n">bt_status_t</span> <span class="n">init</span><span class="p">(</span><span class="n">btav_callbacks_t</span><span class="o">*</span> <span class="n">callbacks</span> <span class="p">)</span>
+</span><span class='line'>        <span class="mi">686</span> <span class="kt">int</span> <span class="n">btif_a2dp_start_media_task</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'>            <span class="n">GKI_create_task</span><span class="p">((</span><span class="n">TASKPTR</span><span class="p">)</span><span class="n">btif_media_task</span><span class="p">,</span> <span class="n">A2DP_MEDIA_TASK</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">btif_enable_service</span><span class="p">(</span><span class="n">BTA_A2DP_SERVICE_ID</span><span class="p">);</span><span class="c1">//Upon BT enable, BTIF core shall invoke the BTA APIs to enable the profiles</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>2 Init A2DP service by btav_interface_t->init().</p>
 
@@ -377,45 +531,67 @@ sBluetoothA2dpInterface-&gt;init(&amp;sBluetoothA2dpCallbacks);
 * Open a socket to listen on client's connect request from control channel.
 </code></pre>
 
-<p>{% codeblock lang:cpp %}
-external/bluetooth/bluedroid/btif/src/btif_media_task.c
-//Task for SBC encoder.  This task receives an event when the waveIn interface has a pcm data buffer ready.  On receiving the event, handle all ready pcm data buffers.  If stream is started, run the SBC encoder on each chunk of pcm samples and build an output packet consisting of one or more encoded SBC frames.
-1066 int btif_media_task(void *p)
-1073     btif_media_task_init();
-1044     UIPC_Init(NULL);</p>
-
-<pre><code>        606 UDRV_API void UIPC_Init(void *p_data)
-            569 int uipc_start_main_server_thread(void)
-                pthread_create(&amp;uipc_main.tid, (const pthread_attr_t *) NULL, (void*)uipc_read_task, NULL)
-</code></pre>
-
-<p>1047     UIPC_Open(UIPC_CH_ID_AV_CTRL , btif_a2dp_ctrl_cb);</p>
-
-<pre><code>        uipc_setup_server_locked(ch_id, A2DP_CTRL_PATH, p_cback);//This is the control socket that listen on A2DP client.
-</code></pre>
-
-<p>1079     while (1)//A2DP event loop
-1080     {
-1085         if (event &amp; BTIF_MEDIA_TASK_CMD)
-1090                 btif_media_task_handle_cmd(p_msg);
-1093
-1094         if (event &amp; BTIF_MEDIA_TASK_DATA)
-1099                 btif_media_task_handle_media(p_msg);
-1102
-1103         if (event &amp; BTIF_MEDIA_AA_TASK_TIMER)
-1105             /<em> advance audio timer expiration </em>/
-1106             btif_media_task_aa_handle_timer();
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">external</span><span class="o">/</span><span class="n">bluetooth</span><span class="o">/</span><span class="n">bluedroid</span><span class="o">/</span><span class="n">btif</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">btif_media_task</span><span class="p">.</span><span class="n">c</span>
+</span><span class='line'><span class="c1">//Task for SBC encoder.  This task receives an event when the waveIn interface has a pcm data buffer ready.  On receiving the event, handle all ready pcm data buffers.  If stream is started, run the SBC encoder on each chunk of pcm samples and build an output packet consisting of one or more encoded SBC frames.</span>
+</span><span class='line'><span class="mi">1066</span> <span class="kt">int</span> <span class="n">btif_media_task</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span>
+</span><span class='line'><span class="mi">1073</span>     <span class="n">btif_media_task_init</span><span class="p">();</span>
+</span><span class='line'><span class="mi">1044</span>     <span class="n">UIPC_Init</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>        <span class="mi">606</span> <span class="n">UDRV_API</span> <span class="kt">void</span> <span class="n">UIPC_Init</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">p_data</span><span class="p">)</span>
+</span><span class='line'>            <span class="mi">569</span> <span class="kt">int</span> <span class="n">uipc_start_main_server_thread</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'>                <span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">uipc_main</span><span class="p">.</span><span class="n">tid</span><span class="p">,</span> <span class="p">(</span><span class="k">const</span> <span class="n">pthread_attr_t</span> <span class="o">*</span><span class="p">)</span> <span class="nb">NULL</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="n">uipc_read_task</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="mi">1047</span>     <span class="n">UIPC_Open</span><span class="p">(</span><span class="n">UIPC_CH_ID_AV_CTRL</span> <span class="p">,</span> <span class="n">btif_a2dp_ctrl_cb</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>        <span class="n">uipc_setup_server_locked</span><span class="p">(</span><span class="n">ch_id</span><span class="p">,</span> <span class="n">A2DP_CTRL_PATH</span><span class="p">,</span> <span class="n">p_cback</span><span class="p">);</span><span class="c1">//This is the control socket that listen on A2DP client.</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="mi">1079</span>     <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="c1">//A2DP event loop</span>
+</span><span class='line'><span class="mi">1080</span>     <span class="p">{</span>
+</span><span class='line'><span class="mi">1085</span>         <span class="k">if</span> <span class="p">(</span><span class="n">event</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">BTIF_MEDIA_TASK_CMD</span><span class="p">)</span>
+</span><span class='line'><span class="mi">1090</span>                 <span class="n">btif_media_task_handle_cmd</span><span class="p">(</span><span class="n">p_msg</span><span class="p">);</span>
+</span><span class='line'><span class="mi">1093</span>
+</span><span class='line'><span class="mi">1094</span>         <span class="k">if</span> <span class="p">(</span><span class="n">event</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">BTIF_MEDIA_TASK_DATA</span><span class="p">)</span>
+</span><span class='line'><span class="mi">1099</span>                 <span class="n">btif_media_task_handle_media</span><span class="p">(</span><span class="n">p_msg</span><span class="p">);</span>
+</span><span class='line'><span class="mi">1102</span>
+</span><span class='line'><span class="mi">1103</span>         <span class="k">if</span> <span class="p">(</span><span class="n">event</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">BTIF_MEDIA_AA_TASK_TIMER</span><span class="p">)</span>
+</span><span class='line'><span class="mi">1105</span>             <span class="o">/&lt;</span><span class="n">em</span><span class="o">&gt;</span> <span class="n">advance</span> <span class="n">audio</span> <span class="n">timer</span> <span class="n">expiration</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;/</span>
+</span><span class='line'><span class="mi">1106</span>             <span class="n">btif_media_task_aa_handle_timer</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Reference:
-{% blockquote logcat:A2DP http://yongbingchen.github.com/txt/bluedroid/a2dp-init-logcat.txt %}
-{% endblockquote %}
-{% blockquote air log: LMP http://yongbingchen.github.com/images/bluedroid/A2DP-connect-LMP.jpg %}
-{% endblockquote %}
-{% blockquote air log: L2CAP http://yongbingchen.github.com/images/bluedroid/A2DP-connect-L2CAP.jpg %}
-{% endblockquote %}
-{% blockquote source code reading note http://yongbingchen.github.com/txt/bluedroid/a2dp-source-code-reading-note.txt %}
-{% endblockquote %}</p>
+<blockquote><p></p><footer><strong>logcat:A2DP</strong> <cite><a href='http://yongbingchen.github.com/txt/bluedroid/a2dp-init-logcat.txt'>yongbingchen.github.com/txt/&hellip;</a></cite></footer></blockquote>
+<blockquote><p></p><footer><strong>air log: LMP</strong> <cite><a href='http://yongbingchen.github.com/images/bluedroid/A2DP-connect-LMP.jpg'>yongbingchen.github.com/images/&hellip;</a></cite></footer></blockquote>
+<blockquote><p></p><footer><strong>air log: L2CAP</strong> <cite><a href='http://yongbingchen.github.com/images/bluedroid/A2DP-connect-L2CAP.jpg'>yongbingchen.github.com/images/&hellip;</a></cite></footer></blockquote>
+<blockquote><p></p><footer><strong>source code reading note</strong> <cite><a href='http://yongbingchen.github.com/txt/bluedroid/a2dp-source-code-reading-note.txt'>yongbingchen.github.com/txt/&hellip;</a></cite></footer></blockquote></p>
 ]]></content>
   </entry>
   

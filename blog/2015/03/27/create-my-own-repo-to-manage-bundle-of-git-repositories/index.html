@@ -168,29 +168,26 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
-<li>On gerrit server, create a working &#8220;Branch Name&#8221; &#8220;my_working_branch&#8221; on these three projects, with &#8220;Initial Revision&#8221; set to &#8220;master&#8221; in https://gerritreview.com/gerrit/#/admin/projects/container/repo_1/${GIT_NAME},branches</li>
-<li>On a client&#8217;s working machine, checkout the repo with below command:
-<code>~$ repo init -u ssh://gerritreview.com:29418/container/repo_1/manifest -b my_working_branch -m manifest.xml --repo-url https://chromium.googlesource.com/external/repo.git --no-repo-verify</code>
-<code>~$ repo sync -j 32</code></li>
-</ol>
+<p/>
+3. On gerrit server, create a working &#8220;Branch Name&#8221; &#8220;my_working_branch&#8221; on these three projects, with &#8220;Initial Revision&#8221; set to &#8220;master&#8221; in https://gerritreview.com/gerrit/#/admin/projects/container/repo_1/${GIT_NAME},branches
+<p/>
+4. On a client&#8217;s working machine, checkout the repo with below command:
 
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>~<span class="nv">$ </span>repo init -u ssh://gerritreview.com:29418/container/repo_1/manifest -b my_working_branch -m manifest.xml --repo-url https://chromium.googlesource.com/external/repo.git --no-repo-verify
+</span><span class='line'>~<span class="nv">$ </span>repo sync -j 32
+</span></code></pre></td></tr></table></div></figure>
 
-<h2>Setup the access control rules for this repo:</h2>
+<h2> Setup the access control rules for this repo:</h2>
 
-<ol>
-<li>define thress group and their access right:
-
-<ol>
-<li>developers  :can submit CL, checkout code, review +/_ 1</li>
-<li>reviewers   :can review +/- 2</li>
-<li>submitters  :can merge CL to working branch</li>
-</ol>
-</li>
-<li>implement these rules in gerrit server:
-First delete all default access permission granted for &#8220;Registered Users&#8221; from https://gerritreview.com/gerrit/#/admin/projects/All-Projects,access
-Then create below access rules for the projects under container: <img src="http://yongbingchen.github.com/images/git/repo/gerrit_server_access_control.jpeg" title="" ></li>
-</ol>
+1. define thress group and their access right: <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; developers  :can submit CL, checkout code, review +/_ 1  <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; reviewers   :can review +/- 2 <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; submitters  :can merge CL to working branch <br />
+2. implement these rules in gerrit server: <br />
+First delete all default access permission granted for &#8220;Registered Users&#8221; from https://gerritreview.com/gerrit/#/admin/projects/All-Projects,access <br />
+Then create below access rules for the projects under container: <img src="http://yongbingchen.github.com/images/git/repo/gerrit_server_access_control.jpeg" title="" >
 
 </div>
 

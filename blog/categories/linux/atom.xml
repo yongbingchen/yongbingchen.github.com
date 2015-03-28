@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Yongbing's Blog]]></title>
   <link href="http://yongbingchen.github.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://yongbingchen.github.com/"/>
-  <updated>2015-03-27T20:27:22-07:00</updated>
+  <updated>2015-03-27T22:06:54-07:00</updated>
   <id>http://yongbingchen.github.com/</id>
   <author>
     <name><![CDATA[Yongbing Chen]]></name>
@@ -19,137 +19,230 @@
     <updated>2013-07-31T05:47:00-07:00</updated>
     <id>http://yongbingchen.github.com/blog/2013/07/31/decode-instruction-address-in-oops-to-c-code-file-line</id>
     <content type="html"><![CDATA[<p>The OOPS message:
-{% codeblock lang:c %}
-[ 2405.090047] Unable to handle kernel paging request at virtual address 008b2005
-[ 2405.097586] pgd = 80004000
-[ 2405.100427] [008b2005] *pgd=00000000
-[ 2405.104187] Internal error: Oops: 5 [#1] PREEMPT SMP ARM
-[ 2405.109673] Modules linked in: mbtusbchar usbfwdnld fusion(O) gal3d amp_core(O)
-[ 2405.117310] CPU: 1    Tainted: G        W  O  (3.4.50+ #11)
-[ 2405.123072] PC is at module_put+0x44/0x8c
-[ 2405.127219] LR is at cdev_put+0x24/0x28
-[ 2405.131182] pc : [<8007521c>]    lr : [<800c97d0>]    psr: 20000013
-[ 2406.111129] Backtrace:
-[ 2406.113680] [<800751d8>] (module_put+0x0/0x8c) from [<800c97d0>] (cdev_put+0x24/0x28)
-[ 2406.121764]  r4:45a8e010 r3:ffffffff
-[ 2406.125491] [<800c97ac>] (cdev_put+0x0/0x28) from [<800c7410>] (fput+0x21c/0x22c)
-{% endcodeblock%}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="p">[</span> <span class="mf">2405.090047</span><span class="p">]</span> <span class="n">Unable</span> <span class="n">to</span> <span class="n">handle</span> <span class="n">kernel</span> <span class="n">paging</span> <span class="n">request</span> <span class="n">at</span> <span class="k">virtual</span> <span class="n">address</span> <span class="mo">00</span><span class="mi">8</span><span class="n">b2005</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2405.097586</span><span class="p">]</span> <span class="n">pgd</span> <span class="o">=</span> <span class="mi">80004000</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2405.100427</span><span class="p">]</span> <span class="p">[</span><span class="mo">00</span><span class="mi">8</span><span class="n">b2005</span><span class="p">]</span> <span class="o">*</span><span class="n">pgd</span><span class="o">=</span><span class="mo">00000000</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2405.104187</span><span class="p">]</span> <span class="n">Internal</span> <span class="n">error</span><span class="o">:</span> <span class="n">Oops</span><span class="o">:</span> <span class="mi">5</span> <span class="p">[</span><span class="err">#</span><span class="mi">1</span><span class="p">]</span> <span class="n">PREEMPT</span> <span class="n">SMP</span> <span class="n">ARM</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2405.109673</span><span class="p">]</span> <span class="n">Modules</span> <span class="n">linked</span> <span class="n">in</span><span class="o">:</span> <span class="n">mbtusbchar</span> <span class="n">usbfwdnld</span> <span class="n">fusion</span><span class="p">(</span><span class="n">O</span><span class="p">)</span> <span class="n">gal3d</span> <span class="n">amp_core</span><span class="p">(</span><span class="n">O</span><span class="p">)</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2405.117310</span><span class="p">]</span> <span class="n">CPU</span><span class="o">:</span> <span class="mi">1</span>    <span class="n">Tainted</span><span class="o">:</span> <span class="n">G</span>        <span class="n">W</span>  <span class="n">O</span>  <span class="p">(</span><span class="mf">3.4.50</span><span class="o">+</span> <span class="err">#</span><span class="mi">11</span><span class="p">)</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2405.123072</span><span class="p">]</span> <span class="n">PC</span> <span class="n">is</span> <span class="n">at</span> <span class="n">module_put</span><span class="o">+</span><span class="mh">0x44</span><span class="o">/</span><span class="mh">0x8c</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2405.127219</span><span class="p">]</span> <span class="n">LR</span> <span class="n">is</span> <span class="n">at</span> <span class="n">cdev_put</span><span class="o">+</span><span class="mh">0x24</span><span class="o">/</span><span class="mh">0x28</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2405.131182</span><span class="p">]</span> <span class="n">pc</span> <span class="o">:</span> <span class="p">[</span><span class="o">&lt;</span><span class="mi">8007521</span><span class="n">c</span><span class="o">&gt;</span><span class="p">]</span>    <span class="n">lr</span> <span class="o">:</span> <span class="p">[</span><span class="o">&lt;</span><span class="mi">800</span><span class="n">c97d0</span><span class="o">&gt;</span><span class="p">]</span>    <span class="n">psr</span><span class="o">:</span> <span class="mi">20000013</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2406.111129</span><span class="p">]</span> <span class="n">Backtrace</span><span class="o">:</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2406.113680</span><span class="p">]</span> <span class="p">[</span><span class="o">&lt;</span><span class="mi">800751</span><span class="n">d8</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">(</span><span class="n">module_put</span><span class="o">+</span><span class="mh">0x0</span><span class="o">/</span><span class="mh">0x8c</span><span class="p">)</span> <span class="n">from</span> <span class="p">[</span><span class="o">&lt;</span><span class="mi">800</span><span class="n">c97d0</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">(</span><span class="n">cdev_put</span><span class="o">+</span><span class="mh">0x24</span><span class="o">/</span><span class="mh">0x28</span><span class="p">)</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2406.121764</span><span class="p">]</span>  <span class="n">r4</span><span class="o">:</span><span class="mi">45</span><span class="n">a8e010</span> <span class="n">r3</span><span class="o">:</span><span class="n">ffffffff</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2406.125491</span><span class="p">]</span> <span class="p">[</span><span class="o">&lt;</span><span class="mi">800</span><span class="n">c97ac</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">(</span><span class="n">cdev_put</span><span class="o">+</span><span class="mh">0x0</span><span class="o">/</span><span class="mh">0x28</span><span class="p">)</span> <span class="n">from</span> <span class="p">[</span><span class="o">&lt;</span><span class="mi">800</span><span class="n">c7410</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">(</span><span class="n">fput</span><span class="o">+</span><span class="mh">0x21c</span><span class="o">/</span><span class="mh">0x22c</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Method A: Recompile vmlinux or failed module with debug info enabled if possible (CONFIG_DEBUG_INFO=y), then gdb can give out the C source code line of the failed instruction:
-{% codeblock lang:c %}
-$ make $MY_DEFAULT_CONFIG_FILE -C $LINUX_ROOT_DIR CROSS_COMPILE=arm-linux-gnueabi- ARCH=arm
-$ make $MY_UIMAGE_NAME -C $LINUX_ROOT_DIR CROSS_COMPILE=arm-linux-gnueabi- ARCH=arm CONFIG_DEBUG_INFO=y -j32
-{% endcodeblock%}
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="err">$</span> <span class="n">make</span> <span class="err">$</span><span class="n">MY_DEFAULT_CONFIG_FILE</span> <span class="o">-</span><span class="n">C</span> <span class="err">$</span><span class="n">LINUX_ROOT_DIR</span> <span class="n">CROSS_COMPILE</span><span class="o">=</span><span class="n">arm</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnueabi</span><span class="o">-</span> <span class="n">ARCH</span><span class="o">=</span><span class="n">arm</span>
+</span><span class='line'><span class="err">$</span> <span class="n">make</span> <span class="err">$</span><span class="n">MY_UIMAGE_NAME</span> <span class="o">-</span><span class="n">C</span> <span class="err">$</span><span class="n">LINUX_ROOT_DIR</span> <span class="n">CROSS_COMPILE</span><span class="o">=</span><span class="n">arm</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnueabi</span><span class="o">-</span> <span class="n">ARCH</span><span class="o">=</span><span class="n">arm</span> <span class="n">CONFIG_DEBUG_INFO</span><span class="o">=</span><span class="n">y</span> <span class="o">-</span><span class="n">j32</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 Recompile individual module if needed:
-{% codeblock lang:c %}
-$ make modules -C $LINUX_ROOT_DIR CROSS_COMPILE=arm-linux-gnueabi- ARCH=arm CONFIG_DEBUG_INFO=y -j32
-{% endcodeblock%}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="err">$</span> <span class="n">make</span> <span class="n">modules</span> <span class="o">-</span><span class="n">C</span> <span class="err">$</span><span class="n">LINUX_ROOT_DIR</span> <span class="n">CROSS_COMPILE</span><span class="o">=</span><span class="n">arm</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnueabi</span><span class="o">-</span> <span class="n">ARCH</span><span class="o">=</span><span class="n">arm</span> <span class="n">CONFIG_DEBUG_INFO</span><span class="o">=</span><span class="n">y</span> <span class="o">-</span><span class="n">j32</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Use gdb to get C source file:line info from given instruction address:
-{% codeblock lang:c %}
-$ arm-linux-androideabi-gdb –f vmlinux
-Reading symbols from linux/vmlinux...done.
-(gdb) list <em>(module_put+0x44)
-0x80073964 is in module_put (kernel/module.c:942).
-937     void module_put(struct module </em>module)
-938     {
-939             if (module) {
-940                     preempt_disable();
-941                     smp_wmb(); /<em> see comment in module_refcount </em>/
-942                     <em><em>this_cpu_inc(module->refptr->decs);
-943
-944                     trace_module_put(module, </em>RET_IP</em>);
-945                     /<em> Maybe they're waiting for us to drop reference? </em>/
-946                     if (unlikely(!module_is_live(module)))
-(gdb) disas (module_put+0x44)
-Dump of assembler code for function module_put:
-   0x80073960 &lt;+64>:    add     r3, r3, #4
-   0x80073964 &lt;+68>:    ldr     r1, [r3, r2]
-{% endcodeblock%}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="err">$</span> <span class="n">arm</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">androideabi</span><span class="o">-</span><span class="n">gdb</span> <span class="err">–</span><span class="n">f</span> <span class="n">vmlinux</span>
+</span><span class='line'><span class="n">Reading</span> <span class="n">symbols</span> <span class="n">from</span> <span class="n">linux</span><span class="o">/</span><span class="n">vmlinux</span><span class="p">...</span><span class="n">done</span><span class="p">.</span>
+</span><span class='line'><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">list</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">(</span><span class="n">module_put</span><span class="o">+</span><span class="mh">0x44</span><span class="p">)</span>
+</span><span class='line'><span class="mh">0x80073964</span> <span class="n">is</span> <span class="n">in</span> <span class="n">module_put</span> <span class="p">(</span><span class="n">kernel</span><span class="o">/</span><span class="n">module</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">942</span><span class="p">).</span>
+</span><span class='line'><span class="mi">937</span>     <span class="kt">void</span> <span class="n">module_put</span><span class="p">(</span><span class="k">struct</span> <span class="n">module</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">module</span><span class="p">)</span>
+</span><span class='line'><span class="mi">938</span>     <span class="p">{</span>
+</span><span class='line'><span class="mi">939</span>             <span class="k">if</span> <span class="p">(</span><span class="n">module</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="mi">940</span>                     <span class="n">preempt_disable</span><span class="p">();</span>
+</span><span class='line'><span class="mi">941</span>                     <span class="nf">smp_wmb</span><span class="p">();</span> <span class="o">/&lt;</span><span class="n">em</span><span class="o">&gt;</span> <span class="n">see</span> <span class="n">comment</span> <span class="n">in</span> <span class="n">module_refcount</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;/</span>
+</span><span class='line'><span class="mi">942</span>                     <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">this_cpu_inc</span><span class="p">(</span><span class="n">module</span><span class="o">-&gt;</span><span class="n">refptr</span><span class="o">-&gt;</span><span class="n">decs</span><span class="p">);</span>
+</span><span class='line'><span class="mi">943</span>
+</span><span class='line'><span class="mi">944</span>                     <span class="nf">trace_module_put</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">RET_IP</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">);</span>
+</span><span class='line'><span class="mi">945</span>                     <span class="o">/&lt;</span><span class="n">em</span><span class="o">&gt;</span> <span class="n">Maybe</span> <span class="n">they</span><span class="err">&#39;</span><span class="n">re</span> <span class="n">waiting</span> <span class="k">for</span> <span class="n">us</span> <span class="n">to</span> <span class="n">drop</span> <span class="n">reference</span><span class="o">?</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;/</span>
+</span><span class='line'><span class="mi">946</span>                     <span class="k">if</span> <span class="p">(</span><span class="n">unlikely</span><span class="p">(</span><span class="o">!</span><span class="n">module_is_live</span><span class="p">(</span><span class="n">module</span><span class="p">)))</span>
+</span><span class='line'><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">disas</span> <span class="p">(</span><span class="n">module_put</span><span class="o">+</span><span class="mh">0x44</span><span class="p">)</span>
+</span><span class='line'><span class="n">Dump</span> <span class="n">of</span> <span class="n">assembler</span> <span class="n">code</span> <span class="k">for</span> <span class="n">function</span> <span class="n">module_put</span><span class="o">:</span>
+</span><span class='line'>   <span class="mh">0x80073960</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">+</span><span class="mi">64</span><span class="o">&gt;:</span>    <span class="n">add</span>     <span class="n">r3</span><span class="p">,</span> <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">4</span>
+</span><span class='line'>   <span class="mh">0x80073964</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">+</span><span class="mi">68</span><span class="o">&gt;:</span>    <span class="n">ldr</span>     <span class="n">r1</span><span class="p">,</span> <span class="p">[</span><span class="n">r3</span><span class="p">,</span> <span class="n">r2</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Method B: If can not recompile the vmlinux/module, but the problematic vmlinux/module file is available, use objdump to get the assembly line, but no C source line available.
-{% codeblock lang:c %}
-$ arm-linux-androideabi-objdump -dSl vmlinux >vmlinux.disasm
-{% endcodeblock%}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="err">$</span> <span class="n">arm</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">androideabi</span><span class="o">-</span><span class="n">objdump</span> <span class="o">-</span><span class="n">dSl</span> <span class="n">vmlinux</span> <span class="o">&gt;</span><span class="n">vmlinux</span><span class="p">.</span><span class="n">disasm</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>module_put+0x44 = 0x800751d8 + 0x44 = 0x8007521c:
-{% codeblock lang:c %}
-800751d8 <module_put>:
-module_put():
-8007521c:       e7931002        ldr     r1, [r3, r2]
-{% endcodeblock%}
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="mi">800751</span><span class="n">d8</span> <span class="o">&lt;</span><span class="n">module_put</span><span class="o">&gt;:</span>
+</span><span class='line'><span class="n">module_put</span><span class="p">()</span><span class="o">:</span>
+</span><span class='line'><span class="mi">8007521</span><span class="n">c</span><span class="o">:</span>       <span class="n">e7931002</span>        <span class="n">ldr</span>     <span class="n">r1</span><span class="p">,</span> <span class="p">[</span><span class="n">r3</span><span class="p">,</span> <span class="n">r2</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 Compared with method A, method B get the same instruction line.</p>
 
 <p>Appendix: only for comparison/reference: use objdump to decode an object file with debug info:
-{% codeblock lang:c %}
-$ arm-linux-androideabi-objdump -dSlr kernel/module.o >kernel/module.disasm
-{% endcodeblock%}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="err">$</span> <span class="n">arm</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">androideabi</span><span class="o">-</span><span class="n">objdump</span> <span class="o">-</span><span class="n">dSlr</span> <span class="n">kernel</span><span class="o">/</span><span class="n">module</span><span class="p">.</span><span class="n">o</span> <span class="o">&gt;</span><span class="n">kernel</span><span class="o">/</span><span class="n">module</span><span class="p">.</span><span class="n">disasm</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Check if module_put+0x44 = 0xf28+0x44 = 0xf6c point to the same C source line and assembly line:
-{% codeblock lang:c %}
- 00000f28 <module_put>:
-  module_put():
-  linux/kernel/module.c:938</p>
-
-<pre><code>      return ret;
-</code></pre>
-
-<p>  }
-  EXPORT_SYMBOL(try_module_get);</p>
-
-<p>  void module_put(struct module *module)
-  {</p>
-
-<pre><code>   f28:       e1a0c00d        mov     ip, sp
-   f2c:       e92dd818        push    {r3, r4, fp, ip, lr, pc}
-   f30:       e24cb004        sub     fp, ip, #4
-</code></pre>
-
-<p>  linux/kernel/module.c:939</p>
-
-<pre><code>      if (module) {
-   f34:       e3500000        cmp     r0, #0
-   f38:       089da818        ldmeq   sp, {r3, r4, fp, sp, pc}
-</code></pre>
-
-<p>  current_thread_info():
-  linux/arch/arm/include/asm/thread_info.h:97</p>
-
-<pre><code>   f3c:       e1a0300d        mov     r3, sp
-   f40:       e3c34d7f        bic     r4, r3, #8128   ; 0x1fc0
-   f44:       e3c4403f        bic     r4, r4, #63     ; 0x3f
-</code></pre>
-
-<p>  module_put():
-  linux/kernel/module.c:940</p>
-
-<pre><code>              preempt_disable();
-   f48:       e5943004        ldr     r3, [r4, #4]
-   f4c:       e2833001        add     r3, r3, #1
-   f50:       e5843004        str     r3, [r4, #4]
-</code></pre>
-
-<p>  linux/kernel/module.c:941</p>
-
-<pre><code>              smp_wmb(); /* see comment in module_refcount */
-   f54:       f57ff05f        dmb     sy
-</code></pre>
-
-<p>  linux/kernel/module.c:942</p>
-
-<pre><code>              __this_cpu_inc(module-&gt;refptr-&gt;decs);
-   f58:       e59f2050        ldr     r2, [pc, #80]   ; fb0 &lt;module_put+0x88&gt;
-   f5c:       e5941014        ldr     r1, [r4, #20]
-   f60:       e5903138        ldr     r3, [r0, #312]  ; 0x138
-   f64:       e7922101        ldr     r2, [r2, r1, lsl #2]
-   f68:       e2833004        add     r3, r3, #4
-   f6c:       e7931002        ldr     r1, [r3, r2]
-   f70:       e2811001        add     r1, r1, #1
-   f74:       e7831002        str     r1, [r3, r2]
-</code></pre>
-
-<p>  linux/kernel/module.c:946
-{% endcodeblock%}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'> <span class="mf">00000f</span><span class="mi">28</span> <span class="o">&lt;</span><span class="n">module_put</span><span class="o">&gt;:</span>
+</span><span class='line'>  <span class="n">module_put</span><span class="p">()</span><span class="o">:</span>
+</span><span class='line'>  <span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">module</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">938</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>      <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">EXPORT_SYMBOL</span><span class="p">(</span><span class="n">try_module_get</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="kt">void</span> <span class="n">module_put</span><span class="p">(</span><span class="k">struct</span> <span class="n">module</span> <span class="o">*</span><span class="n">module</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>   <span class="n">f28</span><span class="o">:</span>       <span class="n">e1a0c00d</span>        <span class="n">mov</span>     <span class="n">ip</span><span class="p">,</span> <span class="n">sp</span>
+</span><span class='line'>   <span class="nl">f2c:</span>       <span class="n">e92dd818</span>        <span class="n">push</span>    <span class="p">{</span><span class="n">r3</span><span class="p">,</span> <span class="n">r4</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">pc</span><span class="p">}</span>
+</span><span class='line'>   <span class="nl">f30:</span>       <span class="n">e24cb004</span>        <span class="n">sub</span>     <span class="n">fp</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="err">#</span><span class="mi">4</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">module</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">939</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>      <span class="k">if</span> <span class="p">(</span><span class="n">module</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>   <span class="nl">f34:</span>       <span class="n">e3500000</span>        <span class="n">cmp</span>     <span class="n">r0</span><span class="p">,</span> <span class="err">#</span><span class="mi">0</span>
+</span><span class='line'>   <span class="nl">f38:</span>       <span class="mi">089</span><span class="n">da818</span>        <span class="n">ldmeq</span>   <span class="n">sp</span><span class="p">,</span> <span class="p">{</span><span class="n">r3</span><span class="p">,</span> <span class="n">r4</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="n">pc</span><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">current_thread_info</span><span class="p">()</span><span class="o">:</span>
+</span><span class='line'>  <span class="n">linux</span><span class="o">/</span><span class="n">arch</span><span class="o">/</span><span class="n">arm</span><span class="o">/</span><span class="n">include</span><span class="o">/</span><span class="n">asm</span><span class="o">/</span><span class="n">thread_info</span><span class="p">.</span><span class="n">h</span><span class="o">:</span><span class="mi">97</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>   <span class="n">f3c</span><span class="o">:</span>       <span class="n">e1a0300d</span>        <span class="n">mov</span>     <span class="n">r3</span><span class="p">,</span> <span class="n">sp</span>
+</span><span class='line'>   <span class="nl">f40:</span>       <span class="n">e3c34d7f</span>        <span class="n">bic</span>     <span class="n">r4</span><span class="p">,</span> <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">8128</span>   <span class="p">;</span> <span class="mh">0x1fc0</span>
+</span><span class='line'>   <span class="nl">f44:</span>       <span class="n">e3c4403f</span>        <span class="n">bic</span>     <span class="n">r4</span><span class="p">,</span> <span class="n">r4</span><span class="p">,</span> <span class="err">#</span><span class="mi">63</span>     <span class="p">;</span> <span class="mh">0x3f</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">module_put</span><span class="p">()</span><span class="o">:</span>
+</span><span class='line'>  <span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">module</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">940</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>              <span class="n">preempt_disable</span><span class="p">();</span>
+</span><span class='line'>   <span class="nl">f48:</span>       <span class="n">e5943004</span>        <span class="n">ldr</span>     <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">r4</span><span class="p">,</span> <span class="err">#</span><span class="mi">4</span><span class="p">]</span>
+</span><span class='line'>   <span class="nl">f4c:</span>       <span class="n">e2833001</span>        <span class="n">add</span>     <span class="n">r3</span><span class="p">,</span> <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">1</span>
+</span><span class='line'>   <span class="nl">f50:</span>       <span class="n">e5843004</span>        <span class="n">str</span>     <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">r4</span><span class="p">,</span> <span class="err">#</span><span class="mi">4</span><span class="p">]</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">module</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">941</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>              <span class="n">smp_wmb</span><span class="p">();</span> <span class="cm">/* see comment in module_refcount */</span>
+</span><span class='line'>   <span class="nl">f54:</span>       <span class="n">f57ff05f</span>        <span class="n">dmb</span>     <span class="n">sy</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">module</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">942</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>              <span class="n">__this_cpu_inc</span><span class="p">(</span><span class="n">module</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">refptr</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">decs</span><span class="p">);</span>
+</span><span class='line'>   <span class="nl">f58:</span>       <span class="n">e59f2050</span>        <span class="n">ldr</span>     <span class="n">r2</span><span class="p">,</span> <span class="p">[</span><span class="n">pc</span><span class="p">,</span> <span class="err">#</span><span class="mi">80</span><span class="p">]</span>   <span class="p">;</span> <span class="n">fb0</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">module_put</span><span class="o">+</span><span class="mh">0x88</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
+</span><span class='line'>   <span class="nl">f5c:</span>       <span class="n">e5941014</span>        <span class="n">ldr</span>     <span class="n">r1</span><span class="p">,</span> <span class="p">[</span><span class="n">r4</span><span class="p">,</span> <span class="err">#</span><span class="mi">20</span><span class="p">]</span>
+</span><span class='line'>   <span class="nl">f60:</span>       <span class="n">e5903138</span>        <span class="n">ldr</span>     <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">r0</span><span class="p">,</span> <span class="err">#</span><span class="mi">312</span><span class="p">]</span>  <span class="p">;</span> <span class="mh">0x138</span>
+</span><span class='line'>   <span class="nl">f64:</span>       <span class="n">e7922101</span>        <span class="n">ldr</span>     <span class="n">r2</span><span class="p">,</span> <span class="p">[</span><span class="n">r2</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">lsl</span> <span class="err">#</span><span class="mi">2</span><span class="p">]</span>
+</span><span class='line'>   <span class="nl">f68:</span>       <span class="n">e2833004</span>        <span class="n">add</span>     <span class="n">r3</span><span class="p">,</span> <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">4</span>
+</span><span class='line'>   <span class="nl">f6c:</span>       <span class="n">e7931002</span>        <span class="n">ldr</span>     <span class="n">r1</span><span class="p">,</span> <span class="p">[</span><span class="n">r3</span><span class="p">,</span> <span class="n">r2</span><span class="p">]</span>
+</span><span class='line'>   <span class="nl">f70:</span>       <span class="n">e2811001</span>        <span class="n">add</span>     <span class="n">r1</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="err">#</span><span class="mi">1</span>
+</span><span class='line'>   <span class="nl">f74:</span>       <span class="n">e7831002</span>        <span class="n">str</span>     <span class="n">r1</span><span class="p">,</span> <span class="p">[</span><span class="n">r3</span><span class="p">,</span> <span class="n">r2</span><span class="p">]</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">module</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">946</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 ]]></content>
   </entry>
   
@@ -173,11 +266,298 @@ I came up with a revised file writing process, to guarantee it's atomic:</p>
 
 <p>Because rename is atomic, and all steps before it are revertable (will not affect the configure file), so the whole process is atomic.</p>
 
-<p>{% include_code atomic_write.c lang:c %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (atomic_write.c)</span> <a href='/downloads/code/atomic_write.c'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="err">﻿</span><span class="cm">/*</span>
+</span><span class='line'><span class="cm"> * Copyright (C) 2013 Yongbing Chen &lt;yongbing.chen.wh@gmail.com&gt;</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+</span><span class='line'><span class="cm"> * you may not use this file except in compliance with the License.</span>
+</span><span class='line'><span class="cm"> * You may obtain a copy of the License at</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> *      http://www.apache.org/licenses/LICENSE-2.0</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+</span><span class='line'><span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+</span><span class='line'><span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+</span><span class='line'><span class="cm"> * See the License for the specific language governing permissions and</span>
+</span><span class='line'><span class="cm"> * limitations under the License.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;stdio.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;string.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;fcntl.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;errno.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;stdlib.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define CHECK_RESULT(x) \</span>
+</span><span class='line'><span class="cp">	do { \</span>
+</span><span class='line'><span class="cp">		if (x != 0){ \</span>
+</span><span class='line'><span class="cp">			printf(&quot;error %s\n&quot;, strerror(errno)); \</span>
+</span><span class='line'><span class="cp">			return -1; \</span>
+</span><span class='line'><span class="cp">		} \</span>
+</span><span class='line'><span class="cp">	}while (0);</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#ifndef TEMP_FAILURE_RETRY </span>
+</span><span class='line'><span class="cp">#define TEMP_FAILURE_RETRY(x) \</span>
+</span><span class='line'><span class="cp">	({ \</span>
+</span><span class='line'><span class="cp">	 int _result; \</span>
+</span><span class='line'><span class="cp">	 do _result = (int) (x); \</span>
+</span><span class='line'><span class="cp">	 while (_result == -1 &amp;&amp; errno == EINTR); \</span>
+</span><span class='line'><span class="cp">	 _result; \</span>
+</span><span class='line'><span class="cp">	 })</span>
+</span><span class='line'><span class="cp">#endif</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">int</span> <span class="n">copy_file</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">src_file</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">dst_file</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>	<span class="kt">FILE</span> <span class="o">*</span><span class="n">fp1</span><span class="p">,</span> <span class="o">*</span><span class="n">fp2</span><span class="p">;</span>
+</span><span class='line'>	<span class="n">fp1</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="n">src_file</span><span class="p">,</span><span class="s">&quot;r&quot;</span><span class="p">);</span>
+</span><span class='line'>	<span class="k">if</span><span class="p">(</span><span class="n">fp1</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+</span><span class='line'>		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;open %s error %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">src_file</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+</span><span class='line'>		<span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="n">fp2</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="n">dst_file</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">);</span>
+</span><span class='line'>	<span class="k">if</span><span class="p">(</span><span class="n">fp2</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+</span><span class='line'>		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;open %s error %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">dst_file</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span> <span class="n">fclose</span><span class="p">(</span><span class="n">fp1</span><span class="p">);</span>
+</span><span class='line'>		<span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="n">fseek</span><span class="p">(</span><span class="n">fp1</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">SEEK_END</span><span class="p">);</span>
+</span><span class='line'>	<span class="kt">int</span> <span class="n">file_size</span> <span class="o">=</span> <span class="n">ftell</span><span class="p">(</span><span class="n">fp1</span><span class="p">);</span>
+</span><span class='line'>	<span class="n">fseek</span><span class="p">(</span><span class="n">fp1</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">SEEK_SET</span><span class="p">);</span>
+</span><span class='line'>	<span class="k">if</span> <span class="p">(</span><span class="n">file_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+</span><span class='line'>		<span class="n">fclose</span><span class="p">(</span><span class="n">fp1</span><span class="p">);</span> <span class="n">fclose</span><span class="p">(</span><span class="n">fp2</span><span class="p">);</span>
+</span><span class='line'>		<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>	<span class="kt">char</span> <span class="o">*</span><span class="n">buffer</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">file_size</span><span class="p">);</span>
+</span><span class='line'>	<span class="k">if</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">==</span> <span class="n">buffer</span><span class="p">){</span>
+</span><span class='line'>		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;error %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span> <span class="n">fclose</span><span class="p">(</span><span class="n">fp1</span><span class="p">);</span> <span class="n">fclose</span><span class="p">(</span><span class="n">fp2</span><span class="p">);</span>
+</span><span class='line'>		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;copy len %d from %s to %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">file_size</span><span class="p">,</span> <span class="n">src_file</span><span class="p">,</span> <span class="n">dst_file</span><span class="p">);</span>
+</span><span class='line'>	<span class="n">ret</span> <span class="o">=</span> <span class="n">fread</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">file_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fp1</span><span class="p">);</span>
+</span><span class='line'>	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">){</span>
+</span><span class='line'>		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;ret %d, error %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">ret</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+</span><span class='line'>		<span class="k">goto</span> <span class="n">error</span><span class="p">;</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="n">ret</span> <span class="o">=</span> <span class="n">fwrite</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">file_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fp2</span><span class="p">);</span>
+</span><span class='line'>	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">){</span>
+</span><span class='line'>		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;ret %d, error %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">ret</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+</span><span class='line'>		<span class="k">goto</span> <span class="n">error</span><span class="p">;</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>	<span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nl">error:</span>
+</span><span class='line'>	<span class="n">fclose</span><span class="p">(</span><span class="n">fp1</span><span class="p">);</span>
+</span><span class='line'>	<span class="n">fclose</span><span class="p">(</span><span class="n">fp2</span><span class="p">);</span>
+</span><span class='line'>	<span class="n">free</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
+</span><span class='line'>	<span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">int</span> <span class="n">update_config_to_tmp_file</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">curr_file</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">file_name</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">O_CREAT</span> <span class="o">|</span> <span class="n">O_APPEND</span> <span class="o">|</span> <span class="n">O_RDWR</span><span class="p">,</span> <span class="mo">0660</span><span class="p">);</span>
+</span><span class='line'>	<span class="k">if</span><span class="p">(</span><span class="n">fd</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">){</span>
+</span><span class='line'>		<span class="k">if</span><span class="p">(</span><span class="n">access</span><span class="p">(</span><span class="n">curr_file</span><span class="p">,</span>  <span class="n">F_OK</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>			<span class="n">CHECK_RESULT</span><span class="p">(</span><span class="n">copy_file</span><span class="p">(</span><span class="n">curr_file</span><span class="p">,</span> <span class="n">file_name</span><span class="p">));</span>
+</span><span class='line'>		<span class="kt">int</span> <span class="n">test_data</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span>
+</span><span class='line'>		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;writing data %d to config file %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">test_data</span><span class="p">,</span> <span class="n">file_name</span><span class="p">);</span>
+</span><span class='line'>		<span class="kt">int</span> <span class="n">data_write</span> <span class="o">=</span> <span class="n">TEMP_FAILURE_RETRY</span><span class="p">(</span><span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">test_data</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">test_data</span><span class="p">)));</span>
+</span><span class='line'>		<span class="k">if</span> <span class="p">(</span><span class="n">data_write</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">data_write</span> <span class="o">!=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">test_data</span><span class="p">)){</span>
+</span><span class='line'>			<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s failed len:%d %s&quot;</span><span class="p">,</span><span class="n">__func__</span><span class="p">,</span> <span class="n">data_write</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+</span><span class='line'>			<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>		<span class="p">}</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>	<span class="k">else</span>
+</span><span class='line'>		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+</span><span class='line'>	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">int</span> <span class="n">sync_conf_file</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">file_name</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>	<span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">O_RDONLY</span><span class="p">);</span>
+</span><span class='line'>	<span class="k">if</span><span class="p">(</span><span class="n">fd</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">){</span>
+</span><span class='line'>		<span class="n">ret</span> <span class="o">=</span> <span class="n">fsync</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>	<span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+</span><span class='line'>	<span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">atomic_update_config_file</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">file_name</span> <span class="o">=</span> <span class="s">&quot;config&quot;</span><span class="p">;</span>
+</span><span class='line'>	<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">file_name_new</span> <span class="o">=</span> <span class="s">&quot;config.new&quot;</span><span class="p">;</span>
+</span><span class='line'>	<span class="n">CHECK_RESULT</span><span class="p">(</span><span class="n">update_config_to_tmp_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">file_name_new</span><span class="p">));</span><span class="c1">//open, write, close inside this operation.</span>
+</span><span class='line'>	<span class="n">CHECK_RESULT</span><span class="p">(</span><span class="n">sync_conf_file</span><span class="p">(</span><span class="n">file_name_new</span><span class="p">));</span><span class="c1">//open, fsync, close to achive a sync.</span>
+</span><span class='line'>	<span class="n">CHECK_RESULT</span><span class="p">(</span><span class="n">rename</span><span class="p">(</span><span class="n">file_name_new</span><span class="p">,</span> <span class="n">file_name</span><span class="p">));</span>
+</span><span class='line'>	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">atomic_update_config_file</span><span class="p">();</span>
+</span><span class='line'>	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">){</span>
+</span><span class='line'>		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;update config failed, keeping original one.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Reference:
-{% blockquote atomic unix methods http://rcrowley.org/2010/01/06/things-unix-can-do-atomically.html%}{% endblockquote %}
-{% blockquote man fsync http://linux.die.net/man/3/fsync%}{% endblockquote %}</p>
+<blockquote><p></p><footer><strong>atomic unix methods</strong> <cite><a href='http://rcrowley.org/2010/01/06/things-unix-can-do-atomically.html'>rcrowley.org/2010/01/06/&hellip;</a></cite></footer></blockquote>
+<blockquote><p></p><footer><strong>man fsync</strong> <cite><a href='http://linux.die.net/man/3/fsync'>linux.die.net/man/3/fsync/&hellip;</a></cite></footer></blockquote></p>
 ]]></content>
   </entry>
   
@@ -187,11 +567,896 @@ I came up with a revised file writing process, to guarantee it's atomic:</p>
     <updated>2013-06-30T22:49:00-07:00</updated>
     <id>http://yongbingchen.github.com/blog/2013/06/30/misc-code-samples</id>
     <content type="html"><![CDATA[<p>1 inotify: monitoring hidraw device file add/remove events:
-{% include_code inotify-example.c lang:c %}
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (inotify-example.c)</span> <a href='/downloads/code/inotify-example.c'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
+<span class='line-number'>153</span>
+<span class='line-number'>154</span>
+<span class='line-number'>155</span>
+<span class='line-number'>156</span>
+<span class='line-number'>157</span>
+<span class='line-number'>158</span>
+<span class='line-number'>159</span>
+<span class='line-number'>160</span>
+<span class='line-number'>161</span>
+<span class='line-number'>162</span>
+<span class='line-number'>163</span>
+<span class='line-number'>164</span>
+<span class='line-number'>165</span>
+<span class='line-number'>166</span>
+<span class='line-number'>167</span>
+<span class='line-number'>168</span>
+<span class='line-number'>169</span>
+<span class='line-number'>170</span>
+<span class='line-number'>171</span>
+<span class='line-number'>172</span>
+<span class='line-number'>173</span>
+<span class='line-number'>174</span>
+<span class='line-number'>175</span>
+<span class='line-number'>176</span>
+<span class='line-number'>177</span>
+<span class='line-number'>178</span>
+<span class='line-number'>179</span>
+<span class='line-number'>180</span>
+<span class='line-number'>181</span>
+<span class='line-number'>182</span>
+<span class='line-number'>183</span>
+<span class='line-number'>184</span>
+<span class='line-number'>185</span>
+<span class='line-number'>186</span>
+<span class='line-number'>187</span>
+<span class='line-number'>188</span>
+<span class='line-number'>189</span>
+<span class='line-number'>190</span>
+<span class='line-number'>191</span>
+<span class='line-number'>192</span>
+<span class='line-number'>193</span>
+<span class='line-number'>194</span>
+<span class='line-number'>195</span>
+<span class='line-number'>196</span>
+<span class='line-number'>197</span>
+<span class='line-number'>198</span>
+<span class='line-number'>199</span>
+<span class='line-number'>200</span>
+<span class='line-number'>201</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm"> * Copyright (C) 2005 The Android Open Source Project</span>
+</span><span class='line'><span class="cm"> * Copyright (C) 2013 Yongbing Chen &lt;yongbing.chen.wh@gmail.com&gt;</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+</span><span class='line'><span class="cm"> * you may not use this file except in compliance with the License.</span>
+</span><span class='line'><span class="cm"> * You may obtain a copy of the License at</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> *      http://www.apache.org/licenses/LICENSE-2.0</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+</span><span class='line'><span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+</span><span class='line'><span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+</span><span class='line'><span class="cm"> * See the License for the specific language governing permissions and</span>
+</span><span class='line'><span class="cm"> * limitations under the License.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;string.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;stdlib.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;errno.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;sys/types.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;poll.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;sys/epoll.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;sys/inotify.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;pthread.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;unistd.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">EPOLL_ID_INOTIFY</span> <span class="o">=</span> <span class="mh">0x80000001</span><span class="p">;</span>
+</span><span class='line'><span class="cp">#define MONITORING_DIR &quot;/dev&quot;</span>
+</span><span class='line'><span class="cp">#define HIDRAW_DEV_FILE_PREFIX &quot;hidraw&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">int</span> <span class="nf">init_epoll_fd</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="kt">int</span> <span class="n">epoll_fd</span> <span class="o">=</span> <span class="n">epoll_create</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>	<span class="k">if</span> <span class="p">(</span><span class="n">epoll_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+</span><span class='line'>		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;epoll_crate failed %s&quot;</span><span class="p">,</span><span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+</span><span class='line'>		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>	<span class="k">return</span> <span class="n">epoll_fd</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">int</span> <span class="nf">init_inotify</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span> <span class="n">dev_path</span><span class="p">,</span> <span class="kt">int</span> <span class="n">epoll_fd</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="kt">int</span> <span class="n">inotify_fd</span> <span class="o">=</span> <span class="n">inotify_init</span><span class="p">();</span>
+</span><span class='line'>	<span class="k">if</span><span class="p">(</span><span class="n">inotify_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+</span><span class='line'>		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;inotify_init failed, errno %s&quot;</span><span class="p">,</span><span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+</span><span class='line'>		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">inotify_add_watch</span><span class="p">(</span><span class="n">inotify_fd</span><span class="p">,</span> <span class="n">dev_path</span><span class="p">,</span> <span class="n">IN_DELETE</span> <span class="o">|</span> <span class="n">IN_CREATE</span><span class="p">);</span>
+</span><span class='line'>	<span class="k">if</span><span class="p">(</span><span class="n">result</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+</span><span class='line'>		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Could not register INotify for %s  errno %s&quot;</span><span class="p">,</span> <span class="n">dev_path</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+</span><span class='line'>		<span class="n">close</span><span class="p">(</span><span class="n">inotify_fd</span><span class="p">);</span>
+</span><span class='line'>		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>	<span class="k">return</span> <span class="n">inotify_fd</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">int</span> <span class="nf">add_inotify_to_epoll</span><span class="p">(</span><span class="kt">int</span> <span class="n">epoll_fd</span><span class="p">,</span> <span class="kt">int</span> <span class="n">inotify_fd</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="k">struct</span> <span class="n">epoll_event</span> <span class="n">event_item</span><span class="p">;</span>
+</span><span class='line'>	<span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">event_item</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">event_item</span><span class="p">));</span>
+</span><span class='line'>	<span class="n">event_item</span><span class="p">.</span><span class="n">events</span> <span class="o">=</span> <span class="n">EPOLLIN</span><span class="p">;</span>
+</span><span class='line'>	<span class="n">event_item</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">u32</span> <span class="o">=</span> <span class="n">EPOLL_ID_INOTIFY</span><span class="p">;</span>
+</span><span class='line'>	<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">epoll_ctl</span><span class="p">(</span><span class="n">epoll_fd</span><span class="p">,</span> <span class="n">EPOLL_CTL_ADD</span><span class="p">,</span> <span class="n">inotify_fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">event_item</span><span class="p">);</span>
+</span><span class='line'>	<span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">){</span>
+</span><span class='line'>		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Could not add INotify to epoll instance.  errno %s&quot;</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+</span><span class='line'>		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">void</span> <span class="nf">process_add_event</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">hidraw_file_name</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s, %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">__func__</span><span class="p">,</span> <span class="n">hidraw_file_name</span><span class="p">);</span>
+</span><span class='line'>	<span class="c1">//may add the file to epoll here.</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">void</span> <span class="nf">process_remove_event</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">hidraw_file_name</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s, %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">__func__</span><span class="p">,</span> <span class="n">hidraw_file_name</span><span class="p">);</span>
+</span><span class='line'>	<span class="c1">//may remove the file from epoll here.</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//Cite from Android EventHub.cpp</span>
+</span><span class='line'><span class="k">static</span> <span class="kt">int</span> <span class="nf">read_inotify</span><span class="p">(</span><span class="kt">int</span> <span class="n">inotify_fd</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">rc</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">char</span> <span class="n">devname</span><span class="p">[</span><span class="mi">128</span><span class="p">];</span>
+</span><span class='line'>    <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">char</span> <span class="n">event_buf</span><span class="p">[</span><span class="mi">512</span><span class="p">];</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">event_size</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">event_pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">struct</span> <span class="n">inotify_event</span> <span class="o">*</span><span class="n">event</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;read_inotify fd: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">inotify_fd</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">rc</span> <span class="o">=</span> <span class="n">TEMP_FAILURE_RETRY</span><span class="p">(</span><span class="n">read</span><span class="p">(</span><span class="n">inotify_fd</span><span class="p">,</span> <span class="n">event_buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">event_buf</span><span class="p">)));</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">rc</span> <span class="o">&lt;</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">event</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;could not get event, %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+</span><span class='line'>        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">strcpy</span><span class="p">(</span><span class="n">devname</span><span class="p">,</span> <span class="n">MONITORING_DIR</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">filename</span> <span class="o">=</span> <span class="n">devname</span> <span class="o">+</span> <span class="n">strlen</span><span class="p">(</span><span class="n">devname</span><span class="p">);</span>
+</span><span class='line'>    <span class="o">*</span><span class="n">filename</span><span class="o">++</span> <span class="o">=</span> <span class="sc">&#39;/&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">while</span><span class="p">(</span><span class="n">rc</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">event</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">event</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">inotify_event</span> <span class="o">*</span><span class="p">)(</span><span class="n">event_buf</span> <span class="o">+</span> <span class="n">event_pos</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d: %08x </span><span class="se">\&quot;</span><span class="s">%s</span><span class="se">\&quot;\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">wd</span><span class="p">,</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">mask</span><span class="p">,</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">len</span> <span class="o">?</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">len</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">strncmp</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span> <span class="n">HIDRAW_DEV_FILE_PREFIX</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">HIDRAW_DEV_FILE_PREFIX</span><span class="p">)))</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">strcpy</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">);</span>
+</span><span class='line'>            <span class="k">if</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">mask</span> <span class="o">&amp;</span> <span class="n">IN_CREATE</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="n">process_add_event</span><span class="p">(</span><span class="n">devname</span><span class="p">);</span>
+</span><span class='line'>            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>                <span class="n">process_remove_event</span><span class="p">(</span><span class="n">devname</span><span class="p">);</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="n">event_size</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="o">+</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">rc</span> <span class="o">-=</span> <span class="n">event_size</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">event_pos</span> <span class="o">+=</span> <span class="n">event_size</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">void</span> <span class="nf">process_inode_event</span><span class="p">(</span><span class="k">struct</span> <span class="n">epoll_event</span> <span class="o">*</span><span class="n">events</span><span class="p">,</span>
+</span><span class='line'>		<span class="kt">int</span> <span class="n">event_counts</span><span class="p">,</span> <span class="kt">int</span> <span class="n">inotify_fd</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'>	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">event_counts</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span><span class='line'>		<span class="k">if</span> <span class="p">(</span><span class="n">events</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">.</span><span class="n">u32</span> <span class="o">==</span> <span class="n">EPOLL_ID_INOTIFY</span><span class="p">){</span>
+</span><span class='line'>			<span class="k">if</span> <span class="p">(</span><span class="n">events</span><span class="o">-&gt;</span><span class="n">events</span> <span class="o">&amp;</span> <span class="n">EPOLLIN</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>				<span class="n">read_inotify</span><span class="p">(</span><span class="n">inotify_fd</span><span class="p">);</span>
+</span><span class='line'>			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>				<span class="n">printf</span><span class="p">(</span><span class="s">&quot;received unexpected epoll event 0x%08x for inotify.&quot;</span><span class="p">,</span> <span class="n">events</span><span class="o">-&gt;</span><span class="n">events</span><span class="p">);</span>
+</span><span class='line'>			<span class="p">}</span>
+</span><span class='line'>		<span class="p">}</span>
+</span><span class='line'>		<span class="n">events</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="kt">int</span> <span class="n">epoll_fd</span> <span class="o">=</span> <span class="n">init_epoll_fd</span><span class="p">();</span>
+</span><span class='line'>	<span class="k">if</span> <span class="p">(</span><span class="n">epoll_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>		<span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="kt">int</span> <span class="n">inotify_fd</span> <span class="o">=</span> <span class="n">init_inotify</span><span class="p">(</span><span class="n">MONITORING_DIR</span><span class="p">,</span> <span class="n">epoll_fd</span><span class="p">);</span>
+</span><span class='line'>	<span class="k">if</span> <span class="p">(</span><span class="n">inotify_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+</span><span class='line'>		<span class="n">close</span><span class="p">(</span><span class="n">epoll_fd</span><span class="p">);</span>
+</span><span class='line'>		<span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="kt">int</span> <span class="n">rc</span> <span class="o">=</span> <span class="n">add_inotify_to_epoll</span><span class="p">(</span><span class="n">epoll_fd</span><span class="p">,</span> <span class="n">inotify_fd</span><span class="p">);</span>
+</span><span class='line'>	<span class="k">if</span> <span class="p">(</span><span class="n">rc</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+</span><span class='line'>		<span class="n">close</span><span class="p">(</span><span class="n">epoll_fd</span><span class="p">);</span><span class="n">close</span><span class="p">(</span><span class="n">inotify_fd</span><span class="p">);</span>
+</span><span class='line'>		<span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">EPOLL_MAX_EVENTS</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
+</span><span class='line'>	<span class="k">struct</span> <span class="n">epoll_event</span> <span class="n">epoll_events</span><span class="p">[</span><span class="n">EPOLL_MAX_EVENTS</span><span class="p">];</span>
+</span><span class='line'>	<span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+</span><span class='line'>		<span class="kt">int</span> <span class="n">rc</span> <span class="o">=</span> <span class="n">TEMP_FAILURE_RETRY</span><span class="p">(</span><span class="n">epoll_wait</span><span class="p">(</span><span class="n">epoll_fd</span><span class="p">,</span> <span class="n">epoll_events</span><span class="p">,</span> <span class="n">EPOLL_MAX_EVENTS</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+</span><span class='line'>		<span class="k">if</span> <span class="p">(</span><span class="n">rc</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>			<span class="n">printf</span><span class="p">(</span><span class="s">&quot;poll failed errno=%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+</span><span class='line'>			<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>			<span class="n">process_inode_event</span><span class="p">(</span><span class="n">epoll_events</span><span class="p">,</span> <span class="n">rc</span><span class="p">,</span> <span class="n">inotify_fd</span><span class="p">);</span>
+</span><span class='line'>		<span class="p">}</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>	<span class="n">close</span><span class="p">(</span><span class="n">inotify_fd</span><span class="p">);</span>
+</span><span class='line'>	<span class="n">close</span><span class="p">(</span><span class="n">epoll_fd</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'> 	<span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+</span><span class='line'> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#ifdef __RUNNING_LOG</span>
+</span><span class='line'> <span class="mi">130</span><span class="o">|</span><span class="n">shell</span><span class="err">@</span><span class="n">android</span><span class="o">:/</span><span class="n">data</span><span class="o">/</span><span class="n">app</span> <span class="err">#</span> <span class="p">.</span><span class="o">/</span><span class="n">test_inotify</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">4998.540741</span><span class="p">]</span> <span class="n">usb</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span> <span class="n">USB</span> <span class="n">disconnect</span><span class="p">,</span> <span class="n">device</span> <span class="n">number</span> <span class="mi">3</span>
+</span><span class='line'><span class="n">read_inotify</span> <span class="n">fd</span><span class="o">:</span> <span class="mi">4</span>
+</span><span class='line'><span class="mi">1</span><span class="o">:</span> <span class="mo">00000200</span> <span class="s">&quot;hidraw0&quot;</span>
+</span><span class='line'><span class="n">Removing</span> <span class="n">device</span> <span class="err">&#39;</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">hidraw0</span><span class="err">&#39;</span> <span class="n">due</span> <span class="n">to</span> <span class="n">inotify</span> <span class="n">event</span>
+</span><span class='line'><span class="n">process_remove_event</span><span class="p">,</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">hidraw0</span>
+</span><span class='line'><span class="n">read_inotify</span> <span class="n">fd</span><span class="o">:</span> <span class="mi">4</span>
+</span><span class='line'><span class="mi">1</span><span class="o">:</span> <span class="mo">00000200</span> <span class="s">&quot;hidraw1&quot;</span>
+</span><span class='line'><span class="n">Removing</span> <span class="n">device</span> <span class="err">&#39;</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">hidraw1</span><span class="err">&#39;</span> <span class="n">due</span> <span class="n">to</span> <span class="n">inotify</span> <span class="n">event</span>
+</span><span class='line'><span class="n">process_remove_event</span><span class="p">,</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">hidraw1</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">5002.247269</span><span class="p">]</span> <span class="n">usb</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span> <span class="n">new</span> <span class="n">full</span><span class="o">-</span><span class="n">speed</span> <span class="n">USB</span> <span class="n">device</span> <span class="n">number</span> <span class="mi">4</span> <span class="n">using</span> <span class="n">berlin</span><span class="o">-</span><span class="n">ehci</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">5002.406589</span><span class="p">]</span> <span class="n">usb</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span> <span class="n">New</span> <span class="n">USB</span> <span class="n">device</span> <span class="n">found</span><span class="p">,</span> <span class="n">idVendor</span><span class="o">=</span><span class="mo">046</span><span class="n">d</span><span class="p">,</span> <span class="n">idProduct</span><span class="o">=</span><span class="n">c52b</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">5002.413862</span><span class="p">]</span> <span class="n">usb</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span> <span class="n">New</span> <span class="n">USB</span> <span class="n">device</span> <span class="n">strings</span><span class="o">:</span> <span class="n">Mfr</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Product</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">SerialNumber</span><span class="o">=</span><span class="mi">0</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">5002.421457</span><span class="p">]</span> <span class="n">usb</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span> <span class="n">Product</span><span class="o">:</span> <span class="n">USB</span> <span class="n">Receiver</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">5002.425927</span><span class="p">]</span> <span class="n">usb</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span> <span class="n">Manufacturer</span><span class="o">:</span> <span class="n">Logitech</span>
+</span><span class='line'><span class="n">read_inotify</span> <span class="n">fd</span><span class="o">:</span><span class="p">[</span> <span class="mf">5002.443452</span><span class="p">]</span> <span class="n">logitech</span><span class="o">-</span><span class="n">djreceiver</span> <span class="mo">0003</span><span class="o">:</span><span class="mo">046</span><span class="n">D</span><span class="o">:</span><span class="n">C52B</span><span class="mf">.000</span><span class="n">B</span><span class="o">:</span> <span class="n">hiddev0</span><span class="p">,</span><span class="n">hidraw0</span><span class="o">:</span> <span class="n">USB</span> <span class="n">HID</span> <span class="n">v1</span><span class="mf">.11</span> <span class="n">Device</span> <span class="p">[</span><span class="n">Logitech</span> <span class="n">USB</span> <span class="n">Receiver</span><span class="p">]</span> <span class="n">on</span> <span class="n">usb</span><span class="o">-</span><span class="n">f7ed0000</span><span class="p">.</span><span class="n">usb</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">input2</span>
+</span><span class='line'> <span class="mi">4</span>
+</span><span class='line'><span class="mi">1</span><span class="o">:</span> <span class="mo">00000100</span> <span class="s">&quot;hidraw0&quot;</span>
+</span><span class='line'><span class="n">process_add_event</span><span class="p">,</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">hidraw0</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">5002.464392</span><span class="p">]</span> <span class="n">input</span><span class="o">:</span> <span class="n">Logitech</span> <span class="n">Unifying</span> <span class="n">Device</span><span class="p">.</span> <span class="n">Wireless</span> <span class="n">PID</span><span class="o">:</span><span class="mi">2012</span> <span class="n">as</span> <span class="o">/</span><span class="n">devices</span><span class="o">/</span><span class="n">soc</span><span class="mf">.0</span><span class="o">/</span><span class="n">f7ed0000</span><span class="p">.</span><span class="n">usb</span><span class="o">/</span><span class="n">usb1</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mf">1.2</span><span class="o">/</span><span class="mo">0003</span><span class="o">:</span><span class="mo">046</span><span class="n">D</span><span class="o">:</span><span class="n">C52B</span><span class="mf">.000</span><span class="n">B</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="n">input4</span>
+</span><span class='line'><span class="n">read_inotify</span> <span class="n">fd</span><span class="o">:</span><span class="p">[</span> <span class="mf">5002.479144</span><span class="p">]</span> <span class="n">logitech</span><span class="o">-</span><span class="n">djdevice</span> <span class="mo">0003</span><span class="o">:</span><span class="mo">046</span><span class="n">D</span><span class="o">:</span><span class="n">C52B</span><span class="mf">.000</span><span class="n">C</span><span class="o">:</span> <span class="n">input</span><span class="p">,</span><span class="n">hidraw1</span><span class="o">:</span> <span class="n">USB</span> <span class="n">HID</span> <span class="n">v1</span><span class="mf">.11</span> <span class="n">Keyboard</span> <span class="p">[</span><span class="n">Logitech</span> <span class="n">Unifying</span> <span class="n">Device</span><span class="p">.</span> <span class="n">Wireless</span> <span class="n">PID</span><span class="o">:</span><span class="mi">2012</span><span class="p">]</span> <span class="n">on</span> <span class="n">usb</span><span class="o">-</span><span class="n">f7ed0000</span><span class="p">.</span><span class="n">usb</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span>
+</span><span class='line'> <span class="mi">4</span>
+</span><span class='line'><span class="mi">1</span><span class="o">:</span> <span class="mo">00000100</span> <span class="s">&quot;hidraw1&quot;</span>
+</span><span class='line'><span class="n">process_add_event</span><span class="p">,</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">hidraw1</span>
+</span><span class='line'><span class="cp">#endif</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 2 pthread timer_create: periodically generate an event, as a heartbeat:
-{% include_code pthread_timer-example.c lang:c %}
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (pthread_timer-example.c)</span> <a href='/downloads/code/pthread_timer-example.c'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm"> * Copyright (C) 2013 Yongbing Chen &lt;yongbing.chen.wh@gmail.com&gt;</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+</span><span class='line'><span class="cm"> * you may not use this file except in compliance with the License.</span>
+</span><span class='line'><span class="cm"> * You may obtain a copy of the License at</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> *      http://www.apache.org/licenses/LICENSE-2.0</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+</span><span class='line'><span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+</span><span class='line'><span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+</span><span class='line'><span class="cm"> * See the License for the specific language governing permissions and</span>
+</span><span class='line'><span class="cm"> * limitations under the License.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;stdlib.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;errno.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;sys/types.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;pthread.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;time.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">typedef</span> <span class="k">struct</span> <span class="n">wrapper_class</span><span class="p">{</span>
+</span><span class='line'>	<span class="kt">int</span> <span class="n">is_alarm_fired</span><span class="p">;</span>
+</span><span class='line'>	<span class="n">timer_t</span> <span class="n">timerid</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="n">wrapper_class</span><span class="p">,</span> <span class="o">*</span><span class="n">wrapper_class_t</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">void</span> <span class="nf">something_is_on_fire</span><span class="p">(</span><span class="n">wrapper_class_t</span> <span class="n">p</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s, is_alarm_fired %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">__func__</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">is_alarm_fired</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">void</span> <span class="nf">defuse_the_fire_alarm</span><span class="p">(</span><span class="n">wrapper_class_t</span> <span class="n">p</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s, is_alarm_fired %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">__func__</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">is_alarm_fired</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">void</span> <span class="nf">trigger_alarm</span><span class="p">(</span><span class="k">union</span> <span class="n">sigval</span> <span class="n">sigev_val</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="n">wrapper_class_t</span> <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="n">wrapper_class_t</span><span class="p">)</span><span class="n">sigev_val</span><span class="p">.</span><span class="n">sival_ptr</span><span class="p">;</span>
+</span><span class='line'>	<span class="c1">//TODO: may need mutex to protect object p.</span>
+</span><span class='line'>	<span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">is_alarm_fired</span><span class="p">){</span>
+</span><span class='line'>		<span class="n">something_is_on_fire</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">void</span> <span class="nf">start_timer_for_alarm</span><span class="p">(</span><span class="n">wrapper_class_t</span> <span class="n">p</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="k">struct</span> <span class="n">sigevent</span> <span class="n">sev</span><span class="p">;</span>
+</span><span class='line'>	<span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sev</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span> <span class="k">struct</span> <span class="n">sigevent</span><span class="p">));</span>
+</span><span class='line'>	<span class="n">sev</span><span class="p">.</span><span class="n">sigev_notify</span> <span class="o">=</span> <span class="n">SIGEV_THREAD</span><span class="p">;</span>
+</span><span class='line'>	<span class="n">sev</span><span class="p">.</span><span class="n">sigev_notify_function</span> <span class="o">=</span> <span class="n">trigger_alarm</span><span class="p">;</span>
+</span><span class='line'>	<span class="n">sev</span><span class="p">.</span><span class="n">sigev_value</span><span class="p">.</span><span class="n">sival_ptr</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+</span><span class='line'>	<span class="k">if</span> <span class="p">(</span><span class="n">timer_create</span><span class="p">(</span><span class="n">CLOCK_REALTIME</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sev</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">timerid</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+</span><span class='line'>		<span class="k">return</span><span class="p">;</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;timer ID is 0x%x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">timerid</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="k">struct</span> <span class="n">itimerspec</span> <span class="n">its</span><span class="p">;</span>
+</span><span class='line'>	<span class="n">its</span><span class="p">.</span><span class="n">it_value</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span><span class='line'>	<span class="n">its</span><span class="p">.</span><span class="n">it_value</span><span class="p">.</span><span class="n">tv_nsec</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>	<span class="n">its</span><span class="p">.</span><span class="n">it_interval</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span><span class='line'>	<span class="n">its</span><span class="p">.</span><span class="n">it_interval</span><span class="p">.</span><span class="n">tv_nsec</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>	<span class="k">if</span> <span class="p">(</span><span class="n">timer_settime</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">timerid</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">its</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+</span><span class='line'>		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;timer_settime failed, err %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+</span><span class='line'>		<span class="n">timer_delete</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">timerid</span><span class="p">);</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">timerid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>		<span class="k">return</span><span class="p">;</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">void</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">wrapper_class_t</span> <span class="n">p</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">is_alarm_fired</span><span class="p">){</span>
+</span><span class='line'> 		<span class="n">something_is_on_fire</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span><span class='line'>		<span class="n">start_timer_for_alarm</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>	<span class="k">else</span><span class="p">{</span>
+</span><span class='line'>		<span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">timerid</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">){</span>
+</span><span class='line'>			<span class="n">timer_delete</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">timerid</span><span class="p">);</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">timerid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>		<span class="p">}</span>
+</span><span class='line'> 		<span class="n">defuse_the_fire_alarm</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//Do not forget to delete this timer in wrapper class&#39;s destroy method!</span>
+</span><span class='line'><span class="c1">//for abnormal exit path.</span>
+</span><span class='line'><span class="k">static</span> <span class="kt">void</span> <span class="nf">wrapper_class_deconstructor</span><span class="p">(</span><span class="n">wrapper_class_t</span> <span class="n">p</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">timerid</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">){</span>
+</span><span class='line'>		<span class="n">timer_delete</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">timerid</span><span class="p">);</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">timerid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>	<span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int32_t</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int32_t</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="n">wrapper_class_t</span> <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="n">wrapper_class_t</span><span class="p">)</span><span class="n">calloc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">wrapper_class</span><span class="p">));</span>
+</span><span class='line'>	<span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+</span><span class='line'>		<span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+</span><span class='line'>	
+</span><span class='line'>	<span class="n">p</span><span class="o">-&gt;</span><span class="n">is_alarm_fired</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>	<span class="n">event_handler</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span><span class='line'>	<span class="n">sleep</span><span class="p">(</span><span class="mi">55</span><span class="p">);</span>
+</span><span class='line'>	
+</span><span class='line'>	<span class="n">p</span><span class="o">-&gt;</span><span class="n">is_alarm_fired</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>	<span class="n">event_handler</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span><span class='line'>	<span class="n">wrapper_class_deconstructor</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#ifdef __RUNNING_LOG</span>
+</span><span class='line'><span class="n">shell</span><span class="err">@</span><span class="n">android</span><span class="o">:/</span><span class="n">data</span><span class="o">/</span><span class="n">app</span> <span class="err">#</span> <span class="n">logwrapper</span> <span class="p">.</span><span class="o">/</span><span class="n">test_pthread_timer</span>
+</span><span class='line'><span class="mo">07</span><span class="o">-</span><span class="mo">01</span> <span class="mo">03</span><span class="o">:</span><span class="mo">01</span><span class="o">:</span><span class="mf">37.248</span> <span class="n">I</span><span class="o">/</span><span class="n">test_pthread_timer</span><span class="p">(</span> <span class="mi">2945</span><span class="p">)</span><span class="o">:</span> <span class="n">something_is_on_fire</span><span class="p">,</span> <span class="n">is_alarm_fired</span> <span class="mi">1</span>
+</span><span class='line'><span class="mo">07</span><span class="o">-</span><span class="mo">01</span> <span class="mo">03</span><span class="o">:</span><span class="mo">01</span><span class="o">:</span><span class="mf">37.248</span> <span class="n">I</span><span class="o">/</span><span class="n">test_pthread_timer</span><span class="p">(</span> <span class="mi">2945</span><span class="p">)</span><span class="o">:</span> <span class="n">timer</span> <span class="n">ID</span> <span class="n">is</span> <span class="mh">0x80000000</span>
+</span><span class='line'><span class="mo">07</span><span class="o">-</span><span class="mo">01</span> <span class="mo">03</span><span class="o">:</span><span class="mo">01</span><span class="o">:</span><span class="mf">47.248</span> <span class="n">I</span><span class="o">/</span><span class="n">test_pthread_timer</span><span class="p">(</span> <span class="mi">2945</span><span class="p">)</span><span class="o">:</span> <span class="n">something_is_on_fire</span><span class="p">,</span> <span class="n">is_alarm_fired</span> <span class="mi">1</span>
+</span><span class='line'><span class="mo">07</span><span class="o">-</span><span class="mo">01</span> <span class="mo">03</span><span class="o">:</span><span class="mo">01</span><span class="o">:</span><span class="mf">57.248</span> <span class="n">I</span><span class="o">/</span><span class="n">test_pthread_timer</span><span class="p">(</span> <span class="mi">2945</span><span class="p">)</span><span class="o">:</span> <span class="n">something_is_on_fire</span><span class="p">,</span> <span class="n">is_alarm_fired</span> <span class="mi">1</span>
+</span><span class='line'><span class="mo">07</span><span class="o">-</span><span class="mo">01</span> <span class="mo">03</span><span class="o">:</span><span class="mo">02</span><span class="o">:</span><span class="mf">07.248</span> <span class="n">I</span><span class="o">/</span><span class="n">test_pthread_timer</span><span class="p">(</span> <span class="mi">2945</span><span class="p">)</span><span class="o">:</span> <span class="n">something_is_on_fire</span><span class="p">,</span> <span class="n">is_alarm_fired</span> <span class="mi">1</span>
+</span><span class='line'><span class="mo">07</span><span class="o">-</span><span class="mo">01</span> <span class="mo">03</span><span class="o">:</span><span class="mo">02</span><span class="o">:</span><span class="mf">17.248</span> <span class="n">I</span><span class="o">/</span><span class="n">test_pthread_timer</span><span class="p">(</span> <span class="mi">2945</span><span class="p">)</span><span class="o">:</span> <span class="n">something_is_on_fire</span><span class="p">,</span> <span class="n">is_alarm_fired</span> <span class="mi">1</span>
+</span><span class='line'><span class="mo">07</span><span class="o">-</span><span class="mo">01</span> <span class="mo">03</span><span class="o">:</span><span class="mo">02</span><span class="o">:</span><span class="mf">27.248</span> <span class="n">I</span><span class="o">/</span><span class="n">test_pthread_timer</span><span class="p">(</span> <span class="mi">2945</span><span class="p">)</span><span class="o">:</span> <span class="n">something_is_on_fire</span><span class="p">,</span> <span class="n">is_alarm_fired</span> <span class="mi">1</span>
+</span><span class='line'><span class="mo">07</span><span class="o">-</span><span class="mo">01</span> <span class="mo">03</span><span class="o">:</span><span class="mo">02</span><span class="o">:</span><span class="mf">32.248</span> <span class="n">I</span><span class="o">/</span><span class="n">test_pthread_timer</span><span class="p">(</span> <span class="mi">2945</span><span class="p">)</span><span class="o">:</span> <span class="n">defuse_the_fire_alarm</span><span class="p">,</span> <span class="n">is_alarm_fired</span> <span class="mi">0</span>
+</span><span class='line'><span class="cp">#endif</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 3 netlink NETLINK_KOBJECT_UEVENT: same purpose as #1:
-{% include_code ueventd-example.c lang:c %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (ueventd-example.c)</span> <a href='/downloads/code/ueventd-example.c'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm"> * Copyright (C) 2013 Yongbing Chen &lt;yongbing.chen.wh@gmail.com&gt;</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+</span><span class='line'><span class="cm"> * you may not use this file except in compliance with the License.</span>
+</span><span class='line'><span class="cm"> * You may obtain a copy of the License at</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> *      http://www.apache.org/licenses/LICENSE-2.0</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+</span><span class='line'><span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+</span><span class='line'><span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+</span><span class='line'><span class="cm"> * See the License for the specific language governing permissions and</span>
+</span><span class='line'><span class="cm"> * limitations under the License.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;stdlib.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;errno.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;sys/socket.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;linux/netlink.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;sys/types.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;unistd.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">int32_t</span> <span class="nf">init_event_sock</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">struct</span> <span class="n">sockaddr_nl</span> <span class="n">netlink_addr</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">const</span> <span class="kt">int32_t</span> <span class="n">buffersize</span> <span class="o">=</span> <span class="mi">128</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">int32_t</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">netlink_addr</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr_nl</span><span class="p">));</span>
+</span><span class='line'>    <span class="n">netlink_addr</span><span class="p">.</span><span class="n">nl_family</span> <span class="o">=</span> <span class="n">AF_NETLINK</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">netlink_addr</span><span class="p">.</span><span class="n">nl_pid</span> <span class="o">=</span> <span class="n">getpid</span><span class="p">();</span>
+</span><span class='line'>    <span class="n">netlink_addr</span><span class="p">.</span><span class="n">nl_groups</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">int32_t</span> <span class="n">event_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">PF_NETLINK</span><span class="p">,</span> <span class="n">SOCK_DGRAM</span><span class="p">,</span> <span class="n">NETLINK_KOBJECT_UEVENT</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">event_socket</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kt">int32_t</span> <span class="n">err</span> <span class="o">=</span> <span class="n">errno</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;error getting socket: %s&quot;</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+</span><span class='line'>        <span class="k">return</span> <span class="o">-</span><span class="n">err</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="cm">/* set receive buffersize */</span>
+</span><span class='line'>    <span class="n">setsockopt</span><span class="p">(</span><span class="n">event_socket</span><span class="p">,</span> <span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">SO_RCVBUFFORCE</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">buffersize</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buffersize</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">ret</span> <span class="o">=</span> <span class="n">bind</span><span class="p">(</span><span class="n">event_socket</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">netlink_addr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr_nl</span><span class="p">));</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kt">int32_t</span> <span class="n">err</span> <span class="o">=</span> <span class="n">errno</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;bind failed: %s&quot;</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+</span><span class='line'>        <span class="n">close</span><span class="p">(</span><span class="n">event_socket</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">return</span> <span class="o">-</span><span class="n">err</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="n">event_socket</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int32_t</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int32_t</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>	<span class="kt">char</span> <span class="n">event_sock_buf</span><span class="p">[</span><span class="mi">1024</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="kt">int32_t</span> <span class="n">event_socket</span> <span class="o">=</span> <span class="n">init_event_sock</span><span class="p">();</span>
+</span><span class='line'>	<span class="k">if</span> <span class="p">(</span><span class="n">event_socket</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+</span><span class='line'>		<span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+</span><span class='line'>		<span class="kt">int32_t</span> <span class="n">len</span> <span class="o">=</span> <span class="n">TEMP_FAILURE_RETRY</span><span class="p">(</span><span class="n">recv</span><span class="p">(</span><span class="n">event_socket</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">event_sock_buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">event_sock_buf</span><span class="p">),</span> <span class="mi">0</span><span class="p">));</span>
+</span><span class='line'>		<span class="k">if</span> <span class="p">(</span><span class="n">len</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+</span><span class='line'>			<span class="n">printf</span><span class="p">(</span><span class="s">&quot;recv failed: %s&quot;</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+</span><span class='line'>			<span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+</span><span class='line'>		<span class="p">}</span>
+</span><span class='line'>		<span class="kt">int32_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>		<span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>			<span class="n">printf</span><span class="p">(</span><span class="s">&quot;next event in buf: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">event_sock_buf</span><span class="o">+</span><span class="n">i</span><span class="p">);</span>
+</span><span class='line'>			<span class="n">i</span> <span class="o">+=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">event_sock_buf</span><span class="o">+</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>		<span class="p">}</span>
+</span><span class='line'>	<span class="p">}</span>
+</span><span class='line'>	<span class="n">close</span><span class="p">(</span><span class="n">event_socket</span><span class="p">);</span>
+</span><span class='line'>	<span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#ifdef __RUNNING_LOG</span>
+</span><span class='line'><span class="n">shell</span><span class="err">@</span><span class="n">android</span><span class="o">:/</span><span class="n">data</span><span class="o">/</span><span class="n">app</span> <span class="err">#</span> <span class="p">.</span><span class="o">/</span><span class="n">test_uevent</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">4550.363457</span><span class="p">]</span> <span class="n">usb</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span> <span class="n">USB</span> <span class="n">disconnect</span><span class="p">,</span> <span class="n">device</span> <span class="n">number</span> <span class="mi">2</span>
+</span><span class='line'><span class="p">...</span>
+</span><span class='line'><span class="n">next</span> <span class="n">event</span> <span class="n">in</span> <span class="n">buf</span><span class="o">:</span> <span class="n">remove</span><span class="err">@</span><span class="o">/</span><span class="n">devices</span><span class="o">/</span><span class="n">soc</span><span class="mf">.0</span><span class="o">/</span><span class="n">f7ed0000</span><span class="p">.</span><span class="n">usb</span><span class="o">/</span><span class="n">usb1</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mf">1.2</span><span class="o">/</span><span class="mo">0003</span><span class="o">:</span><span class="mo">046</span><span class="n">D</span><span class="o">:</span><span class="n">C52B</span><span class="mf">.0003</span><span class="o">/</span><span class="n">hidraw</span><span class="o">/</span><span class="n">hidraw0</span>
+</span><span class='line'><span class="n">next</span> <span class="n">event</span> <span class="n">in</span> <span class="n">buf</span><span class="o">:</span> <span class="n">ACTION</span><span class="o">=</span><span class="n">remove</span>
+</span><span class='line'><span class="n">next</span> <span class="n">event</span> <span class="n">in</span> <span class="n">buf</span><span class="o">:</span> <span class="n">DEVPATH</span><span class="o">=/</span><span class="n">devices</span><span class="o">/</span><span class="n">soc</span><span class="mf">.0</span><span class="o">/</span><span class="n">f7ed0000</span><span class="p">.</span><span class="n">usb</span><span class="o">/</span><span class="n">usb1</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mf">1.2</span><span class="o">/</span><span class="mo">0003</span><span class="o">:</span><span class="mo">046</span><span class="n">D</span><span class="o">:</span><span class="n">C52B</span><span class="mf">.0003</span><span class="o">/</span><span class="n">hidraw</span><span class="o">/</span><span class="n">hidraw0</span>
+</span><span class='line'><span class="n">next</span> <span class="n">event</span> <span class="n">in</span> <span class="n">buf</span><span class="o">:</span> <span class="n">SUBSYSTEM</span><span class="o">=</span><span class="n">hidraw</span>
+</span><span class='line'><span class="n">next</span> <span class="n">event</span> <span class="n">in</span> <span class="n">buf</span><span class="o">:</span> <span class="n">MAJOR</span><span class="o">=</span><span class="mi">249</span>
+</span><span class='line'><span class="n">next</span> <span class="n">event</span> <span class="n">in</span> <span class="n">buf</span><span class="o">:</span> <span class="n">MINOR</span><span class="o">=</span><span class="mi">0</span>
+</span><span class='line'><span class="n">next</span> <span class="n">event</span> <span class="n">in</span> <span class="n">buf</span><span class="o">:</span> <span class="n">DEVNAME</span><span class="o">=</span><span class="n">hidraw0</span>
+</span><span class='line'><span class="n">next</span> <span class="n">event</span> <span class="n">in</span> <span class="n">buf</span><span class="o">:</span> <span class="n">SEQNUM</span><span class="o">=</span><span class="mi">878</span>
+</span><span class='line'><span class="p">...</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">[</span> <span class="mf">4554.467274</span><span class="p">]</span> <span class="n">usb</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span> <span class="n">new</span> <span class="n">full</span><span class="o">-</span><span class="n">speed</span> <span class="n">USB</span> <span class="n">device</span> <span class="n">number</span> <span class="mi">3</span> <span class="n">using</span> <span class="n">berlin</span><span class="o">-</span><span class="n">ehci</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">4554.626594</span><span class="p">]</span> <span class="n">usb</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span> <span class="n">New</span> <span class="n">USB</span> <span class="n">device</span> <span class="n">found</span><span class="p">,</span> <span class="n">idVendor</span><span class="o">=</span><span class="mo">046</span><span class="n">d</span><span class="p">,</span> <span class="n">idProduct</span><span class="o">=</span><span class="n">c52b</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">4554.633604</span><span class="p">]</span> <span class="n">usb</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span> <span class="n">New</span> <span class="n">USB</span> <span class="n">device</span> <span class="n">strings</span><span class="o">:</span> <span class="n">Mfr</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Product</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">SerialNumber</span><span class="o">=</span><span class="mi">0</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">4554.641231</span><span class="p">]</span> <span class="n">usb</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span> <span class="n">Product</span><span class="o">:</span> <span class="n">USB</span> <span class="n">Receiver</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">4554.645650</span><span class="p">]</span> <span class="n">usb</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span> <span class="n">Manufacturer</span><span class="o">:</span> <span class="n">Logitech</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">4554.664080</span><span class="p">]</span> <span class="n">logitech</span><span class="o">-</span><span class="n">djreceiver</span> <span class="mo">0003</span><span class="o">:</span><span class="mo">046</span><span class="n">D</span><span class="o">:</span><span class="n">C52B</span><span class="mf">.0007</span><span class="o">:</span> <span class="n">hiddev0</span><span class="p">,</span><span class="n">hidraw0</span><span class="o">:</span> <span class="n">USB</span> <span class="n">HID</span> <span class="n">v1</span><span class="mf">.11</span> <span class="n">Device</span> <span class="p">[</span><span class="n">Logitech</span> <span class="n">USB</span> <span class="n">Receiver</span><span class="p">]</span> <span class="n">on</span> <span class="n">usb</span><span class="o">-</span><span class="n">f7ed0000</span><span class="p">.</span><span class="n">usb</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">input2</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">4554.686310</span><span class="p">]</span> <span class="n">input</span><span class="o">:</span> <span class="n">Logitech</span> <span class="n">Unifying</span> <span class="n">Device</span><span class="p">.</span> <span class="n">Wireless</span> <span class="n">PID</span><span class="o">:</span><span class="mi">2012</span> <span class="n">as</span> <span class="o">/</span><span class="n">devices</span><span class="o">/</span><span class="n">soc</span><span class="mf">.0</span><span class="o">/</span><span class="n">f7ed0000</span><span class="p">.</span><span class="n">usb</span><span class="o">/</span><span class="n">usb1</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mf">1.2</span><span class="o">/</span><span class="mo">0003</span><span class="o">:</span><span class="mo">046</span><span class="n">D</span><span class="o">:</span><span class="n">C52B</span><span class="mf">.0007</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="n">input3</span>
+</span><span class='line'><span class="p">...</span>
+</span><span class='line'><span class="n">next</span> <span class="n">event</span> <span class="n">in</span> <span class="n">buf</span><span class="o">:</span> <span class="n">add</span><span class="err">@</span><span class="o">/</span><span class="n">devices</span><span class="o">/</span><span class="n">soc</span><span class="mf">.0</span><span class="o">/</span><span class="n">f7ed0000</span><span class="p">.</span><span class="n">usb</span><span class="o">/</span><span class="n">usb1</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mf">1.2</span><span class="o">/</span><span class="mo">0003</span><span class="o">:</span><span class="mo">046</span><span class="n">D</span><span class="o">:</span><span class="n">C52B</span><span class="mf">.0007</span><span class="o">/</span><span class="n">hidraw</span><span class="o">/</span><span class="n">hidraw0</span>
+</span><span class='line'><span class="n">next</span> <span class="n">event</span> <span class="n">in</span> <span class="n">buf</span><span class="o">:</span> <span class="n">ACTION</span><span class="o">=</span><span class="n">add</span>
+</span><span class='line'><span class="n">next</span> <span class="n">event</span> <span class="n">in</span> <span class="n">buf</span><span class="o">:</span> <span class="n">DEVPATH</span><span class="o">=/</span><span class="n">devices</span><span class="o">/</span><span class="n">soc</span><span class="mf">.0</span><span class="o">/</span><span class="n">f7ed0000</span><span class="p">.</span><span class="n">usb</span><span class="o">/</span><span class="n">usb1</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mf">1.2</span><span class="o">/</span><span class="mo">0003</span><span class="o">:</span><span class="mo">046</span><span class="n">D</span><span class="o">:</span><span class="n">C52B</span><span class="mf">.0007</span><span class="o">/</span><span class="n">hidraw</span><span class="o">/</span><span class="n">hidraw0</span>
+</span><span class='line'><span class="n">next</span> <span class="n">event</span> <span class="n">in</span> <span class="n">buf</span><span class="o">:</span> <span class="n">SUBSYSTEM</span><span class="o">=</span><span class="n">hidraw</span>
+</span><span class='line'><span class="n">next</span> <span class="n">event</span> <span class="n">in</span> <span class="n">buf</span><span class="o">:</span> <span class="n">MAJOR</span><span class="o">=</span><span class="mi">249</span>
+</span><span class='line'><span class="n">next</span> <span class="n">event</span> <span class="n">in</span> <span class="n">buf</span><span class="o">:</span> <span class="n">MINOR</span><span class="o">=</span><span class="mi">0</span>
+</span><span class='line'><span class="n">next</span> <span class="n">event</span> <span class="n">in</span> <span class="n">buf</span><span class="o">:</span> <span class="n">DEVNAME</span><span class="o">=</span><span class="n">hidraw0</span>
+</span><span class='line'><span class="n">next</span> <span class="n">event</span> <span class="n">in</span> <span class="n">buf</span><span class="o">:</span> <span class="n">SEQNUM</span><span class="o">=</span><span class="mi">896</span>
+</span><span class='line'><span class="cp">#endif</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 ]]></content>
   </entry>
   
@@ -202,7 +1467,7 @@ I came up with a revised file writing process, to guarantee it's atomic:</p>
     <id>http://yongbingchen.github.com/blog/2013/04/23/skeleton-of-a-bluetooth-sdio-driver</id>
     <content type="html"><![CDATA[<p>A Bluetooth SDIO card driver talks with hardware through SDIO interface, providing R/W method for Bluetooth Adapter layer, here's the class diagram for this relationship:</p>
 
-<p>{% img http://yongbingchen.github.com/images/bt_drv/bt_drv_class_diagram.jpg  %}</p>
+<p><img src="http://yongbingchen.github.com/images/bt_drv/bt_drv_class_diagram.jpg" title="" ></p>
 
 <p>The outbound Bluetooth data path:</p>
 
@@ -225,90 +1490,147 @@ I came up with a revised file writing process, to guarantee it's atomic:</p>
 
 
 <p>Appendix: How to register a driver specific ISR to SDIO's ISR:
-{% codeblock In driver module init, hook up a device ISR to SDIO's ISR. lang:c %}</p>
-
-<pre><code>int __init btmrvl_sdio_init_module(void)
-|
-|
---&gt;sdio_register_driver(&amp;bt_mrvl_sdio) != 0) 
-    |
-    |
-    --&gt;btmrvl_sdio_probe(struct sdio_func *func, const struct sdio_device_id *id)
-        |
-        |
-        --&gt;sdio_claim_irq(func, btmrvl_sdio_interrupt);{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>In driver module init, hook up a device ISR to SDIO's ISR.  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kt">int</span> <span class="n">__init</span> <span class="n">btmrvl_sdio_init_module</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'><span class="o">|</span>
+</span><span class='line'><span class="o">|</span>
+</span><span class='line'><span class="o">--&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">sdio_register_driver</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">bt_mrvl_sdio</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">|</span>
+</span><span class='line'>    <span class="o">|</span>
+</span><span class='line'>    <span class="o">--&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">btmrvl_sdio_probe</span><span class="p">(</span><span class="k">struct</span> <span class="n">sdio_func</span> <span class="o">*</span><span class="n">func</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">sdio_device_id</span> <span class="o">*</span><span class="n">id</span><span class="p">)</span>
+</span><span class='line'>        <span class="o">|</span>
+</span><span class='line'>        <span class="o">|</span>
+</span><span class='line'>        <span class="o">--&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">sdio_claim_irq</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">btmrvl_sdio_interrupt</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 </code></pre>
 
-<p>{% codeblock In this ISR, wake up main data pocessing thread to read data from card. lang:c %}</p>
-
-<pre><code>void btmrvl_sdio_interrupt(struct sdio_func *func)
-|
-|
---&gt;btmrvl_interrupt(priv);
-    |
-    |
-    --&gt;wake_up_interruptible(&amp;priv-&gt;main_thread.wait_q);{% endcodeblock %}
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>In this ISR, wake up main data pocessing thread to read data from card.  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kt">void</span> <span class="n">btmrvl_sdio_interrupt</span><span class="p">(</span><span class="k">struct</span> <span class="n">sdio_func</span> <span class="o">*</span><span class="n">func</span><span class="p">)</span>
+</span><span class='line'><span class="o">|</span>
+</span><span class='line'><span class="o">|</span>
+</span><span class='line'><span class="o">--&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">btmrvl_interrupt</span><span class="p">(</span><span class="n">priv</span><span class="p">);</span>
+</span><span class='line'>    <span class="o">|</span>
+</span><span class='line'>    <span class="o">|</span>
+</span><span class='line'>    <span class="o">--&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">wake_up_interruptible</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">priv</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">main_thread</span><span class="p">.</span><span class="n">wait_q</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 </code></pre>
 
 <p>Source Code:
-{% blockquote @btmrvl_sdio.c http://lxr.linux.no/linux+v3.8.8/drivers/bluetooth/btmrvl_sdio.c %}
-{% endblockquote %}
-{% blockquote @btmrvl_main.c http://lxr.linux.no/linux+v3.8.8/drivers/bluetooth/btmrvl_main.c %}
-{% endblockquote %}</p>
+<blockquote><p></p><footer><strong>@btmrvl_sdio.c</strong> <cite><a href='http://lxr.linux.no/linux+v3.8.8/drivers/bluetooth/btmrvl_sdio.c'>lxr.linux.no/linux+v3.8.8/&hellip;</a></cite></footer></blockquote>
+<blockquote><p></p><footer><strong>@btmrvl_main.c</strong> <cite><a href='http://lxr.linux.no/linux+v3.8.8/drivers/bluetooth/btmrvl_main.c'>lxr.linux.no/linux+v3.8.8/&hellip;</a></cite></footer></blockquote></p>
 
 <h2>Note: How to load firmware for a SDIO device</h2>
 
-<p>{% codeblock 1. Disable interrupt from this SDIO device. lang:c %}
-sdio_claim_host(card->func);
-btmrvl_sdio_disable_host_int(card);</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>1. Disable interrupt from this SDIO device.  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">sdio_claim_host</span><span class="p">(</span><span class="n">card</span><span class="o">-&gt;</span><span class="n">func</span><span class="p">);</span>
+</span><span class='line'><span class="n">btmrvl_sdio_disable_host_int</span><span class="p">(</span><span class="n">card</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">host_int_mask</span> <span class="o">=</span> <span class="n">sdio_readb</span><span class="p">(</span><span class="n">card</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">func</span><span class="p">,</span> <span class="n">card</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">reg</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">host_int_mask</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">ret</span><span class="p">);</span>
+</span><span class='line'><span class="n">host_int_mask</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">=</span> <span class="o">~</span><span class="n">HIM_DISABLE</span><span class="p">;</span>
+</span><span class='line'><span class="n">sdio_writeb</span><span class="p">(</span><span class="n">card</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">func</span><span class="p">,</span> <span class="n">host_int_mask</span><span class="p">,</span> <span class="n">card</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">reg</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">host_int_mask</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">ret</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">sdio_release_host</span><span class="p">(</span><span class="n">card</span><span class="o">-&gt;</span><span class="n">func</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<pre><code>host_int_mask = sdio_readb(card-&gt;func, card-&gt;reg-&gt;host_int_mask, &amp;ret);
-host_int_mask &amp;= ~HIM_DISABLE;
-sdio_writeb(card-&gt;func, host_int_mask, card-&gt;reg-&gt;host_int_mask, &amp;ret);
-</code></pre>
-
-<p>sdio_release_host(card->func);
-{% endcodeblock %}</p>
-
-<p>{% codeblock 2. Get and Write firmware. lang:c %}
-sdio_claim_host(card->func);</p>
-
-<pre><code>//Get firmware from user space.
-request_firmware(&amp;fw_firmware, card-&gt;firmware,//name of firmware file, = "mrvl/sd8787_uapsta.bin",
-        &amp;card-&gt;func-&gt;dev);
-//Write firmware into SDIO device, check firmware status.
-tmpfwbufsz = ALIGN_SZ(BTM_UPLD_SIZE, BTSDIO_DMA_ALIGN);
-fwbuf = (u8 *) ALIGN_ADDR(tmpfwbuf, BTSDIO_DMA_ALIGN);
-memcpy(fwbuf, &amp;firmware[offset], txlen);
-sdio_writesb(card-&gt;func, card-&gt;ioport, fwbuf,tx_blocks * blksz_dl);
-
-//Release firmware related resource in kernel.
-release_firmware(fw_firmware);
-</code></pre>
-
-<p>sdio_release_host(card->func);
-{% endcodeblock %}
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>2. Get and Write firmware.  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">sdio_claim_host</span><span class="p">(</span><span class="n">card</span><span class="o">-&gt;</span><span class="n">func</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="c1">//Get firmware from user space.</span>
+</span><span class='line'><span class="n">request_firmware</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">fw_firmware</span><span class="p">,</span> <span class="n">card</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">firmware</span><span class="p">,</span><span class="c1">//name of firmware file, = &quot;mrvl/sd8787_uapsta.bin&quot;,</span>
+</span><span class='line'>        <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">card</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">func</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">dev</span><span class="p">);</span>
+</span><span class='line'><span class="c1">//Write firmware into SDIO device, check firmware status.</span>
+</span><span class='line'><span class="n">tmpfwbufsz</span> <span class="o">=</span> <span class="n">ALIGN_SZ</span><span class="p">(</span><span class="n">BTM_UPLD_SIZE</span><span class="p">,</span> <span class="n">BTSDIO_DMA_ALIGN</span><span class="p">);</span>
+</span><span class='line'><span class="n">fwbuf</span> <span class="o">=</span> <span class="p">(</span><span class="n">u8</span> <span class="o">*</span><span class="p">)</span> <span class="n">ALIGN_ADDR</span><span class="p">(</span><span class="n">tmpfwbuf</span><span class="p">,</span> <span class="n">BTSDIO_DMA_ALIGN</span><span class="p">);</span>
+</span><span class='line'><span class="n">memcpy</span><span class="p">(</span><span class="n">fwbuf</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">firmware</span><span class="p">[</span><span class="n">offset</span><span class="p">],</span> <span class="n">txlen</span><span class="p">);</span>
+</span><span class='line'><span class="n">sdio_writesb</span><span class="p">(</span><span class="n">card</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">func</span><span class="p">,</span> <span class="n">card</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">ioport</span><span class="p">,</span> <span class="n">fwbuf</span><span class="p">,</span><span class="n">tx_blocks</span> <span class="o">*</span> <span class="n">blksz_dl</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//Release firmware related resource in kernel.</span>
+</span><span class='line'><span class="n">release_firmware</span><span class="p">(</span><span class="n">fw_firmware</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">sdio_release_host</span><span class="p">(</span><span class="n">card</span><span class="o">-&gt;</span><span class="n">func</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 Alternatively, you can use request_firmware_nowait() if current thread is not allowed to sleep for a long time.</p>
 
-<p>{% codeblock 3. Enable SDIO device interrupt. lang:c %}
-btmrvl_sdio_enable_host_int(card);
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>3. Enable SDIO device interrupt.  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">btmrvl_sdio_enable_host_int</span><span class="p">(</span><span class="n">card</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Reference:
-{% blockquote @How request_firmware() works http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/firmware_class/README?id=HEAD %}
-{% endblockquote %}
-{% blockquote @Default firmware search path in Android http://stackoverflow.com/questions/6019915/kernel-module-cannot-find-firmware-file-where-should-it-be %}
-{% endblockquote %}
-{% codeblock $Jellybean/system/core/init/devices.c lang:c %}</p>
-
-<h1>define SYSFS_PREFIX    "/sys"</h1>
-
-<h1>define FIRMWARE_DIR1   "/etc/firmware"</h1>
-
-<p>asprintf(&amp;root, SYSFS_PREFIX"%s/", uevent->path);
-asprintf(&amp;file1, FIRMWARE_DIR1"/%s", uevent->firmware);
-fw_fd = open(file1, O_RDONLY);
-{% endcodeblock %}</p>
+<blockquote><p></p><footer><strong>@How request_firmware() works</strong> <cite><a href='http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/firmware_class/README?id=HEAD'>git.kernel.org/cgit/linux/git/&hellip;</a></cite></footer></blockquote>
+<blockquote><p></p><footer><strong>@Default firmware search path in Android</strong> <cite><a href='http://stackoverflow.com/questions/6019915/kernel-module-cannot-find-firmware-file-where-should-it-be'>stackoverflow.com/questions/&hellip;</a></cite></footer></blockquote>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>$Jellybean/system/core/init/devices.c  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">define</span> <span class="n">SYSFS_PREFIX</span>    <span class="s">&quot;/sys&quot;</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">define</span> <span class="n">FIRMWARE_DIR1</span>   <span class="s">&quot;/etc/firmware&quot;</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">asprintf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">root</span><span class="p">,</span> <span class="n">SYSFS_PREFIX</span><span class="s">&quot;%s/&quot;</span><span class="p">,</span> <span class="n">uevent</span><span class="o">-&gt;</span><span class="n">path</span><span class="p">);</span>
+</span><span class='line'><span class="n">asprintf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">file1</span><span class="p">,</span> <span class="n">FIRMWARE_DIR1</span><span class="s">&quot;/%s&quot;</span><span class="p">,</span> <span class="n">uevent</span><span class="o">-&gt;</span><span class="n">firmware</span><span class="p">);</span>
+</span><span class='line'><span class="n">fw_fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="n">file1</span><span class="p">,</span> <span class="n">O_RDONLY</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h1>Footnote: sdio_claim_host(card->func)</h1>
 
@@ -327,14 +1649,23 @@ fw_fd = open(file1, O_RDONLY);
     <updated>2013-03-23T21:39:00-07:00</updated>
     <id>http://yongbingchen.github.com/blog/2013/03/23/memo-how-a-process-accesses-physical-memory</id>
     <content type="html"><![CDATA[<p>Scenario: a process acquired a new block of memory, then try to access part of this block:
-{% codeblock lang:c %}</p>
-
-<pre><code>    unsigned char * buf = (unsigned char *)malloc(1024);
-    if (buf != NULL)
-            *(buf + 3) = 0xfe;
-</code></pre>
-
-<p>{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">buf</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">buf</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+</span><span class='line'>            <span class="o">*</span><span class="p">(</span><span class="n">buf</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="mh">0xfe</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 What happens in malloc():</p>
 
 <ol>
@@ -360,8 +1691,7 @@ What happens in malloc():</p>
 </ol>
 
 
-<p>{% blockquote @How Xscale Handle Cache Miss http://www.cs.uiuc.edu/homes/luddy/PROCESSORS/XScaleMMX.pdf %}
-{% endblockquote %}</p>
+<p><blockquote><p></p><footer><strong>@How Xscale Handle Cache Miss</strong> <cite><a href='http://www.cs.uiuc.edu/homes/luddy/PROCESSORS/XScaleMMX.pdf'>www.cs.uiuc.edu/homes/luddy/&hellip;</a></cite></footer></blockquote></p>
 ]]></content>
   </entry>
   

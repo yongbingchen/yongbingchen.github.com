@@ -4,7 +4,7 @@
   <title><![CDATA[Category: gerrit | Yongbing's Blog]]></title>
   <link href="http://yongbingchen.github.com/blog/categories/gerrit/atom.xml" rel="self"/>
   <link href="http://yongbingchen.github.com/"/>
-  <updated>2015-03-27T20:27:22-07:00</updated>
+  <updated>2015-03-27T22:06:54-07:00</updated>
   <id>http://yongbingchen.github.com/</id>
   <author>
     <name><![CDATA[Yongbing Chen]]></name>
@@ -34,50 +34,51 @@
 
 <ol>
 <li>on a client working machine, checkout the manifest git first: <code>~$ git clone ssh://gerrit2@gerritreview.com:29418/container/repo_1/manifest</code></li>
-<li>add a new file manifest.xml to the git as below, and merge it to master branch:
-```xml
-&lt;?xml version="1.0" encoding="UTF-8"?>
-<manifest>
+<li>add a new file manifest.xml to the git as below, and merge it to master branch:</li>
+</ol>
+</li>
+</ol>
 
-<pre><code> &lt;remote  name="my_repo"
-         fetch="ssh://gerritreview.com:29418/"
-         review="http://gerritreview.com/gerrit/"
-         /&gt;
- &lt;default revision="my_working_branch"
-         remote="my_repo"
-         sync-j="4"
-         /&gt;
 
- &lt;project path="container/repo_1/git_one" name="container/repo_1/git_one" /&gt;
- &lt;project path="container/repo_1/git_two" name="container/repo_1/git_two" /&gt;
+<p>```xml</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;manifest&gt;
+        &lt;remote  name="my_repo"
+                fetch="ssh://gerritreview.com:29418/"
+                review="http://gerritreview.com/gerrit/"
+                /&gt;
+        &lt;default revision="my_working_branch"
+                remote="my_repo"
+                sync-j="4"
+                /&gt;
+
+        &lt;project path="container/repo_1/git_one" name="container/repo_1/git_one" /&gt;
+        &lt;project path="container/repo_1/git_two" name="container/repo_1/git_two" /&gt;
+&lt;/manifest&gt;
 </code></pre>
 
-<p></manifest>
-```</p></li>
-</ol>
-</li>
-<li>On gerrit server, create a working "Branch Name" "my_working_branch" on these three projects, with "Initial Revision" set to "master" in https://gerritreview.com/gerrit/#/admin/projects/container/repo_1/${GIT_NAME},branches</li>
-<li>On a client's working machine, checkout the repo with below command:
-<code>~$ repo init -u ssh://gerritreview.com:29418/container/repo_1/manifest -b my_working_branch -m manifest.xml --repo-url https://chromium.googlesource.com/external/repo.git --no-repo-verify</code>
-<code>~$ repo sync -j 32</code></li>
-</ol>
+<p>```</p>
 
+<p/>
+3. On gerrit server, create a working "Branch Name" "my_working_branch" on these three projects, with "Initial Revision" set to "master" in https://gerritreview.com/gerrit/#/admin/projects/container/repo_1/${GIT_NAME},branches
+<p/>
+4. On a client's working machine, checkout the repo with below command:
 
-<h2>Setup the access control rules for this repo:</h2>
+```sh
+~$ repo init -u ssh://gerritreview.com:29418/container/repo_1/manifest -b my_working_branch -m manifest.xml --repo-url https://chromium.googlesource.com/external/repo.git --no-repo-verify
+~$ repo sync -j 32
+```
 
-<ol>
-<li>define thress group and their access right:
+<h2> Setup the access control rules for this repo:</h2>
 
-<ol>
-<li>developers  :can submit CL, checkout code, review +/_ 1</li>
-<li>reviewers   :can review +/- 2</li>
-<li>submitters  :can merge CL to working branch</li>
-</ol>
-</li>
-<li>implement these rules in gerrit server:
-First delete all default access permission granted for "Registered Users" from https://gerritreview.com/gerrit/#/admin/projects/All-Projects,access
-Then create below access rules for the projects under container: {% img http://yongbingchen.github.com/images/git/repo/gerrit_server_access_control.jpeg  %}</li>
-</ol>
+1. define thress group and their access right: <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; developers  :can submit CL, checkout code, review +/_ 1  <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; reviewers   :can review +/- 2 <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; submitters  :can merge CL to working branch <br />
+2. implement these rules in gerrit server: <br />
+First delete all default access permission granted for "Registered Users" from https://gerritreview.com/gerrit/#/admin/projects/All-Projects,access <br />
+Then create below access rules for the projects under container: <img src="http://yongbingchen.github.com/images/git/repo/gerrit_server_access_control.jpeg" title="" >
 
 ]]></content>
   </entry>
@@ -117,7 +118,7 @@ Then create below access rules for the projects under container: {% img http://y
 
 
 <p><em>Branches:</em>
-{% img http://yongbingchen.github.com/images/gerrit/branches.jpg  %}</p>
+<img src="http://yongbingchen.github.com/images/gerrit/branches.jpg" title="" ></p>
 ]]></content>
   </entry>
   

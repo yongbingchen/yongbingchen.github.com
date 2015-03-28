@@ -216,7 +216,7 @@
 </span><span class='line'>      # MSIE 7 and newer should be able to use keepalive
 </span><span class='line'>      BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
 </span><span class='line'> 
-</span><span class='line'>+     ServerName gerritreview.com
+</span><span class='line'>+               ServerName gerritreview.com
 </span><span class='line'>+               ProxyRequests Off
 </span><span class='line'>+               ProxyVia Off
 </span><span class='line'>+               ProxyPreserveHost On
@@ -241,7 +241,7 @@
 </span><span class='line'>+ 
 </span><span class='line'>+               ProxyPass /gerrit/ http://localhost:8080/gerrit/ nocanon
 </span><span class='line'>+               ProxyPassReverse /gerrit/ http://localhost:8080/gerrit/
-</span><span class='line'>+     # is this necessary?    
+</span><span class='line'>+               # is this necessary?  
 </span><span class='line'>+               Header edit Location "^http:(.*)$" "https:$1"
 </span><span class='line'>+
 </span><span class='line'>  &lt;/VirtualHost>
@@ -250,7 +250,7 @@
 
 <p>After setup, this gerrit server was deployed in a kvm guest machine, connected to its kvm host through an isolated virtual bridge.  Allowing bidirectional access to tcp port 29418 (gerrit ssh), 443 (HTTPS), 25 (sendmail), as below command:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -258,24 +258,26 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#forward kvm host's incoming (from NIC eth0) tcp dst port 29418 to gerrit server vm.  
-</span><span class='line'>iptables -I FORWARD -i eth0 -p tcp -m state --state NEW,RELATED,ESTABLISHED -m tcp -d $VM_GUEST_IP/32 -dport 29418 -j ACCEPT 
-</span><span class='line'>#any incoming packets from interface eth0, protocol tcp, dst port 29418 will be applied DNAT function (replace the dst addr from kvm host to $VM_GUEST_IP)
-</span><span class='line'>iptables -t nat -i eth0 -I PREROUTING -p tcp  --dport 29418 -j DNAT --to $VM_GUEST_IP:29418 
-</span><span class='line'>#replace any outboud tcp/29418 packet from $VM_GUEST_IP with kvm host's addr, and push to host's NIC eth0
-</span><span class='line'>iptables -t nat -A POSTROUTING -p tcp -o eth0 -s $VM_GUEST_IP --sport 29418 -j MASQUERADE 
-</span><span class='line'>#forward outgoing tcp/29418 connect from $VM_GUEST_IP to host's NIC eth0
-</span><span class='line'>iptables -I FORWARD -o eth0 -p tcp -m state --state NEW,RELATED,ESTABLISHED -m tcp -s $VM_GUEST_IP --sport 29418 -j ACCEPT</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#forward kvm host&#39;s incoming (from NIC eth0) tcp dst port 29418 to gerrit server vm.  </span>
+</span><span class='line'>iptables -I FORWARD -i eth0 -p tcp -m state --state NEW,RELATED,ESTABLISHED -m tcp -d <span class="nv">$VM_GUEST_IP</span>/32 -dport 29418 -j ACCEPT
+</span><span class='line'><span class="c">#any incoming packets from interface eth0, protocol tcp, dst port 29418 will be applied DNAT function (replace the dst addr from kvm host to $VM_GUEST_IP)</span>
+</span><span class='line'>iptables -t nat -i eth0 -I PREROUTING -p tcp  --dport 29418 -j DNAT --to <span class="nv">$VM_GUEST_IP</span>:29418
+</span><span class='line'><span class="c">#replace any outboud tcp/29418 packet from $VM_GUEST_IP with kvm host&#39;s addr, and push to host&#39;s NIC eth0</span>
+</span><span class='line'>iptables -t nat -A POSTROUTING -p tcp -o eth0 -s <span class="nv">$VM_GUEST_IP</span> --sport 29418 -j MASQUERADE
+</span><span class='line'><span class="c">#forward outgoing tcp/29418 connect from $VM_GUEST_IP to host&#39;s NIC eth0</span>
+</span><span class='line'>iptables -I FORWARD -o eth0 -p tcp -m state --state NEW,RELATED,ESTABLISHED -m tcp -s <span class="nv">$VM_GUEST_IP</span> --sport 29418 -j ACCEPT
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Also NAT rules to allow connection from the vm guest (gerrit server) to connect to a NTP server:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>iptables -t nat -A POSTROUTING -p udp -s $VM_GUEST_IP/32 -d 174.137.132.100 -dport 123 -j MASQUERADE
-</span><span class='line'>iptables -I FORWARD -p udp -s $VM_GUEST_IP/32 -d 174.137.132.100/32 -dport 123 -j ACCEPT
-</span><span class='line'>iptables -I FORWARD -p udp -d $VM_GUEST_IP/32 -s 174.137.132.100/32 -dport 123 -j ACCEPT</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>iptables -t nat -A POSTROUTING -p udp -s <span class="nv">$VM_GUEST_IP</span>/32 -d 174.137.132.100 -dport 123 -j MASQUERADE
+</span><span class='line'>iptables -I FORWARD -p udp -s <span class="nv">$VM_GUEST_IP</span>/32 -d 174.137.132.100/32 -dport 123 -j ACCEPT
+</span><span class='line'>iptables -I FORWARD -p udp -d <span class="nv">$VM_GUEST_IP</span>/32 -s 174.137.132.100/32 -dport 123 -j ACCEPT
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Notes:</h2>

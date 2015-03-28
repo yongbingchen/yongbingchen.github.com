@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bible | Yongbing's Blog]]></title>
   <link href="http://yongbingchen.github.com/blog/categories/bible/atom.xml" rel="self"/>
   <link href="http://yongbingchen.github.com/"/>
-  <updated>2015-03-27T20:27:22-07:00</updated>
+  <updated>2015-03-27T22:06:54-07:00</updated>
   <id>http://yongbingchen.github.com/</id>
   <author>
     <name><![CDATA[Yongbing Chen]]></name>
@@ -18,13 +18,9 @@
     <link href="http://yongbingchen.github.com/blog/2013/03/24/exodus/"/>
     <updated>2013-03-24T19:09:00-07:00</updated>
     <id>http://yongbingchen.github.com/blog/2013/03/24/exodus</id>
-    <content type="html"><![CDATA[<p>{% blockquote EXODUS 6 %}
-‘I am the LORD, and I will bring you out from under the burdens of the Egyptians, and I will deliver you from slavery to them, and  I will redeem you with an outstretched arm and with great acts of judgment. I  will take you to be my people, and  I will be your God, and you shall know that  I am the LORD your God, who has brought you out from under the burdens of the Egyptians. I will bring you into the land that I swore to give to Abraham, to Isaac, and to Jacob. I will give it to you for a possession.  I am the LORD.’
-{% endblockquote %}</p>
+    <content type="html"><![CDATA[<p><blockquote><p>‘I am the LORD, and I will bring you out from under the burdens of the Egyptians, and I will deliver you from slavery to them, and  I will redeem you with an outstretched arm and with great acts of judgment. I  will take you to be my people, and  I will be your God, and you shall know that  I am the LORD your God, who has brought you out from under the burdens of the Egyptians. I will bring you into the land that I swore to give to Abraham, to Isaac, and to Jacob. I will give it to you for a possession.  I am the LORD.’</p><footer><strong>EXODUS 6</strong></footer></blockquote></p>
 
-<p>{% blockquote EXODUS 16 %}
-They set out from Elim, and all the congregation of the people of Israel came to the wilderness of Sin, which is between Elim and Sinai, on the fifteenth day of the second month after they had departed from the land of Egypt. And the whole congregation of the people of Israel grumbled against Moses and Aaron in the wilderness, and the people of Israel said to them,  “Would that we had died by the hand of the LORD in the land of Egypt,  when we sat by the meat pots and ate bread to the full, for you have brought us out into this wilderness to kill this whole assembly with hunger.”
-{% endblockquote %}</p>
+<p><blockquote><p>They set out from Elim, and all the congregation of the people of Israel came to the wilderness of Sin, which is between Elim and Sinai, on the fifteenth day of the second month after they had departed from the land of Egypt. And the whole congregation of the people of Israel grumbled against Moses and Aaron in the wilderness, and the people of Israel said to them,  “Would that we had died by the hand of the LORD in the land of Egypt,  when we sat by the meat pots and ate bread to the full, for you have brought us out into this wilderness to kill this whole assembly with hunger.”</p><footer><strong>EXODUS 16</strong></footer></blockquote></p>
 ]]></content>
   </entry>
   
