@@ -4,7 +4,7 @@
   <title><![CDATA[Yongbing's Blog]]></title>
   <link href="http://yongbingchen.github.com/atom.xml" rel="self"/>
   <link href="http://yongbingchen.github.com/"/>
-  <updated>2015-03-27T22:06:54-07:00</updated>
+  <updated>2015-03-27T22:14:48-07:00</updated>
   <id>http://yongbingchen.github.com/</id>
   <author>
     <name><![CDATA[Yongbing Chen]]></name>
@@ -2804,45 +2804,6 @@ This is useful when debugging some real time issues.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Loose coopling hierarchical gerrit workflow]]></title>
-    <link href="http://yongbingchen.github.com/blog/2013/03/11/loose-coopling-hierarchical-gerrit-workflow/"/>
-    <updated>2013-03-11T22:58:00-07:00</updated>
-    <id>http://yongbingchen.github.com/blog/2013/03/11/loose-coopling-hierarchical-gerrit-workflow</id>
-    <content type="html"><![CDATA[<p>As we are working on an Android project, we are handling a very large scale source tree (10GB level), including works from BSP team (bootloader, linux kernel), midware team (A/V codec, media framework),  and Android team (Android HAL, vendor specific Apks). We need to do weekly relaese for several products from single source tree, ensuring no quality degradation in the mean time.</p>
-
-<p>A work flow serves these requirement needs to:</p>
-
-<ol>
-<li>have least cross team dependancy.</li>
-<li>provide tight collaboration in developers.</li>
-<li>easily locate bad node when doing release.</li>
-</ol>
-
-
-<p>To achive these requirements, I defined below branches:</p>
-
-<ol>
-<li>One trunk branch for releasing. Every node is a stable node (passed full test).</li>
-<li>Every team has one independent developing branch, covering this team&#8217;s source code partition, based on last release version, closed after current release is done.</li>
-<li>Integration branch is based on last release version, will integrate above developing branches. Perform full test on this branch, cull out bad node when failed.</li>
-</ol>
-
-
-<p>And a workflow based on these branches:</p>
-
-<ol>
-<li>Every developer submits to developing branch (cross team submit is permitted), gerrit review process servers as first gate keeper in this stage. Add auto build, auto test in gerrit merge hook, let every commit has a build image, and this image will contain all its preceding commits, this makes possible of using binary search to cull out bad node in QA stage.</li>
-<li>After submit window closed, integrators merge these developing branches into one integration branch, perform full test on the result, if failed, apply the failed case on all tail nodes of developing branches, this step picks out the failed developing branch. Then use binary search method on this developing branch to cull out the bad node, and update the developing branch. Iterate untill integration result pass full test.</li>
-<li>Push the passed result into release branch, open submit window, start next developing/release cycle.</li>
-</ol>
-
-
-<p><em>Branches:</em>
-<img src="http://yongbingchen.github.com/images/gerrit/branches.jpg" title="" ></p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[Read e-EDID with clock stretching]]></title>
     <link href="http://yongbingchen.github.com/blog/2013/03/11/read-e-edid-with-clock-stretching/"/>
     <updated>2013-03-11T17:00:00-07:00</updated>
@@ -3296,6 +3257,116 @@ earlier version of UNIX signal is unreliable</p>
 
 <p><em>. when signal handler is running, blocked signals is &#8220;lost&#8221; (?!)
 </em>. when signal handler is running, the same signal is blocked by default, add SA_NODEFER in sigaction.sa_flags unblock it. <blockquote><p></p><footer><strong>man page</strong> <cite><a href='http://man7.org/linux/man-pages/man2/sigaction.2.html'>man7.org/linux/man-pages/man2/&hellip;</a></cite></footer></blockquote></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Resource leakage in Android Java Apk]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/03/11/resource-leakage-in-android-java-apk/"/>
+    <updated>2013-03-11T02:12:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/03/11/resource-leakage-in-android-java-apk</id>
+    <content type="html"><![CDATA[<p><strong>Bug: Keep on resetting BT adapter cause Android crash</strong></p>
+
+<p>Bug description: In GTV/Honeycomb&#8217;s System Setting UI, keep on turning on/off Bluetooth for about 270 times, Android will crash, and UI restart from blackscreen.</p>
+
+<p>My analyze:
+First thing is to located where Android system crashed from logcat, there must be something related to zygote, then I found this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>03-08 20:15:00.026 I/Zygote  ( 3749): Exit zygote because system server (3780) has terminated</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Above that I found a fatal error message:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>03-08 20:14:59.226 F/Looper  ( 3780): Could not create wake pipe.  errno=24</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then all system service died like below:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>03-08 20:14:59.316 I/ServiceManager(  690): service 'usagestats' died</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Tracing down the fatal error message in Android XRef, the error occurs when creating a new Looper instance, in Honeycomb/frameworks/base/libs/utils/Looper.cpp, where 3 new pips need to be created for one new Looper object.
+So I guess the isssue is kind of file/socket/pipe handle leakage issue, to verify this, compare &#8220;lsof&#8221; result after turn on/off Bluetooth once, I can see there&#8217;s 3 newly opened pipes in system_service everytime I performed a turn on/off Bluetooth. Then I found from website that someone reported similar issue on <a href="https://code.google.com/p/android/issues/detail?id=24414" title="Android Bug List">Android Bug List</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/ # lsof |grep system_se >/data/debug/after_turn_off_bt.txt
+</span><span class='line'>/ # hciconfig hci0 up; sleep 5; hciconfig hci0 down
+</span><span class='line'>/ # lsof |grep system_se >/data/debug/after_turn_off_bt_again.txt
+</span><span class='line'>/ # busybox diff  /data/debug/after_turn_off_bt.txt /data/debug/after_turn_off_bt_again.txt
+</span><span class='line'> system_se   887        ???  224       ???                ???       ???        ??? /dev/null
+</span><span class='line'>+system_se   887        ???  225       ???                ???       ???        ??? pipe:[7641]
+</span><span class='line'>+system_se   887        ???  227       ???                ???       ???        ??? pipe:[7641]
+</span><span class='line'>+system_se   887        ???  228       ???                ???       ???        ??? anon_inode:[eventpoll]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The symptom is quite clear now, but how to locate leakage position in Android?</p>
+
+<p>The first clue is that Looper object is used for Android Handler object, it&#8217;s hard to dump call stack in Android native C++ service, but it&#8217;s easy to do that in Java.
+So I added a dump stack in Handler&#8217;s construction method, caught below message when I turn on Bluetooth:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>03-11 05:14:07.806 D/Handler (  898):android.os.Handler
+</span><span class='line'>03-11 05:14:07.806 D/Handler (  898):com.android.internal.util.HierarchicalStateMachine$HsmHandler
+</span><span class='line'>03-11 05:14:07.806 D/Handler (  898):com.android.internal.util.HierarchicalStateMachine$HsmHandler
+</span><span class='line'>03-11 05:14:07.806 D/Handler (  898):com.android.internal.util.HierarchicalStateMachine
+</span><span class='line'>03-11 05:14:07.806 D/Handler (  898):com.android.internal.util.HierarchicalStateMachine
+</span><span class='line'>03-11 05:14:07.806 D/Handler (  898):android.bluetooth.BluetoothDeviceProfileState
+</span><span class='line'>03-11 05:14:07.806 D/Handler (  898):android.server.BluetoothService
+</span><span class='line'>03-11 05:14:07.806 D/Handler (  898):android.server.BluetoothService
+</span><span class='line'>03-11 05:14:07.806 D/Handler (  898):android.server.BluetoothService
+</span><span class='line'>03-11 05:14:07.806 D/Handler (  898):android.server.BluetoothService$EnableThread</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After doing some source code search, I reached the place in BluetoothService.java when problem occurs:
+When turn off BT, BluetoothService will do:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="mi">2146</span>     <span class="kt">void</span> <span class="n">removeProfileState</span><span class="o">(</span><span class="n">String</span> <span class="n">address</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'><span class="mi">2147</span>         <span class="n">mDeviceProfileState</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">address</span><span class="o">);</span> <span class="c1">//Comment out this line so BluetoothService will not create a new BluetoothDeviceProfileState every time BT reset.</span>
+</span><span class='line'><span class="mi">2148</span>     <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then when turn on BT again, it will do:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="mi">2136</span>     <span class="n">BluetoothDeviceProfileState</span> <span class="n">addProfileState</span><span class="o">(</span><span class="n">String</span> <span class="n">address</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'><span class="mi">2137</span>         <span class="n">BluetoothDeviceProfileState</span> <span class="n">state</span> <span class="o">=</span> <span class="n">mDeviceProfileState</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">address</span><span class="o">);</span>
+</span><span class='line'><span class="mi">2138</span>         <span class="k">if</span> <span class="o">(</span><span class="n">state</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="n">state</span><span class="o">;</span>
+</span><span class='line'><span class="mi">2140</span>         <span class="n">state</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BluetoothDeviceProfileState</span><span class="o">(</span><span class="n">mContext</span><span class="o">,</span> <span class="n">address</span><span class="o">,</span> <span class="k">this</span><span class="o">,</span> <span class="n">mA2dpService</span><span class="o">);</span>
+</span><span class='line'><span class="mi">2144</span>     <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Problem here is, we only need do a reset when turn off BT, then we can reuse the BluetoothDeviceProfileState object after we turn it on again, but Android removed it instead, then need to create a new BluetoothDeviceProfileState object next time. If we did not remove the object every time we turn off BT, then the issue disappeared.</p>
+
+<p><em>My comments:</em>
+For Java class who claims system resource in its construction method, we must declare corresponding interface to release them, GC can not do this job for us.</p>
 ]]></content>
   </entry>
   
