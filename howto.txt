@@ -39,6 +39,9 @@ add empty line above list.
 add nested list:
 git show 7b182d77e139cfdd62de91fc6706ffd9acc626da
 make indent by 4 space characters, not 8 characters (will generate effect like source block).
+put code block in list 
+http://meta.stackexchange.com/questions/3792/how-to-nest-code-within-a-list-using-markdown
+
 
 //Add an item in navigation bar
 git show e6c0a2723da572f3d0c6094f5d5ab8110449535d
@@ -80,3 +83,6 @@ git show d972013672f691be03d333cd731bbbe826bfd965
 
 //Add raw href hyperlink in post:
 anymore, see <a href ="http://yongbingchen.github.com/logs/andoird-hid/SDP-fail-cause-HID-pair-fail.txt ">pairing failed by SDP</a> for example.
+
+//add shell clip and xml clip:
+see this commit

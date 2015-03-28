@@ -15,6 +15,7 @@ categories: [gerrit]
 2. Create my own repo config:
     1. on a client working machine, checkout the manifest git first: <code>~$ git clone ssh://gerrit2@gerritreview.com:29418/container/repo_1/manifest</code>
     2. add a new file manifest.xml to the git as below, and merge it to master branch:
+
 ```xml
 	<?xml version="1.0" encoding="UTF-8"?>
 	<manifest>
@@ -31,17 +32,22 @@ categories: [gerrit]
 	        <project path="container/repo_1/git_two" name="container/repo_1/git_two" />
 	</manifest>
 ```
+<p/>
 3. On gerrit server, create a working "Branch Name" "my_working_branch" on these three projects, with "Initial Revision" set to "master" in https://gerritreview.com/gerrit/#/admin/projects/container/repo_1/${GIT_NAME},branches
+<p/>
 4. On a client's working machine, checkout the repo with below command:
-<code>~$ repo init -u ssh://gerritreview.com:29418/container/repo_1/manifest -b my_working_branch -m manifest.xml --repo-url https://chromium.googlesource.com/external/repo.git --no-repo-verify</code>
-<code>~$ repo sync -j 32</code>
 
-## Setup the access control rules for this repo:
+```sh
+~$ repo init -u ssh://gerritreview.com:29418/container/repo_1/manifest -b my_working_branch -m manifest.xml --repo-url https://chromium.googlesource.com/external/repo.git --no-repo-verify
+~$ repo sync -j 32
+```
 
-1. define thress group and their access right:
-    1. developers  :can submit CL, checkout code, review +/_ 1
-    2. reviewers   :can review +/- 2
-    3. submitters  :can merge CL to working branch
-2. implement these rules in gerrit server:
-First delete all default access permission granted for "Registered Users" from https://gerritreview.com/gerrit/#/admin/projects/All-Projects,access
+<h2> Setup the access control rules for this repo:</h2>
+
+1. define thress group and their access right: <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; developers  :can submit CL, checkout code, review +/_ 1  <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; reviewers   :can review +/- 2 <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; submitters  :can merge CL to working branch <br />
+2. implement these rules in gerrit server: <br />
+First delete all default access permission granted for "Registered Users" from https://gerritreview.com/gerrit/#/admin/projects/All-Projects,access <br />
 Then create below access rules for the projects under container: {% img http://yongbingchen.github.com/images/git/repo/gerrit_server_access_control.jpeg  %}

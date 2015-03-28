@@ -47,7 +47,7 @@ And the changes I made upon default Apache HTTPS site config:
  		# MSIE 7 and newer should be able to use keepalive
  		BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
  
-+		ServerName gerritreview.com
++               ServerName gerritreview.com
 +               ProxyRequests Off
 +               ProxyVia Off
 +               ProxyPreserveHost On
@@ -72,7 +72,7 @@ And the changes I made upon default Apache HTTPS site config:
 + 
 +               ProxyPass /gerrit/ http://localhost:8080/gerrit/ nocanon
 +               ProxyPassReverse /gerrit/ http://localhost:8080/gerrit/
-+		# is this necessary?	
++               # is this necessary?	
 +               Header edit Location "^http:(.*)$" "https:$1"
 +
  	</VirtualHost>
@@ -80,7 +80,7 @@ And the changes I made upon default Apache HTTPS site config:
 {% endcodeblock %}
 
 After setup, this gerrit server was deployed in a kvm guest machine, connected to its kvm host through an isolated virtual bridge.  Allowing bidirectional access to tcp port 29418 (gerrit ssh), 443 (HTTPS), 25 (sendmail), as below command:
-{% codeblock %}
+```sh
 #forward kvm host's incoming (from NIC eth0) tcp dst port 29418 to gerrit server vm.  
 iptables -I FORWARD -i eth0 -p tcp -m state --state NEW,RELATED,ESTABLISHED -m tcp -d $VM_GUEST_IP/32 -dport 29418 -j ACCEPT 
 #any incoming packets from interface eth0, protocol tcp, dst port 29418 will be applied DNAT function (replace the dst addr from kvm host to $VM_GUEST_IP)
@@ -89,15 +89,14 @@ iptables -t nat -i eth0 -I PREROUTING -p tcp  --dport 29418 -j DNAT --to $VM_GUE
 iptables -t nat -A POSTROUTING -p tcp -o eth0 -s $VM_GUEST_IP --sport 29418 -j MASQUERADE 
 #forward outgoing tcp/29418 connect from $VM_GUEST_IP to host's NIC eth0
 iptables -I FORWARD -o eth0 -p tcp -m state --state NEW,RELATED,ESTABLISHED -m tcp -s $VM_GUEST_IP --sport 29418 -j ACCEPT 
-{% endcodeblock %}
+```
 
 Also NAT rules to allow connection from the vm guest (gerrit server) to connect to a NTP server:
-{% codeblock %}
+```sh
 iptables -t nat -A POSTROUTING -p udp -s $VM_GUEST_IP/32 -d 174.137.132.100 -dport 123 -j MASQUERADE
 iptables -I FORWARD -p udp -s $VM_GUEST_IP/32 -d 174.137.132.100/32 -dport 123 -j ACCEPT
 iptables -I FORWARD -p udp -d $VM_GUEST_IP/32 -s 174.137.132.100/32 -dport 123 -j ACCEPT
-{% endcodeblock %}
-
+```
 ##Notes:
 {% blockquote Installation and config note http://yongbingchen.github.com/txt/gerrit/install-and-maintain.txt %} {% endblockquote %}
 {% blockquote Full Apache HTTPS site config http://yongbingchen.github.com/txt/gerrit/000-default.conf %} {% endblockquote %}
