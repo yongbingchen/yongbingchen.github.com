@@ -4,7 +4,7 @@
   <title><![CDATA[Yongbing's Blog]]></title>
   <link href="http://yongbingchen.github.com/atom.xml" rel="self"/>
   <link href="http://yongbingchen.github.com/"/>
-  <updated>2015-03-27T22:34:08-07:00</updated>
+  <updated>2015-03-27T22:36:58-07:00</updated>
   <id>http://yongbingchen.github.com/</id>
   <author>
     <name><![CDATA[Yongbing Chen]]></name>
@@ -40,7 +40,7 @@
 
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>~<span class="nv">$ </span>git clone ssh://gerrit2@gerritreview.com:29418/container/repo_1/manifest
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>~<span class="nv">$ </span>git clone ssh://gerritreview.com:29418/container/repo_1/manifest
 </span></code></pre></td></tr></table></div></figure>
 
 
