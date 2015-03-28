@@ -3,7 +3,7 @@ layout: post
 title: "config gerrit server behind Apache https reverse-proxy"
 date: 2015-03-27 16:20
 comments: true
-categories: [git]
+categories: [gerrit]
 ---
 
 I want to setup a secure gerrit server for a small developer group within intranet, I choose Apache as its reverse-proxy server, and use HTTP as gerrit server's auth type, becasue I only want a few selected people to see the server, so no LDAP.
