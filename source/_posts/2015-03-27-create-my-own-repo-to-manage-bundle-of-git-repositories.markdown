@@ -15,10 +15,10 @@ categories: [gerrit]
 2. Create my own repo config:
     1. on a client working machine, checkout the manifest git first: 
 ```sh
-~$ git clone ssh://gerrit2@gerritreview.com:29418/container/repo_1/manifest
+~$ git clone ssh://gerritreview.com:29418/container/repo_1/manifest
 ```
 <p/>
-    2. add a new file manifest.xml to the git as below, and merge it to master branch:
+    b. add a new file manifest.xml to the git as below, and merge it to master branch:
 
 ```xml
 	<?xml version="1.0" encoding="UTF-8"?>
