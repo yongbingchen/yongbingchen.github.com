@@ -13,7 +13,11 @@ categories: [gerrit]
     3. container/repo_1/git_one //child project inside the repo, access right inherit from "container", unselect "Only serve as parent for other projects", select "Create initial empty commit".
     4. container/repo_1/git_two 
 2. Create my own repo config:
-    1. on a client working machine, checkout the manifest git first: <code>~$ git clone ssh://gerrit2@gerritreview.com:29418/container/repo_1/manifest</code>
+    1. on a client working machine, checkout the manifest git first: 
+```sh
+~$ git clone ssh://gerrit2@gerritreview.com:29418/container/repo_1/manifest
+```
+<p/>
     2. add a new file manifest.xml to the git as below, and merge it to master branch:
 
 ```xml
