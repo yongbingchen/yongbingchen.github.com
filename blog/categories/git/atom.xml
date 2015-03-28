@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: git | Yongbing's Blog]]></title>
+  <link href="http://yongbingchen.github.com/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://yongbingchen.github.com/"/>
+  <updated>2015-03-27T20:27:22-07:00</updated>
+  <id>http://yongbingchen.github.com/</id>
+  <author>
+    <name><![CDATA[Yongbing Chen]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[config gerrit server behind Apache https reverse-proxy]]></title>
+    <link href="http://yongbingchen.github.com/blog/2015/03/27/config-gerrit-server-behind-apache-https-reverse-proxy/"/>
+    <updated>2015-03-27T16:20:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2015/03/27/config-gerrit-server-behind-apache-https-reverse-proxy</id>
+    <content type="html"><![CDATA[<p>I want to setup a secure gerrit server for a small developer group within intranet, I choose Apache as its reverse-proxy server, and use HTTP as gerrit server's auth type, becasue I only want a few selected people to see the server, so no LDAP.</p>
+
+<p>Here's the final web view from a registered developer:
+{% img http://yongbingchen.github.com/images/git/repo/sample-cl-webpage.jpg  %}</p>
+
+<p>Here's the gerrit server config:
+{% codeblock %}
+[gerrit]</p>
+
+<pre><code>basePath = git
+canonicalWebUrl = https://gerritreview.com/gerrit
+</code></pre>
+
+<p>[database]</p>
+
+<pre><code>type = mysql
+hostname = localhost
+database = reviewdb
+username = gerrit2
+password = 12345678
+</code></pre>
+
+<p>[auth]</p>
+
+<pre><code>type = HTTP
+</code></pre>
+
+<p>[sendemail]</p>
+
+<pre><code>smtpServer = localhost
+</code></pre>
+
+<p>[container]</p>
+
+<pre><code>user = gerrit2
+javaHome = /usr/lib/jvm/java-7-openjdk-amd64/jre
+</code></pre>
+
+<p>[sshd]</p>
+
+<pre><code>listenAddress = *:29418
+</code></pre>
+
+<p>[httpd]</p>
+
+<pre><code>listenUrl = proxy-https://localhost:8080/gerrit
+</code></pre>
+
+<p>[cache]</p>
+
+<pre><code>directory = cache
+</code></pre>
+
+<p>[index]</p>
+
+<pre><code>type = LUCENE
+</code></pre>
+
+<p>{% endcodeblock %}</p>
+
+<p>And the changes I made upon default Apache HTTPS site config:
+{% codeblock %}
+--- /etc/apache2/sites-available/default-ssl.conf   2014-01-07 05:23:42.000000000 -0800
++++ /etc/apache2/sites-available/000-default.conf   2015-03-25 14:41:20.867255345 -0700
+@@ -130,6 +130,71 @@</p>
+
+<pre><code>    # MSIE 7 and newer should be able to use keepalive
+    BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+</code></pre>
+
+<ul>
+<li><pre><code>ServerName gerritreview.com
+</code></pre></li>
+<li><pre><code>        ProxyRequests Off
+</code></pre></li>
+<li><pre><code>        ProxyVia Off
+</code></pre></li>
+<li><pre><code>        ProxyPreserveHost On
+</code></pre></li>
+<li><pre><code>        &lt;Proxy *&gt;
+</code></pre></li>
+<li><pre><code>                Order deny,allow
+</code></pre></li>
+<li><pre><code>                Allow from all
+</code></pre></li>
+<li><pre><code>        &lt;/Proxy&gt;
+</code></pre></li>
+<li></li>
+<li><pre><code>        &lt;Location /&gt;
+</code></pre></li>
+<li><pre><code>                AuthType Basic
+</code></pre></li>
+<li><pre><code>                AuthName "Gerrit Code Review"
+</code></pre></li>
+<li><pre><code>                Require valid-user
+</code></pre></li>
+<li><pre><code>                AuthBasicProvider file
+</code></pre></li>
+<li><pre><code>                AuthUserFile /etc/apache2/passwords
+</code></pre></li>
+<li><pre><code>        &lt;/Location&gt;
+</code></pre>
+
+<p>+</p></li>
+<li><pre><code>        AllowEncodedSlashes On
+</code></pre></li>
+<li><pre><code>        SSLProxyEngine On
+</code></pre></li>
+<li><pre><code>        SSLProxyVerify none
+</code></pre></li>
+<li><pre><code>        SSLProxyCheckPeerCN off
+</code></pre></li>
+<li><pre><code>        SSLProxyCheckPeerName off
+</code></pre></li>
+<li></li>
+<li><pre><code>        ProxyPass /gerrit/ http://localhost:8080/gerrit/ nocanon
+</code></pre></li>
+<li><pre><code>        ProxyPassReverse /gerrit/ http://localhost:8080/gerrit/
+</code></pre></li>
+<li><pre><code># is this necessary?    
+</code></pre></li>
+<li><pre><code>        Header edit Location "^http:(.*)$" "https:$1"
+</code></pre>
+
+<p>+
+</VirtualHost>
+</IfModule>
+{% endcodeblock %}</p></li>
+</ul>
+
+
+<p>After setup, this gerrit server was deployed in a kvm guest machine, connected to its kvm host through an isolated virtual bridge.  Allowing bidirectional access to tcp port 29418 (gerrit ssh), 443 (HTTPS), 25 (sendmail), as below command:
+{% codeblock %}</p>
+
+<h1>forward kvm host's incoming (from NIC eth0) tcp dst port 29418 to gerrit server vm.</h1>
+
+<p>iptables -I FORWARD -i eth0 -p tcp -m state --state NEW,RELATED,ESTABLISHED -m tcp -d $VM_GUEST_IP/32 -dport 29418 -j ACCEPT</p>
+
+<h1>any incoming packets from interface eth0, protocol tcp, dst port 29418 will be applied DNAT function (replace the dst addr from kvm host to $VM_GUEST_IP)</h1>
+
+<p>iptables -t nat -i eth0 -I PREROUTING -p tcp  --dport 29418 -j DNAT --to $VM_GUEST_IP:29418</p>
+
+<h1>replace any outboud tcp/29418 packet from $VM_GUEST_IP with kvm host's addr, and push to host's NIC eth0</h1>
+
+<p>iptables -t nat -A POSTROUTING -p tcp -o eth0 -s $VM_GUEST_IP --sport 29418 -j MASQUERADE</p>
+
+<h1>forward outgoing tcp/29418 connect from $VM_GUEST_IP to host's NIC eth0</h1>
+
+<p>iptables -I FORWARD -o eth0 -p tcp -m state --state NEW,RELATED,ESTABLISHED -m tcp -s $VM_GUEST_IP --sport 29418 -j ACCEPT
+{% endcodeblock %}</p>
+
+<p>Also NAT rules to allow connection from the vm guest (gerrit server) to connect to a NTP server:
+{% codeblock %}
+iptables -t nat -A POSTROUTING -p udp -s $VM_GUEST_IP/32 -d 174.137.132.100 -dport 123 -j MASQUERADE
+iptables -I FORWARD -p udp -s $VM_GUEST_IP/32 -d 174.137.132.100/32 -dport 123 -j ACCEPT
+iptables -I FORWARD -p udp -d $VM_GUEST_IP/32 -s 174.137.132.100/32 -dport 123 -j ACCEPT
+{% endcodeblock %}</p>
+
+<h2>Notes:</h2>
+
+<p>{% blockquote Installation and config note http://yongbingchen.github.com/txt/gerrit/install-and-maintain.txt %} {% endblockquote %}
+{% blockquote Full Apache HTTPS site config http://yongbingchen.github.com/txt/gerrit/000-default.conf %} {% endblockquote %}</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[git: check ancestor]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/03/25/git-check-ancestor/"/>
+    <updated>2013-03-25T22:59:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/03/25/git-check-ancestor</id>
+    <content type="html"><![CDATA[<p>If you want to check your code base, it's wrong to rely on whether the output of <code>git log $CODE_BASE_TAG..HEAD</code> is empty.</p>
+
+<p>Suppose we have a git version tree as below:</p>
+
+<p>{% img http://yongbingchen.github.com/images/git/version-graph.jpg  %}</p>
+
+<p>DevBranch0 is branched out from Trunk, merged <code>Trunk</code> node C and <code>DevBranch0</code> node b, current HEAD is <code>DevBranch0_c</code>.</p>
+
+<p>The git history is as below:
+{% codeblock %}
+yongbing@ubuntu:~/work/git_ancestor$ git log --oneline --graph
+* 368cfb1 DevBranch0_c
+*   6fecd0a DevBranch0_Merge
+|\
+| * defff5c Trunk_C
+| * 5037bca Trunk_B
+* | 0f45ab0 DevBranch0_b
+* | 38f9ec9 DevBranch0_a
+|/
+* fc18378 Trunk_A
+* 0d3b0bd Init state
+{% endcodeblock %}</p>
+
+<p>Clearly version <code>Trunk_D</code> is not an ancestor of <code>DevBranch0_c</code>, but <code>git log $Trunk_D..HEAD</code> is not empty:
+{% codeblock %}
+yongbing@ubuntu:~/work/git_ancestor$ git tag Trunk_D b25477d
+yongbing@ubuntu:~/work/git_ancestor$ git log Trunk_D..HEAD --oneline
+368cfb1 DevBranch0_c
+6fecd0a DevBranch0_Merge
+0f45ab0 DevBranch0_b
+38f9ec9 DevBranch0_a
+{% endcodeblock %}</p>
+
+<p>The correct way is to use <code>git rev-list</code> command, then grep the result to see if the code base in really in the ancestor list:
+{% codeblock %}
+yongbing@ubuntu:~/work/git_ancestor$ git log -g --oneline
+b25477d HEAD@{1}: commit: Trunk_D
+5037bca HEAD@{9}: commit: Trunk_B
+yongbing@ubuntu:~/work/git_ancestor$ git rev-list -n 10 HEAD |grep 5037bca
+5037bca575ecbf76d9c9d939e52f8858dbaadfe1
+yongbing@ubuntu:~/work/git_ancestor$ git rev-list -n 10 HEAD |grep b25477d
+//Empty output</p>
+
+<p>{% endcodeblock %}</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Loose coopling hierarchical gerrit workflow]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/03/11/loose-coopling-hierarchical-gerrit-workflow/"/>
+    <updated>2013-03-11T22:58:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/03/11/loose-coopling-hierarchical-gerrit-workflow</id>
+    <content type="html"><![CDATA[<p>As we are working on an Android project, we are handling a very large scale source tree (10GB level), including works from BSP team (bootloader, linux kernel), midware team (A/V codec, media framework),  and Android team (Android HAL, vendor specific Apks). We need to do weekly relaese for several products from single source tree, ensuring no quality degradation in the mean time.</p>
+
+<p>A work flow serves these requirement needs to:</p>
+
+<ol>
+<li>have least cross team dependancy.</li>
+<li>provide tight collaboration in developers.</li>
+<li>easily locate bad node when doing release.</li>
+</ol>
+
+
+<p>To achive these requirements, I defined below branches:</p>
+
+<ol>
+<li>One trunk branch for releasing. Every node is a stable node (passed full test).</li>
+<li>Every team has one independent developing branch, covering this team's source code partition, based on last release version, closed after current release is done.</li>
+<li>Integration branch is based on last release version, will integrate above developing branches. Perform full test on this branch, cull out bad node when failed.</li>
+</ol>
+
+
+<p>And a workflow based on these branches:</p>
+
+<ol>
+<li>Every developer submits to developing branch (cross team submit is permitted), gerrit review process servers as first gate keeper in this stage. Add auto build, auto test in gerrit merge hook, let every commit has a build image, and this image will contain all its preceding commits, this makes possible of using binary search to cull out bad node in QA stage.</li>
+<li>After submit window closed, integrators merge these developing branches into one integration branch, perform full test on the result, if failed, apply the failed case on all tail nodes of developing branches, this step picks out the failed developing branch. Then use binary search method on this developing branch to cull out the bad node, and update the developing branch. Iterate untill integration result pass full test.</li>
+<li>Push the passed result into release branch, open submit window, start next developing/release cycle.</li>
+</ol>
+
+
+<p><em>Branches:</em>
+{% img http://yongbingchen.github.com/images/gerrit/branches.jpg  %}</p>
+]]></content>
+  </entry>
+  
+</feed>

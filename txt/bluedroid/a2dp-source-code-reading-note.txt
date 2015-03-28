@@ -1,0 +1,340 @@
+﻿//A2DP Client Side
+
+1. static int adev_open_output_stream(struct audio_hw_device *dev,
+	1.1 out->ctrl_fd = skt_connect(out, "/data/misc/bluedroid/.a2dp_ctrl")
+		skt_fd = socket(AF_LOCAL, SOCK_STREAM, 0);
+		connect(fd, (struct sockaddr *) &addr, alen)
+		setsockopt(skt_fd, SOL_SOCKET, SO_SNDBUF, (char*)&len, (int)sizeof(len));
+	1.2 check_a2dp_ready(out)
+		a2dp_command(out, A2DP_CTRL_CMD_CHECK_READY)
+			//send command
+			send(out->ctrl_fd, &cmd, 1, MSG_NOSIGNAL)
+			//wait for response
+			recv(out->ctrl_fd, &ack, 1, MSG_NOSIGNAL)
+			if (ack != A2DP_CTRL_ACK_SUCCESS)
+				return -1;
+
+
+2. static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
+	2.1 start_audio_datapath(out);
+		a2dp_command(out, A2DP_CTRL_CMD_START);
+		out->audio_fd = skt_connect(out, "/data/misc/bluedroid/.a2dp_data");
+	2.2 sent = skt_write(out->audio_fd, buffer,  bytes);
+		pfd.events = POLLOUT;
+		poll(&pfd, 1, 500);//send timeout 500ms
+		sent = send(fd, p, len, MSG_NOSIGNAL);
+		
+3. static int suspend_audio_datapath(struct a2dp_stream_out *out, bool standby)
+	3.1 a2dp_command(out, A2DP_CTRL_CMD_SUSPEND)
+	3.2 skt_disconnect(out->audio_fd);
+
+
+	
+//Init BT Adatper in Android system init:
+3. In Bluedroid implementation,
+		3.1 return implementation of bt_interface_t
+			external/bluetooth/bluedroid/btif/src/bluetooth.c
+			404 struct hw_module_t HAL_MODULE_INFO_SYM = {
+			408     .id = BT_HARDWARE_MODULE_ID,
+
+			400 static struct hw_module_methods_t bt_stack_module_methods = {
+			401     .open = open_bluetooth_stack,
+
+			385 static int open_bluetooth_stack (const struct hw_module_t* module, char const* name, struct hw_device_t** abstraction)
+			387 {
+			394     stack->get_bluetooth_interface = bluetooth__get_bluetooth_interface;
+
+			//Android bt_interface_t API in <hardware/bluetooth.h>,here's Bluedroid implementation
+			372 const bt_interface_t* bluetooth__get_bluetooth_interface ()
+			376     return &bluetoothInterface;
+	
+			346 static const bt_interface_t bluetoothInterface = {
+			347     sizeof(bt_interface_t),
+			348     init,//must called before enable
+						bt_utils_init();
+						btif_init_bluetooth();
+							external/bluetooth/bluedroid/btif/src/btif_core.c
+							btif_config_init();
+								load_cfg(); //CFG_PATH "/data/misc/bluedroid/" CFG_FILE_NAME "bt_config" CFG_FILE_EXT ".xml"
+									btif_config_get_int("Local", "Adapter", "BluezMigrationDone", &bluez_migration_done);
+						bte_main_boot_entry();//Entry point for BTE chip/stack initialization
+							GKI_init();/* initialize OS */
+							bte_main_in_hw_init();
+								bt_hc_if = (bt_hc_interface_t *) bt_hc_get_interface()//BLUETOOTH HOST/CONTROLLER INTERFACE LIBRARY FUNCTIONS
+									return &bluetoothHCLibInterface;
+							bte_load_conf(BTE_STACK_CONF_FILE);//"/etc/bluetooth/bt_stack.conf"
+						btif_fetch_local_bdaddr(&btif_local_bd_addr);
+						//BTIF task handler managing all messages being passed Bluetooth HAL and BTA.
+						GKI_create_task(btif_task, BTIF_TASK, BTIF_TASK_STR,(UINT16 *) ((UINT8 *)btif_task_stack + BTIF_TASK_STACK_SIZE),sizeof(btif_task_stack));
+							
+			349     enable,
+						 bt_status_t btif_enable_bluetooth(void)//Performs chip power on and kickstarts OS scheduler
+							bte_main_enable(btif_local_bd_addr.address);//Creates all the BTE tasks. 
+								BTE_Init();
+								int result = bt_hc_if->init(&hc_callbacks, local_addr);
+									init_vnd_if(local_bdaddr);//Init BT hw module vendor specific API bt_vendor_interface_t, talk to bt hw module through this API.
+									GLOBAL tHCI_IF *p_hci_if = &hci_h4_func_table;
+									p_hci_if->init();
+									userial_init();
+									lpm_init();
+									pthread_create(&hc_cb.worker_thread, &thread_attr, bt_hc_worker_thread, NULL) != 0)//create HCI TX/RX main thread. All HCI traffic come through here.
+								bt_hc_if->set_power(BT_HC_CHIP_PWR_ON);
+								//btu_task:This is the main task of the Bluetooth Upper Layers unit.It sits in a loop waiting for messages, and dispatches them to the appropiate handlers.
+								GKI_create_task((TASKPTR)btu_task, BTU_TASK, BTE_BTU_TASK_STR,
+					
+			350     disable,
+			351     cleanup,
+			352     get_adapter_properties,
+			353     get_adapter_property,
+			354     set_adapter_property,
+			355     get_remote_device_properties,
+			356     get_remote_device_property,
+			357     set_remote_device_property,
+			358     get_remote_service_record,
+			359     get_remote_services,
+			360     start_discovery,
+			361     cancel_discovery,
+			362     create_bond,
+			363     remove_bond,
+			364     cancel_bond,
+			365     pin_reply,
+			366     ssp_reply,
+			367     get_profile_interface,
+
+			
+
+155 ** Description      This is the main task of the Bluetooth Upper Layers unit.
+156 **                  It sits in a loop waiting for messages, and dispatches them
+157 **                  to the appropiate handlers.
+162 BTU_API UINT32 btu_task (UINT32 param)
+174     /* Initialize the mandatory core stack control blocks
+175        (BTU, BTM, L2CAP, and SDP)
+176      */
+177     btu_init_core();
+179     /* Initialize any optional stack components */
+180     BTE_InitStack();
+193     /* Send a startup evt message to BTIF_TASK to kickstart the init procedure */
+194     GKI_send_event(BTIF_TASK, BT_EVT_TRIGGER_STACK_INIT);
+227                     case BT_EVT_TO_BTU_HCI_EVT:
+228                         btu_hcif_process_event ((UINT8)(p_msg->event & BT_SUB_EVT_MASK), p_msg);
+229                         GKI_freebuf(p_msg);
+236                         break;
+237
+238                     case BT_EVT_TO_BTU_HCI_CMD:
+239                         btu_hcif_send_cmd ((UINT8)(p_msg->event & BT_SUB_EVT_MASK), p_msg);
+240                         break;
+211                     case BT_EVT_TO_BTU_HCI_ACL:
+212                         /* All Acl Data goes to L2CAP */
+213                         l2c_rcv_acl_data (p_msg);
+214                         break;
+	
+		
+
+
+
+//How Android initiate Bluetooth Adapter API:
+	D/AdapterServiceConfig( 2161): Adding A2dpService
+	D/AdapterServiceConfig( 2161): Adding HidService
+	packages/apps/Bluetooth/jni/com_android_bluetooth_btservice_AdapterService.cpp
+	static void classInitNative(JNIEnv* env, jclass clazz)
+		err = hw_get_module(BT_STACK_MODULE_ID, (hw_module_t const**)&module);
+		err = module->methods->open(module, id, &abstraction);
+		const bt_interface_t* sBluetoothInterface = ((bluetooth_module_t*)abstraction)->get_bluetooth_interface();//bt_interface_t API defined in <hardware/bluetooth.h>
+
+	static void initNative(JNIEnv *env, jobject object) {
+		int ret = sBluetoothInterface->init(&sBluetoothCallbacks);
+		const btsock_interface_t *sBluetoothSocketInterface = (btsock_interface_t *)sBluetoothInterface->get_profile_interface(BT_PROFILE_SOCKETS_ID);
+		//btsock_interface_t API defined in <hardware/bt_sock.h>, Represents the standard BT SOCKET interface
+		//listen(): listen to a rfcomm uuid or channel.
+		//connect():connect to a rfcomm uuid channel of remote device
+
+
+
+//Incoming data path
+0. Init vendor (BT chip vendor, like MRVL/TI) implement of bt_vendor_interface_t interface.
+	187 void init_vnd_if(unsigned char *local_bdaddr)
+			dlhandle = dlopen("libbt-vendor.so", RTLD_NOW);				
+			GLOBAL bt_vendor_interface_t *bt_vnd_if = (bt_vendor_interface_t *) dlsym(dlhandle, "BLUETOOTH_VENDOR_LIB_INTERFACE");
+			bt_vnd_if->init(&vnd_callbacks, local_bdaddr);
+			
+	306 uint8_t userial_open(uint8_t port)
+			result = bt_vendor_interface_t * bt_vnd_if->op(BT_VND_OP_USERIAL_OPEN, &fd_array);
+				int bt_vnd_mrvl_if_op(bt_vendor_opcode_t opcode, void *param)
+					mchar_fd = open("/dev/mbtchar0", O_RDWR);
+	363     pthread_create(&(userial_cb.read_thread), &thread_attr, userial_read_thread, NULL) != 0 );
+
+1. Got a packet from hardware device driver, in HCI layer.
+bluedroid/hci/src/userial.c:210 static void *userial_read_thread(void *arg)
+	rx_length = select_read(userial_cb.fd, p, READ_LIMIT);
+		ret = read(fd, pbuf, (size_t)len);
+	utils_enqueue(&(userial_cb.rx_q), p_buf);
+	//bluedroid/hci/src/bt_hci_bdroid.c
+	bthc_signal_event(HC_EVENT_RX);
+
+2. Transfer this to L2CAP layer.
+bluedroid/hci/src/bt_hci_bdroid.c	
+339 static void *bt_hc_worker_thread(void *arg)
+	if (events & HC_EVENT_RX)
+		 p_hci_if->rcv();
+			uint16_t hci_h4_receive_msg(void)//Construct HCI EVENT/ACL packets and send them to stack
+ 957             if (p_cb->p_rcv_msg->event != MSG_HC_TO_STACK_HCI_ACL)
+ 958                 btsnoop_capture(p_cb->p_rcv_msg, TRUE);
+ 959
+ 960             if (p_cb->p_rcv_msg->event == MSG_HC_TO_STACK_HCI_EVT)
+ 961                 intercepted = internal_event_intercept();//intercept the event if it is the result of an early issued internal command.
+						p_cb->int_cmd[p_cb->int_cmd_rd_idx].cback(p_cb->p_rcv_msg);//deactive timer here? NO
+ 965                 bt_hc_cbacks->data_ind((TRANSAC) p_cb->p_rcv_msg, (char *) (p_cb->p_rcv_msg + 1), p_cb->p_rcv_msg->len + BT_HC_HDR_SIZE);
+							bluedroid/main/bte_main.c:504 static int data_ind(TRANSAC transac, char *p_buf, int len)
+								GKI_send_msg (BTU_TASK, BTU_HCI_RCV_MBOX, transac);
+
+
+3. Process this in L2CAP layer							
+162 BTU_API UINT32 btu_task (UINT32 param)
+206             while ((p_msg = (BT_HDR *) GKI_read_mbox (BTU_HCI_RCV_MBOX)) != NULL)
+207             {
+208                 /* Determine the input message type. */
+209                 switch (p_msg->event & BT_EVT_MASK)
+210                 {
+211                     case BT_EVT_TO_BTU_HCI_ACL:
+212                         /* All Acl Data goes to L2CAP */
+213                         l2c_rcv_acl_data (p_msg);//bluedroid/stack/l2cap/l2c_main.c
+
+			
+//Init A2DP server
+04-25 01:56:30.530 I/BluetoothA2dpServiceJni( 2093): classInitNative: succeeds
+packages/apps/Bluetooth/jni/com_android_bluetooth_a2dp.cpp
+137 static void initNative(JNIEnv *env, jobject object)
+	GLOBAL const btav_interface_t *sBluetoothA2dpInterface = (btav_interface_t *)btInf->get_profile_interface(BT_PROFILE_ADVANCED_AUDIO_ID);
+	sBluetoothA2dpInterface->init(&sBluetoothA2dpCallbacks);
+		external/bluetooth/bluedroid/btif/src/btif_av.c
+		725 static bt_status_t init(btav_callbacks_t* callbacks )
+			686 int btif_a2dp_start_media_task(void)
+				GKI_create_task((TASKPTR)btif_media_task, A2DP_MEDIA_TASK,
+			btif_enable_service(BTA_A2DP_SERVICE_ID);//Upon BT enable, BTIF core shall invoke the BTA APIs to enable the profiles
+			
+			
+external/bluetooth/bluedroid/btif/src/btif_media_task.c
+//Task for SBC encoder.  This task receives an event when the waveIn interface has a pcm data buffer ready.  On receiving the event, handle all ready pcm data buffers.  If stream is started, run the SBC encoder on each chunk of pcm samples and build an output packet consisting of one or more encoded SBC frames.
+1066 int btif_media_task(void *p)
+1073     btif_media_task_init();
+1044     UIPC_Init(NULL);
+			606 UDRV_API void UIPC_Init(void *p_data)
+				569 int uipc_start_main_server_thread(void)
+					pthread_create(&uipc_main.tid, (const pthread_attr_t *) NULL, (void*)uipc_read_task, NULL)
+1047     UIPC_Open(UIPC_CH_ID_AV_CTRL , btif_a2dp_ctrl_cb);
+			uipc_setup_server_locked(ch_id, A2DP_CTRL_PATH, p_cback);//This is the control socket that listen on A2DP client.
+1079     while (1)//A2DP event loop 
+1080     {
+1085         if (event & BTIF_MEDIA_TASK_CMD)
+1090                 btif_media_task_handle_cmd(p_msg);
+1093
+1094         if (event & BTIF_MEDIA_TASK_DATA)
+1099                 btif_media_task_handle_media(p_msg);
+1102
+1103         if (event & BTIF_MEDIA_AA_TASK_TIMER)
+1105             /* advance audio timer expiration */
+1106             btif_media_task_aa_handle_timer();
+
+
+//Connect a A2DP remote device
+1. Android system will try to reconnect paired A2DP device automatically after BT enable.
+04-25 01:56:31.080 D/BluetoothAdapterService( 2093): Auto Connecting A2DP Profile with device 50:C9:71:0D:D2:D9
+	packages/apps/Bluetooth/jni/com_android_bluetooth_a2dp.cpp	
+	static jboolean connectA2dpNative(JNIEnv *env, jobject object, jbyteArray address)
+		const bt_interface_t* btInf= getBluetoothInterface();
+		const btav_interface_t *sBluetoothA2dpInterface = (btav_interface_t *)btInf->get_profile_interface(BT_PROFILE_ADVANCED_AUDIO_ID);
+		status = sBluetoothA2dpInterface->connect((bt_bdaddr_t *)addr)
+			//external/bluetooth/bluedroid/btif/src/btif_av.c
+			btif_queue_connect(UUID_SERVCLASS_AUDIO_SOURCE, bd_addr, connect_int);//This will trigger an event in btu_task, now the caller thread returned.
+				GKI_send_msg(BTIF_TASK, BTU_BTIF_MBOX, p_msg);
+
+2. This will later trigger a A2DP server event API_CONNECT_REQ_EVT in state CCB_IDLE_ST:
+05-02 01:54:33.342 I/bt-avp  ( 2093): CCB ccb=0 event=API_CONNECT_REQ_EVT state=CCB_IDLE_ST
+
+3. A2DP server handle this event in bellow two actions:
+external/bluetooth/bluedroid/stack/avdt/avdt_ccb.c
+129 const UINT8 avdt_ccb_st_idle[][AVDT_CCB_NUM_COLS] = {
+130 /* Event                      Action 1                    Action 2                    Next state */
+139 /* API_CONNECT_REQ_EVT */    {AVDT_CCB_SET_CONN,          AVDT_CCB_CHAN_OPEN,         AVDT_CCB_OPENING_ST},
+
+3.1 Set CCB variables associated with AVDT_ConnectReq().
+996 void avdt_ccb_set_conn(tAVDT_CCB *p_ccb, tAVDT_CCB_EVT *p_data)
+	BTM_SetSecurityLevel(TRUE, "", BTM_SEC_SERVICE_AVDTP, p_data->connect.sec_mask,AVDT_PSM, BTM_SEC_PROTO_AVDT, AVDT_CHAN_SIG);
+
+3.2 initiate a signaling channel connection.
+87 void avdt_ccb_chan_open(tAVDT_CCB *p_ccb, tAVDT_CCB_EVT *p_data)
+					BTM_SetOutService(p_ccb->peer_addr, BTM_SEC_SERVICE_AVDTP, AVDT_CHAN_SIG);
+					avdt_ad_open_req(AVDT_CHAN_SIG, p_ccb, NULL, AVDT_INT);
+						lcid = L2CA_ConnectReq(AVDT_PSM, p_ccb->peer_addr)//Note that the connection is not established at this time, but connection establishment gets started. The callback function will be invoked when connection establishes or fails.
+
+4 How L2CAP handle this channel connection:
+external/bluetooth/bluedroid/stack/l2cap/l2c_api.c						
+229 UINT16 L2CA_ErtmConnectReq (UINT16 psm, BD_ADDR p_bd_addr, tL2CAP_ERTM_INFO *p_ertm_info)						
+	p_lcb = l2cu_allocate_lcb (p_bd_addr, FALSE);
+	l2cu_create_conn(p_lcb);//This function initiates an acl connection via HCI
+		2180 BOOLEAN l2cu_create_conn_after_switch (tL2C_LCB *p_lcb)
+			//external/bluetooth/bluedroid/stack/hcic/hcicmds.c
+			btsnd_hcic_create_conn (p_lcb->remote_bd_addr,HCI_PKT_TYPES_MASK_DM1 + HCI_PKT_TYPES_MASK_DH1,page_scan_rep_mode,page_scan_mode,clock_offset,allow_switch));
+				HCI_CMD_TO_LOWER(p_buf);
+					//external/bluetooth/bluedroid/main/bte_main.c
+					bt_hc_if->transmit_buf((TRANSAC)p_msg, \ (char *) (p_msg + 1), \p_msg->len);
+						utils_enqueue(&tx_q, (void *) transac);
+						 bthc_signal_event(HC_EVENT_TX);
+			btu_start_timer (&p_lcb->timer_entry, BTU_TTYPE_L2CAP_LINK,L2CAP_LINK_CONNECT_TOUT);
+	if (p_lcb->link_state == LST_CONNECTED)
+		l2c_csm_execute (p_ccb, L2CEVT_L2CA_CONNECT_REQ, NULL);
+
+
+//Data transfer from A2DP client to remote device.
+1. A2DP client write to A2DP data socket will trigger API_WRITE_REQ_EVT in SCB_STREAM_ST state:
+05-02 01:14:03.134 I/bt-avp  ( 2139): SCB hdl=1 event=1/API_WRITE_REQ_EVT state=SCB_STREAM_ST
+394 /* state table for streaming state */
+395 const UINT8 avdt_scb_st_stream[][AVDT_SCB_NUM_COLS] = {
+396 /* Event                     Action 1                       Action 2                    Next state */
+398 /* API_WRITE_REQ_EVT */     {AVDT_SCB_HDL_WRITE_REQ,        AVDT_SCB_CHK_SND_PKT,       AVDT_SCB_STREAM_ST},
+
+2. A2DP server handle this in bellow two action:
+2.1 builds a new media packet and stores it in the SCB.
+external/bluetooth/bluedroid/stack/avdt/avdt_scb_act.c
+1320 void avdt_scb_hdl_write_req(tAVDT_SCB *p_scb, tAVDT_SCB_EVT *p_data) 
+
+2.2 sends this stored media packet to L2CAP layer.
+1921 void avdt_scb_chk_snd_pkt(tAVDT_SCB *p_scb, tAVDT_SCB_EVT *p_data)
+	avdt_ad_write_req(AVDT_CHAN_MEDIA, p_scb->p_ccb, p_scb, p_pkt);
+		L2CA_DataWrite(avdt_cb.ad.rt_tbl[avdt_ccb_to_idx(p_ccb)][tcid].lcid, p_buf);
+		
+		
+3. L2CAP to HCI layer
+	bluedroid/stack/l2cap/l2c_api.c
+1633 UINT8 L2CA_DataWrite (UINT16 cid, BT_HDR *p_data)
+1634 {
+1636     return l2c_data_write (cid, p_data, L2CAP_FLUSHABLE_CH_BASED);
+					p_ccb = l2cu_find_ccb_by_cid (NULL, cid);
+					l2c_csm_execute (p_ccb, L2CEVT_L2CA_DATA_WRITE, p_data);
+						935 static void l2c_csm_open (tL2C_CCB *p_ccb, UINT16 event, void *p_data)//Just consider channel connected state
+						1050     case L2CEVT_L2CA_DATA_WRITE:                    /* Upper layer data to send */
+						1051         l2c_enqueue_peer_data (p_ccb, (BT_HDR *)p_data);
+						1052         l2c_link_check_send_pkts (p_ccb->p_lcb, NULL, NULL);
+						1053         break;
+								l2c_link_check_send_pkts (p_lcb, NULL, NULL);
+									l2c_link_send_to_lower (p_lcb, p_buf);
+									1341 #if BLE_INCLUDED == TRUE
+									1342         if (p_lcb->is_ble_link)
+									1344             L2C_LINK_SEND_BLE_ACL_DATA(p_buf);
+									1346         else
+									1349             L2C_LINK_SEND_ACL_DATA (p_buf);
+														bte_main_hci_send((BT_HDR *)(p), BT_EVT_TO_LM_HCI_ACL);
+															bt_hc_if->transmit_buf((TRANSAC)p_msg, \(char *) (p_msg + 1),p_msg->len);
+																bluedroid/hci/src/bt_hci_bdroid.c:249 static int transmit_buf(TRANSAC transac, char *p_buf, int len)
+																	utils_enqueue(&tx_q, (void *) transac);
+																	bthc_signal_event(HC_EVENT_TX);
+									1350         }
+219                         break;
+
+4 HCI content write to hardware device driver 
+339 static void *bt_hc_worker_thread(void *arg)
+		if (events & HC_EVENT_TX)
+			p_hci_if->send(sending_msg_que[i]);
+			593 void hci_h4_send_msg(HC_BT_HDR *p_msg)
+				bytes_sent = userial_write(event,(uint8_t *) p,bytes_to_send);
+					 ret = write(userial_cb.fd, p_data+total, len);

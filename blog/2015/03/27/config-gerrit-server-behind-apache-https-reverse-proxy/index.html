@@ -1,0 +1,470 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>config gerrit server behind Apache https reverse-proxy - Yongbing's Blog</title>
+  <meta name="author" content="Yongbing Chen">
+
+  
+  <meta name="description" content="I want to setup a secure gerrit server for a small developer group within intranet, I choose Apache as its reverse-proxy server, and use HTTP as &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yongbingchen.github.com/blog/2015/03/27/config-gerrit-server-behind-apache-https-reverse-proxy/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Yongbing's Blog" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39352307-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft"></div>
+  	<div id="logoText"></div>
+  	<div id="logoRight"></div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">Yongbing's Blog</a></h1>
+  
+    <h2>A personal technical note.</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:yongbingchen.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about-me">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">Config Gerrit Server Behind Apache Https Reverse-proxy</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-27T16:20:00-07:00" pubdate data-updated="true">Mar 27<span>th</span>, 2015</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I want to setup a secure gerrit server for a small developer group within intranet, I choose Apache as its reverse-proxy server, and use HTTP as gerrit server&#8217;s auth type, becasue I only want a few selected people to see the server, so no LDAP.</p>
+
+<p>Here&#8217;s the final web view from a registered developer:
+<img src="http://yongbingchen.github.com/images/git/repo/sample-cl-webpage.jpg" title="" ></p>
+
+<p>Here&#8217;s the gerrit server config:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[gerrit]
+</span><span class='line'>  basePath = git
+</span><span class='line'>  canonicalWebUrl = https://gerritreview.com/gerrit
+</span><span class='line'>[database]
+</span><span class='line'>  type = mysql
+</span><span class='line'>  hostname = localhost
+</span><span class='line'>  database = reviewdb
+</span><span class='line'>  username = gerrit2
+</span><span class='line'>  password = 12345678
+</span><span class='line'>[auth]
+</span><span class='line'>  type = HTTP
+</span><span class='line'>[sendemail]
+</span><span class='line'>  smtpServer = localhost
+</span><span class='line'>[container]
+</span><span class='line'>  user = gerrit2
+</span><span class='line'>  javaHome = /usr/lib/jvm/java-7-openjdk-amd64/jre
+</span><span class='line'>[sshd]
+</span><span class='line'>  listenAddress = *:29418
+</span><span class='line'>[httpd]
+</span><span class='line'>  listenUrl = proxy-https://localhost:8080/gerrit
+</span><span class='line'>[cache]
+</span><span class='line'>  directory = cache
+</span><span class='line'>[index]
+</span><span class='line'>  type = LUCENE</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And the changes I made upon default Apache HTTPS site config:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>--- /etc/apache2/sites-available/default-ssl.conf    2014-01-07 05:23:42.000000000 -0800
+</span><span class='line'>+++ /etc/apache2/sites-available/000-default.conf 2015-03-25 14:41:20.867255345 -0700
+</span><span class='line'>@@ -130,6 +130,71 @@
+</span><span class='line'>      # MSIE 7 and newer should be able to use keepalive
+</span><span class='line'>      BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+</span><span class='line'> 
+</span><span class='line'>+     ServerName gerritreview.com
+</span><span class='line'>+               ProxyRequests Off
+</span><span class='line'>+               ProxyVia Off
+</span><span class='line'>+               ProxyPreserveHost On
+</span><span class='line'>+               &lt;Proxy *>
+</span><span class='line'>+                       Order deny,allow
+</span><span class='line'>+                       Allow from all
+</span><span class='line'>+               &lt;/Proxy>
+</span><span class='line'>+ 
+</span><span class='line'>+               &lt;Location />
+</span><span class='line'>+                       AuthType Basic
+</span><span class='line'>+                       AuthName "Gerrit Code Review"
+</span><span class='line'>+                       Require valid-user
+</span><span class='line'>+                       AuthBasicProvider file
+</span><span class='line'>+                       AuthUserFile /etc/apache2/passwords
+</span><span class='line'>+               &lt;/Location>
+</span><span class='line'>+
+</span><span class='line'>+               AllowEncodedSlashes On
+</span><span class='line'>+               SSLProxyEngine On
+</span><span class='line'>+               SSLProxyVerify none
+</span><span class='line'>+               SSLProxyCheckPeerCN off
+</span><span class='line'>+               SSLProxyCheckPeerName off
+</span><span class='line'>+ 
+</span><span class='line'>+               ProxyPass /gerrit/ http://localhost:8080/gerrit/ nocanon
+</span><span class='line'>+               ProxyPassReverse /gerrit/ http://localhost:8080/gerrit/
+</span><span class='line'>+     # is this necessary?    
+</span><span class='line'>+               Header edit Location "^http:(.*)$" "https:$1"
+</span><span class='line'>+
+</span><span class='line'>  &lt;/VirtualHost>
+</span><span class='line'> &lt;/IfModule></span></code></pre></td></tr></table></div></figure>
+
+
+<p>After setup, this gerrit server was deployed in a kvm guest machine, connected to its kvm host through an isolated virtual bridge.  Allowing bidirectional access to tcp port 29418 (gerrit ssh), 443 (HTTPS), 25 (sendmail), as below command:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#forward kvm host's incoming (from NIC eth0) tcp dst port 29418 to gerrit server vm.  
+</span><span class='line'>iptables -I FORWARD -i eth0 -p tcp -m state --state NEW,RELATED,ESTABLISHED -m tcp -d $VM_GUEST_IP/32 -dport 29418 -j ACCEPT 
+</span><span class='line'>#any incoming packets from interface eth0, protocol tcp, dst port 29418 will be applied DNAT function (replace the dst addr from kvm host to $VM_GUEST_IP)
+</span><span class='line'>iptables -t nat -i eth0 -I PREROUTING -p tcp  --dport 29418 -j DNAT --to $VM_GUEST_IP:29418 
+</span><span class='line'>#replace any outboud tcp/29418 packet from $VM_GUEST_IP with kvm host's addr, and push to host's NIC eth0
+</span><span class='line'>iptables -t nat -A POSTROUTING -p tcp -o eth0 -s $VM_GUEST_IP --sport 29418 -j MASQUERADE 
+</span><span class='line'>#forward outgoing tcp/29418 connect from $VM_GUEST_IP to host's NIC eth0
+</span><span class='line'>iptables -I FORWARD -o eth0 -p tcp -m state --state NEW,RELATED,ESTABLISHED -m tcp -s $VM_GUEST_IP --sport 29418 -j ACCEPT</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Also NAT rules to allow connection from the vm guest (gerrit server) to connect to a NTP server:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>iptables -t nat -A POSTROUTING -p udp -s $VM_GUEST_IP/32 -d 174.137.132.100 -dport 123 -j MASQUERADE
+</span><span class='line'>iptables -I FORWARD -p udp -s $VM_GUEST_IP/32 -d 174.137.132.100/32 -dport 123 -j ACCEPT
+</span><span class='line'>iptables -I FORWARD -p udp -d $VM_GUEST_IP/32 -s 174.137.132.100/32 -dport 123 -j ACCEPT</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Notes:</h2>
+
+<blockquote><p></p><footer><strong>Installation and config note</strong> <cite><a href='http://yongbingchen.github.com/txt/gerrit/install-and-maintain.txt'>yongbingchen.github.com/txt/&hellip;</a></cite></footer></blockquote>
+
+
+<blockquote><p></p><footer><strong>Full Apache HTTPS site config</strong> <cite><a href='http://yongbingchen.github.com/txt/gerrit/000-default.conf'>yongbingchen.github.com/txt/&hellip;</a></cite></footer></blockquote>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Yongbing Chen</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-27T16:20:00-07:00" pubdate data-updated="true">Mar 27<span>th</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/git/'>git</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yongbingchen.github.com/blog/2015/03/27/config-gerrit-server-behind-apache-https-reverse-proxy/" data-via="" data-counturl="http://yongbingchen.github.com/blog/2015/03/27/config-gerrit-server-behind-apache-https-reverse-proxy/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/blog/2013/07/31/decode-instruction-address-in-oops-to-c-code-file-line/" title="Previous Post: decode instruction address in OOPS to C code file:line">&laquo; decode instruction address in OOPS to C code file:line</a>
+      
+      
+        <a class="basic-alignment right articlenav" href="/blog/2015/03/27/create-my-own-repo-to-manage-bundle-of-git-repositories/" title="Next Post: create my own repo to manage bundle of git repositories">create my own repo to manage bundle of git repositories &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/27/create-my-own-repo-to-manage-bundle-of-git-repositories/">create my own repo to manage bundle of git repositories</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/03/27/config-gerrit-server-behind-apache-https-reverse-proxy/">config gerrit server behind Apache https reverse-proxy</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/31/decode-instruction-address-in-oops-to-c-code-file-line/">decode instruction address in OOPS to C code file:line</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/24/atomic-file-write/">atomic file writing</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/12/android-bluetooth-pair-a-hid-device/">Android Bluetooth: pairing a HID device</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+        <h1>Categories</h1>
+        <ul id="categories">
+                <li class='category'><a href='/blog/categories/android/'>Android (8)</a></li>
+<li class='category'><a href='/blog/categories/bible/'>Bible (1)</a></li>
+<li class='category'><a href='/blog/categories/bluetooth/'>Bluetooth (9)</a></li>
+<li class='category'><a href='/blog/categories/gerrit/'>gerrit (2)</a></li>
+<li class='category'><a href='/blog/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>linux (6)</a></li>
+
+        </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Yongbing Chen -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'yongbingchengithub';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://yongbingchen.github.com/blog/2015/03/27/config-gerrit-server-behind-apache-https-reverse-proxy/';
+        var disqus_url = 'http://yongbingchen.github.com/blog/2015/03/27/config-gerrit-server-behind-apache-https-reverse-proxy/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

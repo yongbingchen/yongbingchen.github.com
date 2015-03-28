@@ -1,0 +1,64 @@
+﻿//disconnect
+07-10 02:56:50.371 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 3
+07-10 02:56:50.371 I/bt-l2cap( 2098): L2CAP - Calling Disconnect_Ind_Cb(), CID: 0x0044  No Conf Needed
+07-10 02:56:50.371 D/bt-l2cap( 2098): l2cu_release_ccb: cid 0x0044  in_use: 1
+07-10 02:56:50.381 D/bt-l2cap( 2098): l2cu_dequeue_ccb  CID: 0x0044
+07-10 02:56:50.381 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 3
+07-10 02:56:50.381 I/bt-l2cap( 2098): L2CAP - Calling Disconnect_Ind_Cb(), CID: 0x0045  No Conf Needed
+07-10 02:56:50.381 D/bt-l2cap( 2098): l2cu_release_ccb: cid 0x0045  in_use: 1
+07-10 02:56:50.381 D/bt-l2cap( 2098): l2cu_dequeue_ccb  CID: 0x0045
+07-10 02:56:50.381 D/bt-btm  ( 2098): btm_get_acl_disc_reason_code
+07-10 02:56:50.381 D/bt-btm  ( 2098): btm_acl_removed
+07-10 02:56:50.381 D/bt-btm  ( 2098): btm_bda_to_acl found
+07-10 02:56:50.381 D/bt-btm  ( 2098): btm_acl_report_role_change
+07-10 02:56:50.381 D/bt-btm  ( 2098): btm_acl_update_busy_level
+07-10 02:56:50.381 D/bt-btm  ( 2098): BTM_BLI_ACL_DOWN_EVT
+07-10 02:56:50.381 D/bt-btm  ( 2098): btm_acl_resubmit_page
+07-10 02:56:50.381 E/bt-btm  ( 2098): btm_sec_disconnected - Clearing Pending flag
+07-10 02:56:50.381 I/bt-btm  ( 2098): btm_sec_disconnected() sec_req:x80  State: 0   reason:8 bda:00224887edbf RName:Microsoft Bluetooth Mobile Keyboard 6000
+07-10 02:56:50.381 I/bt-btm  ( 2098): before Update sec_flags=0xbe
+07-10 02:56:50.381 I/bt-btm  ( 2098): after Update sec_flags=0xb8
+07-10 02:56:50.381 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:56:50.381 I/bt-btif ( 2098): BTA got event 0x1703
+07-10 02:56:50.381 W/bt-btif ( 2098): bta_hh_co_close: dev_handle = 0, app_id = 2
+07-10 02:56:50.381 W/bt-btif ( 2098): bta_hh_co_close: Found an existing device with the same handle dev_status = 0, dev_handle =0
+07-10 02:56:50.381 D/bt-btif ( 2098): btif_hh_close_poll_thread
+07-10 02:56:50.431 I/bt-l2cap( 2098): L2CA_SetDesireRole() new:x0, disallow_switch:1
+07-10 02:56:50.431 D/bt-btif ( 2098): bta_dm_pm_cback: st(1), id(23), app(2)
+07-10 02:56:50.431 D/bt-btif ( 2098): btif_transfer_context event 3, len 2
+07-10 02:56:50.431 I/bt-btif ( 2098): BTA got event 0x108
+07-10 02:56:50.431 I/bt-btif ( 2098): bta_dm_sm_execute event:0x8
+07-10 02:56:50.431 D/bt-btm  ( 2098): btm_get_acl_disc_reason_code
+07-10 02:56:50.431 D/bt-btif ( 2098): btif_transfer_context event 6, len 276
+07-10 02:56:50.431 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:56:50.431 D/bt-btif ( 2098): btif_context_switched
+07-10 02:56:50.431 D/bt-btif ( 2098): btif_hh_upstreams_evt: event=BTA_HH_CLOSE_EVT
+07-10 02:56:50.431 D/bt-btif ( 2098): BTA_HH_CLOSE_EVT: status = 0, handle = 0
+07-10 02:56:50.431 D/bt-btif ( 2098): btif_hh_upstreams_evt: uhid fd = 72
+07-10 02:56:50.431 D/bt-btif ( 2098): bta_hh_co_data: UHID write
+07-10 02:56:50.431 I/bt-btif ( 2098): HAL bt_hh_callbacks->connection_state_cb
+07-10 02:56:50.431 D/bt-btif ( 2098): btif_hh_upstreams_evt: Closing uhid fd = 72
+07-10 02:56:50.431 D/HidService( 2098): Connection state 00:22:48:87:ED:BF: 2->0
+07-10 02:56:50.441 I/bt-l2cap( 2098): btif_hh_upstreams_evt: Closing uhid fd = 72
+07-10 02:56:50.441 D/CachedBluetoothDevice( 2020): onProfileStateChanged: profile HID newProfileState 0
+07-10 02:56:50.441 I/bt-btif ( 2098): BTA got event 0x108
+07-10 02:56:50.441 I/bt-btif ( 2098): bta_dm_sm_execute event:0x8
+07-10 02:56:50.441 D/bt-btif ( 2098): btif_transfer_context event 8, len 276
+07-10 02:56:50.441 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:56:50.441 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:56:50.441 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:56:50.451 D/BluetoothAdapterProperties( 2098): CONNECTION_STATE_CHANGE: 00:22:48:87:ED:BF: 2 -> 0
+07-10 02:56:50.451 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:56:50.451 D/BluetoothAdapterService(741731424)( 2098): Get Bonded Devices being called
+07-10 02:56:50.501 I/EventHub( 1642): Removing device '/dev/input/event3' due to inotify event
+07-10 02:56:50.501 I/EventHub( 1642): Removed device: path=/dev/input/event3 name=Broadcom Bluetooth HID id=4 fd=193 classes=0x80000163
+07-10 02:56:50.541 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:56:50.541 D/bt-btif ( 2098): btif_context_switched
+07-10 02:56:50.541 I/bt-btif ( 2098): btif_dm_upstreams_cback  ev: BTA_DM_LINK_DOWN_EVT
+07-10 02:56:50.541 D/bt-btif ( 2098): BTA_DM_LINK_DOWN_EVT. Sending BT_ACL_STATE_DISCONNECTED
+07-10 02:56:50.541 I/bt-btif ( 2098): HAL bt_hal_cbacks->acl_state_changed_cb
+07-10 02:56:50.541 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:56:50.541 D/bt-btif ( 2098): btif_context_switched
+07-10 02:56:50.541 I/bt-btif ( 2098): btif_dm_upstreams_cback  ev: BTA_DM_BUSY_LEVEL_EVT
+07-10 02:56:50.621 I/InputReader( 1642): Device removed: id=4, name='Broadcom Bluetooth HID', sources=0x01000711
+07-10 02:56:50.621 I/ActivityManager( 1642): Config changes=1400 {1.0 ?mcc?mnc en_US ldltr sw540dp w960dp h515dp 320dpi lrg long land television -touch qwerty/v/v dpad/v s.8}

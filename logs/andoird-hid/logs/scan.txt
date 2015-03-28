@@ -1,0 +1,404 @@
+﻿07-10 02:53:40.641 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:53:40.641 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:53:40.651 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:53:40.651 I/bt-btif ( 2098): btif_dm_start_discovery
+07-10 02:53:40.651 I/bt-btif ( 2098): BTA got event 0x200
+07-10 02:53:40.651 I/bt-btif ( 2098): bta_dm_search_sm_execute state:0, event:0x200
+07-10 02:53:40.651 D/bt-btif ( 2098): bta_dm_search_start avoid_scatter=1
+07-10 02:53:40.651 W/bt-btif ( 2098): bta_dm_check_av:0
+07-10 02:53:40.651 I/bt-btm  ( 2098): BTM_StartInquiry: mode: 0, dur: 10, rsps: 0, flt: 0
+07-10 02:53:40.651 D/bt-btm  ( 2098): BTM_StartInquiry: p_inq->inq_active = 0x01
+07-10 02:53:40.651 I/bt-btif ( 2098): bta_dm_search_start status=1
+07-10 02:53:40.661 D/bt-btm  ( 2098): btm_acl_update_busy_level
+07-10 02:53:40.661 D/bt-btm  ( 2098): BTM_BLI_INQ_EVT
+07-10 02:53:40.661 I/bt-btif ( 2098): BTA got event 0x108
+07-10 02:53:40.661 I/bt-btif ( 2098): bta_dm_sm_execute event:0x8
+07-10 02:53:40.661 D/bt-btif ( 2098): btif_transfer_context event 8, len 276
+07-10 02:53:40.661 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:53:40.661 D/bt-btif ( 2098): btif_context_switched
+07-10 02:53:40.661 I/bt-btif ( 2098): btif_dm_upstreams_cback  ev: BTA_DM_BUSY_LEVEL_EVT
+07-10 02:53:40.661 I/bt-btif ( 2098): HAL bt_hal_cbacks->discovery_state_changed_cb
+07-10 02:53:40.671 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:53:40.671 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:53:40.691 V/BluetoothDiscoveryReceiver( 2020): Received: android.bluetooth.adapter.action.DISCOVERY_STARTED
+07-10 02:53:40.691 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:53:40.691 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:53:45.871 I/bt-btm  ( 2098): BTM_InqDbRead: bd addr [70f395470143]
+07-10 02:53:45.871 D/bt-btif ( 2098): bte_search_devices_evt event=BTA_DM_INQ_RES_EVT param_len=284
+07-10 02:53:45.871 D/bt-btif ( 2098): btif_transfer_context event 0, len 284
+07-10 02:53:45.871 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:53:45.871 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:53:45.871 D/bt-btif ( 2098): btif_context_switched
+07-10 02:53:45.871 I/bt-btif ( 2098): btif_dm_search_devices_evt event=BTA_DM_INQ_RES_EVT
+07-10 02:53:45.871 D/bt-btif ( 2098): btif_dm_search_devices_evt() 70:f3:95:47:01:43 device_type = 0x1
+07-10 02:53:45.871 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:1, len:248
+07-10 02:53:45.871 D/bt-btif ( 2098): found node, p->name:Name, child/value:0x45a8eab0, bytes:10
+07-10 02:53:45.871 D/bt-btif ( 2098): p->used:10, type:1, p->flag:0
+07-10 02:53:45.871 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:255, len:6
+07-10 02:53:45.871 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:1, len:9
+07-10 02:53:45.871 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:4, len:4
+07-10 02:53:45.871 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:5, len:4
+07-10 02:53:45.881 I/bt-btif ( 2098): HAL bt_hal_cbacks->device_found_cb
+07-10 02:53:45.941 D/BluetoothEventManager( 2020): param btClass10c
+07-10 02:53:45.951 D/BluetoothEventManager( 2020): device70:F3:95:47:01:43btclass:10c
+07-10 02:53:48.461 D/bt-btm  ( 2098): update RSSI new:-83, old:-86
+07-10 02:53:48.461 I/bt-btm  ( 2098): BTM_InqDbRead: bd addr [70f395470143]
+07-10 02:53:48.461 D/bt-btif ( 2098): bte_search_devices_evt event=BTA_DM_INQ_RES_EVT param_len=284
+07-10 02:53:48.461 D/bt-btif ( 2098): btif_transfer_context event 0, len 284
+07-10 02:53:48.461 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:53:48.461 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:53:48.461 D/bt-btif ( 2098): btif_context_switched
+07-10 02:53:48.461 I/bt-btif ( 2098): btif_dm_search_devices_evt event=BTA_DM_INQ_RES_EVT
+07-10 02:53:48.461 D/bt-btif ( 2098): btif_dm_search_devices_evt() 70:f3:95:47:01:43 device_type = 0x1
+07-10 02:53:48.461 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:1, len:248
+07-10 02:53:48.461 D/bt-btif ( 2098): found node, p->name:Name, child/value:0x45a8eab0, bytes:10
+07-10 02:53:48.461 D/bt-btif ( 2098): p->used:10, type:1, p->flag:0
+07-10 02:53:48.461 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:255, len:6
+07-10 02:53:48.461 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:1, len:9
+07-10 02:53:48.461 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:4, len:4
+07-10 02:53:48.461 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:5, len:4
+07-10 02:53:48.461 I/bt-btif ( 2098): HAL bt_hal_cbacks->device_found_cb
+07-10 02:53:48.511 D/BluetoothEventManager( 2020): param btClass10c
+07-10 02:53:48.521 D/BluetoothEventManager( 2020): device70:F3:95:47:01:43btclass:10c
+07-10 02:53:49.111 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:53:53.531 D/bt-btm  ( 2098): btm_acl_update_busy_level
+07-10 02:53:53.531 D/bt-btm  ( 2098): BTM_BLI_INQ_DONE_EVT
+07-10 02:53:53.531 D/bt-btm  ( 2098): BTM Inq Compl Callback: status 0x00, num results 1
+07-10 02:53:53.531 D/bt-btif ( 2098): bta_dm_inq_cmpl_cb
+07-10 02:53:53.531 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:53:53.531 I/bt-btif ( 2098): BTA got event 0x108
+07-10 02:53:53.531 I/bt-btif ( 2098): bta_dm_sm_execute event:0x8
+07-10 02:53:53.531 D/bt-btif ( 2098): btif_transfer_context event 8, len 276
+07-10 02:53:53.531 I/bt-btif ( 2098): BTA got event 0x203
+07-10 02:53:53.531 I/bt-btif ( 2098): bta_dm_search_sm_execute state:1, event:0x203
+07-10 02:53:53.531 D/bt-btif ( 2098): bta_dm_inq_cmpl
+07-10 02:53:53.531 D/bt-btif ( 2098): bte_search_devices_evt event=BTA_DM_INQ_CMPL_EVT param_len=284
+07-10 02:53:53.531 D/bt-btif ( 2098): btif_transfer_context event 1, len 284
+07-10 02:53:53.531 D/bt-btif ( 2098): bta_dm_discover_device, BDA:0x70F395470143
+07-10 02:53:53.531 D/bt-btif ( 2098): bta_dm_discover_device name_discover_done = 0 p_btm_inq_info 0x473dadf8
+07-10 02:53:53.531 D/bt-btif ( 2098): bta_dm_discover_device appl_knows_rem_name 0
+07-10 02:53:53.531 D/bt-btif ( 2098): bta_dm_read_remote_device_name
+07-10 02:53:53.531 I/bt-btm  ( 2098): BTM_ReadRemoteDeviceName: bd addr [70f395470143]
+07-10 02:53:53.531 I/bt-btm  ( 2098): no device found in inquiry db
+07-10 02:53:53.531 D/bt-btm  ( 2098): btm_acl_paging discing:0, paging:0 BDA: 70f395470143
+07-10 02:53:53.531 D/bt-btm  ( 2098): btm_bda_to_acl Not found
+07-10 02:53:53.531 D/bt-btm  ( 2098): connecting_bda: 70f395470143
+07-10 02:53:53.531 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:53:53.531 D/bt-btif ( 2098): bta_dm_read_remote_device_name: BTM_ReadRemoteDeviceName is started
+07-10 02:53:53.531 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:53:53.531 D/bt-btif ( 2098): btif_context_switched
+07-10 02:53:53.531 I/bt-btif ( 2098): btif_dm_upstreams_cback  ev: BTA_DM_BUSY_LEVEL_EVT
+07-10 02:53:53.531 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:53:53.531 D/bt-btif ( 2098): btif_context_switched
+07-10 02:53:53.531 I/bt-btif ( 2098): btif_dm_search_devices_evt event=BTA_DM_INQ_CMPL_EVT
+07-10 02:53:53.531 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:53:53.531 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:53:54.851 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:53:54.851 I/bt-btm  ( 2098): btm_sec_rmt_host_support_feat_evt  sm4: 0x11  p[0]: 0x1
+07-10 02:53:54.851 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:53:55.061 I/bt-btm  ( 2098): BDA 70:f3:95:47:01:43
+07-10 02:53:55.061 I/bt-btm  ( 2098): Inquire BDA 70:f3:95:47:01:43
+07-10 02:53:55.061 D/bt-btif ( 2098): bta_dm_remname_cback name=<MSH-LT162>
+07-10 02:53:55.061 I/bt-btm  ( 2098): btm_sec_rmt_name_request_complete
+07-10 02:53:55.061 D/bt-btm  ( 2098): btm_bda_to_acl Not found
+07-10 02:53:55.061 D/bt-btm  ( 2098): btm_acl_resubmit_page
+07-10 02:53:55.061 I/bt-btm  ( 2098): Security Manager: rmt_name_complete PairState: 0  RemName: MSH-LT162  status: 0 State:0  p_dev_rec: 0x473dbe0c
+07-10 02:53:55.061 I/bt-btm  ( 2098): setting BTM_SEC_NAME_KNOWN sec_flags:0x88
+07-10 02:53:55.061 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:53:55.061 I/bt-btif ( 2098): BTA got event 0x204
+07-10 02:53:55.061 I/bt-btif ( 2098): bta_dm_search_sm_execute state:1, event:0x204
+07-10 02:53:55.061 D/bt-btif ( 2098): bta_dm_rmt_name
+07-10 02:53:55.061 D/bt-btif ( 2098): bta_dm_discover_device, BDA:0x70F395470143
+07-10 02:53:55.061 D/bt-btif ( 2098): bta_dm_discover_device name_discover_done = 1 p_btm_inq_info 0x473dadf8
+07-10 02:53:55.061 D/bt-btif ( 2098): bta_dm_discover_device appl_knows_rem_name 1
+07-10 02:53:55.061 I/bt-btif ( 2098): BTA got event 0x207
+07-10 02:53:55.061 I/bt-btif ( 2098): bta_dm_search_sm_execute state:1, event:0x207
+07-10 02:53:55.061 D/bt-btif ( 2098): bta_dm_search_result searching:0x0000, result:0x0000
+07-10 02:53:55.061 D/bt-btif ( 2098): bte_search_devices_evt event=BTA_DM_DISC_RES_EVT param_len=284
+07-10 02:53:55.061 D/bt-btif ( 2098): btif_transfer_context event 2, len 284
+07-10 02:53:55.061 D/bt-btif ( 2098): bta_dm_discover_next_device
+07-10 02:53:55.061 I/bt-btif ( 2098): BTA got event 0x206
+07-10 02:53:55.061 I/bt-btif ( 2098): bta_dm_search_sm_execute state:1, event:0x206
+07-10 02:53:55.061 D/bt-btif ( 2098): bta_dm_search_cmpl
+07-10 02:53:55.061 D/bt-btif ( 2098): bte_search_devices_evt event=BTA_DM_DISC_CMPL_EVT param_len=0
+07-10 02:53:55.061 D/bt-btif ( 2098): btif_transfer_context event 4, len 0
+07-10 02:53:55.061 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:53:55.061 D/bt-btif ( 2098): btif_context_switched
+07-10 02:53:55.061 I/bt-btif ( 2098): btif_dm_search_devices_evt event=BTA_DM_DISC_RES_EVT
+07-10 02:53:55.061 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:1, len:9
+07-10 02:53:55.061 I/bt-btif ( 2098): HAL bt_hal_cbacks->remote_device_properties_cb
+07-10 02:53:55.061 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:53:55.061 D/bt-btif ( 2098): btif_context_switched
+07-10 02:53:55.061 I/bt-btif ( 2098): btif_dm_search_devices_evt event=BTA_DM_DISC_CMPL_EVT
+07-10 02:53:55.061 I/bt-btif ( 2098): HAL bt_hal_cbacks->discovery_state_changed_cb
+07-10 02:53:55.121 V/BluetoothDiscoveryReceiver( 2020): Received: android.bluetooth.adapter.action.DISCOVERY_FINISHED
+07-10 02:53:55.121 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:53:55.131 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:08.641 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:08.641 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:08.641 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:08.651 I/bt-btif ( 2098): btif_dm_start_discovery
+07-10 02:54:08.651 I/bt-btif ( 2098): BTA got event 0x200
+07-10 02:54:08.651 I/bt-btif ( 2098): bta_dm_search_sm_execute state:0, event:0x200
+07-10 02:54:08.651 D/bt-btif ( 2098): bta_dm_search_start avoid_scatter=1
+07-10 02:54:08.651 W/bt-btif ( 2098): bta_dm_check_av:0
+07-10 02:54:08.651 I/bt-btm  ( 2098): BTM_StartInquiry: mode: 0, dur: 10, rsps: 0, flt: 0
+07-10 02:54:08.651 D/bt-btm  ( 2098): BTM_StartInquiry: p_inq->inq_active = 0x01
+07-10 02:54:08.651 I/bt-btif ( 2098): bta_dm_search_start status=1
+07-10 02:54:08.661 D/bt-btm  ( 2098): btm_acl_update_busy_level
+07-10 02:54:08.661 D/bt-btm  ( 2098): BTM_BLI_INQ_EVT
+07-10 02:54:08.661 I/bt-btif ( 2098): BTA got event 0x108
+07-10 02:54:08.661 I/bt-btif ( 2098): bta_dm_sm_execute event:0x8
+07-10 02:54:08.661 D/bt-btif ( 2098): btif_transfer_context event 8, len 276
+07-10 02:54:08.661 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:08.661 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:08.661 I/bt-btif ( 2098): btif_dm_upstreams_cback  ev: BTA_DM_BUSY_LEVEL_EVT
+07-10 02:54:08.661 I/bt-btif ( 2098): HAL bt_hal_cbacks->discovery_state_changed_cb
+07-10 02:54:08.671 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:08.671 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:08.671 V/BluetoothDiscoveryReceiver( 2020): Received: android.bluetooth.adapter.action.DISCOVERY_STARTED
+07-10 02:54:08.681 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:08.681 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:09.111 I/bt-btm  ( 2098): BTM_InqDbRead: bd addr [00224887edbf]
+07-10 02:54:09.111 D/bt-btif ( 2098): bte_search_devices_evt event=BTA_DM_INQ_RES_EVT param_len=284
+07-10 02:54:09.111 D/bt-btif ( 2098): btif_transfer_context event 0, len 284
+07-10 02:54:09.111 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:09.111 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:09.111 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:09.111 I/bt-btif ( 2098): btif_dm_search_devices_evt event=BTA_DM_INQ_RES_EVT
+07-10 02:54:09.111 D/bt-btif ( 2098): btif_dm_search_devices_evt() 00:22:48:87:ed:bf device_type = 0x1
+07-10 02:54:09.111 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:1, len:248
+07-10 02:54:09.111 D/bt-btif ( 2098): found node is NULL
+07-10 02:54:09.111 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:255, len:6
+07-10 02:54:09.111 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:4, len:4
+07-10 02:54:09.111 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:5, len:4
+07-10 02:54:09.111 I/bt-btif ( 2098): HAL bt_hal_cbacks->device_found_cb
+07-10 02:54:09.121 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:09.131 D/bt-btm  ( 2098): update RSSI new:-49, old:-50
+07-10 02:54:09.131 I/bt-btm  ( 2098): BTM_InqDbRead: bd addr [00224887edbf]
+07-10 02:54:09.131 D/bt-btif ( 2098): bte_search_devices_evt event=BTA_DM_INQ_RES_EVT param_len=284
+07-10 02:54:09.131 D/bt-btif ( 2098): btif_transfer_context event 0, len 284
+07-10 02:54:09.131 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:09.131 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:09.131 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:09.131 I/bt-btif ( 2098): btif_dm_search_devices_evt event=BTA_DM_INQ_RES_EVT
+07-10 02:54:09.131 D/bt-btif ( 2098): btif_dm_search_devices_evt() 00:22:48:87:ed:bf device_type = 0x1
+07-10 02:54:09.131 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:1, len:248
+07-10 02:54:09.131 D/bt-btif ( 2098): found node is NULL
+07-10 02:54:09.131 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:255, len:6
+07-10 02:54:09.131 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:4, len:4
+07-10 02:54:09.131 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:5, len:4
+07-10 02:54:09.131 I/bt-btif ( 2098): HAL bt_hal_cbacks->device_found_cb
+07-10 02:54:09.141 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:09.161 D/BluetoothEventManager( 2020): param btClass2540
+07-10 02:54:09.171 D/BluetoothEventManager( 2020): DeviceFoundHandler created new CachedBluetoothDevice: 00:22:48:87:ED:BF
+07-10 02:54:09.171 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:09.201 D/BluetoothEventManager( 2020): device00:22:48:87:ED:BFbtclass:2540
+07-10 02:54:09.201 D/BluetoothEventManager( 2020): param btClass2540
+07-10 02:54:09.211 D/BluetoothEventManager( 2020): device00:22:48:87:ED:BFbtclass:2540
+07-10 02:54:09.661 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:09.911 D/bt-btm  ( 2098): update RSSI new:-47, old:-49
+07-10 02:54:09.911 I/bt-btm  ( 2098): BTM_InqDbRead: bd addr [00224887edbf]
+07-10 02:54:09.911 D/bt-btif ( 2098): bte_search_devices_evt event=BTA_DM_INQ_RES_EVT param_len=284
+07-10 02:54:09.911 D/bt-btif ( 2098): btif_transfer_context event 0, len 284
+07-10 02:54:09.911 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:09.911 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:09.911 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:09.911 I/bt-btif ( 2098): btif_dm_search_devices_evt event=BTA_DM_INQ_RES_EVT
+07-10 02:54:09.911 D/bt-btif ( 2098): btif_dm_search_devices_evt() 00:22:48:87:ed:bf device_type = 0x1
+07-10 02:54:09.911 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:1, len:248
+07-10 02:54:09.911 D/bt-btif ( 2098): found node is NULL
+07-10 02:54:09.911 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:255, len:6
+07-10 02:54:09.911 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:4, len:4
+07-10 02:54:09.911 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:5, len:4
+07-10 02:54:09.911 I/bt-btif ( 2098): HAL bt_hal_cbacks->device_found_cb
+07-10 02:54:09.961 D/BluetoothEventManager( 2020): param btClass2540
+07-10 02:54:09.971 D/BluetoothEventManager( 2020): device00:22:48:87:ED:BFbtclass:2540
+07-10 02:54:10.071 I/bt-btm  ( 2098): BTM_InqDbRead: bd addr [70f395470143]
+07-10 02:54:10.071 D/bt-btif ( 2098): bte_search_devices_evt event=BTA_DM_INQ_RES_EVT param_len=284
+07-10 02:54:10.071 D/bt-btif ( 2098): btif_transfer_context event 0, len 284
+07-10 02:54:10.071 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:10.071 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:10.071 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:10.071 I/bt-btif ( 2098): btif_dm_search_devices_evt event=BTA_DM_INQ_RES_EVT
+07-10 02:54:10.071 D/bt-btif ( 2098): btif_dm_search_devices_evt() 70:f3:95:47:01:43 device_type = 0x1
+07-10 02:54:10.071 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:1, len:248
+07-10 02:54:10.071 D/bt-btif ( 2098): found node, p->name:Name, child/value:0x45a8eab0, bytes:10
+07-10 02:54:10.071 D/bt-btif ( 2098): p->used:10, type:1, p->flag:0
+07-10 02:54:10.071 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:255, len:6
+07-10 02:54:10.071 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:1, len:9
+07-10 02:54:10.071 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:4, len:4
+07-10 02:54:10.071 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:5, len:4
+07-10 02:54:10.071 I/bt-btif ( 2098): HAL bt_hal_cbacks->device_found_cb
+07-10 02:54:10.161 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:10.171 D/BluetoothEventManager( 2020): param btClass10c
+07-10 02:54:10.181 D/BluetoothEventManager( 2020): device70:F3:95:47:01:43btclass:10c
+07-10 02:54:10.271 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:12.471 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:12.871 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:13.441 D/bt-btm  ( 2098): update RSSI new:-46, old:-47
+07-10 02:54:13.441 I/bt-btm  ( 2098): BTM_InqDbRead: bd addr [00224887edbf]
+07-10 02:54:13.441 D/bt-btif ( 2098): bte_search_devices_evt event=BTA_DM_INQ_RES_EVT param_len=284
+07-10 02:54:13.441 D/bt-btif ( 2098): btif_transfer_context event 0, len 284
+07-10 02:54:13.441 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:13.441 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:13.441 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:13.441 I/bt-btif ( 2098): btif_dm_search_devices_evt event=BTA_DM_INQ_RES_EVT
+07-10 02:54:13.441 D/bt-btif ( 2098): btif_dm_search_devices_evt() 00:22:48:87:ed:bf device_type = 0x1
+07-10 02:54:13.441 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:1, len:248
+07-10 02:54:13.441 D/bt-btif ( 2098): found node is NULL
+07-10 02:54:13.441 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:255, len:6
+07-10 02:54:13.441 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:4, len:4
+07-10 02:54:13.441 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:5, len:4
+07-10 02:54:13.441 I/bt-btif ( 2098): HAL bt_hal_cbacks->device_found_cb
+07-10 02:54:13.481 D/BluetoothEventManager( 2020): param btClass2540
+07-10 02:54:13.491 D/BluetoothEventManager( 2020): device00:22:48:87:ED:BFbtclass:2540
+07-10 02:54:13.691 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:14.871 D/bt-btm  ( 2098): update RSSI new:-83, old:-86
+07-10 02:54:14.871 I/bt-btm  ( 2098): BTM_InqDbRead: bd addr [70f395470143]
+07-10 02:54:14.871 D/bt-btif ( 2098): bte_search_devices_evt event=BTA_DM_INQ_RES_EVT param_len=284
+07-10 02:54:14.871 D/bt-btif ( 2098): btif_transfer_context event 0, len 284
+07-10 02:54:14.871 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:14.871 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:14.871 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:14.871 I/bt-btif ( 2098): btif_dm_search_devices_evt event=BTA_DM_INQ_RES_EVT
+07-10 02:54:14.871 D/bt-btif ( 2098): btif_dm_search_devices_evt() 70:f3:95:47:01:43 device_type = 0x1
+07-10 02:54:14.871 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:1, len:248
+07-10 02:54:14.871 D/bt-btif ( 2098): found node, p->name:Name, child/value:0x45a8eab0, bytes:10
+07-10 02:54:14.871 D/bt-btif ( 2098): p->used:10, type:1, p->flag:0
+07-10 02:54:14.871 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:255, len:6
+07-10 02:54:14.871 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:1, len:9
+07-10 02:54:14.871 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:4, len:4
+07-10 02:54:14.871 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:5, len:4
+07-10 02:54:14.871 I/bt-btif ( 2098): HAL bt_hal_cbacks->device_found_cb
+07-10 02:54:14.931 D/BluetoothEventManager( 2020): param btClass10c
+07-10 02:54:14.941 D/BluetoothEventManager( 2020): device70:F3:95:47:01:43btclass:10c
+07-10 02:54:15.201 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:15.421 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:15.701 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:15.711 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:15.961 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:16.711 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:17.221 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:17.491 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:17.731 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:17.741 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:18.741 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:20.551 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:21.001 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:21.521 D/bt-btm  ( 2098): btm_acl_update_busy_level
+07-10 02:54:21.521 D/bt-btm  ( 2098): BTM_BLI_INQ_DONE_EVT
+07-10 02:54:21.521 D/bt-btm  ( 2098): BTM Inq Compl Callback: status 0x00, num results 2
+07-10 02:54:21.521 D/bt-btif ( 2098): bta_dm_inq_cmpl_cb
+07-10 02:54:21.521 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:21.521 I/bt-btif ( 2098): BTA got event 0x108
+07-10 02:54:21.521 I/bt-btif ( 2098): bta_dm_sm_execute event:0x8
+07-10 02:54:21.521 D/bt-btif ( 2098): btif_transfer_context event 8, len 276
+07-10 02:54:21.521 I/bt-btif ( 2098): BTA got event 0x203
+07-10 02:54:21.521 I/bt-btif ( 2098): bta_dm_search_sm_execute state:1, event:0x203
+07-10 02:54:21.521 D/bt-btif ( 2098): bta_dm_inq_cmpl
+07-10 02:54:21.521 D/bt-btif ( 2098): bte_search_devices_evt event=BTA_DM_INQ_CMPL_EVT param_len=284
+07-10 02:54:21.521 D/bt-btif ( 2098): btif_transfer_context event 1, len 284
+07-10 02:54:21.521 D/bt-btif ( 2098): bta_dm_discover_device, BDA:0x00224887EDBF
+07-10 02:54:21.521 D/bt-btif ( 2098): bta_dm_discover_device name_discover_done = 0 p_btm_inq_info 0x473dadf8
+07-10 02:54:21.521 D/bt-btif ( 2098): bta_dm_discover_device appl_knows_rem_name 0
+07-10 02:54:21.521 D/bt-btif ( 2098): bta_dm_read_remote_device_name
+07-10 02:54:21.521 I/bt-btm  ( 2098): BTM_ReadRemoteDeviceName: bd addr [00224887edbf]
+07-10 02:54:21.521 I/bt-btm  ( 2098): no device found in inquiry db
+07-10 02:54:21.521 D/bt-btm  ( 2098): btm_acl_paging discing:0, paging:0 BDA: 00224887edbf
+07-10 02:54:21.521 D/bt-btm  ( 2098): btm_bda_to_acl Not found
+07-10 02:54:21.521 D/bt-btm  ( 2098): connecting_bda: 70f395470143
+07-10 02:54:21.521 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:54:21.521 I/bt-btm  ( 2098): btm_sec_alloc_dev
+07-10 02:54:21.521 I/bt-btm  ( 2098): BTM_InqDbRead: bd addr [00224887edbf]
+07-10 02:54:21.521 D/bt-btm  ( 2098): BTM_GetHCIConnHandle
+07-10 02:54:21.521 D/bt-btm  ( 2098): btm_bda_to_acl Not found
+07-10 02:54:21.521 D/bt-btif ( 2098): bta_dm_read_remote_device_name: BTM_ReadRemoteDeviceName is started
+07-10 02:54:21.521 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:21.521 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:21.521 I/bt-btif ( 2098): btif_dm_upstreams_cback  ev: BTA_DM_BUSY_LEVEL_EVT
+07-10 02:54:21.521 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:21.521 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:21.521 I/bt-btif ( 2098): btif_dm_search_devices_evt event=BTA_DM_INQ_CMPL_EVT
+07-10 02:54:21.521 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:21.521 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:22.011 I/bt-btm  ( 2098): BDA 00:22:48:87:ed:bf
+07-10 02:54:22.011 I/bt-btm  ( 2098): Inquire BDA 00:22:48:87:ed:bf
+07-10 02:54:22.011 D/bt-btif ( 2098): bta_dm_remname_cback name=<Microsoft Bluetooth Mobile Keyboard 6000>
+07-10 02:54:22.011 I/bt-btm  ( 2098): btm_sec_rmt_name_request_complete
+07-10 02:54:22.011 D/bt-btm  ( 2098): btm_bda_to_acl Not found
+07-10 02:54:22.011 D/bt-btm  ( 2098): btm_acl_resubmit_page
+07-10 02:54:22.011 I/bt-btm  ( 2098): Security Manager: rmt_name_complete PairState: 0  RemName: Microsoft Bluetooth Mobile Keyboard 6000  status: 0 State:0  p_dev_rec: 0x473dbf54
+07-10 02:54:22.011 I/bt-btm  ( 2098): setting BTM_SEC_NAME_KNOWN sec_flags:0x88
+07-10 02:54:22.011 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:22.011 I/bt-btif ( 2098): BTA got event 0x204
+07-10 02:54:22.011 I/bt-btif ( 2098): bta_dm_search_sm_execute state:1, event:0x204
+07-10 02:54:22.011 D/bt-btif ( 2098): bta_dm_rmt_name
+07-10 02:54:22.011 D/bt-btif ( 2098): bta_dm_discover_device, BDA:0x00224887EDBF
+07-10 02:54:22.011 D/bt-btif ( 2098): bta_dm_discover_device name_discover_done = 1 p_btm_inq_info 0x473dadf8
+07-10 02:54:22.011 D/bt-btif ( 2098): bta_dm_discover_device appl_knows_rem_name 1
+07-10 02:54:22.011 I/bt-btif ( 2098): BTA got event 0x207
+07-10 02:54:22.011 I/bt-btif ( 2098): bta_dm_search_sm_execute state:1, event:0x207
+07-10 02:54:22.011 D/bt-btif ( 2098): bta_dm_search_result searching:0x0000, result:0x0000
+07-10 02:54:22.011 D/bt-btif ( 2098): bte_search_devices_evt event=BTA_DM_DISC_RES_EVT param_len=284
+07-10 02:54:22.011 D/bt-btif ( 2098): btif_transfer_context event 2, len 284
+07-10 02:54:22.011 D/bt-btif ( 2098): bta_dm_discover_next_device
+07-10 02:54:22.011 D/bt-btif ( 2098): bta_dm_discover_device, BDA:0x70F395470143
+07-10 02:54:22.011 D/bt-btif ( 2098): bta_dm_discover_device name_discover_done = 0 p_btm_inq_info 0x473dae24
+07-10 02:54:22.011 D/bt-btif ( 2098): bta_dm_discover_device appl_knows_rem_name 0
+07-10 02:54:22.011 D/bt-btif ( 2098): bta_dm_read_remote_device_name
+07-10 02:54:22.011 I/bt-btm  ( 2098): BTM_ReadRemoteDeviceName: bd addr [70f395470143]
+07-10 02:54:22.011 I/bt-btm  ( 2098): no device found in inquiry db
+07-10 02:54:22.011 D/bt-btm  ( 2098): btm_acl_paging discing:0, paging:0 BDA: 70f395470143
+07-10 02:54:22.011 D/bt-btm  ( 2098): btm_bda_to_acl Not found
+07-10 02:54:22.011 D/bt-btm  ( 2098): connecting_bda: 00224887edbf
+07-10 02:54:22.011 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:54:22.011 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:22.011 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:22.011 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:22.011 I/bt-btif ( 2098): btif_dm_search_devices_evt event=BTA_DM_DISC_RES_EVT
+07-10 02:54:22.011 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:1, len:40
+07-10 02:54:22.011 I/bt-btif ( 2098): HAL bt_hal_cbacks->remote_device_properties_cb
+07-10 02:54:22.021 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:22.021 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:25.151 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:54:25.151 I/bt-btm  ( 2098): btm_sec_rmt_host_support_feat_evt  sm4: 0x11  p[0]: 0x1
+07-10 02:54:25.151 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:25.351 I/bt-btm  ( 2098): BDA 70:f3:95:47:01:43
+07-10 02:54:25.351 I/bt-btm  ( 2098): Inquire BDA 70:f3:95:47:01:43
+07-10 02:54:25.351 D/bt-btif ( 2098): bta_dm_remname_cback name=<MSH-LT162>
+07-10 02:54:25.351 I/bt-btm  ( 2098): btm_sec_rmt_name_request_complete
+07-10 02:54:25.351 D/bt-btm  ( 2098): btm_bda_to_acl Not found
+07-10 02:54:25.351 D/bt-btm  ( 2098): btm_acl_resubmit_page
+07-10 02:54:25.351 I/bt-btm  ( 2098): Security Manager: rmt_name_complete PairState: 0  RemName: MSH-LT162  status: 0 State:0  p_dev_rec: 0x473dbe0c
+07-10 02:54:25.351 I/bt-btm  ( 2098): setting BTM_SEC_NAME_KNOWN sec_flags:0x88
+07-10 02:54:25.351 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:25.351 I/bt-btif ( 2098): BTA got event 0x204
+07-10 02:54:25.351 I/bt-btif ( 2098): bta_dm_search_sm_execute state:1, event:0x204
+07-10 02:54:25.351 D/bt-btif ( 2098): bta_dm_rmt_name
+07-10 02:54:25.351 D/bt-btif ( 2098): bta_dm_discover_device, BDA:0x70F395470143
+07-10 02:54:25.351 D/bt-btif ( 2098): bta_dm_discover_device name_discover_done = 1 p_btm_inq_info 0x473dae24
+07-10 02:54:25.351 D/bt-btif ( 2098): bta_dm_discover_device appl_knows_rem_name 1
+07-10 02:54:25.351 I/bt-btif ( 2098): BTA got event 0x207
+07-10 02:54:25.351 I/bt-btif ( 2098): bta_dm_search_sm_execute state:1, event:0x207
+07-10 02:54:25.351 D/bt-btif ( 2098): bta_dm_search_result searching:0x0000, result:0x0000
+07-10 02:54:25.351 D/bt-btif ( 2098): bte_search_devices_evt event=BTA_DM_DISC_RES_EVT param_len=284
+07-10 02:54:25.351 D/bt-btif ( 2098): btif_transfer_context event 2, len 284
+07-10 02:54:25.351 D/bt-btif ( 2098): bta_dm_discover_next_device
+07-10 02:54:25.351 I/bt-btif ( 2098): BTA got event 0x206
+07-10 02:54:25.351 I/bt-btif ( 2098): bta_dm_search_sm_execute state:1, event:0x206
+07-10 02:54:25.351 D/bt-btif ( 2098): bta_dm_search_cmpl
+07-10 02:54:25.351 D/bt-btif ( 2098): bte_search_devices_evt event=BTA_DM_DISC_CMPL_EVT param_len=0
+07-10 02:54:25.351 D/bt-btif ( 2098): btif_transfer_context event 4, len 0
+07-10 02:54:25.351 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:25.351 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:25.351 I/bt-btif ( 2098): btif_dm_search_devices_evt event=BTA_DM_DISC_RES_EVT
+07-10 02:54:25.351 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:1, len:9
+07-10 02:54:25.351 I/bt-btif ( 2098): HAL bt_hal_cbacks->remote_device_properties_cb
+07-10 02:54:25.361 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:25.361 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:25.361 I/bt-btif ( 2098): btif_dm_search_devices_evt event=BTA_DM_DISC_CMPL_EVT
+07-10 02:54:25.361 I/bt-btif ( 2098): HAL bt_hal_cbacks->discovery_state_changed_cb
+07-10 02:54:25.401 V/BluetoothDiscoveryReceiver( 2020): Received: android.bluetooth.adapter.action.DISCOVERY_FINISHED
+07-10 02:54:25.401 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:25.401 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588

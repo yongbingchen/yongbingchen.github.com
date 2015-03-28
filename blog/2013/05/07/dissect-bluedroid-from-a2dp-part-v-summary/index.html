@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Dissect Bluedroid from A2DP: Part V: Key components - Yongbing's Blog</title>
+  <meta name="author" content="Yongbing Chen">
+
+  
+  <meta name="description" content="1 Interface and implementation bt_interface_t: Android defined, Bluedroid implemented as bluetoothInterface in external/bluetooth/bluedroid/btif/src/ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-v-summary/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Yongbing's Blog" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39352307-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft"></div>
+  	<div id="logoText"></div>
+  	<div id="logoRight"></div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">Yongbing's Blog</a></h1>
+  
+    <h2>A personal technical note.</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:yongbingchen.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about-me">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">Dissect Bluedroid From A2DP: Part v: Key Components</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-07T20:57:00-07:00" pubdate data-updated="true">May 7<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>1 Interface and implementation</h3>
+
+<p><font color = "green">bt_interface_t</font>: Android defined, Bluedroid implemented as bluetoothInterface in external/bluetooth/bluedroid/btif/src/bluetooth.c: System control BT adapter.</p>
+
+<p><font color = "green">btav_interface_t</font>: Android defined, Bluedroid implemented as bt_av_interface in external/bluetooth/bluedroid/btif/src/btif_av.c: System control A2DP service.</p>
+
+<p><font color = "green">audio_hw_device and audio_stream_out</font>: Android defined, Bluedroid implemented in external/bluetooth/bluedroid/audio_a2dp_hw/audio_a2dp_hw.c: AudioFlinger use A2DP client as audio output device.</p>
+
+<p><font color = "green">bt_vendor_interface_t</font>: Bluedroid defined, BRCM implemented as BLUETOOTH_VENDOR_LIB_INTERFACE in device/common/libbt/src/bt_vendor_brcm.c: Bluedroid talk to BT char device driver, internal usage only.</p>
+
+<p><font color = "green">tHCI_IF</font>: Bluedroid defined, Bluedroid implemented as hci_h4_func_table in external/bluetooth/bluedroid/hci/src/hci_h4.c: Bluedroid HCI interface (data/cmd/evt in/out), internal usage only.</p>
+
+<p><font color = "green">bt_hc_interface_t</font>: Bluedroid defined, Bluedroid implemented as bluetoothHCLibInterface in external/bluetooth/bluedroid/hci/src/bt_hci_bdroid.c: Wrapper of tHCI_IF, has bt_hc_worker_thread to serialize downcoming HCI commands and read upcoming data/evt from HCI device.</p>
+
+<p><font color = "green">L2CAP </font> layer API, in external/bluetooth/bluedroid/stack/include/l2c_api.h, internal usage only.</p>
+
+<p><font color = "green">LMP </font> API, in external/bluetooth/bluedroid/stack/include/btm_api.h, internal usage only.</p>
+
+<h3>2 Tasks/Roles/Layers</h3>
+
+<p><font color = "green">btif_task</font>, managing all messages being passed Android Bluetooth HAL and BTA.</p>
+
+<p><font color = "green">btu_task</font>, the main task of the Bluetooth Upper Layers unit, routing in/out BT cmd/event/data, processing timeout events.</p>
+
+<p><font color = "green">bt_hc_worker_thread</font>, HCI worker thread, all HCI traffic come through this thread.</p>
+
+<p><font color = "green">userial_read_thread</font>, monitoring incoming packets from BT char device driver, transfering these to bt_hc_worker_thread.</p>
+
+<p><font color = "green">btif_media_task</font>, task for A2DP SBC encoder.</p>
+
+<p><font color = "green">uipc_read_task</font>, A2DP server thread, receive audio input data from A2DP client, feed into btif_media_task.</p>
+
+<p><font color = "green">UIPC/A2DP_CTRL_PATH/A2DP_DATA_PATH</font>, socket based IPC, for A2DP client connect/control to A2DP server.</p>
+
+<p><font color = "green">AVDT_CHAN_SIG/AVDT_CHAN_MEDIA/AVDT_CHAN_REPORT</font>, A2DP channels, communicate with remote device.</p>
+
+<p>Serial Finished.</p>
+
+<p>Reference:</p>
+
+<blockquote><p></p><footer><strong>source code reading note</strong> <cite><a href='http://yongbingchen.github.com/txt/bluedroid/a2dp-source-code-reading-note.txt'>yongbingchen.github.com/txt/&hellip;</a></cite></footer></blockquote>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Yongbing Chen</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-07T20:57:00-07:00" pubdate data-updated="true">May 7<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android/'>Android</a>, <a class='category' href='/blog/categories/bluetooth/'>Bluetooth</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-v-summary/" data-via="" data-counturl="http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-v-summary/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-iv-a2dp-traffic/" title="Previous Post: Dissect Bluedroid from A2DP: Part IV: connect and communication">&laquo; Dissect Bluedroid from A2DP: Part IV: connect and communication</a>
+      
+      
+        <a class="basic-alignment right articlenav" href="/blog/2013/05/09/dump-stack-in-android-native-c-code/" title="Next Post: dump_stack in Android native C code">dump_stack in Android native C code &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/27/create-my-own-repo-to-manage-bundle-of-git-repositories/">create my own repo to manage bundle of git repositories</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/03/27/config-gerrit-server-behind-apache-https-reverse-proxy/">config gerrit server behind Apache https reverse-proxy</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/31/decode-instruction-address-in-oops-to-c-code-file-line/">decode instruction address in OOPS to C code file:line</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/24/atomic-file-write/">atomic file writing</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/12/android-bluetooth-pair-a-hid-device/">Android Bluetooth: pairing a HID device</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+        <h1>Categories</h1>
+        <ul id="categories">
+                <li class='category'><a href='/blog/categories/android/'>Android (8)</a></li>
+<li class='category'><a href='/blog/categories/bible/'>Bible (1)</a></li>
+<li class='category'><a href='/blog/categories/bluetooth/'>Bluetooth (9)</a></li>
+<li class='category'><a href='/blog/categories/gerrit/'>gerrit (2)</a></li>
+<li class='category'><a href='/blog/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>linux (6)</a></li>
+
+        </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Yongbing Chen -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'yongbingchengithub';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-v-summary/';
+        var disqus_url = 'http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-v-summary/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

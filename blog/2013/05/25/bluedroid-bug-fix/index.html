@@ -1,0 +1,351 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>bluedroid bug fixing - Yongbing's Blog</title>
+  <meta name="author" content="Yongbing Chen">
+
+  
+  <meta name="description" content="I fixed thress tricky bugs in one week, that&#8217;s pretty efficient, even out of my own expectation ^-^ bug I: TiVo remote connected but not &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yongbingchen.github.com/blog/2013/05/25/bluedroid-bug-fix/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Yongbing's Blog" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39352307-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft"></div>
+  	<div id="logoText"></div>
+  	<div id="logoRight"></div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">Yongbing's Blog</a></h1>
+  
+    <h2>A personal technical note.</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:yongbingchen.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about-me">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">Bluedroid Bug Fixing</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-25T07:13:00-07:00" pubdate data-updated="true">May 25<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I fixed thress tricky bugs in one week, that&#8217;s pretty efficient, even out of my own expectation ^-^</p>
+
+<h2>bug I: TiVo remote connected but not working.</h2>
+
+<p>QA reported a bug that TiVo remote control connected, but no key input captured by our host.</p>
+
+<p>Compared with the normal case (some other HID device), I found below message missed for TiVo case after BT connect:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>05-16 22:13:34.386 D/bt-btif ( 2146): UHID_START from uhid-dev
+</span><span class='line'>05-16 22:13:34.386 D/bt-btif ( 2146): UHID_OPEN from uhid-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That means the input device for this newly added HID device(TiVo remote) has never been opened by Android EventHub.cpp in failed case.</p>
+
+<p>Then I checked the getevent result when TiVo remote connected, found out that there&#8217;s no input device created for it at all.</p>
+
+<p>Tracing from where Bluedroid created a uhid device for a newly added HID device in bta_hh_co_send_hid_info() down to hid kernel code, turned out that the Vendor_id/Product_id for TiVo remote already registered in hid kernel part (point to an existing kernel driver linux/drivers/hid/hid-tivo.c, which is based on BlueZ hidp), so this is an issue of Bluedroid, affecting a group of device which has registered id in kernel as HID_BLUETOOTH_DEVICE.</p>
+
+<p>This kind of devices suppose to be servered by their own driver, so the generic probe method hid_device_probe() will not be triggered when trying to create a uhid device from Bluedroid, thus the input device file will not be created by input_register_device() within this probe.</p>
+
+<h2>bug II: Lenovo BT mouse can not pair with our host.</h2>
+
+<p>The log shows below error when trying to pair Lenovo BT mouse:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>05-16 21:07:41.451 W/bt-sdp  ( 2146): result :36005A0900000A000100010200013503191200090004350D350619010009000135031900010902053503191002090009350835061912000901000902000901000902010917EF0902020960020902030902450902042801090205090002
+</span><span class='line'>05-16 21:07:41.451 W/bt-sdp  ( 2146): SDP - Bad type: 0x02 or len: 4 in attr_rsp</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Compared with air log, I found that one byte of the SDP message is different:
+In air log, I found :0900000A00010001<font color = "red">02</font>0001,
+while in dump message in the error message, it&#8217;s 0900000A00010001<font color = "green">09</font>0001</p>
+
+<p>Narrow down this change from driver level to Bluedroid SDP, finally found out it&#8217;s a bug in btsnoop_capture(), a simple load/restore bug.</p>
+
+<h2>bug III: Can not unpair a remote HID device.</h2>
+
+<p>QA found one HID device can not be unpaired: if the device is connected when doing unpair, the device remain connected after unpair, and can not be paired again after unpair.</p>
+
+<p>From the log, I found below error message when trying to re-piar:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>05-20 21:09:19.567  2125  2158 W bt-btif : btif_hh_connect: Device  already added, attr_mask = 0x8005
+</span><span class='line'>05-20 21:09:19.567  2125  2158 E bt-btif : btif_hh_connect: Error, device  can only be reconnected from device side</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Compared with another HID device which can successfully do unpair/pair, I found that the success case can correctly response to host&#8217;s BTA_HH_CTRL_VIRTUAL_CABLE_UNPLUG request as defined in HID spec 1.1, figure A.4.</p>
+
+<p>In the failed case, the HID device will not initiate disconnect against our host after receiving the unplug request, and Bluedroid in our host failed to deal with this situation, as required by HID spec, to delete pair information after issue this requirement. Due to this remaining piece of pair information, next pair attempt will fail.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Yongbing Chen</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-25T07:13:00-07:00" pubdate data-updated="true">May 25<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/bluetooth/'>Bluetooth</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yongbingchen.github.com/blog/2013/05/25/bluedroid-bug-fix/" data-via="" data-counturl="http://yongbingchen.github.com/blog/2013/05/25/bluedroid-bug-fix/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/blog/2013/05/09/dump-stack-in-android-native-c-code/" title="Previous Post: dump_stack in Android native C code">&laquo; dump_stack in Android native C code</a>
+      
+      
+        <a class="basic-alignment right articlenav" href="/blog/2013/06/30/misc-code-samples/" title="Next Post: misc code samples">misc code samples &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/27/create-my-own-repo-to-manage-bundle-of-git-repositories/">create my own repo to manage bundle of git repositories</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/03/27/config-gerrit-server-behind-apache-https-reverse-proxy/">config gerrit server behind Apache https reverse-proxy</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/31/decode-instruction-address-in-oops-to-c-code-file-line/">decode instruction address in OOPS to C code file:line</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/24/atomic-file-write/">atomic file writing</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/12/android-bluetooth-pair-a-hid-device/">Android Bluetooth: pairing a HID device</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+        <h1>Categories</h1>
+        <ul id="categories">
+                <li class='category'><a href='/blog/categories/android/'>Android (8)</a></li>
+<li class='category'><a href='/blog/categories/bible/'>Bible (1)</a></li>
+<li class='category'><a href='/blog/categories/bluetooth/'>Bluetooth (9)</a></li>
+<li class='category'><a href='/blog/categories/gerrit/'>gerrit (2)</a></li>
+<li class='category'><a href='/blog/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>linux (6)</a></li>
+
+        </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Yongbing Chen -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'yongbingchengithub';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://yongbingchen.github.com/blog/2013/05/25/bluedroid-bug-fix/';
+        var disqus_url = 'http://yongbingchen.github.com/blog/2013/05/25/bluedroid-bug-fix/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,515 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>decode instruction address in OOPS to C code file:line - Yongbing's Blog</title>
+  <meta name="author" content="Yongbing Chen">
+
+  
+  <meta name="description" content="The OOPS message: 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+[ 2405.090047] Unable to handle kernel paging request at virtual address 008b2005
+[ 2405.097586] pgd &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yongbingchen.github.com/blog/2013/07/31/decode-instruction-address-in-oops-to-c-code-file-line/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Yongbing's Blog" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39352307-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft"></div>
+  	<div id="logoText"></div>
+  	<div id="logoRight"></div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">Yongbing's Blog</a></h1>
+  
+    <h2>A personal technical note.</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:yongbingchen.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about-me">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">Decode Instruction Address in OOPS to C Code File:line</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-31T05:47:00-07:00" pubdate data-updated="true">Jul 31<span>st</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>The OOPS message:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="p">[</span> <span class="mf">2405.090047</span><span class="p">]</span> <span class="n">Unable</span> <span class="n">to</span> <span class="n">handle</span> <span class="n">kernel</span> <span class="n">paging</span> <span class="n">request</span> <span class="n">at</span> <span class="k">virtual</span> <span class="n">address</span> <span class="mo">00</span><span class="mi">8</span><span class="n">b2005</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2405.097586</span><span class="p">]</span> <span class="n">pgd</span> <span class="o">=</span> <span class="mi">80004000</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2405.100427</span><span class="p">]</span> <span class="p">[</span><span class="mo">00</span><span class="mi">8</span><span class="n">b2005</span><span class="p">]</span> <span class="o">*</span><span class="n">pgd</span><span class="o">=</span><span class="mo">00000000</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2405.104187</span><span class="p">]</span> <span class="n">Internal</span> <span class="n">error</span><span class="o">:</span> <span class="n">Oops</span><span class="o">:</span> <span class="mi">5</span> <span class="p">[</span><span class="err">#</span><span class="mi">1</span><span class="p">]</span> <span class="n">PREEMPT</span> <span class="n">SMP</span> <span class="n">ARM</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2405.109673</span><span class="p">]</span> <span class="n">Modules</span> <span class="n">linked</span> <span class="n">in</span><span class="o">:</span> <span class="n">mbtusbchar</span> <span class="n">usbfwdnld</span> <span class="n">fusion</span><span class="p">(</span><span class="n">O</span><span class="p">)</span> <span class="n">gal3d</span> <span class="n">amp_core</span><span class="p">(</span><span class="n">O</span><span class="p">)</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2405.117310</span><span class="p">]</span> <span class="n">CPU</span><span class="o">:</span> <span class="mi">1</span>    <span class="n">Tainted</span><span class="o">:</span> <span class="n">G</span>        <span class="n">W</span>  <span class="n">O</span>  <span class="p">(</span><span class="mf">3.4.50</span><span class="o">+</span> <span class="err">#</span><span class="mi">11</span><span class="p">)</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2405.123072</span><span class="p">]</span> <span class="n">PC</span> <span class="n">is</span> <span class="n">at</span> <span class="n">module_put</span><span class="o">+</span><span class="mh">0x44</span><span class="o">/</span><span class="mh">0x8c</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2405.127219</span><span class="p">]</span> <span class="n">LR</span> <span class="n">is</span> <span class="n">at</span> <span class="n">cdev_put</span><span class="o">+</span><span class="mh">0x24</span><span class="o">/</span><span class="mh">0x28</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2405.131182</span><span class="p">]</span> <span class="n">pc</span> <span class="o">:</span> <span class="p">[</span><span class="o">&lt;</span><span class="mi">8007521</span><span class="n">c</span><span class="o">&gt;</span><span class="p">]</span>    <span class="n">lr</span> <span class="o">:</span> <span class="p">[</span><span class="o">&lt;</span><span class="mi">800</span><span class="n">c97d0</span><span class="o">&gt;</span><span class="p">]</span>    <span class="n">psr</span><span class="o">:</span> <span class="mi">20000013</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2406.111129</span><span class="p">]</span> <span class="n">Backtrace</span><span class="o">:</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2406.113680</span><span class="p">]</span> <span class="p">[</span><span class="o">&lt;</span><span class="mi">800751</span><span class="n">d8</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">(</span><span class="n">module_put</span><span class="o">+</span><span class="mh">0x0</span><span class="o">/</span><span class="mh">0x8c</span><span class="p">)</span> <span class="n">from</span> <span class="p">[</span><span class="o">&lt;</span><span class="mi">800</span><span class="n">c97d0</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">(</span><span class="n">cdev_put</span><span class="o">+</span><span class="mh">0x24</span><span class="o">/</span><span class="mh">0x28</span><span class="p">)</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2406.121764</span><span class="p">]</span>  <span class="n">r4</span><span class="o">:</span><span class="mi">45</span><span class="n">a8e010</span> <span class="n">r3</span><span class="o">:</span><span class="n">ffffffff</span>
+</span><span class='line'><span class="p">[</span> <span class="mf">2406.125491</span><span class="p">]</span> <span class="p">[</span><span class="o">&lt;</span><span class="mi">800</span><span class="n">c97ac</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">(</span><span class="n">cdev_put</span><span class="o">+</span><span class="mh">0x0</span><span class="o">/</span><span class="mh">0x28</span><span class="p">)</span> <span class="n">from</span> <span class="p">[</span><span class="o">&lt;</span><span class="mi">800</span><span class="n">c7410</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">(</span><span class="n">fput</span><span class="o">+</span><span class="mh">0x21c</span><span class="o">/</span><span class="mh">0x22c</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Method A: Recompile vmlinux or failed module with debug info enabled if possible (CONFIG_DEBUG_INFO=y), then gdb can give out the C source code line of the failed instruction:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="err">$</span> <span class="n">make</span> <span class="err">$</span><span class="n">MY_DEFAULT_CONFIG_FILE</span> <span class="o">-</span><span class="n">C</span> <span class="err">$</span><span class="n">LINUX_ROOT_DIR</span> <span class="n">CROSS_COMPILE</span><span class="o">=</span><span class="n">arm</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnueabi</span><span class="o">-</span> <span class="n">ARCH</span><span class="o">=</span><span class="n">arm</span>
+</span><span class='line'><span class="err">$</span> <span class="n">make</span> <span class="err">$</span><span class="n">MY_UIMAGE_NAME</span> <span class="o">-</span><span class="n">C</span> <span class="err">$</span><span class="n">LINUX_ROOT_DIR</span> <span class="n">CROSS_COMPILE</span><span class="o">=</span><span class="n">arm</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnueabi</span><span class="o">-</span> <span class="n">ARCH</span><span class="o">=</span><span class="n">arm</span> <span class="n">CONFIG_DEBUG_INFO</span><span class="o">=</span><span class="n">y</span> <span class="o">-</span><span class="n">j32</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Recompile individual module if needed:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="err">$</span> <span class="n">make</span> <span class="n">modules</span> <span class="o">-</span><span class="n">C</span> <span class="err">$</span><span class="n">LINUX_ROOT_DIR</span> <span class="n">CROSS_COMPILE</span><span class="o">=</span><span class="n">arm</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnueabi</span><span class="o">-</span> <span class="n">ARCH</span><span class="o">=</span><span class="n">arm</span> <span class="n">CONFIG_DEBUG_INFO</span><span class="o">=</span><span class="n">y</span> <span class="o">-</span><span class="n">j32</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Use gdb to get C source file:line info from given instruction address:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="err">$</span> <span class="n">arm</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">androideabi</span><span class="o">-</span><span class="n">gdb</span> <span class="err">–</span><span class="n">f</span> <span class="n">vmlinux</span>
+</span><span class='line'><span class="n">Reading</span> <span class="n">symbols</span> <span class="n">from</span> <span class="n">linux</span><span class="o">/</span><span class="n">vmlinux</span><span class="p">...</span><span class="n">done</span><span class="p">.</span>
+</span><span class='line'><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">list</span> <span class="o">*</span><span class="p">(</span><span class="n">module_put</span><span class="o">+</span><span class="mh">0x44</span><span class="p">)</span>
+</span><span class='line'><span class="mh">0x80073964</span> <span class="n">is</span> <span class="n">in</span> <span class="n">module_put</span> <span class="p">(</span><span class="n">kernel</span><span class="o">/</span><span class="n">module</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">942</span><span class="p">).</span>
+</span><span class='line'><span class="mi">937</span>     <span class="kt">void</span> <span class="n">module_put</span><span class="p">(</span><span class="k">struct</span> <span class="n">module</span> <span class="o">*</span><span class="n">module</span><span class="p">)</span>
+</span><span class='line'><span class="mi">938</span>     <span class="p">{</span>
+</span><span class='line'><span class="mi">939</span>             <span class="k">if</span> <span class="p">(</span><span class="n">module</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="mi">940</span>                     <span class="n">preempt_disable</span><span class="p">();</span>
+</span><span class='line'><span class="mi">941</span>                     <span class="nf">smp_wmb</span><span class="p">();</span> <span class="cm">/* see comment in module_refcount */</span>
+</span><span class='line'><span class="mi">942</span>                     <span class="nf">__this_cpu_inc</span><span class="p">(</span><span class="n">module</span><span class="o">-&gt;</span><span class="n">refptr</span><span class="o">-&gt;</span><span class="n">decs</span><span class="p">);</span>
+</span><span class='line'><span class="mi">943</span>
+</span><span class='line'><span class="mi">944</span>                     <span class="nf">trace_module_put</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">_RET_IP_</span><span class="p">);</span>
+</span><span class='line'><span class="mi">945</span>                     <span class="cm">/* Maybe they&#39;re waiting for us to drop reference? */</span>
+</span><span class='line'><span class="mi">946</span>                     <span class="k">if</span> <span class="p">(</span><span class="n">unlikely</span><span class="p">(</span><span class="o">!</span><span class="n">module_is_live</span><span class="p">(</span><span class="n">module</span><span class="p">)))</span>
+</span><span class='line'><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">disas</span> <span class="p">(</span><span class="n">module_put</span><span class="o">+</span><span class="mh">0x44</span><span class="p">)</span>
+</span><span class='line'><span class="n">Dump</span> <span class="n">of</span> <span class="n">assembler</span> <span class="n">code</span> <span class="k">for</span> <span class="n">function</span> <span class="n">module_put</span><span class="o">:</span>
+</span><span class='line'>   <span class="mh">0x80073960</span> <span class="o">&lt;+</span><span class="mi">64</span><span class="o">&gt;:</span>    <span class="n">add</span>     <span class="n">r3</span><span class="p">,</span> <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">4</span>
+</span><span class='line'>   <span class="mh">0x80073964</span> <span class="o">&lt;+</span><span class="mi">68</span><span class="o">&gt;:</span>    <span class="n">ldr</span>     <span class="n">r1</span><span class="p">,</span> <span class="p">[</span><span class="n">r3</span><span class="p">,</span> <span class="n">r2</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Method B: If can not recompile the vmlinux/module, but the problematic vmlinux/module file is available, use objdump to get the assembly line, but no C source line available.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="err">$</span> <span class="n">arm</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">androideabi</span><span class="o">-</span><span class="n">objdump</span> <span class="o">-</span><span class="n">dSl</span> <span class="n">vmlinux</span> <span class="o">&gt;</span><span class="n">vmlinux</span><span class="p">.</span><span class="n">disasm</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>module_put+0x44 = 0x800751d8 + 0x44 = 0x8007521c:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="mi">800751</span><span class="n">d8</span> <span class="o">&lt;</span><span class="n">module_put</span><span class="o">&gt;:</span>
+</span><span class='line'><span class="n">module_put</span><span class="p">()</span><span class="o">:</span>
+</span><span class='line'><span class="mi">8007521</span><span class="n">c</span><span class="o">:</span>       <span class="n">e7931002</span>        <span class="n">ldr</span>     <span class="n">r1</span><span class="p">,</span> <span class="p">[</span><span class="n">r3</span><span class="p">,</span> <span class="n">r2</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Compared with method A, method B get the same instruction line.</p>
+
+<p>Appendix: only for comparison/reference: use objdump to decode an object file with debug info:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="err">$</span> <span class="n">arm</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">androideabi</span><span class="o">-</span><span class="n">objdump</span> <span class="o">-</span><span class="n">dSlr</span> <span class="n">kernel</span><span class="o">/</span><span class="n">module</span><span class="p">.</span><span class="n">o</span> <span class="o">&gt;</span><span class="n">kernel</span><span class="o">/</span><span class="n">module</span><span class="p">.</span><span class="n">disasm</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Check if module_put+0x44 = 0xf28+0x44 = 0xf6c point to the same C source line and assembly line:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'> <span class="mf">00000f</span><span class="mi">28</span> <span class="o">&lt;</span><span class="n">module_put</span><span class="o">&gt;:</span>
+</span><span class='line'>  <span class="n">module_put</span><span class="p">()</span><span class="o">:</span>
+</span><span class='line'>  <span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">module</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">938</span>
+</span><span class='line'>          <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="n">EXPORT_SYMBOL</span><span class="p">(</span><span class="n">try_module_get</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kt">void</span> <span class="nf">module_put</span><span class="p">(</span><span class="k">struct</span> <span class="n">module</span> <span class="o">*</span><span class="n">module</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>       <span class="nl">f28:</span>       <span class="n">e1a0c00d</span>        <span class="n">mov</span>     <span class="n">ip</span><span class="p">,</span> <span class="n">sp</span>
+</span><span class='line'>       <span class="nl">f2c:</span>       <span class="n">e92dd818</span>        <span class="n">push</span>    <span class="p">{</span><span class="n">r3</span><span class="p">,</span> <span class="n">r4</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">pc</span><span class="p">}</span>
+</span><span class='line'>       <span class="nl">f30:</span>       <span class="n">e24cb004</span>        <span class="n">sub</span>     <span class="n">fp</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="err">#</span><span class="mi">4</span>
+</span><span class='line'>  <span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">module</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">939</span>
+</span><span class='line'>          <span class="k">if</span> <span class="p">(</span><span class="n">module</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>       <span class="nl">f34:</span>       <span class="n">e3500000</span>        <span class="n">cmp</span>     <span class="n">r0</span><span class="p">,</span> <span class="err">#</span><span class="mi">0</span>
+</span><span class='line'>       <span class="nl">f38:</span>       <span class="mi">089</span><span class="n">da818</span>        <span class="n">ldmeq</span>   <span class="n">sp</span><span class="p">,</span> <span class="p">{</span><span class="n">r3</span><span class="p">,</span> <span class="n">r4</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="n">pc</span><span class="p">}</span>
+</span><span class='line'>  <span class="n">current_thread_info</span><span class="p">()</span><span class="o">:</span>
+</span><span class='line'>  <span class="n">linux</span><span class="o">/</span><span class="n">arch</span><span class="o">/</span><span class="n">arm</span><span class="o">/</span><span class="n">include</span><span class="o">/</span><span class="n">asm</span><span class="o">/</span><span class="n">thread_info</span><span class="p">.</span><span class="n">h</span><span class="o">:</span><span class="mi">97</span>
+</span><span class='line'>       <span class="nl">f3c:</span>       <span class="n">e1a0300d</span>        <span class="n">mov</span>     <span class="n">r3</span><span class="p">,</span> <span class="n">sp</span>
+</span><span class='line'>       <span class="nl">f40:</span>       <span class="n">e3c34d7f</span>        <span class="n">bic</span>     <span class="n">r4</span><span class="p">,</span> <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">8128</span>   <span class="p">;</span> <span class="mh">0x1fc0</span>
+</span><span class='line'>       <span class="nl">f44:</span>       <span class="n">e3c4403f</span>        <span class="n">bic</span>     <span class="n">r4</span><span class="p">,</span> <span class="n">r4</span><span class="p">,</span> <span class="err">#</span><span class="mi">63</span>     <span class="p">;</span> <span class="mh">0x3f</span>
+</span><span class='line'>  <span class="n">module_put</span><span class="p">()</span><span class="o">:</span>
+</span><span class='line'>  <span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">module</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">940</span>
+</span><span class='line'>                  <span class="n">preempt_disable</span><span class="p">();</span>
+</span><span class='line'>       <span class="nl">f48:</span>       <span class="n">e5943004</span>        <span class="n">ldr</span>     <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">r4</span><span class="p">,</span> <span class="err">#</span><span class="mi">4</span><span class="p">]</span>
+</span><span class='line'>       <span class="nl">f4c:</span>       <span class="n">e2833001</span>        <span class="n">add</span>     <span class="n">r3</span><span class="p">,</span> <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">1</span>
+</span><span class='line'>       <span class="nl">f50:</span>       <span class="n">e5843004</span>        <span class="n">str</span>     <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">r4</span><span class="p">,</span> <span class="err">#</span><span class="mi">4</span><span class="p">]</span>
+</span><span class='line'>  <span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">module</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">941</span>
+</span><span class='line'>                  <span class="n">smp_wmb</span><span class="p">();</span> <span class="cm">/* see comment in module_refcount */</span>
+</span><span class='line'>       <span class="nl">f54:</span>       <span class="n">f57ff05f</span>        <span class="n">dmb</span>     <span class="n">sy</span>
+</span><span class='line'>  <span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">module</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">942</span>
+</span><span class='line'>                  <span class="n">__this_cpu_inc</span><span class="p">(</span><span class="n">module</span><span class="o">-&gt;</span><span class="n">refptr</span><span class="o">-&gt;</span><span class="n">decs</span><span class="p">);</span>
+</span><span class='line'>       <span class="nl">f58:</span>       <span class="n">e59f2050</span>        <span class="n">ldr</span>     <span class="n">r2</span><span class="p">,</span> <span class="p">[</span><span class="n">pc</span><span class="p">,</span> <span class="err">#</span><span class="mi">80</span><span class="p">]</span>   <span class="p">;</span> <span class="n">fb0</span> <span class="o">&lt;</span><span class="n">module_put</span><span class="o">+</span><span class="mh">0x88</span><span class="o">&gt;</span>
+</span><span class='line'>       <span class="nl">f5c:</span>       <span class="n">e5941014</span>        <span class="n">ldr</span>     <span class="n">r1</span><span class="p">,</span> <span class="p">[</span><span class="n">r4</span><span class="p">,</span> <span class="err">#</span><span class="mi">20</span><span class="p">]</span>
+</span><span class='line'>       <span class="nl">f60:</span>       <span class="n">e5903138</span>        <span class="n">ldr</span>     <span class="n">r3</span><span class="p">,</span> <span class="p">[</span><span class="n">r0</span><span class="p">,</span> <span class="err">#</span><span class="mi">312</span><span class="p">]</span>  <span class="p">;</span> <span class="mh">0x138</span>
+</span><span class='line'>       <span class="nl">f64:</span>       <span class="n">e7922101</span>        <span class="n">ldr</span>     <span class="n">r2</span><span class="p">,</span> <span class="p">[</span><span class="n">r2</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">lsl</span> <span class="err">#</span><span class="mi">2</span><span class="p">]</span>
+</span><span class='line'>       <span class="nl">f68:</span>       <span class="n">e2833004</span>        <span class="n">add</span>     <span class="n">r3</span><span class="p">,</span> <span class="n">r3</span><span class="p">,</span> <span class="err">#</span><span class="mi">4</span>
+</span><span class='line'>       <span class="nl">f6c:</span>       <span class="n">e7931002</span>        <span class="n">ldr</span>     <span class="n">r1</span><span class="p">,</span> <span class="p">[</span><span class="n">r3</span><span class="p">,</span> <span class="n">r2</span><span class="p">]</span>
+</span><span class='line'>       <span class="nl">f70:</span>       <span class="n">e2811001</span>        <span class="n">add</span>     <span class="n">r1</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="err">#</span><span class="mi">1</span>
+</span><span class='line'>       <span class="nl">f74:</span>       <span class="n">e7831002</span>        <span class="n">str</span>     <span class="n">r1</span><span class="p">,</span> <span class="p">[</span><span class="n">r3</span><span class="p">,</span> <span class="n">r2</span><span class="p">]</span>
+</span><span class='line'>  <span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">module</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">946</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Yongbing Chen</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-31T05:47:00-07:00" pubdate data-updated="true">Jul 31<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yongbingchen.github.com/blog/2013/07/31/decode-instruction-address-in-oops-to-c-code-file-line/" data-via="" data-counturl="http://yongbingchen.github.com/blog/2013/07/31/decode-instruction-address-in-oops-to-c-code-file-line/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/blog/2013/07/24/atomic-file-write/" title="Previous Post: atomic file writing">&laquo; atomic file writing</a>
+      
+      
+        <a class="basic-alignment right articlenav" href="/blog/2015/03/27/config-gerrit-server-behind-apache-https-reverse-proxy/" title="Next Post: config gerrit server behind Apache https reverse-proxy">config gerrit server behind Apache https reverse-proxy &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/27/create-my-own-repo-to-manage-bundle-of-git-repositories/">create my own repo to manage bundle of git repositories</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/03/27/config-gerrit-server-behind-apache-https-reverse-proxy/">config gerrit server behind Apache https reverse-proxy</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/31/decode-instruction-address-in-oops-to-c-code-file-line/">decode instruction address in OOPS to C code file:line</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/24/atomic-file-write/">atomic file writing</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/12/android-bluetooth-pair-a-hid-device/">Android Bluetooth: pairing a HID device</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+        <h1>Categories</h1>
+        <ul id="categories">
+                <li class='category'><a href='/blog/categories/android/'>Android (8)</a></li>
+<li class='category'><a href='/blog/categories/bible/'>Bible (1)</a></li>
+<li class='category'><a href='/blog/categories/bluetooth/'>Bluetooth (9)</a></li>
+<li class='category'><a href='/blog/categories/gerrit/'>gerrit (2)</a></li>
+<li class='category'><a href='/blog/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>linux (6)</a></li>
+
+        </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Yongbing Chen -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'yongbingchengithub';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://yongbingchen.github.com/blog/2013/07/31/decode-instruction-address-in-oops-to-c-code-file-line/';
+        var disqus_url = 'http://yongbingchen.github.com/blog/2013/07/31/decode-instruction-address-in-oops-to-c-code-file-line/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

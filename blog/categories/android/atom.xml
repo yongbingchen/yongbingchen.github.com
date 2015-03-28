@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Android | Yongbing's Blog]]></title>
+  <link href="http://yongbingchen.github.com/blog/categories/android/atom.xml" rel="self"/>
+  <link href="http://yongbingchen.github.com/"/>
+  <updated>2015-03-27T20:27:22-07:00</updated>
+  <id>http://yongbingchen.github.com/</id>
+  <author>
+    <name><![CDATA[Yongbing Chen]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Android Bluetooth: pairing a HID device]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/07/12/android-bluetooth-pair-a-hid-device/"/>
+    <updated>2013-07-12T23:06:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/07/12/android-bluetooth-pair-a-hid-device</id>
+    <content type="html"><![CDATA[<p>{% img http://yongbingchen.github.com/images/android_bt/android-pair-hid-device.jpg  %}</p>
+
+<ol>
+<li>User started scanning from Bluetooth Settings UI, Android Bluetooth service responded to this request, calling bluedroid to start discovery.</li>
+<li>Bluedroid found nearby devices in discovery mode, reported them through device found callback.</li>
+<li>User selected one device from found devices, started to pairing it, Android Bluetooth service called bluedroid to creat bond with it.</li>
+<li>Bluedroid requested PIN code from end user (simple secure pairing mode has different procedure).</li>
+<li>Bluedroid started SDP process to find remote device's UUID.</li>
+<li>After SDP finished, bluedroid called remote device property changed on UUID changed to notify Android.</li>
+<li>Android received the event, then HID profile service started to connect it. Without this SDP event, the pair will fail due to no further action over L2CAP anymore, see <a href ="http://yongbingchen.github.com/logs/andoird-hid/SDP-fail-cause-HID-pair-fail.txt ">pairing failed by SDP</a> for example.</li>
+<li>In HID profile connection process, bluedroid conducted another round of SDP, fetched HID descriptor from remote device, created hidraw and input device file for the new remote device, through uhid interface, the remote device was ready to use from that point.</li>
+</ol>
+
+
+<p>Logs and call stack:
+{% blockquote scan to found device cb http://yongbingchen.github.com/logs/andoird-hid/start-discovery-to-found-device-callback.txt %} {% endblockquote %}
+{% blockquote pair to bonded cb http://yongbingchen.github.com/logs/andoird-hid/start-pairing-to-bonded.txt %} {% endblockquote %}
+{% blockquote on UUID changed to HID connect http://yongbingchen.github.com/logs/andoird-hid/onUuidChanged-to-HID-connect.txt %} {% endblockquote %}</p>
+
+<p>Full logs:
+{% blockquote scan http://yongbingchen.github.com/logs/andoird-hid/logs/scan.txt %} {% endblockquote %}
+{% blockquote pair http://yongbingchen.github.com/logs/andoird-hid/logs/pair.txt %} {% endblockquote %}
+{% blockquote hcidump http://yongbingchen.github.com/logs/andoird-hid/logs/hcidump.txt %} {% endblockquote %}
+{% blockquote air log http://yongbingchen.github.com/logs/andoird-hid/logs/scan-pair.cfa %} {% endblockquote %}</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[dump_stack in Android native C code]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/05/09/dump-stack-in-android-native-c-code/"/>
+    <updated>2013-05-09T21:34:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/05/09/dump-stack-in-android-native-c-code</id>
+    <content type="html"><![CDATA[<p>1 Wrapper Android C++ method into a C function:
+{% codeblock lang:cpp %}
+external/bluetooth/bluedroid$ cat bta/sys/dump_stack.cpp</p>
+
+<h1>include &lt;utils/CallStack.h></h1>
+
+<p>using namespace android;
+extern "C" void dump_stack_android(void)
+{</p>
+
+<pre><code>    CallStack stack;
+    stack.update();
+    stack.dump();
+</code></pre>
+
+<p>}
+{% endcodeblock %}</p>
+
+<p>2 Call this C function from target place:
+{% codeblock lang:cpp %}
+diff --git a/bta/dm/bta_dm_act.c b/bta/dm/bta_dm_act.c
++extern void dump_stack_android(void);
+ static void bta_dm_adjust_roles(BOOLEAN delay_role_switch)
+ {
++    dump_stack_android();</p>
+
+<pre><code> if(bta_dm_cb.device_list.count)
+ {
+</code></pre>
+
+<p>{% endcodeblock %}</p>
+
+<p>3 Add library libutils as dependency in LOCAL_SHARED_LIBRARIES,
+{% codeblock lang:cpp %}
+diff --git a/main/Android.mk b/main/Android.mk
+ LOCAL_SRC_FILES+= \
+ +       ../bta/sys/dump_stack.cpp \</p>
+
+<pre><code>     ../udrv/ulinux/uipc.c
+</code></pre>
+
+<p> LOCAL_SHARED_LIBRARIES := \</p>
+
+<pre><code> libcutils \
+</code></pre>
+
+<ul>
+<li> libutils \
+{% endcodeblock %}</li>
+</ul>
+
+
+<p>I met a ld error as:
+{% codeblock lang:cpp %}
+error: undefined reference to 'android::CallStack::CallStack()'
+{% endcodeblock %}
+It turned out that I added the libutils dependency into a static library libbt-brcm_bta, which can not solve this dynamic symbol at link time
+{% blockquote refer to this wiki https://en.wikipedia.org/wiki/Static_library %}{% endblockquote %}
+Move the dependency to dynamic library bluetooth.default.so solved the problem.</p>
+
+<p>The final result on running board is:
+{% codeblock lang:cpp %}
+root@android:/ # logcat -v time |grep CallStack&amp;
+05-09 21:01:57.666 D/CallStack( 2133): (null)#00  pc 0005c444  /system/lib/hw/bluetooth.default.so (dump_stack_android+15)
+05-09 21:01:57.666 D/CallStack( 2133): (null)#01  pc 0004ddb2  /system/lib/hw/bluetooth.default.so
+05-09 21:01:57.666 D/CallStack( 2133): (null)#02  pc 0004c310  /system/lib/hw/bluetooth.default.so (bta_sys_conn_close+27)
+05-09 21:01:57.666 D/CallStack( 2133): (null)#03  pc 000577d4  /system/lib/hw/bluetooth.default.so (bta_av_str_closed+115)
+05-09 21:01:57.666 D/CallStack( 2133): (null)#04  pc 0004705e  /system/lib/hw/bluetooth.default.so (bta_av_ssm_execute+269)
+05-09 21:01:57.666 D/CallStack( 2133): (null)#05  pc 00046f1c  /system/lib/hw/bluetooth.default.so (bta_av_hdl_event+159)
+05-09 21:01:57.666 D/CallStack( 2133): (null)#06  pc 0004bf02  /system/lib/hw/bluetooth.default.so (bta_sys_event+49)
+05-09 21:01:57.666 D/CallStack( 2133): (null)#07  pc 00074b70  /system/lib/hw/bluetooth.default.so (btu_task+559)
+05-09 21:01:57.666 D/CallStack( 2133): (null)#08  pc 00042784  /system/lib/hw/bluetooth.default.so (gki_task_entry+91)
+05-09 21:01:57.666 D/CallStack( 2133): (null)#09  pc 0000e3d8  /system/lib/libc.so (__thread_entry+72)
+05-09 21:01:57.666 D/CallStack( 2133): (null)#10  pc 0000dac4  /system/lib/libc.so (pthread_create+160)
+{% endcodeblock %}</p>
+
+<p>This result can be verified as the same as addr2line:
+{% codeblock lang:cpp %}
+$ arm-eabi-addr2line -e ../../../out/target/product/bg2ct_dmp_emmc/symbols/system/lib/hw/bluetooth.default.so 0004c310
+external/bluetooth/bluedroid/bta/./sys/bta_sys_conn.c:236
+{% endcodeblock %}</p>
+
+<h1>Update: Peek stack of a running process</h1>
+
+<p>Android debuggerd can be used to dump a running process's stack:
+{% codeblock lang:c %}<br/>
+ALOGD("peeking stack of process %d\n", pid);
+kill(pid, SIGSTOP);
+ptrace(PTRACE_ATTACH, pid, 0,0);
+char *tombstone_path = engrave_tombstone(pid,</p>
+
+<pre><code>    pid, 
+    0/*no signal*/,
+    true /*dump_sibling_threads*/, 
+    false /*not quiet*/, 
+    &amp;detach_failed,
+    &amp;total_sleep_time_usec);
+</code></pre>
+
+<p>ptrace(PTRACE_DETACH, pid, 0, 0);
+kill(pid, SIGCONT);
+{% endcodeblock %}</p>
+
+<p>The stack of main thread of the process will shown in logcat, and all others will be in the tombstone file.
+The target process will resume to execution right after the dump stack finished.
+This is useful when debugging some real time issues.</p>
+
+<p>{% blockquote source code and test log http://yongbingchen.github.com/downloads/code/peek_stack.tar.gz %} {% endblockquote %}</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dissect Bluedroid from A2DP: Part V: Key components]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-v-summary/"/>
+    <updated>2013-05-07T20:57:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-v-summary</id>
+    <content type="html"><![CDATA[<h3>1 Interface and implementation</h3>
+
+<p><font color = "green">bt_interface_t</font>: Android defined, Bluedroid implemented as bluetoothInterface in external/bluetooth/bluedroid/btif/src/bluetooth.c: System control BT adapter.</p>
+
+<p><font color = "green">btav_interface_t</font>: Android defined, Bluedroid implemented as bt_av_interface in external/bluetooth/bluedroid/btif/src/btif_av.c: System control A2DP service.</p>
+
+<p><font color = "green">audio_hw_device and audio_stream_out</font>: Android defined, Bluedroid implemented in external/bluetooth/bluedroid/audio_a2dp_hw/audio_a2dp_hw.c: AudioFlinger use A2DP client as audio output device.</p>
+
+<p><font color = "green">bt_vendor_interface_t</font>: Bluedroid defined, BRCM implemented as BLUETOOTH_VENDOR_LIB_INTERFACE in device/common/libbt/src/bt_vendor_brcm.c: Bluedroid talk to BT char device driver, internal usage only.</p>
+
+<p><font color = "green">tHCI_IF</font>: Bluedroid defined, Bluedroid implemented as hci_h4_func_table in external/bluetooth/bluedroid/hci/src/hci_h4.c: Bluedroid HCI interface (data/cmd/evt in/out), internal usage only.</p>
+
+<p><font color = "green">bt_hc_interface_t</font>: Bluedroid defined, Bluedroid implemented as bluetoothHCLibInterface in external/bluetooth/bluedroid/hci/src/bt_hci_bdroid.c: Wrapper of tHCI_IF, has bt_hc_worker_thread to serialize downcoming HCI commands and read upcoming data/evt from HCI device.</p>
+
+<p><font color = "green">L2CAP </font> layer API, in external/bluetooth/bluedroid/stack/include/l2c_api.h, internal usage only.</p>
+
+<p><font color = "green">LMP </font> API, in external/bluetooth/bluedroid/stack/include/btm_api.h, internal usage only.</p>
+
+<h3>2 Tasks/Roles/Layers</h3>
+
+<p><font color = "green">btif_task</font>, managing all messages being passed Android Bluetooth HAL and BTA.</p>
+
+<p><font color = "green">btu_task</font>, the main task of the Bluetooth Upper Layers unit, routing in/out BT cmd/event/data, processing timeout events.</p>
+
+<p><font color = "green">bt_hc_worker_thread</font>, HCI worker thread, all HCI traffic come through this thread.</p>
+
+<p><font color = "green">userial_read_thread</font>, monitoring incoming packets from BT char device driver, transfering these to bt_hc_worker_thread.</p>
+
+<p><font color = "green">btif_media_task</font>, task for A2DP SBC encoder.</p>
+
+<p><font color = "green">uipc_read_task</font>, A2DP server thread, receive audio input data from A2DP client, feed into btif_media_task.</p>
+
+<p><font color = "green">UIPC/A2DP_CTRL_PATH/A2DP_DATA_PATH</font>, socket based IPC, for A2DP client connect/control to A2DP server.</p>
+
+<p><font color = "green">AVDT_CHAN_SIG/AVDT_CHAN_MEDIA/AVDT_CHAN_REPORT</font>, A2DP channels, communicate with remote device.</p>
+
+<p>Serial Finished.</p>
+
+<p>Reference:
+{% blockquote source code reading note http://yongbingchen.github.com/txt/bluedroid/a2dp-source-code-reading-note.txt %}
+{% endblockquote %}</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dissect Bluedroid from A2DP: Part IV: connect and communication]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-iv-a2dp-traffic/"/>
+    <updated>2013-05-07T04:50:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-iv-a2dp-traffic</id>
+    <content type="html"><![CDATA[<h3>Item A. Connect a remote A2DP device:</h3>
+
+<p>{% img center http://yongbingchen.github.com/images/bluedroid/a2dp_connect.jpg  %}
+1 Android system will try to reconnect paired A2DP device automatically after BT enable.
+{% codeblock lang:cpp %}
+04-25 01:56:31.080 D/BluetoothAdapterService( 2093): Auto Connecting A2DP Profile with device 50:C9:71:0D:D2:D9</p>
+
+<pre><code>packages/apps/Bluetooth/jni/com_android_bluetooth_a2dp.cpp  
+static jboolean connectA2dpNative(JNIEnv *env, jobject object, jbyteArray address)
+    const bt_interface_t* btInf= getBluetoothInterface();
+    const btav_interface_t *sBluetoothA2dpInterface = (btav_interface_t *)btInf-&gt;get_profile_interface(BT_PROFILE_ADVANCED_AUDIO_ID);
+    status = sBluetoothA2dpInterface-&gt;connect((bt_bdaddr_t *)addr)
+        external/bluetooth/bluedroid/btif/src/btif_av.c
+        btif_queue_connect(UUID_SERVCLASS_AUDIO_SOURCE, bd_addr, connect_int);//This will trigger an event in btu_task, now the caller thread returned.
+            GKI_send_msg(BTIF_TASK, BTU_BTIF_MBOX, p_msg);
+</code></pre>
+
+<p>{% endcodeblock %}
+2 This will later trigger a A2DP server event API_CONNECT_REQ_EVT in state CCB_IDLE_ST:
+{% codeblock lang:cpp %}
+05-02 01:54:33.342 I/bt-avp  ( 2093): CCB ccb=0 event=API_CONNECT_REQ_EVT state=CCB_IDLE_ST
+{% endcodeblock %}
+3 A2DP server handle this event in bellow two actions:
+{% codeblock lang:cpp %}
+external/bluetooth/bluedroid/stack/avdt/avdt_ccb.c
+129 const UINT8 avdt_ccb_st_idle[][AVDT_CCB_NUM_COLS] = {
+130 /<em> Event                      Action 1                    Action 2                    Next state </em>/
+139 /<em> API_CONNECT_REQ_EVT </em>/    {AVDT_CCB_SET_CONN,          AVDT_CCB_CHAN_OPEN,         AVDT_CCB_OPENING_ST},
+//3.1 Set CCB variables associated with AVDT_ConnectReq().
+996 void avdt_ccb_set_conn(tAVDT_CCB <em>p_ccb, tAVDT_CCB_EVT </em>p_data)</p>
+
+<pre><code>BTM_SetSecurityLevel(TRUE, "", BTM_SEC_SERVICE_AVDTP, p_data-&gt;connect.sec_mask,AVDT_PSM, BTM_SEC_PROTO_AVDT, AVDT_CHAN_SIG);
+</code></pre>
+
+<p>//3.2 initiate a signaling channel connection.
+87 void avdt_ccb_chan_open(tAVDT_CCB <em>p_ccb, tAVDT_CCB_EVT </em>p_data)</p>
+
+<pre><code>                BTM_SetOutService(p_ccb-&gt;peer_addr, BTM_SEC_SERVICE_AVDTP, AVDT_CHAN_SIG);
+                avdt_ad_open_req(AVDT_CHAN_SIG, p_ccb, NULL, AVDT_INT);
+</code></pre>
+
+<p>{% endcodeblock %}
+4 How L2CAP handle this channel connection:
+{% codeblock lang:cpp %}
+external/bluetooth/bluedroid/stack/l2cap/l2c_api.c                    <br/>
+229 UINT16 L2CA_ErtmConnectReq (UINT16 psm, BD_ADDR p_bd_addr, tL2CAP_ERTM_INFO *p_ertm_info)</p>
+
+<pre><code>p_lcb = l2cu_allocate_lcb (p_bd_addr, FALSE);
+l2cu_create_conn(p_lcb);//This function initiates an acl connection via HCI
+    2180 BOOLEAN l2cu_create_conn_after_switch (tL2C_LCB *p_lcb)
+        //external/bluetooth/bluedroid/stack/hcic/hcicmds.c
+        btsnd_hcic_create_conn (p_lcb-&gt;remote_bd_addr,HCI_PKT_TYPES_MASK_DM1 + HCI_PKT_TYPES_MASK_DH1,page_scan_rep_mode,page_scan_mode,clock_offset,allow_switch));
+            HCI_CMD_TO_LOWER(p_buf);
+                //external/bluetooth/bluedroid/main/bte_main.c
+                bt_hc_if-&gt;transmit_buf((TRANSAC)p_msg, \ (char *) (p_msg + 1), \p_msg-&gt;len);
+                    utils_enqueue(&amp;tx_q, (void *) transac);
+                     bthc_signal_event(HC_EVENT_TX);
+        btu_start_timer (&amp;p_lcb-&gt;timer_entry, BTU_TTYPE_L2CAP_LINK,L2CAP_LINK_CONNECT_TOUT);
+</code></pre>
+
+<p>{% endcodeblock %}
+5 This command will trigger connection establish process between local and remote device, accomplished by a event-driven state machine in BT stack.</p>
+
+<h3>Item B. a2dp_write data path:</h3>
+
+<p>{% img center http://yongbingchen.github.com/images/bluedroid/a2dp_write.jpg  %}
+1 A2DP client writes to A2DP data socket will trigger API_WRITE_REQ_EVT in SCB_STREAM_ST state:
+{% codeblock lang:cpp %}
+05-02 01:14:03.134 I/bt-avp  ( 2139): SCB hdl=1 event=1/API_WRITE_REQ_EVT state=SCB_STREAM_ST
+394 /<em> state table for streaming state </em>/
+395 const UINT8 avdt_scb_st_stream[][AVDT_SCB_NUM_COLS] = {
+396 /<em> Event                     Action 1                       Action 2                    Next state </em>/
+398 /<em> API_WRITE_REQ_EVT </em>/     {AVDT_SCB_HDL_WRITE_REQ,        AVDT_SCB_CHK_SND_PKT,       AVDT_SCB_STREAM_ST},
+{% endcodeblock %}
+2 A2DP server handle this with bellow two actions:
+{% codeblock lang:cpp %}
+//2.1 build a new media packet and stores it in the SCB.
+external/bluetooth/bluedroid/stack/avdt/avdt_scb_act.c
+1320 void avdt_scb_hdl_write_req(tAVDT_SCB <em>p_scb, tAVDT_SCB_EVT </em>p_data)</p>
+
+<p>//2.2 send this stored media packet to L2CAP layer.
+1921 void avdt_scb_chk_snd_pkt(tAVDT_SCB <em>p_scb, tAVDT_SCB_EVT </em>p_data)</p>
+
+<pre><code>avdt_ad_write_req(AVDT_CHAN_MEDIA, p_scb-&gt;p_ccb, p_scb, p_pkt);
+    L2CA_DataWrite(avdt_cb.ad.rt_tbl[avdt_ccb_to_idx(p_ccb)][tcid].lcid, p_buf);
+</code></pre>
+
+<p>{% endcodeblock %}
+3 L2CAP to HCI layer
+{% codeblock lang:cpp %}
+bluedroid/stack/l2cap/l2c_api.c
+1633 UINT8 L2CA_DataWrite (UINT16 cid, BT_HDR *p_data)
+1636     return l2c_data_write (cid, p_data, L2CAP_FLUSHABLE_CH_BASED);</p>
+
+<pre><code>                p_ccb = l2cu_find_ccb_by_cid (NULL, cid);
+                l2c_csm_execute (p_ccb, L2CEVT_L2CA_DATA_WRITE, p_data);
+                    935 static void l2c_csm_open (tL2C_CCB *p_ccb, UINT16 event, void *p_data)//Just consider channel connected state
+                    1050     case L2CEVT_L2CA_DATA_WRITE:                    /* Upper layer data to send */
+                    1051         l2c_enqueue_peer_data (p_ccb, (BT_HDR *)p_data);
+                    1052         l2c_link_check_send_pkts (p_ccb-&gt;p_lcb, NULL, NULL);
+                    1053         break;
+                            l2c_link_check_send_pkts (p_lcb, NULL, NULL);
+                                l2c_link_send_to_lower (p_lcb, p_buf);
+                                1341 #if BLE_INCLUDED == TRUE
+                                1342         if (p_lcb-&gt;is_ble_link)
+                                1344             L2C_LINK_SEND_BLE_ACL_DATA(p_buf);
+                                1346         else
+                                1349             L2C_LINK_SEND_ACL_DATA (p_buf);
+                                                    bte_main_hci_send((BT_HDR *)(p), BT_EVT_TO_LM_HCI_ACL);
+                                                        bt_hc_if-&gt;transmit_buf((TRANSAC)p_msg, \(char *) (p_msg + 1),p_msg-&gt;len);
+                                                            bluedroid/hci/src/bt_hci_bdroid.c:249 static int transmit_buf(TRANSAC transac, char *p_buf, int len)
+                                                                utils_enqueue(&amp;tx_q, (void *) transac);
+                                                                bthc_signal_event(HC_EVENT_TX);
+</code></pre>
+
+<p>{% endcodeblock %}
+4 HCI content write to hardware device driver
+{% codeblock lang:cpp %}
+339 static void <em>bt_hc_worker_thread(void </em>arg)</p>
+
+<pre><code>    if (events &amp; HC_EVENT_TX)
+        p_hci_if-&gt;send(sending_msg_que[i]);
+        593 void hci_h4_send_msg(HC_BT_HDR *p_msg)
+            bytes_sent = userial_write(event,(uint8_t *) p,bytes_to_send);
+                 ret = write(userial_cb.fd, p_data+total, len);
+</code></pre>
+
+<p>{% endcodeblock %}</p>
+
+<h3>Item C. Incoming data/event path:</h3>
+
+<p>0 Init vendor (BT chip vendor, like MRVL/TI) implement of bt_vendor_interface_t interface.
+{% codeblock lang:cpp %}</p>
+
+<pre><code>187 void init_vnd_if(unsigned char *local_bdaddr)
+        dlhandle = dlopen("libbt-vendor.so", RTLD_NOW);             
+        GLOBAL bt_vendor_interface_t *bt_vnd_if = (bt_vendor_interface_t *) dlsym(dlhandle, "BLUETOOTH_VENDOR_LIB_INTERFACE");
+        bt_vnd_if-&gt;init(&amp;vnd_callbacks, local_bdaddr);
+
+306 uint8_t userial_open(uint8_t port)
+        result = bt_vendor_interface_t * bt_vnd_if-&gt;op(BT_VND_OP_USERIAL_OPEN, &amp;fd_array);
+            int bt_vnd_mrvl_if_op(bt_vendor_opcode_t opcode, void *param)
+                mchar_fd = open("/dev/mbtchar0", O_RDWR);
+363     pthread_create(&amp;(userial_cb.read_thread), &amp;thread_attr, userial_read_thread, NULL) != 0 );
+</code></pre>
+
+<p>{% endcodeblock %}
+1 Got a packet from hardware device driver, in HCI layer.
+{% codeblock lang:cpp %}
+bluedroid/hci/src/userial.c:210
+static void <em>userial_read_thread(void </em>arg)</p>
+
+<pre><code>rx_length = select_read(userial_cb.fd, p, READ_LIMIT);
+    ret = read(fd, pbuf, (size_t)len);
+utils_enqueue(&amp;(userial_cb.rx_q), p_buf);
+//bluedroid/hci/src/bt_hci_bdroid.c
+bthc_signal_event(HC_EVENT_RX);
+</code></pre>
+
+<p>{% endcodeblock %}</p>
+
+<p>2 Transfer this to L2CAP layer.
+{% codeblock lang:cpp %}
+bluedroid/hci/src/bt_hci_bdroid.c <br/>
+339 static void <em>bt_hc_worker_thread(void </em>arg)</p>
+
+<pre><code>if (events &amp; HC_EVENT_RX)
+     p_hci_if-&gt;rcv();
+        uint16_t hci_h4_receive_msg(void)//Construct HCI EVENT/ACL packets and send them to stack
+</code></pre>
+
+<p> 957             if (p_cb->p_rcv_msg->event != MSG_HC_TO_STACK_HCI_ACL)
+ 958                 btsnoop_capture(p_cb->p_rcv_msg, TRUE);//dump to HCI trace file/socket.
+ 960             if (p_cb->p_rcv_msg->event == MSG_HC_TO_STACK_HCI_EVT)
+ 965                 bt_hc_cbacks->data_ind((TRANSAC) p_cb->p_rcv_msg, (char *) (p_cb->p_rcv_msg + 1), p_cb->p_rcv_msg->len + BT_HC_HDR_SIZE);</p>
+
+<pre><code>                        bluedroid/main/bte_main.c:504 static int data_ind(TRANSAC transac, char *p_buf, int len)
+                            GKI_send_msg (BTU_TASK, BTU_HCI_RCV_MBOX, transac);//handle in btu_task.
+</code></pre>
+
+<p>{% endcodeblock %}</p>
+
+<p>Reference:
+{% blockquote logcat:A2DP http://yongbingchen.github.com/txt/bluedroid/a2dp-init-logcat.txt %}
+{% endblockquote %}
+{% blockquote air log: LMP http://yongbingchen.github.com/images/bluedroid/A2DP-connect-LMP.jpg %}
+{% endblockquote %}
+{% blockquote air log: L2CAP http://yongbingchen.github.com/images/bluedroid/A2DP-connect-L2CAP.jpg %}
+{% endblockquote %}
+{% blockquote source code reading note http://yongbingchen.github.com/txt/bluedroid/a2dp-source-code-reading-note.txt %}
+{% endblockquote %}</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dissect Bluedroid from A2DP: Part III: Init A2DP Service]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-iii-init-a2dp-service/"/>
+    <updated>2013-05-07T04:17:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-iii-init-a2dp-service</id>
+    <content type="html"><![CDATA[<p>{% img center http://yongbingchen.github.com/images/bluedroid/init_a2dp_service.jpg  %}
+1 Get Android defined A2DP interface btav_interface_t from bt_interface_t get_bluetooth_interface().
+{% codeblock lang:cpp %}
+04-25 01:56:30.530 I/BluetoothA2dpServiceJni( 2093): classInitNative: succeeds
+packages/apps/Bluetooth/jni/com_android_bluetooth_a2dp.cpp
+137 static void initNative(JNIEnv *env, jobject object)</p>
+
+<pre><code>GLOBAL const btav_interface_t *sBluetoothA2dpInterface = (btav_interface_t *)btInf-&gt;get_profile_interface(BT_PROFILE_ADVANCED_AUDIO_ID);
+sBluetoothA2dpInterface-&gt;init(&amp;sBluetoothA2dpCallbacks);
+    external/bluetooth/bluedroid/btif/src/btif_av.c
+    725 static bt_status_t init(btav_callbacks_t* callbacks )
+        686 int btif_a2dp_start_media_task(void)
+            GKI_create_task((TASKPTR)btif_media_task, A2DP_MEDIA_TASK,
+        btif_enable_service(BTA_A2DP_SERVICE_ID);//Upon BT enable, BTIF core shall invoke the BTA APIs to enable the profiles
+</code></pre>
+
+<p>{% endcodeblock %}</p>
+
+<p>2 Init A2DP service by btav_interface_t->init().</p>
+
+<pre><code>* Start a btif_media_task as main loop for A2DP service.
+* Open a socket to listen on client's connect request from control channel.
+</code></pre>
+
+<p>{% codeblock lang:cpp %}
+external/bluetooth/bluedroid/btif/src/btif_media_task.c
+//Task for SBC encoder.  This task receives an event when the waveIn interface has a pcm data buffer ready.  On receiving the event, handle all ready pcm data buffers.  If stream is started, run the SBC encoder on each chunk of pcm samples and build an output packet consisting of one or more encoded SBC frames.
+1066 int btif_media_task(void *p)
+1073     btif_media_task_init();
+1044     UIPC_Init(NULL);</p>
+
+<pre><code>        606 UDRV_API void UIPC_Init(void *p_data)
+            569 int uipc_start_main_server_thread(void)
+                pthread_create(&amp;uipc_main.tid, (const pthread_attr_t *) NULL, (void*)uipc_read_task, NULL)
+</code></pre>
+
+<p>1047     UIPC_Open(UIPC_CH_ID_AV_CTRL , btif_a2dp_ctrl_cb);</p>
+
+<pre><code>        uipc_setup_server_locked(ch_id, A2DP_CTRL_PATH, p_cback);//This is the control socket that listen on A2DP client.
+</code></pre>
+
+<p>1079     while (1)//A2DP event loop
+1080     {
+1085         if (event &amp; BTIF_MEDIA_TASK_CMD)
+1090                 btif_media_task_handle_cmd(p_msg);
+1093
+1094         if (event &amp; BTIF_MEDIA_TASK_DATA)
+1099                 btif_media_task_handle_media(p_msg);
+1102
+1103         if (event &amp; BTIF_MEDIA_AA_TASK_TIMER)
+1105             /<em> advance audio timer expiration </em>/
+1106             btif_media_task_aa_handle_timer();
+{% endcodeblock %}</p>
+
+<p>Reference:
+{% blockquote logcat:A2DP http://yongbingchen.github.com/txt/bluedroid/a2dp-init-logcat.txt %}
+{% endblockquote %}
+{% blockquote air log: LMP http://yongbingchen.github.com/images/bluedroid/A2DP-connect-LMP.jpg %}
+{% endblockquote %}
+{% blockquote air log: L2CAP http://yongbingchen.github.com/images/bluedroid/A2DP-connect-L2CAP.jpg %}
+{% endblockquote %}
+{% blockquote source code reading note http://yongbingchen.github.com/txt/bluedroid/a2dp-source-code-reading-note.txt %}
+{% endblockquote %}</p>
+]]></content>
+  </entry>
+  
+</feed>

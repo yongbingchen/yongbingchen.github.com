@@ -1,0 +1,61 @@
+﻿//LOGS for discovery remote bluetooth device.
+07-10 02:53:40.651 I/bt-btif ( 2098): btif_dm_start_discovery
+07-10 02:53:40.661 I/bt-btif ( 2098): HAL bt_hal_cbacks->discovery_state_changed_cb
+07-10 02:53:40.691 V/BluetoothDiscoveryReceiver( 2020): Received: android.bluetooth.adapter.action.DISCOVERY_STARTED
+
+
+07-10 02:54:13.441 I/bt-btm  ( 2098): BTM_InqDbRead: bd addr [00224887edbf]
+07-10 02:54:13.441 I/bt-btif ( 2098): HAL bt_hal_cbacks->device_found_cb
+07-10 02:54:13.491 D/BluetoothEventManager( 2020): device00:22:48:87:ED:BFbtclass:2540
+
+//1. Call stack of start scan. 
+http://androidxref.com/4.2_r1/xref/packages/apps/Settings/src/com/android/settings/bluetooth/BluetoothSettings.java
+startScanning()
+	mLocalAdapter.startScanning(true);
+
+http://androidxref.com/4.2_r1/xref/frameworks/base/core/java/android/bluetooth/BluetoothAdapter.java#760
+359    private IBluetooth mService;
+760    public boolean startDiscovery() {
+764                if (mService != null) return mService.startDiscovery();
+
+http://androidxref.com/4.2_r1/xref/packages/apps/Bluetooth/src/com/android/bluetooth/btservice/AdapterService.java#637
+480    private static class AdapterServiceBinder extends IBluetooth.Stub {
+637        public boolean startDiscovery() {
+645            return service.startDiscovery();
+646        }
+
+70public class AdapterService extends Service {
+987     boolean startDiscovery() {
+991        return startDiscoveryNative();
+992    }
+ 
+http://androidxref.com/4.2_r1/xref/packages/apps/Bluetooth/jni/com_android_bluetooth_btservice_AdapterService.cpp#568
+568static jboolean startDiscoveryNative(JNIEnv* env, jobject obj) {
+574    int ret = sBluetoothInterface->start_discovery();
+
+//2. Device found callback.
+http://androidxref.com/4.2_r1/xref/packages/apps/Bluetooth/jni/com_android_bluetooth_btservice_AdapterService.cpp#446
+446bt_callbacks_t sBluetoothCallbacks = {
+451    device_found_callback,
+
+259static void device_found_callback(int num_properties, bt_property_t *properties) {
+245    callbackEnv->CallVoidMethod(sJniCallbacksObj, method_devicePropertyChangedCallback, addr,
+287    callbackEnv->CallVoidMethod(sJniCallbacksObj, method_deviceFoundCallback, addr);
+
+
+
+
+
+http://androidxref.com/4.2_r1/xref/packages/apps/Bluetooth/src/com/android/bluetooth/btservice/RemoteDevices.java 
+304     void deviceFoundCallback(byte[] address) {
+315         Intent intent = new Intent(BluetoothDevice.ACTION_FOUND);
+322         mAdapterService.sendBroadcast(intent, mAdapterService.BLUETOOTH_PERM);
+
+http://androidxref.com/4.2_r1/xref/packages/apps/Settings/src/com/android/settings/bluetooth/BluetoothEventManager.java#89
+89        addHandler(BluetoothDevice.ACTION_FOUND, new DeviceFoundHandler());
+	
+191    private class DeviceFoundHandler implements Handler {
+192        public void onReceive(Context context, Intent intent,
+199            CachedBluetoothDevice cachedDevice = mDeviceManager.addDevice(mLocalAdapter, mProfileManager, device);
+208            cachedDevice.setBtClass(btClass);
+209            cachedDevice.setName(name);

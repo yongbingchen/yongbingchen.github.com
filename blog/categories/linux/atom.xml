@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: linux | Yongbing's Blog]]></title>
+  <link href="http://yongbingchen.github.com/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://yongbingchen.github.com/"/>
+  <updated>2015-03-27T20:27:22-07:00</updated>
+  <id>http://yongbingchen.github.com/</id>
+  <author>
+    <name><![CDATA[Yongbing Chen]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[decode instruction address in OOPS to C code file:line]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/07/31/decode-instruction-address-in-oops-to-c-code-file-line/"/>
+    <updated>2013-07-31T05:47:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/07/31/decode-instruction-address-in-oops-to-c-code-file-line</id>
+    <content type="html"><![CDATA[<p>The OOPS message:
+{% codeblock lang:c %}
+[ 2405.090047] Unable to handle kernel paging request at virtual address 008b2005
+[ 2405.097586] pgd = 80004000
+[ 2405.100427] [008b2005] *pgd=00000000
+[ 2405.104187] Internal error: Oops: 5 [#1] PREEMPT SMP ARM
+[ 2405.109673] Modules linked in: mbtusbchar usbfwdnld fusion(O) gal3d amp_core(O)
+[ 2405.117310] CPU: 1    Tainted: G        W  O  (3.4.50+ #11)
+[ 2405.123072] PC is at module_put+0x44/0x8c
+[ 2405.127219] LR is at cdev_put+0x24/0x28
+[ 2405.131182] pc : [<8007521c>]    lr : [<800c97d0>]    psr: 20000013
+[ 2406.111129] Backtrace:
+[ 2406.113680] [<800751d8>] (module_put+0x0/0x8c) from [<800c97d0>] (cdev_put+0x24/0x28)
+[ 2406.121764]  r4:45a8e010 r3:ffffffff
+[ 2406.125491] [<800c97ac>] (cdev_put+0x0/0x28) from [<800c7410>] (fput+0x21c/0x22c)
+{% endcodeblock%}</p>
+
+<p>Method A: Recompile vmlinux or failed module with debug info enabled if possible (CONFIG_DEBUG_INFO=y), then gdb can give out the C source code line of the failed instruction:
+{% codeblock lang:c %}
+$ make $MY_DEFAULT_CONFIG_FILE -C $LINUX_ROOT_DIR CROSS_COMPILE=arm-linux-gnueabi- ARCH=arm
+$ make $MY_UIMAGE_NAME -C $LINUX_ROOT_DIR CROSS_COMPILE=arm-linux-gnueabi- ARCH=arm CONFIG_DEBUG_INFO=y -j32
+{% endcodeblock%}
+Recompile individual module if needed:
+{% codeblock lang:c %}
+$ make modules -C $LINUX_ROOT_DIR CROSS_COMPILE=arm-linux-gnueabi- ARCH=arm CONFIG_DEBUG_INFO=y -j32
+{% endcodeblock%}</p>
+
+<p>Use gdb to get C source file:line info from given instruction address:
+{% codeblock lang:c %}
+$ arm-linux-androideabi-gdb –f vmlinux
+Reading symbols from linux/vmlinux...done.
+(gdb) list <em>(module_put+0x44)
+0x80073964 is in module_put (kernel/module.c:942).
+937     void module_put(struct module </em>module)
+938     {
+939             if (module) {
+940                     preempt_disable();
+941                     smp_wmb(); /<em> see comment in module_refcount </em>/
+942                     <em><em>this_cpu_inc(module->refptr->decs);
+943
+944                     trace_module_put(module, </em>RET_IP</em>);
+945                     /<em> Maybe they're waiting for us to drop reference? </em>/
+946                     if (unlikely(!module_is_live(module)))
+(gdb) disas (module_put+0x44)
+Dump of assembler code for function module_put:
+   0x80073960 &lt;+64>:    add     r3, r3, #4
+   0x80073964 &lt;+68>:    ldr     r1, [r3, r2]
+{% endcodeblock%}</p>
+
+<p>Method B: If can not recompile the vmlinux/module, but the problematic vmlinux/module file is available, use objdump to get the assembly line, but no C source line available.
+{% codeblock lang:c %}
+$ arm-linux-androideabi-objdump -dSl vmlinux >vmlinux.disasm
+{% endcodeblock%}</p>
+
+<p>module_put+0x44 = 0x800751d8 + 0x44 = 0x8007521c:
+{% codeblock lang:c %}
+800751d8 <module_put>:
+module_put():
+8007521c:       e7931002        ldr     r1, [r3, r2]
+{% endcodeblock%}
+Compared with method A, method B get the same instruction line.</p>
+
+<p>Appendix: only for comparison/reference: use objdump to decode an object file with debug info:
+{% codeblock lang:c %}
+$ arm-linux-androideabi-objdump -dSlr kernel/module.o >kernel/module.disasm
+{% endcodeblock%}</p>
+
+<p>Check if module_put+0x44 = 0xf28+0x44 = 0xf6c point to the same C source line and assembly line:
+{% codeblock lang:c %}
+ 00000f28 <module_put>:
+  module_put():
+  linux/kernel/module.c:938</p>
+
+<pre><code>      return ret;
+</code></pre>
+
+<p>  }
+  EXPORT_SYMBOL(try_module_get);</p>
+
+<p>  void module_put(struct module *module)
+  {</p>
+
+<pre><code>   f28:       e1a0c00d        mov     ip, sp
+   f2c:       e92dd818        push    {r3, r4, fp, ip, lr, pc}
+   f30:       e24cb004        sub     fp, ip, #4
+</code></pre>
+
+<p>  linux/kernel/module.c:939</p>
+
+<pre><code>      if (module) {
+   f34:       e3500000        cmp     r0, #0
+   f38:       089da818        ldmeq   sp, {r3, r4, fp, sp, pc}
+</code></pre>
+
+<p>  current_thread_info():
+  linux/arch/arm/include/asm/thread_info.h:97</p>
+
+<pre><code>   f3c:       e1a0300d        mov     r3, sp
+   f40:       e3c34d7f        bic     r4, r3, #8128   ; 0x1fc0
+   f44:       e3c4403f        bic     r4, r4, #63     ; 0x3f
+</code></pre>
+
+<p>  module_put():
+  linux/kernel/module.c:940</p>
+
+<pre><code>              preempt_disable();
+   f48:       e5943004        ldr     r3, [r4, #4]
+   f4c:       e2833001        add     r3, r3, #1
+   f50:       e5843004        str     r3, [r4, #4]
+</code></pre>
+
+<p>  linux/kernel/module.c:941</p>
+
+<pre><code>              smp_wmb(); /* see comment in module_refcount */
+   f54:       f57ff05f        dmb     sy
+</code></pre>
+
+<p>  linux/kernel/module.c:942</p>
+
+<pre><code>              __this_cpu_inc(module-&gt;refptr-&gt;decs);
+   f58:       e59f2050        ldr     r2, [pc, #80]   ; fb0 &lt;module_put+0x88&gt;
+   f5c:       e5941014        ldr     r1, [r4, #20]
+   f60:       e5903138        ldr     r3, [r0, #312]  ; 0x138
+   f64:       e7922101        ldr     r2, [r2, r1, lsl #2]
+   f68:       e2833004        add     r3, r3, #4
+   f6c:       e7931002        ldr     r1, [r3, r2]
+   f70:       e2811001        add     r1, r1, #1
+   f74:       e7831002        str     r1, [r3, r2]
+</code></pre>
+
+<p>  linux/kernel/module.c:946
+{% endcodeblock%}</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[atomic file writing]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/07/24/atomic-file-write/"/>
+    <updated>2013-07-24T05:16:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/07/24/atomic-file-write</id>
+    <content type="html"><![CDATA[<p>QA reported a bug, sometimes when power cycle target board right after pairing a bluetooth device, the whole bluetooth paring info lost.
+I found out the root cause is that the configure file of bluedroid lost all content in this case.
+Turned out the bluedroid configure file writing operation is not atomic.
+I came up with a revised file writing process, to guarantee it's atomic:</p>
+
+<ol>
+<li>copy the configure file to a temporary file.</li>
+<li>write the update content to the temporary file.</li>
+<li>fsync the temporary file. (the step that bluedroid missed)</li>
+<li>rename the temporary file to configure file.</li>
+</ol>
+
+
+<p>Because rename is atomic, and all steps before it are revertable (will not affect the configure file), so the whole process is atomic.</p>
+
+<p>{% include_code atomic_write.c lang:c %}</p>
+
+<p>Reference:
+{% blockquote atomic unix methods http://rcrowley.org/2010/01/06/things-unix-can-do-atomically.html%}{% endblockquote %}
+{% blockquote man fsync http://linux.die.net/man/3/fsync%}{% endblockquote %}</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[misc code samples]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/06/30/misc-code-samples/"/>
+    <updated>2013-06-30T22:49:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/06/30/misc-code-samples</id>
+    <content type="html"><![CDATA[<p>1 inotify: monitoring hidraw device file add/remove events:
+{% include_code inotify-example.c lang:c %}
+2 pthread timer_create: periodically generate an event, as a heartbeat:
+{% include_code pthread_timer-example.c lang:c %}
+3 netlink NETLINK_KOBJECT_UEVENT: same purpose as #1:
+{% include_code ueventd-example.c lang:c %}</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Skeleton of a Bluetooth SDIO driver]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/04/23/skeleton-of-a-bluetooth-sdio-driver/"/>
+    <updated>2013-04-23T05:28:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/04/23/skeleton-of-a-bluetooth-sdio-driver</id>
+    <content type="html"><![CDATA[<p>A Bluetooth SDIO card driver talks with hardware through SDIO interface, providing R/W method for Bluetooth Adapter layer, here's the class diagram for this relationship:</p>
+
+<p>{% img http://yongbingchen.github.com/images/bt_drv/bt_drv_class_diagram.jpg  %}</p>
+
+<p>The outbound Bluetooth data path:</p>
+
+<ol>
+<li>Upper layer use HCI interface send() to send data/command packet, implemented as btmrvl_send_frame() in this driver.</li>
+<li>Put this packet in adapter's tx queue, wakeup the main data processing thread (like NAPI in a network driver, thread function is btmrvl_service_main_thread()).</li>
+<li>In main data procssing thread, re-organize skb data payload for DMA transfer (in btmrvl_tx_pkt()).</li>
+<li>Call sdio_writesb() to write data to hardware (in btmrvl_sdio_host_to_card()).</li>
+</ol>
+
+
+<p>The incoming Bluetooth data path:</p>
+
+<ol>
+<li>SDIO card received a data packet, triggered a interrupt to host.</li>
+<li>The SDIO ISR triggred the main data processing thread.</li>
+<li>In this thread, allocate a skb with DAM aligned, call sdio_readsb() to read the data from SDIO interface (in btmrvl_sdio_card_to_host()).</li>
+<li>Call hci_recv_frame(skb) to send this data packet to upper layer Bluetooth stack.</li>
+</ol>
+
+
+<p>Appendix: How to register a driver specific ISR to SDIO's ISR:
+{% codeblock In driver module init, hook up a device ISR to SDIO's ISR. lang:c %}</p>
+
+<pre><code>int __init btmrvl_sdio_init_module(void)
+|
+|
+--&gt;sdio_register_driver(&amp;bt_mrvl_sdio) != 0) 
+    |
+    |
+    --&gt;btmrvl_sdio_probe(struct sdio_func *func, const struct sdio_device_id *id)
+        |
+        |
+        --&gt;sdio_claim_irq(func, btmrvl_sdio_interrupt);{% endcodeblock %}
+</code></pre>
+
+<p>{% codeblock In this ISR, wake up main data pocessing thread to read data from card. lang:c %}</p>
+
+<pre><code>void btmrvl_sdio_interrupt(struct sdio_func *func)
+|
+|
+--&gt;btmrvl_interrupt(priv);
+    |
+    |
+    --&gt;wake_up_interruptible(&amp;priv-&gt;main_thread.wait_q);{% endcodeblock %}
+</code></pre>
+
+<p>Source Code:
+{% blockquote @btmrvl_sdio.c http://lxr.linux.no/linux+v3.8.8/drivers/bluetooth/btmrvl_sdio.c %}
+{% endblockquote %}
+{% blockquote @btmrvl_main.c http://lxr.linux.no/linux+v3.8.8/drivers/bluetooth/btmrvl_main.c %}
+{% endblockquote %}</p>
+
+<h2>Note: How to load firmware for a SDIO device</h2>
+
+<p>{% codeblock 1. Disable interrupt from this SDIO device. lang:c %}
+sdio_claim_host(card->func);
+btmrvl_sdio_disable_host_int(card);</p>
+
+<pre><code>host_int_mask = sdio_readb(card-&gt;func, card-&gt;reg-&gt;host_int_mask, &amp;ret);
+host_int_mask &amp;= ~HIM_DISABLE;
+sdio_writeb(card-&gt;func, host_int_mask, card-&gt;reg-&gt;host_int_mask, &amp;ret);
+</code></pre>
+
+<p>sdio_release_host(card->func);
+{% endcodeblock %}</p>
+
+<p>{% codeblock 2. Get and Write firmware. lang:c %}
+sdio_claim_host(card->func);</p>
+
+<pre><code>//Get firmware from user space.
+request_firmware(&amp;fw_firmware, card-&gt;firmware,//name of firmware file, = "mrvl/sd8787_uapsta.bin",
+        &amp;card-&gt;func-&gt;dev);
+//Write firmware into SDIO device, check firmware status.
+tmpfwbufsz = ALIGN_SZ(BTM_UPLD_SIZE, BTSDIO_DMA_ALIGN);
+fwbuf = (u8 *) ALIGN_ADDR(tmpfwbuf, BTSDIO_DMA_ALIGN);
+memcpy(fwbuf, &amp;firmware[offset], txlen);
+sdio_writesb(card-&gt;func, card-&gt;ioport, fwbuf,tx_blocks * blksz_dl);
+
+//Release firmware related resource in kernel.
+release_firmware(fw_firmware);
+</code></pre>
+
+<p>sdio_release_host(card->func);
+{% endcodeblock %}
+Alternatively, you can use request_firmware_nowait() if current thread is not allowed to sleep for a long time.</p>
+
+<p>{% codeblock 3. Enable SDIO device interrupt. lang:c %}
+btmrvl_sdio_enable_host_int(card);
+{% endcodeblock %}</p>
+
+<p>Reference:
+{% blockquote @How request_firmware() works http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/firmware_class/README?id=HEAD %}
+{% endblockquote %}
+{% blockquote @Default firmware search path in Android http://stackoverflow.com/questions/6019915/kernel-module-cannot-find-firmware-file-where-should-it-be %}
+{% endblockquote %}
+{% codeblock $Jellybean/system/core/init/devices.c lang:c %}</p>
+
+<h1>define SYSFS_PREFIX    "/sys"</h1>
+
+<h1>define FIRMWARE_DIR1   "/etc/firmware"</h1>
+
+<p>asprintf(&amp;root, SYSFS_PREFIX"%s/", uevent->path);
+asprintf(&amp;file1, FIRMWARE_DIR1"/%s", uevent->firmware);
+fw_fd = open(file1, O_RDONLY);
+{% endcodeblock %}</p>
+
+<h1>Footnote: sdio_claim_host(card->func)</h1>
+
+<ol>
+<li>card->func means an independent function residues in same card (there maybe different functions implemented in same card simultaneously, like BT and Wifi in MRVL 8787 module. The device field in struct sdio_device_id is used as function id to distinguish these functions, in this driver, the device field in driver is 0x911B for MRVL_BT_SD8787, it reflected as:
+0x911b in /sys/class/mmc_host/mmc1/mmc1\:0001/mmc1\:0001\:3/device.</li>
+<li>sdio_claim_host() is acting like a lock, I guess this will serialize access to same SD device between different functions, and also between different threads inside same function.</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Refresh memo: how a process accesses physical memory]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/03/23/memo-how-a-process-accesses-physical-memory/"/>
+    <updated>2013-03-23T21:39:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/03/23/memo-how-a-process-accesses-physical-memory</id>
+    <content type="html"><![CDATA[<p>Scenario: a process acquired a new block of memory, then try to access part of this block:
+{% codeblock lang:c %}</p>
+
+<pre><code>    unsigned char * buf = (unsigned char *)malloc(1024);
+    if (buf != NULL)
+            *(buf + 3) = 0xfe;
+</code></pre>
+
+<p>{% endcodeblock %}
+What happens in malloc():</p>
+
+<ol>
+<li>stdlib will try to handle it internally, if can't satisfy this request, then,</li>
+<li>Call sbrk() to let kernel enlarge current process's heap space (by adjust process's VMAs).</li>
+</ol>
+
+
+<p>What happens next when try to access the memory:</p>
+
+<ol>
+<li>CPU's MMU use this virtual address to look up in current CPU's TLB, not found.</li>
+<li>Then MMU switch to look up this address in process's Page Table, try to do the virtual-to-physical address translation.</li>
+<li>Step 2 will fail, a Page Fault exception happens.
+
+<ul>
+<li>In Page Fault exception handler, check if current process has write permission to this address, that's done by check process's VMA list.</li>
+<li>Allocate a physical page, update process's Page Table for this page.</li>
+</ul>
+</li>
+<li>After the exception handler returned, and the process get scheduled to execute again, it will retry the instruction that caused the Page Fault, this time will get correct physical address pointed to the new page. Update TLB entry for this new map.</li>
+<li>Select proper line in Cache for this physical address, write the new value to Cache, then hardware will write back this new value from Cache to real memory at proper time.</li>
+</ol>
+
+
+<p>{% blockquote @How Xscale Handle Cache Miss http://www.cs.uiuc.edu/homes/luddy/PROCESSORS/XScaleMMX.pdf %}
+{% endblockquote %}</p>
+]]></content>
+  </entry>
+  
+</feed>

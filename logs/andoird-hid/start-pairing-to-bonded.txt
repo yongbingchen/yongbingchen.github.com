@@ -1,0 +1,90 @@
+﻿//Call stack of pairing
+http://androidxref.com/4.2_r1/xref/packages/apps/Settings/src/com/android/settings/bluetooth/BluetoothDevicePreference.java#173
+173    void onClicked() {
+181            pair();
+206        if (!mCachedDevice.startPairing()) {
+
+http://androidxref.com/4.2_r1/xref/packages/apps/Settings/src/com/android/settings/bluetooth/CachedBluetoothDevice.java#281
+49    private final BluetoothDevice mDevice;
+281    boolean startPairing() {
+287        if (!mDevice.createBond()) {
+
+http://androidxref.com/4.2_r1/xref/frameworks/base/core/java/android/bluetooth/BluetoothDevice.java#671
+480    private static IBluetooth sService;
+671    public boolean createBond() {
+677            return sService.createBond(this);
+
+http://androidxref.com/4.2_r1/xref/packages/apps/Bluetooth/src/com/android/bluetooth/btservice/AdapterService.java#480
+480    private static class AdapterServiceBinder extends IBluetooth.Stub {
+694        public boolean createBond(BluetoothDevice device) {
+700            AdapterService service = getService();
+702            return service.createBond(device);
+
+1025     boolean createBond(BluetoothDevice device) {
+1033        Message msg = mBondStateMachine.obtainMessage(BondStateMachine.CREATE_BOND);
+1035        mBondStateMachine.sendMessage(msg);
+
+http://androidxref.com/4.2_r1/xref/packages/apps/Bluetooth/src/com/android/bluetooth/btservice/BondStateMachine.java#110
+97    private class StableState extends State {
+104        public boolean processMessage(Message msg) {
+110              case CREATE_BOND:
+111                  createBond(dev, true);
+
+237    private boolean createBond(BluetoothDevice dev, boolean transition) {
+59     private AdapterService mAdapterService;
+241            if (!mAdapterService.createBondNative(addr)) {
+
+http://androidxref.com/4.2_r1/xref/packages/apps/Bluetooth/jni/com_android_bluetooth_btservice_AdapterService.cpp#590
+590static jboolean createBondNative(JNIEnv* env, jobject obj, jbyteArray address) {
+604    int ret = sBluetoothInterface->create_bond((bt_bdaddr_t *)addr);
+
+//LOGS
+//1. Issued pair command.					
+07-10 02:54:39.861 I/BluetoothBondStateMachine( 2098): Bond address is:00:22:48:87:ED:BF
+07-10 02:54:39.861 I/bt-btif ( 2098): btif_dm_create_bond: bd_addr=00:22:48:87:ed:bf
+07-10 02:54:39.861 I/BluetoothBondStateMachine( 2098): Entering PendingCommandState State
+
+07-10 02:54:39.871 I/BluetoothBondStateMachine( 2098): bondStateChangeCallback: Status: 0 Address: 00:22:48:87:ED:BF newState: 1
+07-10 02:54:39.881 I/BluetoothBondStateMachine( 2098): Bond State Change Intent:00:22:48:87:ED:BF OldState: 10 NewState: 11
+
+//2. Request pin code from end user.
+07-10 02:54:41.241 I/bt-btif ( 2098): HAL bt_hal_cbacks->pin_request_cb
+07-10 02:54:41.351 I/ActivityManager( 1642): START u0 {act=android.bluetooth.device.action.PAIRING_REQUEST flg=0x10000000 cmp=com.android.settings/.bluetooth.BluetoothPairingDialog (has extras)} from pid 2020
+07-10 02:54:41.631 I/bt-btm  ( 2098): BTM_PINCodeReply(): PairState: 3   PairFlags: 0x09  PinLen:6  Result:0
+07-10 02:54:48.321 D/bt-btif ( 2098): btif_dm_auth_cmpl_evt: Storing link key. key_type=0x0, is_temp=0
+
+//3. Start SDP to get remote device supported service UUID.
+07-10 02:54:48.321 I/bt-btif ( 2098): btif_dm_get_remote_services: remote_addr=00:22:48:87:ed:bf
+07-10 02:54:48.321 E/bt-btif ( 2098): ****************search UUID = 1200***********
+07-10 02:54:48.321 I/bt-sdp  ( 2098): SDP - Originate started
+
+//4. onUuidChanged event triggured HID connect command from Android.
+07-10 02:54:50.161 D/BluetoothInputDevice( 2020): connect(00:22:48:87:ED:BF)				   
+07-10 02:54:50.161 I/bt-btif ( 2098): BTHH: btif_hh_connect
+07-10 02:54:50.161 D/bt-btif ( 2098): Connect _hh
+07-10 02:54:50.171 I/bt-btif ( 2098): BTA got event 0x1700
+07-10 02:54:50.171 I/bt-sdp  ( 2098): SDP - Originate started
+
+07-10 02:54:50.171 I/bt-btif ( 2098): HAL bt_hh_callbacks->connection_state_cb
+07-10 02:54:50.171 D/HidService( 2098): Connection state 00:22:48:87:ED:BF: 0->1
+07-10 02:54:50.171 D/CachedBluetoothDevice( 2020): Command sent successfully:CONNECT Address:00:22:48:87:ED:BF Profile:HID
+
+//5. A new SDP process fetch HID descriptor from remote device, create hidraw and input device through uhid interface after that.
+07-10 02:54:51.421 W/bt-btif ( 2098): BTA_HH_OPEN_EVT: Found device...Getting dscp info for handle ... 0
+07-10 02:54:51.421 D/bt-btif ( 2098): btif_hh_upstreams_evt: event=BTA_HH_GET_DSCP_EVT
+07-10 02:54:51.431 W/bt-btif ( 2098): btif_hh_upstreams_evt: name = Broadcom Bluetooth HID
+07-10 02:54:51.431 W/bt-btif ( 2098): bta_hh_co_send_hid_info: vendor_id = 0x045e, product_id = 0x0762, version= 0x0013,ctry_code=0x21//This trggier device file /dev/hidraw* /dev/input/event* be created through uhid driver in kernel.
+
+07-10 02:54:51.431 D/HidService( 2098): Connection state 00:22:48:87:ED:BF: 1->2
+07-10 02:54:51.441 D/CachedBluetoothDevice( 2020): onProfileStateChanged: profile HID newProfileState 2
+07-10 02:54:51.441 D/BluetoothAdapterProperties( 2098): CONNECTION_STATE_CHANGE: 00:22:48:87:ED:BF: 1 -> 2
+
+07-10 02:54:51.461 I/EventHub( 1642): New device: id=4, fd=193, path='/dev/input/event3', name='Broadcom Bluetooth HID', classes=0x80000163, configuration='', keyLayout='/system/usr/keylayout/Broadcom_Bluetooth_HID.kl', keyCharacterMap='/system/usr/keychars/Generic.kcm', builtinKeyboard=false, usingSuspendBlockIoctl=true, usingClockIoctl=true
+
+//6. Now the key input will go through bluedroid->uhid->input and hidraw.
+07-10 02:54:51.471 D/bt-btif ( 2098): UHID_START from uhid-dev
+07-10 02:54:51.471 D/bt-btif ( 2098): UHID_OPEN from uhid-dev
+07-10 02:54:51.471 W/bt-btif ( 2098): bta_hh_co_send_hid_info: fd = 72, dscp_len = 139, result = 0
+
+
+

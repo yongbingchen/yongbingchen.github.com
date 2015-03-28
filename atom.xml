@@ -1,124 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>Yongbing's Blog</title>
-  <meta name="author" content="Yongbing Chen">
-
-  
-  <meta name="description" content="Create repo manifest: As gerrit server administrator, create below pojects in gerrit server container //for global access control, choose &#8220;Only &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://yongbingchen.github.com/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Yongbing's Blog" type="application/atom+xml">
-  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-39352307-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <div id="logo">
-  	<div id="logoLeft"></div>
-  	<div id="logoText"></div>
-  	<div id="logoRight"></div>
-  	<div class="clear"></div>
-  </div>
-  <h1><a href="/">Yongbing's Blog</a></h1>
-  
-    <h2>A personal technical note.</h2>
-  
-  <div class="clear"></div>
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:yongbingchen.github.com" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/about-me">About Me</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
+  <title><![CDATA[Yongbing's Blog]]></title>
+  <link href="http://yongbingchen.github.com/atom.xml" rel="self"/>
+  <link href="http://yongbingchen.github.com/"/>
+  <updated>2015-03-27T20:21:29-07:00</updated>
+  <id>http://yongbingchen.github.com/</id>
+  <author>
+    <name><![CDATA[Yongbing Chen]]></name>
     
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2015/03/27/create-my-own-repo-to-manage-bundle-of-git-repositories/">Create My Own Repo to Manage Bundle of Git Repositories</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-
-
-<time datetime="2015-03-27T17:35:00-07:00" pubdate data-updated="true">Mar 27<span>th</span>, 2015</time>
-        
-         | <a href="/blog/2015/03/27/create-my-own-repo-to-manage-bundle-of-git-repositories/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Create repo manifest:</h2>
+  <entry>
+    <title type="html"><![CDATA[create my own repo to manage bundle of git repositories]]></title>
+    <link href="http://yongbingchen.github.com/blog/2015/03/27/create-my-own-repo-to-manage-bundle-of-git-repositories/"/>
+    <updated>2015-03-27T17:35:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2015/03/27/create-my-own-repo-to-manage-bundle-of-git-repositories</id>
+    <content type="html"><![CDATA[<h2>Create repo manifest:</h2>
 
 <ol>
 <li>As gerrit server administrator, create below pojects in gerrit server
@@ -195,46 +95,15 @@ First delete all default access permission granted for &#8220;Registered Users&#
 Then create below access rules for the projects under container: <img src="http://yongbingchen.github.com/images/git/repo/gerrit_server_access_control.jpeg" title="" ></li>
 </ol>
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2015/03/27/config-gerrit-server-behind-apache-https-reverse-proxy/">Config Gerrit Server Behind Apache Https Reverse-proxy</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-03-27T16:20:00-07:00" pubdate data-updated="true">Mar 27<span>th</span>, 2015</time>
-        
-         | <a href="/blog/2015/03/27/config-gerrit-server-behind-apache-https-reverse-proxy/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I want to setup a secure gerrit server for a small developer group within intranet, I choose Apache as its reverse-proxy server, and use HTTP as gerrit server&#8217;s auth type, becasue I only want a few selected people to see the server, so no LDAP.</p>
+  <entry>
+    <title type="html"><![CDATA[config gerrit server behind Apache https reverse-proxy]]></title>
+    <link href="http://yongbingchen.github.com/blog/2015/03/27/config-gerrit-server-behind-apache-https-reverse-proxy/"/>
+    <updated>2015-03-27T16:20:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2015/03/27/config-gerrit-server-behind-apache-https-reverse-proxy</id>
+    <content type="html"><![CDATA[<p>I want to setup a secure gerrit server for a small developer group within intranet, I choose Apache as its reverse-proxy server, and use HTTP as gerrit server&#8217;s auth type, becasue I only want a few selected people to see the server, so no LDAP.</p>
 
 <p>Here&#8217;s the final web view from a registered developer:
 <img src="http://yongbingchen.github.com/images/git/repo/sample-cl-webpage.jpg" title="" ></p>
@@ -406,46 +275,15 @@ Then create below access rules for the projects under container: <img src="http:
 
 
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/07/31/decode-instruction-address-in-oops-to-c-code-file-line/">Decode Instruction Address in OOPS to C Code File:line</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-31T05:47:00-07:00" pubdate data-updated="true">Jul 31<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/31/decode-instruction-address-in-oops-to-c-code-file-line/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The OOPS message:</p>
+  <entry>
+    <title type="html"><![CDATA[decode instruction address in OOPS to C code file:line]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/07/31/decode-instruction-address-in-oops-to-c-code-file-line/"/>
+    <updated>2013-07-31T05:47:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/07/31/decode-instruction-address-in-oops-to-c-code-file-line</id>
+    <content type="html"><![CDATA[<p>The OOPS message:</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -648,46 +486,15 @@ Then create below access rules for the projects under container: <img src="http:
 
 
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/07/24/atomic-file-write/">Atomic File Writing</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-24T05:16:00-07:00" pubdate data-updated="true">Jul 24<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/24/atomic-file-write/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>QA reported a bug, sometimes when power cycle target board right after pairing a bluetooth device, the whole bluetooth paring info lost.
+  <entry>
+    <title type="html"><![CDATA[atomic file writing]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/07/24/atomic-file-write/"/>
+    <updated>2013-07-24T05:16:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/07/24/atomic-file-write</id>
+    <content type="html"><![CDATA[<p>QA reported a bug, sometimes when power cycle target board right after pairing a bluetooth device, the whole bluetooth paring info lost.
 I found out the root cause is that the configure file of bluedroid lost all content in this case.
 Turned out the bluedroid configure file writing operation is not atomic.
 I came up with a revised file writing process, to guarantee it&#8217;s atomic:</p>
@@ -702,7 +509,7 @@ I came up with a revised file writing process, to guarantee it&#8217;s atomic:</
 
 <p>Because rename is atomic, and all steps before it are revertable (will not affect the configure file), so the whole process is atomic.</p>
 
-<figure class='code'><figcaption><span> (atomic_write.c)</span> <a href='/downloads/code/atomic_write.c'>download</a></figcaption>
+<figure class='code'><figcaption><span> (atomic_write.c)</span> <a href='http://yongbingchen.github.com/downloads/code/atomic_write.c'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -1001,46 +808,15 @@ I came up with a revised file writing process, to guarantee it&#8217;s atomic:</
 
 
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/07/12/android-bluetooth-pair-a-hid-device/">Android Bluetooth: Pairing a HID Device</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-12T23:06:00-07:00" pubdate data-updated="true">Jul 12<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/12/android-bluetooth-pair-a-hid-device/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://yongbingchen.github.com/images/android_bt/android-pair-hid-device.jpg" title="" ></p>
+  <entry>
+    <title type="html"><![CDATA[Android Bluetooth: pairing a HID device]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/07/12/android-bluetooth-pair-a-hid-device/"/>
+    <updated>2013-07-12T23:06:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/07/12/android-bluetooth-pair-a-hid-device</id>
+    <content type="html"><![CDATA[<p><img src="http://yongbingchen.github.com/images/android_bt/android-pair-hid-device.jpg" title="" ></p>
 
 <ol>
 <li>User started scanning from Bluetooth Settings UI, Android Bluetooth service responded to this request, calling bluedroid to start discovery.</li>
@@ -1092,48 +868,17 @@ I came up with a revised file writing process, to guarantee it&#8217;s atomic:</
 
 
 <p></p>
-</div>
+]]></content>
+  </entry>
   
-  
+  <entry>
+    <title type="html"><![CDATA[misc code samples]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/06/30/misc-code-samples/"/>
+    <updated>2013-06-30T22:49:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/06/30/misc-code-samples</id>
+    <content type="html"><![CDATA[<p>1 inotify: monitoring hidraw device file add/remove events:</p>
 
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/06/30/misc-code-samples/">Misc Code Samples</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-30T22:49:00-07:00" pubdate data-updated="true">Jun 30<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/30/misc-code-samples/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>1 inotify: monitoring hidraw device file add/remove events:</p>
-
-<figure class='code'><figcaption><span> (inotify-example.c)</span> <a href='/downloads/code/inotify-example.c'>download</a></figcaption>
+<figure class='code'><figcaption><span> (inotify-example.c)</span> <a href='http://yongbingchen.github.com/downloads/code/inotify-example.c'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -1541,7 +1286,7 @@ I came up with a revised file writing process, to guarantee it&#8217;s atomic:</
 
 <p>2 pthread timer_create: periodically generate an event, as a heartbeat:</p>
 
-<figure class='code'><figcaption><span> (pthread_timer-example.c)</span> <a href='/downloads/code/pthread_timer-example.c'>download</a></figcaption>
+<figure class='code'><figcaption><span> (pthread_timer-example.c)</span> <a href='http://yongbingchen.github.com/downloads/code/pthread_timer-example.c'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -1797,7 +1542,7 @@ I came up with a revised file writing process, to guarantee it&#8217;s atomic:</
 
 <p>3 netlink NETLINK_KOBJECT_UEVENT: same purpose as #1:</p>
 
-<figure class='code'><figcaption><span> (ueventd-example.c)</span> <a href='/downloads/code/ueventd-example.c'>download</a></figcaption>
+<figure class='code'><figcaption><span> (ueventd-example.c)</span> <a href='http://yongbingchen.github.com/downloads/code/ueventd-example.c'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -2032,46 +1777,15 @@ I came up with a revised file writing process, to guarantee it&#8217;s atomic:</
 
 
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/05/25/bluedroid-bug-fix/">Bluedroid Bug Fixing</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-25T07:13:00-07:00" pubdate data-updated="true">May 25<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/05/25/bluedroid-bug-fix/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I fixed thress tricky bugs in one week, that&#8217;s pretty efficient, even out of my own expectation ^-^</p>
+  <entry>
+    <title type="html"><![CDATA[bluedroid bug fixing]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/05/25/bluedroid-bug-fix/"/>
+    <updated>2013-05-25T07:13:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/05/25/bluedroid-bug-fix</id>
+    <content type="html"><![CDATA[<p>I fixed thress tricky bugs in one week, that&#8217;s pretty efficient, even out of my own expectation ^-^</p>
 
 <h2>bug I: TiVo remote connected but not working.</h2>
 
@@ -2124,46 +1838,15 @@ while in dump message in the error message, it&#8217;s 0900000A00010001<font col
 <p>Compared with another HID device which can successfully do unpair/pair, I found that the success case can correctly response to host&#8217;s BTA_HH_CTRL_VIRTUAL_CABLE_UNPLUG request as defined in HID spec 1.1, figure A.4.</p>
 
 <p>In the failed case, the HID device will not initiate disconnect against our host after receiving the unplug request, and Bluedroid in our host failed to deal with this situation, as required by HID spec, to delete pair information after issue this requirement. Due to this remaining piece of pair information, next pair attempt will fail.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/05/09/dump-stack-in-android-native-c-code/">Dump_stack in Android Native C Code</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-09T21:34:00-07:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/05/09/dump-stack-in-android-native-c-code/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>1 Wrapper Android C++ method into a C function:</p>
+  <entry>
+    <title type="html"><![CDATA[dump_stack in Android native C code]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/05/09/dump-stack-in-android-native-c-code/"/>
+    <updated>2013-05-09T21:34:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/05/09/dump-stack-in-android-native-c-code</id>
+    <content type="html"><![CDATA[<p>1 Wrapper Android C++ method into a C function:</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -2317,46 +2000,15 @@ This is useful when debugging some real time issues.</p>
 
 <blockquote><p></p><footer><strong>source code and test log</strong> <cite><a href='http://yongbingchen.github.com/downloads/code/peek_stack.tar.gz'>yongbingchen.github.com/code/&hellip;</a></cite></footer></blockquote>
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-v-summary/">Dissect Bluedroid From A2DP: Part v: Key Components</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-07T20:57:00-07:00" pubdate data-updated="true">May 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-v-summary/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>1 Interface and implementation</h3>
+  <entry>
+    <title type="html"><![CDATA[Dissect Bluedroid from A2DP: Part V: Key components]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-v-summary/"/>
+    <updated>2013-05-07T20:57:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-v-summary</id>
+    <content type="html"><![CDATA[<h3>1 Interface and implementation</h3>
 
 <p><font color = "green">bt_interface_t</font>: Android defined, Bluedroid implemented as bluetoothInterface in external/bluetooth/bluedroid/btif/src/bluetooth.c: System control BT adapter.</p>
 
@@ -2398,46 +2050,15 @@ This is useful when debugging some real time issues.</p>
 
 <blockquote><p></p><footer><strong>source code reading note</strong> <cite><a href='http://yongbingchen.github.com/txt/bluedroid/a2dp-source-code-reading-note.txt'>yongbingchen.github.com/txt/&hellip;</a></cite></footer></blockquote>
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-iv-a2dp-traffic/">Dissect Bluedroid From A2DP: Part IV: Connect and Communication</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-07T04:50:00-07:00" pubdate data-updated="true">May 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-iv-a2dp-traffic/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>Item A. Connect a remote A2DP device:</h3>
+  <entry>
+    <title type="html"><![CDATA[Dissect Bluedroid from A2DP: Part IV: connect and communication]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-iv-a2dp-traffic/"/>
+    <updated>2013-05-07T04:50:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-iv-a2dp-traffic</id>
+    <content type="html"><![CDATA[<h3>Item A. Connect a remote A2DP device:</h3>
 
 <p><img class="center" src="http://yongbingchen.github.com/images/bluedroid/a2dp_connect.jpg" title="" >
 1 Android system will try to reconnect paired A2DP device automatically after BT enable.</p>
@@ -2723,129 +2344,960 @@ This is useful when debugging some real time issues.</p>
 
 <blockquote><p></p><footer><strong>source code reading note</strong> <cite><a href='http://yongbingchen.github.com/txt/bluedroid/a2dp-source-code-reading-note.txt'>yongbingchen.github.com/txt/&hellip;</a></cite></footer></blockquote>
 
-</div>
+]]></content>
+  </entry>
   
+  <entry>
+    <title type="html"><![CDATA[Dissect Bluedroid from A2DP: Part III: Init A2DP Service]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-iii-init-a2dp-service/"/>
+    <updated>2013-05-07T04:17:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-iii-init-a2dp-service</id>
+    <content type="html"><![CDATA[<p><img class="center" src="http://yongbingchen.github.com/images/bluedroid/init_a2dp_service.jpg" title="" >
+1 Get Android defined A2DP interface btav_interface_t from bt_interface_t get_bluetooth_interface().</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="mo">04</span><span class="o">-</span><span class="mi">25</span> <span class="mo">01</span><span class="o">:</span><span class="mi">56</span><span class="o">:</span><span class="mf">30.530</span> <span class="n">I</span><span class="o">/</span><span class="n">BluetoothA2dpServiceJni</span><span class="p">(</span> <span class="mi">2093</span><span class="p">)</span><span class="o">:</span> <span class="nl">classInitNative:</span> <span class="n">succeeds</span>
+</span><span class='line'><span class="n">packages</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">Bluetooth</span><span class="o">/</span><span class="n">jni</span><span class="o">/</span><span class="n">com_android_bluetooth_a2dp</span><span class="p">.</span><span class="n">cpp</span>
+</span><span class='line'><span class="mi">137</span> <span class="k">static</span> <span class="kt">void</span> <span class="n">initNative</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jobject</span> <span class="n">object</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">GLOBAL</span> <span class="k">const</span> <span class="n">btav_interface_t</span> <span class="o">*</span><span class="n">sBluetoothA2dpInterface</span> <span class="o">=</span> <span class="p">(</span><span class="n">btav_interface_t</span> <span class="o">*</span><span class="p">)</span><span class="n">btInf</span><span class="o">-&gt;</span><span class="n">get_profile_interface</span><span class="p">(</span><span class="n">BT_PROFILE_ADVANCED_AUDIO_ID</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">sBluetoothA2dpInterface</span><span class="o">-&gt;</span><span class="n">init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sBluetoothA2dpCallbacks</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">external</span><span class="o">/</span><span class="n">bluetooth</span><span class="o">/</span><span class="n">bluedroid</span><span class="o">/</span><span class="n">btif</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">btif_av</span><span class="p">.</span><span class="n">c</span>
+</span><span class='line'>      <span class="mi">725</span> <span class="k">static</span> <span class="n">bt_status_t</span> <span class="n">init</span><span class="p">(</span><span class="n">btav_callbacks_t</span><span class="o">*</span> <span class="n">callbacks</span> <span class="p">)</span>
+</span><span class='line'>          <span class="mi">686</span> <span class="kt">int</span> <span class="n">btif_a2dp_start_media_task</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'>              <span class="n">GKI_create_task</span><span class="p">((</span><span class="n">TASKPTR</span><span class="p">)</span><span class="n">btif_media_task</span><span class="p">,</span> <span class="n">A2DP_MEDIA_TASK</span><span class="p">,</span>
+</span><span class='line'>          <span class="n">btif_enable_service</span><span class="p">(</span><span class="n">BTA_A2DP_SERVICE_ID</span><span class="p">);</span><span class="c1">//Upon BT enable, BTIF core shall invoke the BTA APIs to enable the profiles</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2 Init A2DP service by btav_interface_t->init().</p>
+
+<pre><code>* Start a btif_media_task as main loop for A2DP service.
+* Open a socket to listen on client's connect request from control channel.
+</code></pre>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">external</span><span class="o">/</span><span class="n">bluetooth</span><span class="o">/</span><span class="n">bluedroid</span><span class="o">/</span><span class="n">btif</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">btif_media_task</span><span class="p">.</span><span class="n">c</span>
+</span><span class='line'><span class="c1">//Task for SBC encoder.  This task receives an event when the waveIn interface has a pcm data buffer ready.  On receiving the event, handle all ready pcm data buffers.  If stream is started, run the SBC encoder on each chunk of pcm samples and build an output packet consisting of one or more encoded SBC frames.</span>
+</span><span class='line'><span class="mi">1066</span> <span class="kt">int</span> <span class="n">btif_media_task</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span>
+</span><span class='line'><span class="mi">1073</span>     <span class="n">btif_media_task_init</span><span class="p">();</span>
+</span><span class='line'><span class="mi">1044</span>     <span class="n">UIPC_Init</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'>          <span class="mi">606</span> <span class="n">UDRV_API</span> <span class="kt">void</span> <span class="n">UIPC_Init</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">p_data</span><span class="p">)</span>
+</span><span class='line'>              <span class="mi">569</span> <span class="kt">int</span> <span class="n">uipc_start_main_server_thread</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'>                  <span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uipc_main</span><span class="p">.</span><span class="n">tid</span><span class="p">,</span> <span class="p">(</span><span class="k">const</span> <span class="n">pthread_attr_t</span> <span class="o">*</span><span class="p">)</span> <span class="nb">NULL</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="n">uipc_read_task</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span>
+</span><span class='line'><span class="mi">1047</span>     <span class="n">UIPC_Open</span><span class="p">(</span><span class="n">UIPC_CH_ID_AV_CTRL</span> <span class="p">,</span> <span class="n">btif_a2dp_ctrl_cb</span><span class="p">);</span>
+</span><span class='line'>          <span class="n">uipc_setup_server_locked</span><span class="p">(</span><span class="n">ch_id</span><span class="p">,</span> <span class="n">A2DP_CTRL_PATH</span><span class="p">,</span> <span class="n">p_cback</span><span class="p">);</span><span class="c1">//This is the control socket that listen on A2DP client.</span>
+</span><span class='line'><span class="mi">1079</span>     <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="c1">//A2DP event loop </span>
+</span><span class='line'><span class="mi">1080</span>     <span class="p">{</span>
+</span><span class='line'><span class="mi">1085</span>         <span class="k">if</span> <span class="p">(</span><span class="n">event</span> <span class="o">&amp;</span> <span class="n">BTIF_MEDIA_TASK_CMD</span><span class="p">)</span>
+</span><span class='line'><span class="mi">1090</span>                 <span class="n">btif_media_task_handle_cmd</span><span class="p">(</span><span class="n">p_msg</span><span class="p">);</span>
+</span><span class='line'><span class="mi">1093</span>
+</span><span class='line'><span class="mi">1094</span>         <span class="k">if</span> <span class="p">(</span><span class="n">event</span> <span class="o">&amp;</span> <span class="n">BTIF_MEDIA_TASK_DATA</span><span class="p">)</span>
+</span><span class='line'><span class="mi">1099</span>                 <span class="n">btif_media_task_handle_media</span><span class="p">(</span><span class="n">p_msg</span><span class="p">);</span>
+</span><span class='line'><span class="mi">1102</span>
+</span><span class='line'><span class="mi">1103</span>         <span class="k">if</span> <span class="p">(</span><span class="n">event</span> <span class="o">&amp;</span> <span class="n">BTIF_MEDIA_AA_TASK_TIMER</span><span class="p">)</span>
+</span><span class='line'><span class="mi">1105</span>             <span class="cm">/* advance audio timer expiration */</span>
+</span><span class='line'><span class="mi">1106</span>             <span class="n">btif_media_task_aa_handle_timer</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Reference:</p>
+
+<blockquote><p></p><footer><strong>logcat:A2DP</strong> <cite><a href='http://yongbingchen.github.com/txt/bluedroid/a2dp-init-logcat.txt'>yongbingchen.github.com/txt/&hellip;</a></cite></footer></blockquote>
+
+
+<blockquote><p></p><footer><strong>air log: LMP</strong> <cite><a href='http://yongbingchen.github.com/images/bluedroid/A2DP-connect-LMP.jpg'>yongbingchen.github.com/images/&hellip;</a></cite></footer></blockquote>
+
+
+<blockquote><p></p><footer><strong>air log: L2CAP</strong> <cite><a href='http://yongbingchen.github.com/images/bluedroid/A2DP-connect-L2CAP.jpg'>yongbingchen.github.com/images/&hellip;</a></cite></footer></blockquote>
+
+
+<blockquote><p></p><footer><strong>source code reading note</strong> <cite><a href='http://yongbingchen.github.com/txt/bluedroid/a2dp-source-code-reading-note.txt'>yongbingchen.github.com/txt/&hellip;</a></cite></footer></blockquote>
+
+
+
+]]></content>
+  </entry>
   
+  <entry>
+    <title type="html"><![CDATA[Dissect Bluedroid from A2DP: Part II: Init Bluetooth Adapter]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/05/04/dissect-bluedroid-from-a2dp-part-ii-init-bluetooth-adapter/"/>
+    <updated>2013-05-04T02:37:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/05/04/dissect-bluedroid-from-a2dp-part-ii-init-bluetooth-adapter</id>
+    <content type="html"><![CDATA[<p>Android defined one interface bt_interface_t to control a Bluetooth Adapter, Bluedroid implemented this interface as &#8220;static const bt_interface_t bluetoothInterface&#8221; in external/bluetooth/bluedroid/btif/src/bluetooth.c.</p>
+
+<p><img class="center" src="http://yongbingchen.github.com/images/bluedroid/init_bt_adapter.jpg" title="" ></p>
+
+<blockquote><p></p><footer><strong>logcat:A2DP</strong> <cite><a href='http://yongbingchen.github.com/txt/bluedroid/a2dp-init-logcat.txt'>yongbingchen.github.com/txt/&hellip;</a></cite></footer></blockquote>
 
 
-    </article>
+
+]]></content>
+  </entry>
   
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
+  <entry>
+    <title type="html"><![CDATA[Dissect Bluedroid from A2DP  Part I: use case]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/05/03/dissect-bluedroid-from-a2dp-part-i-use-case/"/>
+    <updated>2013-05-03T22:05:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/05/03/dissect-bluedroid-from-a2dp-part-i-use-case</id>
+    <content type="html"><![CDATA[<p>Android framework defined two hardware interfaces for operating audio output devices, they are audio_hw_device_t and audio_stream_out_t, AudioFlinger is the only user of these interfaces. Bluedroid implemented these two interface in external/bluetooth/bluedroid/audio_a2dp_hw/audio_a2dp_hw.c, AudioFlinger can output audio sample to a connected A2DP sink device if this implementation has been registered to Android.</p>
+
+<p><img src="http://yongbingchen.github.com/images/bluedroid/A2dp_use_case.jpg" title="" ></p>
+
+<p>In Bluedroid&#8217;s A2DP hardware implementation, it will use two sockets to communicate with A2DP server.</p>
+
+<p><img class="center" src="http://yongbingchen.github.com/images/bluedroid/audio_a2dp_hw_bluedroid.jpg" title="" ></p>
+
+<p>Reference:</p>
+
+<blockquote><p></p><footer><strong>Source Code</strong> <cite><a href='http://androidxref.com/4.2.2_r1'>androidxref.com/4.2.2_r1/&hellip;</a></cite></footer></blockquote>
+
+
+<blockquote><p></p><footer><strong>logcat:A2DP</strong> <cite><a href='http://yongbingchen.github.com/txt/bluedroid/a2dp-init-logcat.txt'>yongbingchen.github.com/txt/&hellip;</a></cite></footer></blockquote>
+
+
+
+]]></content>
+  </entry>
   
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2015/03/27/create-my-own-repo-to-manage-bundle-of-git-repositories/">create my own repo to manage bundle of git repositories</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/03/27/config-gerrit-server-behind-apache-https-reverse-proxy/">config gerrit server behind Apache https reverse-proxy</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/31/decode-instruction-address-in-oops-to-c-code-file-line/">decode instruction address in OOPS to C code file:line</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/24/atomic-file-write/">atomic file writing</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/12/android-bluetooth-pair-a-hid-device/">Android Bluetooth: pairing a HID device</a>
-      </li>
-    
-  </ul>
-</section>
-<section>
-        <h1>Categories</h1>
-        <ul id="categories">
-                <li class='category'><a href='/blog/categories/android/'>Android (8)</a></li>
-<li class='category'><a href='/blog/categories/bible/'>Bible (1)</a></li>
-<li class='category'><a href='/blog/categories/bluetooth/'>Bluetooth (9)</a></li>
-<li class='category'><a href='/blog/categories/gerrit/'>gerrit (2)</a></li>
-<li class='category'><a href='/blog/categories/git/'>git (3)</a></li>
-<li class='category'><a href='/blog/categories/linux/'>linux (6)</a></li>
+  <entry>
+    <title type="html"><![CDATA[Skeleton of a Bluetooth SDIO driver]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/04/23/skeleton-of-a-bluetooth-sdio-driver/"/>
+    <updated>2013-04-23T05:28:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/04/23/skeleton-of-a-bluetooth-sdio-driver</id>
+    <content type="html"><![CDATA[<p>A Bluetooth SDIO card driver talks with hardware through SDIO interface, providing R/W method for Bluetooth Adapter layer, here&#8217;s the class diagram for this relationship:</p>
 
-        </ul>
-</section>
+<p><img src="http://yongbingchen.github.com/images/bt_drv/bt_drv_class_diagram.jpg" title="" ></p>
+
+<p>The outbound Bluetooth data path:</p>
+
+<ol>
+<li>Upper layer use HCI interface send() to send data/command packet, implemented as btmrvl_send_frame() in this driver.</li>
+<li>Put this packet in adapter&#8217;s tx queue, wakeup the main data processing thread (like NAPI in a network driver, thread function is btmrvl_service_main_thread()).</li>
+<li>In main data procssing thread, re-organize skb data payload for DMA transfer (in btmrvl_tx_pkt()).</li>
+<li>Call sdio_writesb() to write data to hardware (in btmrvl_sdio_host_to_card()).</li>
+</ol>
 
 
+<p>The incoming Bluetooth data path:</p>
+
+<ol>
+<li>SDIO card received a data packet, triggered a interrupt to host.</li>
+<li>The SDIO ISR triggred the main data processing thread.</li>
+<li>In this thread, allocate a skb with DAM aligned, call sdio_readsb() to read the data from SDIO interface (in btmrvl_sdio_card_to_host()).</li>
+<li>Call hci_recv_frame(skb) to send this data packet to upper layer Bluetooth stack.</li>
+</ol>
+
+
+<p>Appendix: How to register a driver specific ISR to SDIO&#8217;s ISR:</p>
+
+<figure class='code'><figcaption><span>In driver module init, hook up a device ISR to SDIO&#8217;s ISR.  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'>    <span class="kt">int</span> <span class="n">__init</span> <span class="nf">btmrvl_sdio_init_module</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">|</span>
+</span><span class='line'>    <span class="o">|</span>
+</span><span class='line'>    <span class="o">--&gt;</span><span class="n">sdio_register_driver</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bt_mrvl_sdio</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>      <span class="o">|</span>
+</span><span class='line'>      <span class="o">|</span>
+</span><span class='line'>      <span class="o">--&gt;</span><span class="n">btmrvl_sdio_probe</span><span class="p">(</span><span class="k">struct</span> <span class="n">sdio_func</span> <span class="o">*</span><span class="n">func</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">sdio_device_id</span> <span class="o">*</span><span class="n">id</span><span class="p">)</span>
+</span><span class='line'>          <span class="o">|</span>
+</span><span class='line'>          <span class="o">|</span>
+</span><span class='line'>          <span class="o">--&gt;</span><span class="n">sdio_claim_irq</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">btmrvl_sdio_interrupt</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
 
+<figure class='code'><figcaption><span>In this ISR, wake up main data pocessing thread to read data from card.  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'>    <span class="kt">void</span> <span class="nf">btmrvl_sdio_interrupt</span><span class="p">(</span><span class="k">struct</span> <span class="n">sdio_func</span> <span class="o">*</span><span class="n">func</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">|</span>
+</span><span class='line'>    <span class="o">|</span>
+</span><span class='line'>    <span class="o">--&gt;</span><span class="n">btmrvl_interrupt</span><span class="p">(</span><span class="n">priv</span><span class="p">);</span>
+</span><span class='line'>      <span class="o">|</span>
+</span><span class='line'>      <span class="o">|</span>
+</span><span class='line'>      <span class="o">--&gt;</span><span class="n">wake_up_interruptible</span><span class="p">(</span><span class="o">&amp;</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">main_thread</span><span class="p">.</span><span class="n">wait_q</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Source Code:</p>
+
+<blockquote><p></p><footer><strong>@btmrvl_sdio.c</strong> <cite><a href='http://lxr.linux.no/linux+v3.8.8/drivers/bluetooth/btmrvl_sdio.c'>lxr.linux.no/linux+v3.8.8/&hellip;</a></cite></footer></blockquote>
+
+
+<blockquote><p></p><footer><strong>@btmrvl_main.c</strong> <cite><a href='http://lxr.linux.no/linux+v3.8.8/drivers/bluetooth/btmrvl_main.c'>lxr.linux.no/linux+v3.8.8/&hellip;</a></cite></footer></blockquote>
+
+
+<h2>Note: How to load firmware for a SDIO device</h2>
+
+<figure class='code'><figcaption><span>1. Disable interrupt from this SDIO device.  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">sdio_claim_host</span><span class="p">(</span><span class="n">card</span><span class="o">-&gt;</span><span class="n">func</span><span class="p">);</span>
+</span><span class='line'><span class="n">btmrvl_sdio_disable_host_int</span><span class="p">(</span><span class="n">card</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">host_int_mask</span> <span class="o">=</span> <span class="n">sdio_readb</span><span class="p">(</span><span class="n">card</span><span class="o">-&gt;</span><span class="n">func</span><span class="p">,</span> <span class="n">card</span><span class="o">-&gt;</span><span class="n">reg</span><span class="o">-&gt;</span><span class="n">host_int_mask</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ret</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">host_int_mask</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">HIM_DISABLE</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">sdio_writeb</span><span class="p">(</span><span class="n">card</span><span class="o">-&gt;</span><span class="n">func</span><span class="p">,</span> <span class="n">host_int_mask</span><span class="p">,</span> <span class="n">card</span><span class="o">-&gt;</span><span class="n">reg</span><span class="o">-&gt;</span><span class="n">host_int_mask</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ret</span><span class="p">);</span>
+</span><span class='line'><span class="n">sdio_release_host</span><span class="p">(</span><span class="n">card</span><span class="o">-&gt;</span><span class="n">func</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>2. Get and Write firmware.  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">sdio_claim_host</span><span class="p">(</span><span class="n">card</span><span class="o">-&gt;</span><span class="n">func</span><span class="p">);</span>
+</span><span class='line'>  <span class="c1">//Get firmware from user space.</span>
+</span><span class='line'>  <span class="n">request_firmware</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fw_firmware</span><span class="p">,</span> <span class="n">card</span><span class="o">-&gt;</span><span class="n">firmware</span><span class="p">,</span><span class="c1">//name of firmware file, = &quot;mrvl/sd8787_uapsta.bin&quot;,</span>
+</span><span class='line'>          <span class="o">&amp;</span><span class="n">card</span><span class="o">-&gt;</span><span class="n">func</span><span class="o">-&gt;</span><span class="n">dev</span><span class="p">);</span>
+</span><span class='line'>  <span class="c1">//Write firmware into SDIO device, check firmware status.</span>
+</span><span class='line'>  <span class="n">tmpfwbufsz</span> <span class="o">=</span> <span class="n">ALIGN_SZ</span><span class="p">(</span><span class="n">BTM_UPLD_SIZE</span><span class="p">,</span> <span class="n">BTSDIO_DMA_ALIGN</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">fwbuf</span> <span class="o">=</span> <span class="p">(</span><span class="n">u8</span> <span class="o">*</span><span class="p">)</span> <span class="n">ALIGN_ADDR</span><span class="p">(</span><span class="n">tmpfwbuf</span><span class="p">,</span> <span class="n">BTSDIO_DMA_ALIGN</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">memcpy</span><span class="p">(</span><span class="n">fwbuf</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">firmware</span><span class="p">[</span><span class="n">offset</span><span class="p">],</span> <span class="n">txlen</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">sdio_writesb</span><span class="p">(</span><span class="n">card</span><span class="o">-&gt;</span><span class="n">func</span><span class="p">,</span> <span class="n">card</span><span class="o">-&gt;</span><span class="n">ioport</span><span class="p">,</span> <span class="n">fwbuf</span><span class="p">,</span><span class="n">tx_blocks</span> <span class="o">*</span> <span class="n">blksz_dl</span><span class="p">);</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="c1">//Release firmware related resource in kernel.</span>
+</span><span class='line'>  <span class="n">release_firmware</span><span class="p">(</span><span class="n">fw_firmware</span><span class="p">);</span>
+</span><span class='line'><span class="n">sdio_release_host</span><span class="p">(</span><span class="n">card</span><span class="o">-&gt;</span><span class="n">func</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Alternatively, you can use request_firmware_nowait() if current thread is not allowed to sleep for a long time.</p>
+
+<figure class='code'><figcaption><span>3. Enable SDIO device interrupt.  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">btmrvl_sdio_enable_host_int</span><span class="p">(</span><span class="n">card</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Reference:</p>
+
+<blockquote><p></p><footer><strong>@How request_firmware() works</strong> <cite><a href='http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/firmware_class/README?id=HEAD'>git.kernel.org/cgit/linux/git/&hellip;</a></cite></footer></blockquote>
+
+
+<blockquote><p></p><footer><strong>@Default firmware search path in Android</strong> <cite><a href='http://stackoverflow.com/questions/6019915/kernel-module-cannot-find-firmware-file-where-should-it-be'>stackoverflow.com/questions/&hellip;</a></cite></footer></blockquote>
+
+
+
+
+<figure class='code'><figcaption><span>$Jellybean/system/core/init/devices.c  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#define SYSFS_PREFIX    &quot;/sys&quot;</span>
+</span><span class='line'><span class="cp">#define FIRMWARE_DIR1   &quot;/etc/firmware&quot;</span>
+</span><span class='line'><span class="n">asprintf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">root</span><span class="p">,</span> <span class="n">SYSFS_PREFIX</span><span class="s">&quot;%s/&quot;</span><span class="p">,</span> <span class="n">uevent</span><span class="o">-&gt;</span><span class="n">path</span><span class="p">);</span>
+</span><span class='line'><span class="n">asprintf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">file1</span><span class="p">,</span> <span class="n">FIRMWARE_DIR1</span><span class="s">&quot;/%s&quot;</span><span class="p">,</span> <span class="n">uevent</span><span class="o">-&gt;</span><span class="n">firmware</span><span class="p">);</span>
+</span><span class='line'><span class="n">fw_fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="n">file1</span><span class="p">,</span> <span class="n">O_RDONLY</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Footnote: sdio_claim_host(card->func)</h1>
+
+<ol>
+<li>card->func means an independent function residues in same card (there maybe different functions implemented in same card simultaneously, like BT and Wifi in MRVL 8787 module. The device field in struct sdio_device_id is used as function id to distinguish these functions, in this driver, the device field in driver is 0x911B for MRVL_BT_SD8787, it reflected as:
+0x911b in /sys/class/mmc_host/mmc1/mmc1\:0001/mmc1\:0001\:3/device.</li>
+<li>sdio_claim_host() is acting like a lock, I guess this will serialize access to same SD device between different functions, and also between different threads inside same function.</li>
+</ol>
+
+]]></content>
+  </entry>
   
-</aside>
+  <entry>
+    <title type="html"><![CDATA[git: check ancestor]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/03/25/git-check-ancestor/"/>
+    <updated>2013-03-25T22:59:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/03/25/git-check-ancestor</id>
+    <content type="html"><![CDATA[<p>If you want to check your code base, it&#8217;s wrong to rely on whether the output of <code>git log $CODE_BASE_TAG..HEAD</code> is empty.</p>
 
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Yongbing Chen -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
+<p>Suppose we have a git version tree as below:</p>
 
-</footer>
+<p><img src="http://yongbingchen.github.com/images/git/version-graph.jpg" title="" ></p>
+
+<p>DevBranch0 is branched out from Trunk, merged <code>Trunk</code> node C and <code>DevBranch0</code> node b, current HEAD is <code>DevBranch0_c</code>.</p>
+
+<p>The git history is as below:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yongbing@ubuntu:~/work/git_ancestor$ git log --oneline --graph
+</span><span class='line'>* 368cfb1 DevBranch0_c
+</span><span class='line'>*   6fecd0a DevBranch0_Merge
+</span><span class='line'>|\
+</span><span class='line'>| * defff5c Trunk_C
+</span><span class='line'>| * 5037bca Trunk_B
+</span><span class='line'>* | 0f45ab0 DevBranch0_b
+</span><span class='line'>* | 38f9ec9 DevBranch0_a
+</span><span class='line'>|/
+</span><span class='line'>* fc18378 Trunk_A
+</span><span class='line'>* 0d3b0bd Init state</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Clearly version <code>Trunk_D</code> is not an ancestor of <code>DevBranch0_c</code>, but <code>git log $Trunk_D..HEAD</code> is not empty:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yongbing@ubuntu:~/work/git_ancestor$ git tag Trunk_D b25477d
+</span><span class='line'>yongbing@ubuntu:~/work/git_ancestor$ git log Trunk_D..HEAD --oneline
+</span><span class='line'>368cfb1 DevBranch0_c
+</span><span class='line'>6fecd0a DevBranch0_Merge
+</span><span class='line'>0f45ab0 DevBranch0_b
+</span><span class='line'>38f9ec9 DevBranch0_a</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The correct way is to use <code>git rev-list</code> command, then grep the result to see if the code base in really in the ancestor list:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yongbing@ubuntu:~/work/git_ancestor$ git log -g --oneline
+</span><span class='line'>b25477d HEAD@{1}: commit: Trunk_D
+</span><span class='line'>5037bca HEAD@{9}: commit: Trunk_B
+</span><span class='line'>yongbing@ubuntu:~/work/git_ancestor$ git rev-list -n 10 HEAD |grep 5037bca
+</span><span class='line'>5037bca575ecbf76d9c9d939e52f8858dbaadfe1
+</span><span class='line'>yongbing@ubuntu:~/work/git_ancestor$ git rev-list -n 10 HEAD |grep b25477d
+</span><span class='line'>//Empty output</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
-
-<script type="text/javascript">
-      var disqus_shortname = 'yongbingchengithub';
-      
-        
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
+  <entry>
+    <title type="html"><![CDATA[EXODUS]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/03/24/exodus/"/>
+    <updated>2013-03-24T19:09:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/03/24/exodus</id>
+    <content type="html"><![CDATA[<blockquote><p>‘I am the LORD, and I will bring you out from under the burdens of the Egyptians, and I will deliver you from slavery to them, and  I will redeem you with an outstretched arm and with great acts of judgment. I  will take you to be my people, and  I will be your God, and you shall know that  I am the LORD your God, who has brought you out from under the burdens of the Egyptians. I will bring you into the land that I swore to give to Abraham, to Isaac, and to Jacob. I will give it to you for a possession.  I am the LORD.’</p><footer><strong>EXODUS 6</strong></footer></blockquote>
 
 
 
 
+<blockquote><p>They set out from Elim, and all the congregation of the people of Israel came to the wilderness of Sin, which is between Elim and Sinai, on the fifteenth day of the second month after they had departed from the land of Egypt. And the whole congregation of the people of Israel grumbled against Moses and Aaron in the wilderness, and the people of Israel said to them,  “Would that we had died by the hand of the LORD in the land of Egypt,  when we sat by the meat pots and ate bread to the full, for you have brought us out into this wilderness to kill this whole assembly with hunger.”</p><footer><strong>EXODUS 16</strong></footer></blockquote>
 
-</body>
-</html>
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Refresh memo: how a process accesses physical memory]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/03/23/memo-how-a-process-accesses-physical-memory/"/>
+    <updated>2013-03-23T21:39:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/03/23/memo-how-a-process-accesses-physical-memory</id>
+    <content type="html"><![CDATA[<p>Scenario: a process acquired a new block of memory, then try to access part of this block:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'>        <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">buf</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">buf</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+</span><span class='line'>                <span class="o">*</span><span class="p">(</span><span class="n">buf</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="mh">0xfe</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What happens in malloc():</p>
+
+<ol>
+<li>stdlib will try to handle it internally, if can&#8217;t satisfy this request, then,</li>
+<li>Call sbrk() to let kernel enlarge current process&#8217;s heap space (by adjust process&#8217;s VMAs).</li>
+</ol>
+
+
+<p>What happens next when try to access the memory:</p>
+
+<ol>
+<li>CPU&#8217;s MMU use this virtual address to look up in current CPU&#8217;s TLB, not found.</li>
+<li>Then MMU switch to look up this address in process&#8217;s Page Table, try to do the virtual-to-physical address translation.</li>
+<li>Step 2 will fail, a Page Fault exception happens.
+
+<ul>
+<li>In Page Fault exception handler, check if current process has write permission to this address, that&#8217;s done by check process&#8217;s VMA list.</li>
+<li>Allocate a physical page, update process&#8217;s Page Table for this page.</li>
+</ul>
+</li>
+<li>After the exception handler returned, and the process get scheduled to execute again, it will retry the instruction that caused the Page Fault, this time will get correct physical address pointed to the new page. Update TLB entry for this new map.</li>
+<li>Select proper line in Cache for this physical address, write the new value to Cache, then hardware will write back this new value from Cache to real memory at proper time.</li>
+</ol>
+
+
+<blockquote><p></p><footer><strong>@How Xscale Handle Cache Miss</strong> <cite><a href='http://www.cs.uiuc.edu/homes/luddy/PROCESSORS/XScaleMMX.pdf'>www.cs.uiuc.edu/homes/luddy/&hellip;</a></cite></footer></blockquote>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Loose coopling hierarchical gerrit workflow]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/03/11/loose-coopling-hierarchical-gerrit-workflow/"/>
+    <updated>2013-03-11T22:58:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/03/11/loose-coopling-hierarchical-gerrit-workflow</id>
+    <content type="html"><![CDATA[<p>As we are working on an Android project, we are handling a very large scale source tree (10GB level), including works from BSP team (bootloader, linux kernel), midware team (A/V codec, media framework),  and Android team (Android HAL, vendor specific Apks). We need to do weekly relaese for several products from single source tree, ensuring no quality degradation in the mean time.</p>
+
+<p>A work flow serves these requirement needs to:</p>
+
+<ol>
+<li>have least cross team dependancy.</li>
+<li>provide tight collaboration in developers.</li>
+<li>easily locate bad node when doing release.</li>
+</ol>
+
+
+<p>To achive these requirements, I defined below branches:</p>
+
+<ol>
+<li>One trunk branch for releasing. Every node is a stable node (passed full test).</li>
+<li>Every team has one independent developing branch, covering this team&#8217;s source code partition, based on last release version, closed after current release is done.</li>
+<li>Integration branch is based on last release version, will integrate above developing branches. Perform full test on this branch, cull out bad node when failed.</li>
+</ol>
+
+
+<p>And a workflow based on these branches:</p>
+
+<ol>
+<li>Every developer submits to developing branch (cross team submit is permitted), gerrit review process servers as first gate keeper in this stage. Add auto build, auto test in gerrit merge hook, let every commit has a build image, and this image will contain all its preceding commits, this makes possible of using binary search to cull out bad node in QA stage.</li>
+<li>After submit window closed, integrators merge these developing branches into one integration branch, perform full test on the result, if failed, apply the failed case on all tail nodes of developing branches, this step picks out the failed developing branch. Then use binary search method on this developing branch to cull out the bad node, and update the developing branch. Iterate untill integration result pass full test.</li>
+<li>Push the passed result into release branch, open submit window, start next developing/release cycle.</li>
+</ol>
+
+
+<p><em>Branches:</em>
+<img src="http://yongbingchen.github.com/images/gerrit/branches.jpg" title="" ></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Read e-EDID with clock stretching]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/03/11/read-e-edid-with-clock-stretching/"/>
+    <updated>2013-03-11T17:00:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/03/11/read-e-edid-with-clock-stretching</id>
+    <content type="html"><![CDATA[<h2>Read e-EDID with master clock stretching</h2>
+
+<p>In E-DDC, a special I²C addressing scheme was introduced, in which multiple 256-byte segments could be selected. To do this, a single 8-bit segment index is passed to the display via the I²C address 30h. (Because this access is always a write, the first I²C octet will always be 60h.).</p>
+
+<p>In my MHL project, this first write will always get an I2C NO_ACK error(E-DDC need tolerate with NO_ACK error for this write, to be back-compatible with legacy DDC, so we are using GPIO to simulate I2C, instead of using standard I2C controller).</p>
+
+<p>From below signal, we found the ACK actually came, but master did not acquire it at that time, that&#8217;s exactly what clock stretching targeted at.</p>
+
+<p><img src="http://yongbingchen.github.com/images/edid/write_0x60_clock_stretch.jpg" title="" ></p>
+
+<p>Add clock stretching logic in our GPIO simulation function, then can successfully read all e-EDID segments.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Sending a signal from Linux kernel]]></title>
+    <link href="http://yongbingchen.github.com/blog/2013/03/11/sending-a-signal-from-linux-kernel/"/>
+    <updated>2013-03-11T06:17:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2013/03/11/sending-a-signal-from-linux-kernel</id>
+    <content type="html"><![CDATA[<p><strong>Send SIGUSR1 from kernel</strong></p>
+
+<p>I want to use a signal to inform an asynchronous event from one kernel module to a user space application.</p>
+
+<p>To achieve this, add below code in kernel driver:</p>
+
+<figure class='code'><figcaption><span>patch on kernel module  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="o">+</span><span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">linux</span><span class="o">/</span><span class="n">sched</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">+</span><span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">asm</span><span class="o">/</span><span class="n">siginfo</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">+</span><span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">linux</span><span class="o">/</span><span class="n">pid_namespace</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">+</span><span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">linux</span><span class="o">/</span><span class="n">pid</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">typedef</span> <span class="k">enum</span>
+</span><span class='line'> <span class="p">{</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">THIS_MODULE_IOCTL_SET_OWNER</span> <span class="o">=</span> <span class="mh">0x111</span><span class="p">,</span>
+</span><span class='line'> <span class="p">}</span><span class="n">MODULE_IOCTL_CMD</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">+</span><span class="k">static</span> <span class="kt">int</span> <span class="n">owner</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span><span class="k">static</span> <span class="k">struct</span> <span class="n">task_struct</span> <span class="o">*</span> <span class="n">current_task</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">+</span><span class="k">static</span> <span class="kt">void</span> <span class="n">send_signal</span><span class="p">(</span><span class="kt">int</span> <span class="n">sig_num</span><span class="p">)</span>
+</span><span class='line'><span class="o">+</span><span class="p">{</span>
+</span><span class='line'><span class="o">+</span>       <span class="k">if</span> <span class="p">(</span><span class="n">owner</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'><span class="o">+</span>               <span class="k">return</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">printk</span><span class="p">(</span><span class="s">&quot;%s,%d.sending to owner %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">__func__</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">,</span> <span class="n">owner</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>       <span class="k">struct</span> <span class="n">siginfo</span> <span class="n">info</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">info</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">siginfo</span><span class="p">));</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">info</span><span class="p">.</span><span class="n">si_signo</span> <span class="o">=</span> <span class="n">sig_num</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">info</span><span class="p">.</span><span class="n">si_code</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">info</span><span class="p">.</span><span class="n">si_int</span> <span class="o">=</span> <span class="mi">1234</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>       <span class="k">if</span> <span class="p">(</span><span class="n">current_task</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+</span><span class='line'><span class="o">+</span>               <span class="n">rcu_read_lock</span><span class="p">();</span>
+</span><span class='line'><span class="o">+</span>               <span class="n">current_task</span> <span class="o">=</span> <span class="n">pid_task</span><span class="p">(</span><span class="n">find_vpid</span><span class="p">(</span><span class="n">owner</span><span class="p">),</span> <span class="n">PIDTYPE_PID</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>               <span class="n">rcu_read_unlock</span><span class="p">();</span>
+</span><span class='line'><span class="o">+</span>       <span class="p">}</span>
+</span><span class='line'><span class="o">+</span>       <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">send_sig_info</span><span class="p">(</span><span class="n">sig_num</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">info</span><span class="p">,</span> <span class="n">current_task</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>       <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="o">+</span>               <span class="n">printk</span><span class="p">(</span><span class="s">&quot;error sending signal</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>       <span class="p">}</span>
+</span><span class='line'><span class="o">+</span><span class="p">}</span>
+</span><span class='line'><span class="o">+</span>
+</span><span class='line'> <span class="k">static</span> <span class="kt">int</span> <span class="n">device_event_handler</span><span class="p">(</span><span class="k">struct</span> <span class="n">snd_pcm_substream</span> <span class="o">*</span><span class="n">substream</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cmd</span><span class="p">)</span>
+</span><span class='line'> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">cmd</span> <span class="o">==</span> <span class="n">INTRESTED_EVENT</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="o">+</span>                       <span class="n">send_signal</span><span class="p">(</span><span class="n">SIGUSR1</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="err">@@</span> <span class="o">-</span><span class="mi">325</span><span class="p">,</span><span class="mi">6</span> <span class="o">+</span><span class="mi">352</span><span class="p">,</span><span class="mi">13</span> <span class="err">@@</span> <span class="k">static</span> <span class="kt">long</span> <span class="n">device_ioctl</span><span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">file</span><span class="p">,</span>
+</span><span class='line'><span class="o">+</span>       <span class="k">case</span> <span class="n">THIS_MODULE_IOCTL_SET_OWNER</span>:
+</span><span class='line'><span class="o">+</span>               <span class="n">printk</span><span class="p">(</span><span class="s">&quot;%s, owner pid %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">__func__</span><span class="p">,</span> <span class="n">owner</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>               <span class="k">if</span><span class="p">(</span><span class="n">copy_from_user</span><span class="p">(</span><span class="o">&amp;</span><span class="n">owner</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">arg</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">))){</span>
+</span><span class='line'><span class="o">+</span>                       <span class="n">ret</span> <span class="o">=</span> <span class="o">-</span><span class="n">EFAULT</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>               <span class="p">}</span>
+</span><span class='line'><span class="o">+</span>               <span class="n">current_task</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>               <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">+</span><span class="n">MODULE_LICENSE</span><span class="p">(</span><span class="s">&quot;GPL&quot;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In user space application, set its pid to kernel module, then listen on the signal.</p>
+
+<figure class='code'><figcaption><span>patch on user application  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="o">+</span><span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">pthread</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">+</span><span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">semaphore</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">+</span><span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">signal</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">+</span><span class="k">static</span> <span class="n">sem_t</span> <span class="n">event_sem</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span><span class="k">static</span> <span class="k">volatile</span> <span class="kt">sig_atomic_t</span> <span class="n">intrested_event</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>
+</span><span class='line'><span class="o">+</span><span class="kt">void</span> <span class="n">sig_handler_event1</span><span class="p">(</span><span class="kt">int</span> <span class="n">sig</span><span class="p">)</span>
+</span><span class='line'><span class="o">+</span><span class="p">{</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">interested_event</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">sem_post</span><span class="p">(</span><span class="o">&amp;</span><span class="n">event_sem</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">+</span><span class="k">static</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">event_handler_thread_func</span><span class="p">()</span>
+</span><span class='line'><span class="o">+</span><span class="p">{</span>
+</span><span class='line'><span class="o">+</span>        <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+</span><span class='line'><span class="o">+</span>                <span class="n">sem_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">event_sem</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>                <span class="k">if</span> <span class="p">(</span><span class="n">intrested_event</span><span class="p">){</span>
+</span><span class='line'><span class="o">+</span>                        <span class="n">LOGD</span><span class="p">(</span><span class="s">&quot;%s,%d, received intrested_event signal.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">__func__</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>                        <span class="n">intrested_event</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>                <span class="p">}</span>
+</span><span class='line'><span class="o">+</span>        <span class="p">}</span>
+</span><span class='line'><span class="o">+</span>        <span class="n">pthread_exit</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+</span><span class='line'><span class="o">+</span>               <span class="n">pthread_t</span> <span class="n">event_thread</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>               <span class="k">if</span> <span class="p">(</span><span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">event_thread</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">event_handler_thread_func</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">){</span>
+</span><span class='line'>                        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Thread create failed%s.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+</span><span class='line'><span class="o">+</span>                  <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>               <span class="p">}</span>
+</span><span class='line'><span class="o">+</span>               <span class="n">sem_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">event_sem</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">+</span>               <span class="k">struct</span> <span class="n">sigaction</span> <span class="n">usr_action</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>               <span class="n">sigset_t</span> <span class="n">block_mask</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>               <span class="n">sigfillset</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">block_mask</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>               <span class="n">usr_action</span><span class="p">.</span><span class="n">sa_handler</span> <span class="o">=</span> <span class="n">sig_handler_event1</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>               <span class="n">usr_action</span><span class="p">.</span><span class="n">sa_mask</span> <span class="o">=</span> <span class="n">block_mask</span><span class="p">;</span><span class="c1">//block all signal inside signal handler.</span>
+</span><span class='line'><span class="o">+</span>               <span class="n">usr_action</span><span class="p">.</span><span class="n">sa_flags</span> <span class="o">=</span> <span class="n">SA_NODEFER</span><span class="p">;</span><span class="c1">//do not block SIGUSR1 within sig_handler_int.</span>
+</span><span class='line'><span class="o">+</span>               <span class="n">sigaction</span> <span class="p">(</span><span class="n">SIGUSR1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">usr_action</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>               <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&quot;/dev/target_device_name&quot;</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>               <span class="kt">int</span> <span class="n">my_pid</span> <span class="o">=</span> <span class="n">getpid</span><span class="p">();</span>
+</span><span class='line'><span class="o">+</span>               <span class="n">ioctl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="mh">0x111</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">my_pid</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>               <span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A signal could interrupt below primitive calls:
+<em>close, fcntl (operation F_SETLK), open, read, recv, recvfrom, select, send, sendto, tcdrain, waitpid, wait, and write</em>,
+POXIS and BSD will handle this situation differently. POXIS will fail these primitive call with EINTR, caller need to use macro TEMP_FAILURE_RETRY (expression) to retry.
+Programmer need to take care of this issue.</p>
+
+<p>Reference:</p>
+
+<blockquote><p></p><footer><strong>@glibc-manual-0.02</strong> <cite><a href='http://www.cs.utah.edu/dept/old/texinfo/glibc-manual-0.02/library_21.html#sec349'>www.cs.utah.edu/dept/old/&hellip;</a></cite></footer></blockquote>
+
+
+<blockquote><p></p><footer><strong>@ldd3</strong> <cite><a href='http://www.makelinux.net/ldd3/chp-6-sect-2'>www.makelinux.net/ldd3/&hellip;</a></cite></footer></blockquote>
+
+
+<h1>Sending Signal Across Processes</h1>
+
+<p>In receiver process, create a share memory, write receiver&#8217;s pid to it, then wait for the signal.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="o">+</span><span class="err">#</span><span class="n">include</span>  <span class="o">&lt;</span><span class="n">signal</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">+</span><span class="err">#</span><span class="n">include</span>  <span class="o">&lt;</span><span class="n">sys</span><span class="o">/</span><span class="n">ipc</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">+</span><span class="err">#</span><span class="n">include</span>  <span class="o">&lt;</span><span class="n">sys</span><span class="o">/</span><span class="n">shm</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">+</span><span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">pthread</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">+</span><span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">semaphore</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">+</span><span class="err">#</span><span class="n">define</span> <span class="n">MY_IPC_KEY_PATH</span> <span class="s">&quot;/data/misc/bluedroid&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">+</span><span class="k">static</span> <span class="n">sem_t</span> <span class="n">event_sem</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span><span class="k">static</span> <span class="k">volatile</span> <span class="kt">sig_atomic_t</span> <span class="n">intrested_event</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>
+</span><span class='line'><span class="o">+</span><span class="k">static</span> <span class="kt">void</span> <span class="n">sig_handler_int</span><span class="p">(</span><span class="kt">int</span> <span class="n">sig</span><span class="p">)</span>
+</span><span class='line'><span class="o">+</span><span class="p">{</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">interested_event</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">sem_post</span><span class="p">(</span><span class="o">&amp;</span><span class="n">event_sem</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span><span class="p">}</span>
+</span><span class='line'><span class="o">+</span>
+</span><span class='line'><span class="o">+</span><span class="k">static</span> <span class="kt">void</span> <span class="n">wait_for_signal</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'><span class="o">+</span><span class="p">{</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">pid_t</span> <span class="n">pid</span> <span class="o">=</span> <span class="n">getpid</span><span class="p">();</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">key_t</span> <span class="n">my_ipc_key</span>   <span class="o">=</span> <span class="n">ftok</span><span class="p">(</span><span class="n">MY_IPC_KEY_PATH</span><span class="p">,</span> <span class="sc">&#39;s&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>       <span class="kt">int</span> <span class="n">share_mem_id</span>   <span class="o">=</span> <span class="n">shmget</span><span class="p">(</span><span class="n">my_ipc_key</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">pid_t</span><span class="p">),</span> <span class="n">IPC_CREAT</span> <span class="o">|</span> <span class="mo">0666</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">pid_t</span> <span class="o">*</span><span class="n">share_mem</span>  <span class="o">=</span> <span class="p">(</span><span class="n">pid_t</span> <span class="o">*</span><span class="p">)</span> <span class="n">shmat</span><span class="p">(</span><span class="n">share_mem_id</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>       <span class="o">*</span><span class="n">share_mem</span> <span class="o">=</span> <span class="n">pid</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s,%d, set my pid %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">__func__</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">,</span> <span class="n">pid</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>
+</span><span class='line'><span class="o">+</span>       <span class="k">struct</span> <span class="n">sigaction</span> <span class="n">usr_action</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">sigset_t</span> <span class="n">block_mask</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">sigfillset</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">block_mask</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">usr_action</span><span class="p">.</span><span class="n">sa_handler</span> <span class="o">=</span> <span class="n">sig_handler_int</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">usr_action</span><span class="p">.</span><span class="n">sa_mask</span> <span class="o">=</span> <span class="n">block_mask</span><span class="p">;</span><span class="c1">//block all signal inside signal handler.</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">usr_action</span><span class="p">.</span><span class="n">sa_flags</span> <span class="o">=</span> <span class="n">SA_NODEFER</span><span class="p">;</span><span class="c1">//do not block SIGUSR1 within sig_handler_int.</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">sigaction</span> <span class="p">(</span><span class="n">SIGINT</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">usr_action</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">sem_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">event_sem</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>       <span class="k">while</span><span class="p">(</span><span class="n">intrested_event</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+</span><span class='line'><span class="o">+</span>               <span class="n">sem_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">event_sem</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>               <span class="k">if</span> <span class="p">(</span><span class="n">intrested_event</span><span class="p">){</span>
+</span><span class='line'><span class="o">+</span>                       <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s,%d, received intrested_event signal.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">__func__</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>               <span class="p">}</span>
+</span><span class='line'><span class="o">+</span>       <span class="p">}</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">intrested_event</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">shmdt</span><span class="p">(</span><span class="n">share_mem</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">shmctl</span><span class="p">(</span><span class="n">share_mem_id</span><span class="p">,</span> <span class="n">IPC_RMID</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">receiver_process</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">+</span>    <span class="n">wait_for_signal</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In sender process, acquire the receiver process&#8217;spid through the share memory object, then send the signal.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="o">+</span><span class="err">#</span><span class="n">include</span>  <span class="o">&lt;</span><span class="n">signal</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">+</span><span class="err">#</span><span class="n">include</span>  <span class="o">&lt;</span><span class="n">sys</span><span class="o">/</span><span class="n">ipc</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">+</span><span class="err">#</span><span class="n">include</span>  <span class="o">&lt;</span><span class="n">sys</span><span class="o">/</span><span class="n">shm</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">+</span><span class="err">#</span><span class="n">define</span> <span class="n">MY_IPC_KEY_PATH</span> <span class="s">&quot;/data/misc/bluedroid&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">+</span><span class="k">static</span> <span class="kt">void</span> <span class="n">wakeup_receiver</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'><span class="o">+</span><span class="p">{</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">key_t</span> <span class="n">my_ipc_key</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>       <span class="kt">int</span> <span class="n">share_mem_id</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">pid_t</span> <span class="o">*</span><span class="n">share_mem</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">pid_t</span> <span class="n">pid</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">my_ipc_key</span>   <span class="o">=</span> <span class="n">ftok</span><span class="p">(</span><span class="n">MY_IPC_KEY_PATH</span><span class="p">,</span> <span class="sc">&#39;s&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">share_mem_id</span>   <span class="o">=</span> <span class="n">shmget</span><span class="p">(</span><span class="n">my_ipc_key</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">pid_t</span><span class="p">),</span> <span class="mo">0666</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">share_mem</span>  <span class="o">=</span> <span class="p">(</span><span class="n">pid_t</span> <span class="o">*</span><span class="p">)</span> <span class="n">shmat</span><span class="p">(</span><span class="n">share_mem_id</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">pid</span>     <span class="o">=</span> <span class="o">*</span><span class="n">share_mem</span><span class="p">;</span>
+</span><span class='line'><span class="o">+</span>       <span class="n">shmdt</span><span class="p">(</span><span class="n">share_mem</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>
+</span><span class='line'><span class="o">+</span>       <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">){</span>
+</span><span class='line'><span class="o">+</span>               <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">sigquue</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">SIGINT</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">){</span>
+</span><span class='line'>                        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;send signal failed %s.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+</span><span class='line'>                        <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'><span class="o">+</span>               <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s,%d, send signale to pid %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">__func__</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">,</span> <span class="n">pid</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>       <span class="p">}</span>
+</span><span class='line'><span class="o">+</span>       <span class="k">else</span><span class="p">{</span>
+</span><span class='line'><span class="o">+</span>               <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s,%d, pid %d not ready</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">__func__</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">,</span> <span class="n">pid</span><span class="p">);</span>
+</span><span class='line'><span class="o">+</span>       <span class="p">}</span>
+</span><span class='line'><span class="o">+</span>
+</span><span class='line'><span class="o">+</span><span class="p">}</span>
+</span><span class='line'><span class="kt">void</span> <span class="n">sender</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="o">+</span>    <span class="n">wakeup_receiver</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A note: shmget() is not available in Android, so this is not a valid IPC for Android.</p>
+
+<p>Reference:</p>
+
+<blockquote><p></p><footer><strong>http://www.csl.mtu.edu/cs4411.ck/www/NOTES/signal/kill.html</strong></footer></blockquote>
+
+
+<h2>Footnote: signal lost</h2>
+
+<p>1 unreliable signal:
+earlier version of UNIX signal is unreliable</p>
+
+<blockquote><p></p><footer><strong>unreliable signals</strong> <cite><a href='http://codeidol.com/community/nix/unreliable-signals/5031'>codeidol.com/community/nix/5031/&hellip;</a></cite></footer></blockquote>
+
+
+<p>2 real-time signal:</p>
+
+<blockquote><p></p><footer><strong>man page</strong> <cite><a href='http://man7.org/linux/man-pages/man7/signal.7.html'>man7.org/linux/man-pages/man7/&hellip;</a></cite></footer></blockquote>
+
+
+<p>POSIX added signals, and <blockquote><p></p><footer><strong>why signal is a bad AIO than poll</strong> <cite><a href='http://stackoverflow.com/questions/6345973/who-uses-posix-realtime-signals-and-why'>stackoverflow.com/questions/&hellip;</a></cite></footer></blockquote>
+3 signal lost:</p>
+
+<p><em>. when signal handler is running, blocked signals is &#8220;lost&#8221; (?!)
+</em>. when signal handler is running, the same signal is blocked by default, add SA_NODEFER in sigaction.sa_flags unblock it. <blockquote><p></p><footer><strong>man page</strong> <cite><a href='http://man7.org/linux/man-pages/man2/sigaction.2.html'>man7.org/linux/man-pages/man2/&hellip;</a></cite></footer></blockquote></p>
+]]></content>
+  </entry>
+  
+</feed>

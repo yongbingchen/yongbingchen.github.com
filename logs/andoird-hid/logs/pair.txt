@@ -1,0 +1,1086 @@
+﻿//pair
+07-10 02:54:22.011 D/bt-btif ( 2098): bta_dm_discover_device appl_knows_rem_name 0
+07-10 02:54:22.011 D/bt-btif ( 2098): bta_dm_read_remote_device_name
+07-10 02:54:22.011 I/bt-btm  ( 2098): BTM_ReadRemoteDeviceName: bd addr [70f395470143]
+07-10 02:54:22.011 I/bt-btm  ( 2098): no device found in inquiry db
+07-10 02:54:22.011 D/bt-btm  ( 2098): btm_acl_paging discing:0, paging:0 BDA: 70f395470143
+07-10 02:54:22.011 D/bt-btm  ( 2098): btm_bda_to_acl Not found
+07-10 02:54:22.011 D/bt-btm  ( 2098): connecting_bda: 00224887edbf
+07-10 02:54:22.011 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:54:22.011 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:22.011 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:22.011 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:22.011 I/bt-btif ( 2098): btif_dm_search_devices_evt event=BTA_DM_DISC_RES_EVT
+07-10 02:54:22.011 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:1, len:40
+07-10 02:54:22.011 I/bt-btif ( 2098): HAL bt_hal_cbacks->remote_device_properties_cb
+07-10 02:54:22.021 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:22.021 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:25.151 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:54:25.151 I/bt-btm  ( 2098): btm_sec_rmt_host_support_feat_evt  sm4: 0x11  p[0]: 0x1
+07-10 02:54:25.151 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:25.351 I/bt-btm  ( 2098): BDA 70:f3:95:47:01:43
+07-10 02:54:25.351 I/bt-btm  ( 2098): Inquire BDA 70:f3:95:47:01:43
+07-10 02:54:25.351 D/bt-btif ( 2098): bta_dm_remname_cback name=<MSH-LT162>
+07-10 02:54:25.351 I/bt-btm  ( 2098): btm_sec_rmt_name_request_complete
+07-10 02:54:25.351 D/bt-btm  ( 2098): btm_bda_to_acl Not found
+07-10 02:54:25.351 D/bt-btm  ( 2098): btm_acl_resubmit_page
+07-10 02:54:25.351 I/bt-btm  ( 2098): Security Manager: rmt_name_complete PairState: 0  RemName: MSH-LT162  status: 0 State:0  p_dev_rec: 0x473dbe0c
+07-10 02:54:25.351 I/bt-btm  ( 2098): setting BTM_SEC_NAME_KNOWN sec_flags:0x88
+07-10 02:54:25.351 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:25.351 I/bt-btif ( 2098): BTA got event 0x204
+07-10 02:54:25.351 I/bt-btif ( 2098): bta_dm_search_sm_execute state:1, event:0x204
+07-10 02:54:25.351 D/bt-btif ( 2098): bta_dm_rmt_name
+07-10 02:54:25.351 D/bt-btif ( 2098): bta_dm_discover_device, BDA:0x70F395470143
+07-10 02:54:25.351 D/bt-btif ( 2098): bta_dm_discover_device name_discover_done = 1 p_btm_inq_info 0x473dae24
+07-10 02:54:25.351 D/bt-btif ( 2098): bta_dm_discover_device appl_knows_rem_name 1
+07-10 02:54:25.351 I/bt-btif ( 2098): BTA got event 0x207
+07-10 02:54:25.351 I/bt-btif ( 2098): bta_dm_search_sm_execute state:1, event:0x207
+07-10 02:54:25.351 D/bt-btif ( 2098): bta_dm_search_result searching:0x0000, result:0x0000
+07-10 02:54:25.351 D/bt-btif ( 2098): bte_search_devices_evt event=BTA_DM_DISC_RES_EVT param_len=284
+07-10 02:54:25.351 D/bt-btif ( 2098): btif_transfer_context event 2, len 284
+07-10 02:54:25.351 D/bt-btif ( 2098): bta_dm_discover_next_device
+07-10 02:54:25.351 I/bt-btif ( 2098): BTA got event 0x206
+07-10 02:54:25.351 I/bt-btif ( 2098): bta_dm_search_sm_execute state:1, event:0x206
+07-10 02:54:25.351 D/bt-btif ( 2098): bta_dm_search_cmpl
+07-10 02:54:25.351 D/bt-btif ( 2098): bte_search_devices_evt event=BTA_DM_DISC_CMPL_EVT param_len=0
+07-10 02:54:25.351 D/bt-btif ( 2098): btif_transfer_context event 4, len 0
+07-10 02:54:25.351 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:25.351 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:25.351 I/bt-btif ( 2098): btif_dm_search_devices_evt event=BTA_DM_DISC_RES_EVT
+07-10 02:54:25.351 D/bt-btif ( 2098): in, bd addr:70:f3:95:47:01:43, prop type:1, len:9
+07-10 02:54:25.351 I/bt-btif ( 2098): HAL bt_hal_cbacks->remote_device_properties_cb
+07-10 02:54:25.361 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:25.361 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:25.361 I/bt-btif ( 2098): btif_dm_search_devices_evt event=BTA_DM_DISC_CMPL_EVT
+07-10 02:54:25.361 I/bt-btif ( 2098): HAL bt_hal_cbacks->discovery_state_changed_cb
+07-10 02:54:25.401 V/BluetoothDiscoveryReceiver( 2020): Received: android.bluetooth.adapter.action.DISCOVERY_FINISHED
+07-10 02:54:25.401 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:25.401 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+
+07-10 02:54:39.841 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:39.851 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:39.851 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:39.861 I/BluetoothBondStateMachine( 2098): Bond address is:00:22:48:87:ED:BF
+07-10 02:54:39.861 I/bt-btif ( 2098): btif_dm_create_bond: bd_addr=00:22:48:87:ed:bf
+07-10 02:54:39.861 D/bt-btif ( 2098): btif_transfer_context event 33026, len 6
+07-10 02:54:39.861 I/BluetoothBondStateMachine( 2098): Entering PendingCommandState State
+07-10 02:54:39.861 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:39.861 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:39.861 I/bt-btif ( 2098): btif_dm_generic_evt: event=33026
+07-10 02:54:39.861 D/bt-btif ( 2098): bond_state_changed: state=1 prev_state=0
+07-10 02:54:39.861 I/bt-btif ( 2098): HAL bt_hal_cbacks->bond_state_changed_cb
+07-10 02:54:39.871 I/BluetoothBondStateMachine( 2098): bondStateChangeCallback: Status: 0 Address: 00:22:48:87:ED:BF newState: 1
+07-10 02:54:39.871 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:4, len:4
+07-10 02:54:39.871 D/bt-btif ( 2098): found node, p->name:DevClass, child/value:0x45a57498, bytes:4
+07-10 02:54:39.871 D/bt-btif ( 2098): p->used:4, type:2, p->flag:0
+07-10 02:54:39.871 I/bt-btif ( 2098): BTA got event 0x10a
+07-10 02:54:39.871 I/bt-btif ( 2098): bta_dm_sm_execute event:0xa
+07-10 02:54:39.871 I/bt-btm  ( 2098): BTM_SecBond BDA: 00:22:48:87:ed:bf
+07-10 02:54:39.871 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:54:39.871 D/bt-btm  ( 2098): before update sec_flags=0x88
+07-10 02:54:39.871 I/bt-btm  ( 2098): BTM: BTM_DeleteStoredLinkKey: delete_all_flag: FALSE
+07-10 02:54:39.871 D/bt-btm  ( 2098): after update sec_flags=0x88
+07-10 02:54:39.871 I/bt-btm  ( 2098): BTM_SecBond: Local device supports SSP=8
+07-10 02:54:39.871 I/bt-btm  ( 2098):   remote_features=00-00-00-00
+07-10 02:54:39.871 I/bt-btm  ( 2098):                   00-00-00-00
+07-10 02:54:39.871 I/bt-btm  ( 2098): BTM_SecBond: Remote sm4: 0x0  HCI Handle: 0xffff
+07-10 02:54:39.871 D/bt-btm  ( 2098): sec mode: 4 sm4:x0
+07-10 02:54:39.871 I/bt-btm  ( 2098): btm_sec_change_pairing_state  Old: 0
+07-10 02:54:39.871 I/bt-btm  ( 2098): btm_sec_change_pairing_state  New: 1 pairing_flags:0x1
+07-10 02:54:39.871 I/bt-btm  ( 2098): BTM_ReadRemoteDeviceName: bd addr [00224887edbf]
+07-10 02:54:39.871 I/bt-btm  ( 2098): no device found in inquiry db
+07-10 02:54:39.871 D/bt-btm  ( 2098): btm_acl_paging discing:0, paging:0 BDA: 00224887edbf
+07-10 02:54:39.871 D/bt-btm  ( 2098): btm_bda_to_acl Not found
+07-10 02:54:39.871 D/bt-btm  ( 2098): connecting_bda: 70f395470143
+07-10 02:54:39.871 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:54:39.871 D/bt-btm  ( 2098): State:1 sm4: 0x0 sec_state:0
+07-10 02:54:39.881 I/BluetoothBondStateMachine( 2098): Bond State Change Intent:00:22:48:87:ED:BF OldState: 10 NewState: 11
+07-10 02:54:39.881 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:39.881 D/BluetoothAdapterService(741731424)( 2098): Get Bonded Devices being called
+07-10 02:54:39.881 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:39.891 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:39.891 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:39.891 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:39.891 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:39.901 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:39.901 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:39.901 D/BluetoothDiscoverableEnabler( 2020): handleModeChanged(): mode = 21
+07-10 02:54:39.901 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:39.911 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:39.921 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:39.921 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:41.231 I/bt-btm  ( 2098): BDA 00:22:48:87:ed:bf
+07-10 02:54:41.231 I/bt-btm  ( 2098): Inquire BDA 00:22:48:87:ed:bf
+07-10 02:54:41.231 I/bt-btm  ( 2098): btm_sec_rmt_name_request_complete
+07-10 02:54:41.231 D/bt-btm  ( 2098): btm_bda_to_acl Not found
+07-10 02:54:41.231 D/bt-btm  ( 2098): btm_acl_resubmit_page
+07-10 02:54:41.231 I/bt-btm  ( 2098): Security Manager: rmt_name_complete PairState: 1  RemName: Microsoft Bluetooth Mobile Keyboard 6000  status: 0 State:0  p_dev_rec: 0x473dbf54
+07-10 02:54:41.231 I/bt-btm  ( 2098): setting BTM_SEC_NAME_KNOWN sec_flags:0x88
+07-10 02:54:41.231 I/bt-btm  ( 2098): btm_sec_rmt_name_request_complete() continue bonding sm4: 0x0000, status:0x0
+07-10 02:54:41.231 I/bt-btm  ( 2098): btm_sec_rmt_name_request_complete  IS_SM4_UNKNOWN Flags:0x0001
+07-10 02:54:41.231 I/bt-btm  ( 2098): btm_sec_change_pairing_state  Old: 1
+07-10 02:54:41.231 I/bt-btm  ( 2098): btm_sec_change_pairing_state  New: 3 pairing_flags:0x1
+07-10 02:54:41.231 D/bt-btm  ( 2098): btm_sec_check_prefetch_pin: PIN code callback called
+07-10 02:54:41.231 D/bt-btm  ( 2098): btm_bda_to_acl Not found
+07-10 02:54:41.231 D/bt-btif ( 2098): btif_transfer_context event 2, len 276
+07-10 02:54:41.231 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:41.231 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:41.231 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:41.231 I/bt-btif ( 2098): btif_dm_upstreams_cback  ev: BTA_DM_PIN_REQ_EVT
+07-10 02:54:41.231 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:1, len:40
+07-10 02:54:41.231 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:4, len:4
+07-10 02:54:41.231 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:5, len:4
+07-10 02:54:41.231 I/bt-btif ( 2098): HAL bt_hal_cbacks->remote_device_properties_cb
+07-10 02:54:41.241 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:4, len:4
+07-10 02:54:41.241 D/bt-btif ( 2098): found node, p->name:DevClass, child/value:0x45a57498, bytes:4
+07-10 02:54:41.241 D/bt-btif ( 2098): p->used:4, type:2, p->flag:0
+07-10 02:54:41.241 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:4, len:4
+07-10 02:54:41.241 D/bt-btif ( 2098): found node, p->name:DevClass, child/value:0x45a57498, bytes:4
+07-10 02:54:41.241 D/bt-btif ( 2098): p->used:4, type:2, p->flag:0
+07-10 02:54:41.241 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:4, len:4
+07-10 02:54:41.241 D/bt-btif ( 2098): found node, p->name:DevClass, child/value:0x45a57498, bytes:4
+07-10 02:54:41.241 D/bt-btif ( 2098): p->used:4, type:2, p->flag:0
+07-10 02:54:41.241 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:4, len:4
+07-10 02:54:41.241 D/bt-btif ( 2098): found node, p->name:DevClass, child/value:0x45a57498, bytes:4
+07-10 02:54:41.241 D/bt-btif ( 2098): p->used:4, type:2, p->flag:0
+07-10 02:54:41.241 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:4, len:4
+07-10 02:54:41.241 D/bt-btif ( 2098): found node, p->name:DevClass, child/value:0x45a57498, bytes:4
+07-10 02:54:41.241 D/bt-btif ( 2098): p->used:4, type:2, p->flag:0
+07-10 02:54:41.241 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:4, len:4
+07-10 02:54:41.241 D/bt-btif ( 2098): found node, p->name:DevClass, child/value:0x45a57498, bytes:4
+07-10 02:54:41.241 D/bt-btif ( 2098): p->used:4, type:2, p->flag:0
+07-10 02:54:41.241 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:4, len:4
+07-10 02:54:41.241 D/bt-btif ( 2098): found node, p->name:DevClass, child/value:0x45a57498, bytes:4
+07-10 02:54:41.241 D/bt-btif ( 2098): p->used:4, type:2, p->flag:0
+07-10 02:54:41.241 D/bt-btif ( 2098): found node, p->name:FixedPinZerosKeyboardBlacklist, child/value:0x45a7f9e8, bytes:10
+07-10 02:54:41.241 D/bt-btif ( 2098): p->used:10, type:1, p->flag:0
+07-10 02:54:41.241 I/bt-btif ( 2098): HAL bt_hal_cbacks->pin_request_cb
+07-10 02:54:41.351 W/ContextImpl( 2020): Calling a method in the system process without a qualified user: android.app.ContextImpl.startActivity:930 android.content.ContextWrapper.startActivity:284 android.content.ContextWrapper.startActivity:284 com.android.settings.bluetooth.BluetoothPairingRequest.onReceive:72 android.app.ActivityThread.handleReceiver:2376
+07-10 02:54:41.351 W/ContextImpl( 2020): Calling a method in the system process without a qualified user: android.app.ContextImpl.startActivity:942 android.app.ContextImpl.startActivity:931 android.content.ContextWrapper.startActivity:284 android.content.ContextWrapper.startActivity:284 com.android.settings.bluetooth.BluetoothPairingRequest.onReceive:72
+07-10 02:54:41.351 I/ActivityManager( 1642): START u0 {act=android.bluetooth.device.action.PAIRING_REQUEST flg=0x10000000 cmp=com.android.settings/.bluetooth.BluetoothPairingDialog (has extras)} from pid 2020
+07-10 02:54:41.431 I/dalvikvm-heap( 1642): Grow heap (frag case) to 5.918MB for 380496-byte allocation
+07-10 02:54:41.561 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:41.561 D/LocalBluetoothManager( 2020): setting foreground activity to null
+07-10 02:54:41.621 I/bt-btif ( 2098): btif_dm_pin_reply: accept=1
+07-10 02:54:41.621 I/bt-btif ( 2098): BTA got event 0x10c
+07-10 02:54:41.621 I/bt-btif ( 2098): bta_dm_sm_execute event:0xc
+07-10 02:54:41.631 I/bt-btm  ( 2098): BTM_PINCodeReply(): PairState: 3   PairFlags: 0x09  PinLen:6  Result:0
+07-10 02:54:41.631 I/bt-l2cap( 2098): l2c_link_adjust_allocation  num_hipri: 0  num_lowpri: 1  low_quota: 6  round_robin_quota: 0  qq: 6
+07-10 02:54:41.631 I/bt-l2cap( 2098): l2c_link_adjust_allocation LCB 0   Priority: 0  XmitQuota: 6
+07-10 02:54:41.631 I/bt-l2cap( 2098):         SentNotAcked: 0  RRUnacked: 0
+07-10 02:54:41.631 D/bt-l2cap( 2098): l2cu_create_conn_after_switch :0 num_acl:0 no_hi: 0 is_bonding:1
+07-10 02:54:41.631 I/bt-btm  ( 2098): BTM_InqDbRead: bd addr [00224887edbf]
+07-10 02:54:41.631 D/bt-btm  ( 2098): btm_acl_paging discing:0, paging:0 BDA: 00224887edbf
+07-10 02:54:41.631 D/bt-btm  ( 2098): btm_bda_to_acl Not found
+07-10 02:54:41.631 D/bt-btm  ( 2098): connecting_bda: 00224887edbf
+07-10 02:54:41.631 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:54:41.631 D/bt-btm  ( 2098): btm_acl_update_busy_level
+07-10 02:54:41.631 D/bt-btm  ( 2098): BTM_BLI_PAGE_EVT
+07-10 02:54:41.641 D/bt-btm  ( 2098): btm_acl_update_busy_level
+07-10 02:54:41.641 D/bt-btm  ( 2098): BTM_BLI_PAGE_EVT
+07-10 02:54:41.641 D/bt-btm  ( 2098): Security Manager: btm_sec_dd_create_conn [00224887edbf]
+07-10 02:54:41.641 I/bt-btm  ( 2098): btm_sec_change_pairing_state  Old: 3
+07-10 02:54:41.641 I/bt-btm  ( 2098): btm_sec_change_pairing_state  New: 2 pairing_flags:0xd
+07-10 02:54:41.641 I/bt-btif ( 2098): BTA got event 0x108
+07-10 02:54:41.641 I/bt-btif ( 2098): bta_dm_sm_execute event:0x8
+07-10 02:54:41.641 D/bt-btif ( 2098): btif_transfer_context event 8, len 276
+07-10 02:54:41.641 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:41.641 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:41.641 I/bt-btif ( 2098): btif_dm_upstreams_cback  ev: BTA_DM_BUSY_LEVEL_EVT
+07-10 02:54:41.651 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:41.651 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:41.731 I/v_egl   ( 2020): veglGetDisplayInfo:512 processName=ndroid.settings
+07-10 02:54:41.731 I/v_egl   ( 2020): , minUndequeued=1
+07-10 02:54:41.741 E/BufferQueue( 1583): [com.android.settings/com.android.settings.bluetooth.BluetoothPairingDialog] dequeueBuffer: can't dequeue multiple buffers without setting the buffer count
+07-10 02:54:41.741 I/v_egl   ( 2020): procName=ndroid.settings
+07-10 02:54:41.741 I/v_egl   ( 2020): , bufferCount=3
+07-10 02:54:41.741 I/v_egl   ( 2020): Set buffer count to 3
+07-10 02:54:41.801 I/ActivityManager( 1642): Displayed com.android.settings/.bluetooth.BluetoothPairingDialog: +233ms
+07-10 02:54:42.331 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:54:42.331 I/bt-btm  ( 2098): btm_sec_link_key_request()  BDA: 00:22:48:87:ed:bf
+07-10 02:54:42.341 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:42.341 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:42.341 I/bt-btm  ( 2098): btm_sec_pin_code_request()  State: 2, BDA:00224887edbf
+07-10 02:54:42.341 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:54:42.341 I/bt-btm  ( 2098): btm_sec_pin_code_request bonding sending reply
+07-10 02:54:42.341 I/bt-btm  ( 2098): btm_sec_change_pairing_state  Old: 2
+07-10 02:54:42.341 I/bt-btm  ( 2098): btm_sec_change_pairing_state  New: 9 pairing_flags:0xd
+07-10 02:54:42.341 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:42.341 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:48.321 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:54:48.321 I/bt-btm  ( 2098): btm_sec_link_key_notification()  BDA:00224887edbf, TYPE: 0
+07-10 02:54:48.321 D/bt-btm  ( 2098): btm_restore_mode: Authen Enable -> 0
+07-10 02:54:48.321 D/bt-btif ( 2098): btif_transfer_context event 3, len 276
+07-10 02:54:48.321 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:48.321 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:48.321 I/bt-btif ( 2098): btif_dm_upstreams_cback  ev: BTA_DM_AUTH_CMPL_EVT
+07-10 02:54:48.321 D/bt-btif ( 2098): btif_dm_auth_cmpl_evt: Storing link key. key_type=0x0, is_temp=0
+07-10 02:54:48.321 D/bt-btif ( 2098): post cmd type:1, size:0, h:7,
+07-10 02:54:48.321 I/bt-btif ( 2098): btif_dm_get_remote_services: remote_addr=00:22:48:87:ed:bf
+07-10 02:54:48.321 D/bt-btif ( 2098): cmd.id:4
+07-10 02:54:48.321 I/bt-btif ( 2098): BTA got event 0x202
+07-10 02:54:48.321 I/bt-btif ( 2098): bta_dm_search_sm_execute state:0, event:0x202
+FFFFFFF, sdp_search=1
+07-10 02:54:48.321 I/bt-btm  ( 2098): BTM_InqDbRead: bd addr [00224887edbf]
+07-10 02:54:48.321 D/bt-btif ( 2098): bta_dm_discover_device, BDA:0x00224887EDBF
+ce name_discover_done = 0 p_btm_inq_info 0x473dadf8
+07-10 02:54:48.321 D/bt-btif ( 2098): bta_dm_discover_device appl_knows_rem_name 1
+07-10 02:54:48.321 I/bt-btm  ( 2098): BTM_ReadClockOffset: RemBdAddr: 00224887edbf
+07-10 02:54:48.321 D/bt-btm  ( 2098): btm_bda_to_acl Not found
+07-10 02:54:48.321 D/bt-btif ( 2098): bta_dm_search_cb.services = 1fffffff***********
+07-10 02:54:48.321 E/bt-btif ( 2098): services_to_search = 1fffffff
+07-10 02:54:48.321 E/bt-btif ( 2098): ****************search UUID = 1200***********
+07-10 02:54:48.321 I/bt-sdp  ( 2098): SDP - Originate started
+07-10 02:54:48.321 I/bt-l2cap( 2098): L2CA_ErtmConnectReq()  PSM: 0x0001  BDA: 00224887edbf  p_ertm_info: 0x00000000 allowed:0x0 preferred:0
+07-10 02:54:48.321 D/bt-l2cap( 2098): l2cu_allocate_ccb: cid 0x0000
+07-10 02:54:48.321 D/bt-l2cap( 2098): l2cu_enqueue_ccb CID: 0x0040  priority: 2
+07-10 02:54:48.321 D/bt-l2cap( 2098): l2c_link_adjust_chnl_allocation
+07-10 02:54:48.321 D/bt-l2cap( 2098): POOL ID:3, GKI_poolcount = 200, reserved_buff = 0, weighted_chnls = 2, quota_per_weighted_chnls = 101
+07-10 02:54:48.321 I/bt-l2cap( 2098): CID:0x0040 Priority:2 TxDataRate:1 Quota:101
+07-10 02:54:48.321 I/bt-l2cap( 2098): L2CAP - L2CA_conn_req(psm: 0x0001) returned CID: 0x0040
+07-10 02:54:48.321 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:48.321 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+data/misc/bluedroid/bt_config.new
+07-10 02:54:48.341 D/bt-btm  ( 2098): btm_acl_resubmit_page
+ger: btm_sec_connected in state: 9  handle:1 status:0 enc_mode:0  bda:4887edbf RName:Microsoft Bluetooth Mobile Keyboard 6000
+07-10 02:54:48.341 I/bt-btm  ( 2098): btm_sec_change_pairing_state  Old: 9
+ btm_sec_change_pairing_state  New: 0 pairing_flags:0xd
+0224887edbf is_bonding: 0
+07-10 02:54:48.341 D/bt-l2cap( 2098): l2cu_update_lcb_4_bonding  BDA: 00224887edbf is_bonding: 1
+e_busy_level
+-10 02:54:48.341 D/bt-btm  ( 2098): BTM_BLI_PAGE_DONE_EVT
+07-10 02:54:48.341 I/bt-l2cap( 2098): l2cu_send_peer_info_req: type 0x0002
+07-10 02:54:48.341 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:48.341 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0040, q_cout=0
+07-10 02:54:48.341 D/bt-btm  ( 2098): btm_acl_created hci_handle=1 link_role=0  is_le_link=0
+07-10 02:54:48.341 D/bt-btm  ( 2098): btm_bda_to_acl Not found
+07-10 02:54:48.341 I/bt-l2cap( 2098): L2CAP - st: CLOSED evt: 0
+07-10 02:54:48.341 D/bt-btm  ( 2098): btm_sec_l2cap_access_req is_originator:1, 0x473ea634
+07-10 02:54:48.341 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:54:48.341 D/bt-l2cap( 2098): l2c_link_sec_comp: 17, 0x473ea634
+07-10 02:54:48.341 D/bt-l2cap( 2098): ccb timer ticks: 0
+07-10 02:54:48.341 I/bt-l2cap( 2098): L2CAP - st: ORIG_W4_SEC_COMP evt: 7
+07-10 02:54:48.341 I/bt-btif ( 2098): BTA got event 0x108
+07-10 02:54:48.341 I/bt-btif ( 2098): bta_dm_sm_execute event:0x8
+07-10 02:54:48.341 D/bt-btif ( 2098): btif_transfer_context event 8, len 276
+07-10 02:54:48.341 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:48.341 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:48.341 I/bt-btif ( 2098): btif_dm_upstreams_cback  ev: BTA_DM_BUSY_LEVEL_EVT
+=1, bdaddr=00:22:48:87:ED:BF
+07-10 02:54:48.411 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0040, q_cout=0
+07-10 02:54:48.411 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+411 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:48.411 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:48.411 I/bt-l2cap( 2098): L2CAP - st: W4_L2CAP_CON_RSP evt: 19
+ TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:48.411 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0040, q_cout=0
+07-10 02:54:48.421 D/bt-btm  ( 2098): btm_read_remote_features_complete
+07-10 02:54:48.421 D/bt-btm  ( 2098): btm_establish_continue
+07-10 02:54:48.421 D/bt-btm  ( 2098): btm_set_packet_types
+07-10 02:54:48.421 D/bt-btm  ( 2098): SetPacketType Mask -> 0x331e
+07-10 02:54:48.421 D/bt-btm  ( 2098): BTM_SetLinkPolicy
+07-10 02:54:48.421 I/bt-btm  ( 2098): BTM_SetLinkPolicy park not supported (settings: 0x0007)
+07-10 02:54:48.421 D/bt-btm  ( 2098): btm_bda_to_acl found
+07-10 02:54:48.421 D/bt-btm  ( 2098): btm_bda_to_acl found
+07-10 02:54:48.421 D/bt-btm  ( 2098): BTM_SetLinkSuperTout
+07-10 02:54:48.421 D/bt-btm  ( 2098): btm_acl_update_busy_level
+07-10 02:54:48.421 D/bt-btm  ( 2098): BTM_BLI_ACL_UP_EVT
+07-10 02:54:48.421 I/bt-btif ( 2098): BTA got event 0x108
+07-10 02:54:48.421 I/bt-btif ( 2098): bta_dm_sm_execute event:0x8
+07-10 02:54:48.421 D/bt-btm  ( 2098): btm_bda_to_acl found
+07-10 02:54:48.421 D/bt-btm  ( 2098): BTM_ReadRemoteFeatures
+07-10 02:54:48.421 W/bt-btif ( 2098): info:x0
+07-10 02:54:48.421 D/bt-btif ( 2098): btif_transfer_context event 5, len 276
+07-10 02:54:48.421 I/bt-l2cap( 2098): L2CA_SetDesireRole() new:x0, disallow_switch:0
+fetched event a001
+xt_switched
+07-10 02:54:48.421 I/bt-btif ( 2098): BTA got event 0x108
+07-10 02:54:48.421 I/bt-btif ( 2098): bta_dm_sm_execute event:0x8
+len 276
+-btif ( 2098): btif_dm_upstreams_cback  ev: BTA_DM_LINK_UP_EVT
+07-10 02:54:48.421 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0040, q_cout=0
+07-10 02:54:48.421 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:48.421 D/bt-btif ( 2098): BTA_DM_LINK_UP_EVT. Sending BT_ACL_STATE_CONNECTED
+07-10 02:54:48.421 I/bt-btif ( 2098): HAL bt_hal_cbacks->acl_state_changed_cb
+07-10 02:54:48.421 I/bt-l2cap( 2098): L2CAP - st: W4_L2CAP_CON_RSP evt: 11
+07-10 02:54:48.421 I/bt-l2cap( 2098): L2CAP - Calling Connect_Cfm_Cb(), CID: 0x0040, Success
+07-10 02:54:48.421 I/bt-l2cap( 2098): L2CA_ConfigReq()  CID 0x0040: fcr_present:0 (mode 0) mtu_present:1 (256)
+07-10 02:54:48.421 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 24
+07-10 02:54:48.421 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:48.421 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0040, q_cout=0
+07-10 02:54:48.421 I/bt-sdp  ( 2098): SDP - got conn cnf, sent cfg req, CID: 0x40
+07-10 02:54:48.421 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:48.421 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:48.421 I/bt-btif ( 2098): btif_dm_upstreams_cback  ev: BTA_DM_BUSY_LEVEL_EVT
+(L532): opcode = 7
+07-10 02:54:48.441 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0040, q_cout=0
+2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:48.451 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 15
+ CID: 0x0040
+ I/bt-sdp  ( 2098): SDP - Rcvd cfg cfm, CID: 0x40  Result: 0
+07-10 02:54:48.461 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:48.461 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:48.461 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 14
+07-10 02:54:48.461 I/bt-l2cap( 2098): l2c_fcr_process_peer_cfg_req() CFG fcr_present:0 fcr.mode:0 CCB FCR mode:0 preferred: 0 allowed:1
+07-10 02:54:48.461 D/bt-btm  ( 2098): btm_bda_to_acl found
+07-10 02:54:48.461 D/bt-btm  ( 2098): btm_get_max_packet_size
+07-10 02:54:48.461 D/bt-l2cap( 2098): l2cu_adjust_out_mps use 0   Based on peer_cfg.fcr.mps: 0  packet_size: 17
+07-10 02:54:48.461 I/bt-l2cap( 2098): L2CAP - Calling Config_Req_Cb(), CID: 0x0040, C-bit 0
+07-10 02:54:48.461 I/bt-l2cap( 2098): L2CA_ConfigRsp()  CID: 0x0040  Result: 0 MTU present:0 Flush TO:0 FCR:0 FCS:0
+07-10 02:54:48.461 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 25
+07-10 02:54:48.461 D/bt-l2cap( 2098): l2c_link_adjust_chnl_allocation
+07-10 02:54:48.461 D/bt-l2cap( 2098): POOL ID:3, GKI_poolcount = 200, reserved_buff = 0, weighted_chnls = 2, quota_per_weighted_chnls = 101
+07-10 02:54:48.461 I/bt-l2cap( 2098): CID:0x0040 Priority:2 TxDataRate:1 Quota:101
+07-10 02:54:48.461 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:48.461 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0040, q_cout=0
+8.461 I/bt-sdp  ( 2098): SDP - Rcvd cfg ind, sent cfg cfm, CID: 0x40
+07-10 02:54:48.461 I/bt-l2cap( 2098): L2CA_DataWrite()  CID: 0x0040  Len: 20
+- st: OPEN evt: 30
+07-10 02:54:48.461 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0040, q_cout=1
+07-10 02:54:48.461 D/bt-l2cap( 2098): RR service pri=2, quota=4, lcid=0x0040
+Unack=2,RRQuota=0,RRUnack=0
+07-10 02:54:48.461 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0040, q_cout=0
+07-10 02:54:48.471 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0040, q_cout=0
+07-10 02:54:48.471 D/bt-l2cap( 2098): TotalWin=5,LinkUnack(0x1)=1,RRCheck=0,RRUnack=0
+07-10 02:54:48.481 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0040, q_cout=0
+07-10 02:54:48.481 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:48.481 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:48.481 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:48.661 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 20
+07-10 02:54:48.661 W/bt-sdp  ( 2098): process_service_search_attr_rsp
+07-10 02:54:48.661 I/bt-sdp  ( 2098): SDP - disconnect  CID: 0x40
+07-10 02:54:48.661 I/bt-l2cap( 2098): L2CA_DisconnectReq()  CID: 0x0040
+07-10 02:54:48.671 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 27
+07-10 02:54:48.671 I/bt-btm  ( 2098): BTM_SetPowerMode: pm_id 128 BDA: 4887edbf mode:0x0
+07-10 02:54:48.671 D/bt-btm  ( 2098): BTM_SetPowerMode: mode:0x0 interval 0 max:34, min:0
+07-10 02:54:48.671 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:48.671 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0040, q_cout=0
+07-10 02:54:48.681 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0040, q_cout=0
+k=0,RRUnack=0
+07-10 02:54:48.681 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:48.681 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+): L2CAP - st: W4_L2CAP_DISC_RSP evt: 18
+07-10 02:54:48.681 D/bt-l2cap( 2098): l2cu_release_ccb: cid 0x0040  in_use: 1
+07-10 02:54:48.681 D/bt-l2cap( 2098): l2cu_dequeue_ccb  CID: 0x0040
+mic_ccbs() starting IDLE timeout: 4
+07-10 02:54:48.681 I/bt-l2cap( 2098): L2CAP - Calling DisconnectCfm_Cb(), CID: 0x0040
+07-10 02:54:48.681 I/bt-sdp  ( 2098): SDP - Rcvd L2CAP disc cfm, CID: 0x40
+07-10 02:54:48.681 D/bt-sdp  ( 2098): releasing SDP rsp_list
+07-10 02:54:48.681 I/bt-btif ( 2098): BTA got event 0x205
+07-10 02:54:48.681 I/bt-btif ( 2098): bta_dm_search_sm_execute state:3, event:0x205
+07-10 02:54:48.681 D/bt-btif ( 2098): sdp_result::0x0
+07-10 02:54:48.681 D/bt-btif ( 2098): bta_dm_sdp_result services_found = 0000
+07-10 02:54:48.681 D/bt-btif ( 2098): bta_dm_search_cb.services = 1fffffff***********
+07-10 02:54:48.681 E/bt-btif ( 2098): services_to_search = 1ffffffe
+07-10 02:54:48.681 E/bt-btif ( 2098): ****************search UUID = 0100***********
+07-10 02:54:48.681 I/bt-sdp  ( 2098): SDP - Originate started
+07-10 02:54:48.681 I/bt-l2cap( 2098): L2CA_ErtmConnectReq()  PSM: 0x0001  BDA: 00224887edbf  p_ertm_info: 0x00000000 allowed:0x0 preferred:0
+07-10 02:54:48.681 D/bt-l2cap( 2098): l2cu_allocate_ccb: cid 0x0000
+07-10 02:54:48.681 D/bt-l2cap( 2098): l2cu_enqueue_ccb CID: 0x0041  priority: 2
+07-10 02:54:48.681 D/bt-l2cap( 2098): l2c_link_adjust_chnl_allocation
+07-10 02:54:48.681 D/bt-l2cap( 2098): POOL ID:3, GKI_poolcount = 200, reserved_buff = 0, weighted_chnls = 2, quota_per_weighted_chnls = 101
+07-10 02:54:48.681 I/bt-l2cap( 2098): CID:0x0041 Priority:2 TxDataRate:1 Quota:101
+:54:48.681 I/bt-l2cap( 2098): L2CAP - st: CLOSED evt: 21
+07-10 02:54:48.681 I/bt-btm  ( 2098): BTM_SetPowerMode: pm_id 128 BDA: 4887edbf mode:0x0
+tPowerMode: mode:0x0 interval 0 max:0, min:0
+07-10 02:54:48.681 D/bt-btm  ( 2098): btm_sec_l2cap_access_req is_originator:1, 0x473ea790
+07-10 02:54:48.681 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+54:48.681 D/bt-l2cap( 2098): l2c_link_sec_comp: 17, 0x473ea790
+07-10 02:54:48.681 D/bt-l2cap( 2098): ccb timer ticks: 0
+07-10 02:54:48.681 I/bt-l2cap( 2098): L2CAP - st: CLOSED evt: 7
+07-10 02:54:48.681 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:48.681 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=0
+07-10 02:54:48.681 I/bt-l2cap( 2098): L2CAP - L2CA_conn_req(psm: 0x0001) returned CID: 0x0041
+07-10 02:54:48.691 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=0
+07-10 02:54:48.691 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:48.691 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:48.691 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:48.691 I/bt-l2cap( 2098): L2CAP - st: W4_L2CAP_CON_RSP evt: 11
+07-10 02:54:48.691 I/bt-l2cap( 2098): L2CAP - Calling Connect_Cfm_Cb(), CID: 0x0041, Success
+07-10 02:54:48.691 I/bt-l2cap( 2098): L2CA_ConfigReq()  CID 0x0041: fcr_present:0 (mode 0) mtu_present:1 (256)
+07-10 02:54:48.691 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 24
+07-10 02:54:48.691 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:48.691 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=0
+07-10 02:54:48.691 I/bt-sdp  ( 2098): SDP - got conn cnf, sent cfg req, CID: 0x41
+07-10 02:54:48.711 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=0
+07-10 02:54:48.711 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:48.711 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:48.711 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:48.711 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 15
+07-10 02:54:48.711 I/bt-l2cap( 2098): L2CAP - Calling Config_Rsp_Cb(), CID: 0x0041
+07-10 02:54:48.711 I/bt-sdp  ( 2098): SDP - Rcvd cfg cfm, CID: 0x41  Result: 0
+07-10 02:54:48.721 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 14
+07-10 02:54:48.721 I/bt-l2cap( 2098): l2c_fcr_process_peer_cfg_req() CFG fcr_present:0 fcr.mode:0 CCB FCR mode:0 preferred: 0 allowed:1
+07-10 02:54:48.721 D/bt-btm  ( 2098): btm_bda_to_acl found
+07-10 02:54:48.721 D/bt-btm  ( 2098): btm_get_max_packet_size
+ Based on peer_cfg.fcr.mps: 0  packet_size: 17
+07-10 02:54:48.721 I/bt-l2cap( 2098): L2CAP - Calling Config_Req_Cb(), CID: 0x0041, C-bit 0
+present:0 Flush TO:0 FCR:0 FCS:0
+07-10 02:54:48.721 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 25
+07-10 02:54:48.721 D/bt-l2cap( 2098): l2c_link_adjust_chnl_allocation
+07-10 02:54:48.721 D/bt-l2cap( 2098): POOL ID:3, GKI_poolcount = 200, reserved_buff = 0, weighted_chnls = 2, quota_per_weighted_chnls = 101
+07-10 02:54:48.721 I/bt-l2cap( 2098): CID:0x0041 Priority:2 TxDataRate:1 Quota:101
+07-10 02:54:48.721 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:48.721 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=0
+07-10 02:54:48.721 I/bt-sdp  ( 2098): SDP - Rcvd cfg ind, sent cfg cfm, CID: 0x41
+07-10 02:54:48.721 I/bt-l2cap( 2098): L2CA_DataWrite()  CID: 0x0041  Len: 20
+07-10 02:54:48.721 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 30
+07-10 02:54:48.721 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=1
+07-10 02:54:48.721 D/bt-l2cap( 2098): RR service pri=2, quota=4, lcid=0x0041
+07-10 02:54:48.721 D/bt-l2cap( 2098): TotalWin=4,Hndl=0x1,Quota=6,Unack=2,RRQuota=0,RRUnack=0
+07-10 02:54:48.721 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=0
+_mrvl_if_op(L532): opcode = 7
+07-10 02:54:48.741 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=0
+07-10 02:54:48.741 D/bt-l2cap( 2098): TotalWin=5,LinkUnack(0x1)=1,RRCheck=0,RRUnack=0
+07-10 02:54:48.741 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=0
+07-10 02:54:48.741 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:48.741 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:48.741 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:48.931 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 20
+07-10 02:54:48.931 I/bt-l2cap( 2098): L2CA_DataWrite()  CID: 0x0041  Len: 22
+07-10 02:54:48.931 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 30
+07-10 02:54:48.931 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=1
+07-10 02:54:48.931 D/bt-l2cap( 2098): RR service pri=2, quota=4, lcid=0x0041
+07-10 02:54:48.931 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+x0041, q_cout=0
+07-10 02:54:48.951 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=0
+8): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:48.951 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+0
+( 2098): L2CAP - st: OPEN evt: 20
+
+07-10 02:54:49.121 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 30
+07-10 02:54:49.121 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=1
+07-10 02:54:49.121 D/bt-l2cap( 2098): RR service pri=2, quota=4, lcid=0x0041
+ck=1,RRQuota=0,RRUnack=0
+07-10 02:54:49.121 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=0
+scan pri=2, lcid=0x0041, q_cout=0
+07-10 02:54:49.151 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:49.151 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:49.151 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:49.321 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 20
+07-10 02:54:49.321 I/bt-l2cap( 2098): L2CA_DataWrite()  CID: 0x0041  Len: 22
+07-10 02:54:49.321 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 30
+07-10 02:54:49.321 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=1
+07-10 02:54:49.321 D/bt-l2cap( 2098): RR service pri=2, quota=4, lcid=0x0041
+07-10 02:54:49.321 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:49.321 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=0
+07-10 02:54:49.351 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=0
+07-10 02:54:49.351 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:49.351 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:49.351 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:49.531 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 20
+07-10 02:54:49.531 I/bt-l2cap( 2098): L2CA_DataWrite()  CID: 0x0041  Len: 22
+30
+07-10 02:54:49.531 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=1
+07-10 02:54:49.531 D/bt-l2cap( 2098): RR service pri=2, quota=4, lcid=0x0041
+07-10 02:54:49.531 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:49.531 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=0
+07-10 02:54:49.551 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=0
+07-10 02:54:49.551 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:49.551 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:49.551 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+PEN evt: 20
+e()  CID: 0x0041  Len: 22
+07-10 02:54:49.771 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 30
+07-10 02:54:49.771 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=1
+07-10 02:54:49.771 D/bt-l2cap( 2098): RR service pri=2, quota=4, lcid=0x0041
+07-10 02:54:49.771 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:49.771 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=0
+07-10 02:54:49.781 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=0
+07-10 02:54:49.781 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:49.781 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+
+07-10 02:54:49.931 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 20
+07-10 02:54:49.931 W/bt-sdp  ( 2098): process_service_search_attr_rsp
+07-10 02:54:49.931 I/bt-sdp  ( 2098): SDP - disconnect  CID: 0x41
+07-10 02:54:49.931 I/bt-l2cap( 2098): L2CA_DisconnectReq()  CID: 0x0041
+07-10 02:54:49.931 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 27
+07-10 02:54:49.931 I/bt-btm  ( 2098): BTM_SetPowerMode: pm_id 128 BDA: 4887edbf mode:0x0
+07-10 02:54:49.931 D/bt-btm  ( 2098): BTM_SetPowerMode: mode:0x0 interval 0 max:34, min:0
+07-10 02:54:49.931 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:49.931 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0041, q_cout=0
+ q_cout=0
+ 02:54:49.961 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:49.961 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:49.961 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:49.961 I/bt-l2cap( 2098): L2CAP - st: W4_L2CAP_DISC_RSP evt: 18
+07-10 02:54:49.961 D/bt-l2cap( 2098): l2cu_release_ccb: cid 0x0041  in_use: 1
+07-10 02:54:49.961 D/bt-l2cap( 2098): l2cu_dequeue_ccb  CID: 0x0041
+07-10 02:54:49.961 D/bt-l2cap( 2098): l2cu_no_dynamic_ccbs() starting IDLE timeout: 4
+07-10 02:54:49.961 I/bt-l2cap( 2098): L2CAP - Calling DisconnectCfm_Cb(), CID: 0x0041
+07-10 02:54:49.961 I/bt-sdp  ( 2098): SDP - Rcvd L2CAP disc cfm, CID: 0x41
+sp_list
+2:54:49.961 I/bt-btif ( 2098): BTA got event 0x205
+49.961 I/bt-btif ( 2098): bta_dm_search_sm_execute state:3, event:0x205
+07-10 02:54:49.961 D/bt-btif ( 2098): sdp_result::0x0
+
+07-10 02:54:49.961 D/bt-btif ( 2098): bta_dm_sdp_result (raw_data used = 0x264 raw_data_ptr = 0x473eb770)
+07-10 02:54:49.961 I/bt-btif ( 2098): BTA got event 0x207
+a_dm_search_sm_execute state:3, event:0x207
+07-10 02:54:49.961 D/bt-btif ( 2098): bta_dm_disc_result
+07-10 02:54:49.961 D/bt-btif ( 2098): btif_transfer_context event 2, len 300
+07-10 02:54:49.961 I/bt-btif ( 2098): BTA got event 0x206
+rch_sm_execute state:3, event:0x206
+07-10 02:54:49.961 D/bt-btif ( 2098): bta_dm_search_cmpl
+07-10 02:54:49.961 D/bt-btif ( 2098): btif_transfer_context event 4, len 0
+07-10 02:54:49.961 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:49.961 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:49.961 I/bt-btif ( 2098): btif_dm_search_services_evt:  event = 2
+07-10 02:54:49.961 D/bt-btif ( 2098): btif_dm_search_services_evt:(result=0x0, services 0x100000)
+07-10 02:54:49.961 E/bt-btif ( 2098): Index: 0 uuid:00001124-0000-1000-8000-00805f9b34fb
+07-10 02:54:49.961 D/bt-btif ( 2098): btif_dm_search_services_evt Remote Service SDP done. Call bond_state_changed_cb BONDED
+07-10 02:54:49.961 D/bt-btif ( 2098): bond_state_changed: state=2 prev_state=1
+07-10 02:54:49.961 I/bt-btif ( 2098): HAL bt_hal_cbacks->bond_state_changed_cb
+dStateChangeCallback: Status: 0 Address: 00:22:48:87:ED:BF newState: 2
+07-10 02:54:49.961 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:3, len:16
+ h:7,
+07-10 02:54:49.961 I/bt-btif ( 2098): HAL bt_hal_cbacks->remote_device_properties_cb
+07[  206.246044] input: Broadcom Bluetooth HID as /devices/virtual/misc/uhid/input3
+-10 02:54:49.961 D/bt-btif ( 2098): cmd.id:4
+07-10 02:54:49.961 D/btif_config_util( 2098): btif_config_save_file(L153): in file name:/data/misc/bluedroid/bt_config.new
+07-10 02:54:49.971 D/B[  206.271583] generic-bluetooth 0005:045E:0762.0005: input,hidraw2: BLUETOOTH HID v0.13 Keyboard [Broadcom Bluetooth HID] on
+btservice.AdapterProperties@2c360588
+07-10 02:54:49.971 D/CachedBluetoothDevice( 2020): No profiles. Maybe we will connect later
+07-10 02:54:49.971 D/BluetoothAdapterService(741731424)( 2098): Get Bonded Devices being called
+07-10 02:54:49.971 I/BluetoothBondStateMachine( 2098): Bond State Change Intent:00:22:48:87:ED:BF OldState: 11 NewState: 12
+07-10 02:54:50.081 I/dalvikvm-heap( 1642): Grow heap (frag case) to 6.284MB for 380496-byte allocation
+07-10 02:54:50.131 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:50.131 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:50.131 I/bt-btif ( 2098): btif_dm_search_services_evt:  event = 4
+07-10 02:54:50.141 I/BluetoothBondStateMachine( 2098): StableState(): Entering Off State
+07-10 02:54:50.151 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.151 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.161 D/BluetoothInputDevice( 2020): connect(00:22:48:87:ED:BF)
+07-10 02:54:50.161 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.161 D/bt-btif ( 2098): btif_transfer_context event 0, len 6
+07-10 02:54:50.161 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:50.161 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:50.161 I/bt-btif ( 2098): btif_hh_handle_evt: event=0
+07-10 02:54:50.161 I/bt-btif ( 2098): BTHH: btif_hh_connect
+07-10 02:54:50.161 D/bt-btif ( 2098): Connect _hh
+07-10 02:54:50.171 I/bt-btif ( 2098): BTA got event 0x1700
+07-10 02:54:50.171 I/bt-sdp  ( 2098): SDP - Originate started
+07-10 02:54:50.171 I/bt-l2cap( 2098): L2CA_ErtmConnectReq()  PSM: 0x0001  BDA: 00224887edbf  p_ertm_info: 0x00000000 allowed:0x0 preferred:0
+07-10 02:54:50.171 D/bt-l2cap( 2098): l2cu_allocate_ccb: cid 0x0000
+07-10 02:54:50.171 D/bt-l2cap( 2098): l2cu_enqueue_ccb CID: 0x0042  priority: 2
+07-10 02:54:50.171 D/bt-l2cap( 2098): l2c_link_adjust_chnl_allocation
+07-10 02:54:50.171 D/bt-l2cap( 2098): POOL ID:3, GKI_poolcount = 200, reserved_buff = 0, weighted_chnls = 2, quota_per_weighted_chnls = 101
+07-10 02:54:50.171 I/bt-l2cap( 2098): CID:0x0042 Priority:2 TxDataRate:1 Quota:101
+07-10 02:54:50.171 I/bt-l2cap( 2098): L2CAP - st: CLOSED evt: 21
+07-10 02:54:50.171 I/bt-btm  ( 2098): BTM_SetPowerMode: pm_id 128 BDA: 4887edbf mode:0x0
+07-10 02:54:50.171 D/bt-btm  ( 2098): BTM_SetPowerMode: mode:0x0 interval 0 max:0, min:0
+07-10 02:54:50.171 D/bt-btm  ( 2098): btm_sec_l2cap_access_req is_originator:1, 0x473ea8ec
+07-10 02:54:50.171 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:54:50.171 D/bt-l2cap( 2098): l2c_link_sec_comp: 17, 0x473ea8ec
+07-10 02:54:50.171 D/bt-l2cap( 2098): ccb timer ticks: 0
+07-10 02:54:50.171 I/bt-l2cap( 2098): L2CAP - st: CLOSED evt: 7
+07-10 02:54:50.171 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:50.171 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0042, q_cout=0
+07-10 02:54:50.171 I/bt-l2cap( 2098): L2CAP - L2CA_conn_req(psm: 0x0001) returned CID: 0x0042
+07-10 02:54:50.171 I/bt-btif ( 2098): HAL bt_hh_callbacks->connection_state_cb
+07-10 02:54:50.171 I/bt-btif ( 2098): HAL bt_hh_callbacks->connection_state_cb
+07-10 02:54:50.171 D/HidService( 2098): Connection state 00:22:48:87:ED:BF: 0->1
+07-10 02:54:50.171 D/CachedBluetoothDevice( 2020): Command sent successfully:CONNECT Address:00:22:48:87:ED:BF Profile:HID
+07-10 02:54:50.171 W/HidService( 2098): no state change: 1
+07-10 02:54:50.181 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.181 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.181 D/BluetoothAdapterProperties( 2098): CONNECTION_STATE_CHANGE: 00:22:48:87:ED:BF: 0 -> 1
+07-10 02:54:50.181 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0042, q_cout=0
+07-10 02:54:50.181 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:50.181 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.181 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.191 I/bt-l2cap( 2098): L2CAP - st: W4_L2CAP_CON_RSP evt: 11
+07-10 02:54:50.191 I/bt-l2cap( 2098): L2CAP - Calling Connect_Cfm_Cb(), CID: 0x0042, Success
+07-10 02:54:50.191 I/bt-l2cap( 2098): L2CA_ConfigReq()  CID 0x0042: fcr_present:0 (mode 0) mtu_present:1 (256)
+07-10 02:54:50.191 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 24
+07-10 02:54:50.191 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:50.191 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0042, q_cout=0
+07-10 02:54:50.191 I/bt-sdp  ( 2098): SDP - got conn cnf, sent cfg req, CID: 0x42
+07-10 02:54:50.191 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.191 D/LocalBluetoothManager( 2020): setting foreground activity to non-null context
+07-10 02:54:50.201 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.201 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.201 D/BluetoothAdapterService(741731424)( 2098): Get Bonded Devices being called
+07-10 02:54:50.211 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0042, q_cout=0
+07-10 02:54:50.211 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:50.211 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.211 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.211 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.211 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 15
+07-10 02:54:50.211 I/bt-l2cap( 2098): L2CAP - Calling Config_Rsp_Cb(), CID: 0x0042
+07-10 02:54:50.211 I/bt-sdp  ( 2098): SDP - Rcvd cfg cfm, CID: 0x42  Result: 0
+07-10 02:54:50.221 D/BluetoothDiscoverableEnabler( 2020): handleModeChanged(): mode = 21
+07-10 02:54:50.221 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 14
+07-10 02:54:50.221 I/bt-l2cap( 2098): l2c_fcr_process_peer_cfg_req() CFG fcr_present:0 fcr.mode:0 CCB FCR mode:0 preferred: 0 allowed:1
+07-10 02:54:50.221 D/bt-btm  ( 2098): btm_bda_to_acl found
+07-10 02:54:50.221 D/bt-btm  ( 2098): btm_get_max_packet_size
+07-10 02:54:50.221 D/bt-l2cap( 2098): l2cu_adjust_out_mps use 0   Based on peer_cfg.fcr.mps: 0  packet_size: 17
+07-10 02:54:50.221 I/bt-l2cap( 2098): L2CAP - Calling Config_Req_Cb(), CID: 0x0042, C-bit 0
+07-10 02:54:50.221 I/bt-l2cap( 2098): L2CA_ConfigRsp()  CID: 0x0042  Result: 0 MTU present:0 Flush TO:0 FCR:0 FCS:0
+07-10 02:54:50.221 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 25
+07-10 02:54:50.221 D/bt-l2cap( 2098): l2c_link_adjust_chnl_allocation
+07-10 02:54:50.221 D/bt-l2cap( 2098): POOL ID:3, GKI_poolcount = 200, reserved_buff = 0, weighted_chnls = 2, quota_per_weighted_chnls = 101
+07-10 02:54:50.221 I/bt-l2cap( 2098): CID:0x0042 Priority:2 TxDataRate:1 Quota:101
+07-10 02:54:50.221 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:50.221 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0042, q_cout=0
+07-10 02:54:50.221 I/bt-sdp  ( 2098): SDP - Rcvd cfg ind, sent cfg cfm, CID: 0x42
+07-10 02:54:50.221 I/bt-l2cap( 2098): L2CA_DataWrite()  CID: 0x0042  Len: 13
+07-10 02:54:50.221 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 30
+07-10 02:54:50.221 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0042, q_cout=1
+07-10 02:54:50.221 D/bt-l2cap( 2098): RR service pri=2, quota=4, lcid=0x0042
+07-10 02:54:50.221 D/bt-l2cap( 2098): TotalWin=4,Hndl=0x1,Quota=6,Unack=2,RRQuota=0,RRUnack=0
+07-10 02:54:50.221 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0042, q_cout=0
+07-10 02:54:50.221 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.231 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.231 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.241 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0042, q_cout=0
+07-10 02:54:50.241 D/bt-l2cap( 2098): TotalWin=5,LinkUnack(0x1)=1,RRCheck=0,RRUnack=0
+07-10 02:54:50.241 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0042, q_cout=0
+07-10 02:54:50.241 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:50.241 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.241 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.241 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.251 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.271 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.281 D/BluetoothDiscoverableEnabler( 2020): handleModeChanged(): mode = 21
+07-10 02:54:50.281 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.301 D/CachedBluetoothDevice( 2020): onProfileStateChanged: profile HID newProfileState 1
+07-10 02:54:50.301 W/InputMethodManagerService( 1642): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@2c602498 attribute=null, token = android.os.BinderProxy@2c5a7b98
+07-10 02:54:50.311 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.321 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.331 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:50.341 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 20
+07-10 02:54:50.341 I/bt-l2cap( 2098): L2CA_DataWrite()  CID: 0x0042  Len: 19
+07-10 02:54:50.341 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 30
+07-10 02:54:50.341 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0042, q_cout=1
+07-10 02:54:50.341 D/bt-l2cap( 2098): RR service pri=2, quota=4, lcid=0x0042
+07-10 02:54:50.341 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:50.341 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0042, q_cout=0
+07-10 02:54:50.361 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0042, q_cout=0
+07-10 02:54:50.361 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:50.361 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.361 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.541 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 20
+07-10 02:54:50.541 W/bt-sdp  ( 2098): process_service_attr_rsp
+07-10 02:54:50.541 I/bt-sdp  ( 2098): SDP - disconnect  CID: 0x42
+07-10 02:54:50.541 I/bt-l2cap( 2098): L2CA_DisconnectReq()  CID: 0x0042
+07-10 02:54:50.541 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 27
+07-10 02:54:50.541 I/bt-btm  ( 2098): BTM_SetPowerMode: pm_id 128 BDA: 4887edbf mode:0x0
+07-10 02:54:50.541 D/bt-btm  ( 2098): BTM_SetPowerMode: mode:0x0 interval 0 max:34, min:0
+07-10 02:54:50.541 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:50.541 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0042, q_cout=0
+07-10 02:54:50.551 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0042, q_cout=0
+07-10 02:54:50.551 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:50.551 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.551 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.551 I/bt-l2cap( 2098): L2CAP - st: W4_L2CAP_DISC_RSP evt: 18
+07-10 02:54:50.551 D/bt-l2cap( 2098): l2cu_release_ccb: cid 0x0042  in_use: 1
+07-10 02:54:50.551 D/bt-l2cap( 2098): l2cu_dequeue_ccb  CID: 0x0042
+07-10 02:54:50.551 D/bt-l2cap( 2098): l2cu_no_dynamic_ccbs() starting IDLE timeout: 4
+07-10 02:54:50.551 I/bt-l2cap( 2098): L2CAP - Calling DisconnectCfm_Cb(), CID: 0x0042
+07-10 02:54:50.551 I/bt-sdp  ( 2098): SDP - Rcvd L2CAP disc cfm, CID: 0x42
+07-10 02:54:50.551 I/bt-sdp  ( 2098): SDP - Originate started
+07-10 02:54:50.551 I/bt-l2cap( 2098): L2CA_ErtmConnectReq()  PSM: 0x0001  BDA: 00224887edbf  p_ertm_info: 0x00000000 allowed:0x0 preferred:0
+07-10 02:54:50.551 D/bt-l2cap( 2098): l2cu_allocate_ccb: cid 0x0000
+07-10 02:54:50.551 D/bt-l2cap( 2098): l2cu_enqueue_ccb CID: 0x0043  priority: 2
+07-10 02:54:50.551 D/bt-l2cap( 2098): l2c_link_adjust_chnl_allocation
+07-10 02:54:50.551 D/bt-l2cap( 2098): POOL ID:3, GKI_poolcount = 200, reserved_buff = 0, weighted_chnls = 2, quota_per_weighted_chnls = 101
+07-10 02:54:50.551 I/bt-l2cap( 2098): CID:0x0043 Priority:2 TxDataRate:1 Quota:101
+07-10 02:54:50.551 I/bt-l2cap( 2098): L2CAP - st: CLOSED evt: 21
+07-10 02:54:50.551 I/bt-btm  ( 2098): BTM_SetPowerMode: pm_id 128 BDA: 4887edbf mode:0x0
+07-10 02:54:50.551 D/bt-btm  ( 2098): BTM_SetPowerMode: mode:0x0 interval 0 max:0, min:0
+07-10 02:54:50.551 D/bt-btm  ( 2098): btm_sec_l2cap_access_req is_originator:1, 0x473eaa48
+07-10 02:54:50.551 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:54:50.551 D/bt-l2cap( 2098): l2c_link_sec_comp: 17, 0x473eaa48
+07-10 02:54:50.551 D/bt-l2cap( 2098): ccb timer ticks: 0
+07-10 02:54:50.551 I/bt-l2cap( 2098): L2CAP - st: CLOSED evt: 7
+07-10 02:54:50.551 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:50.551 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=0
+07-10 02:54:50.551 I/bt-l2cap( 2098): L2CAP - L2CA_conn_req(psm: 0x0001) returned CID: 0x0043
+07-10 02:54:50.551 D/bt-sdp  ( 2098): releasing SDP rsp_list
+07-10 02:54:50.551 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=0
+07-10 02:54:50.551 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:50.551 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.551 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.581 I/bt-l2cap( 2098): L2CAP - st: W4_L2CAP_CON_RSP evt: 11
+07-10 02:54:50.581 I/bt-l2cap( 2098): L2CAP - Calling Connect_Cfm_Cb(), CID: 0x0043, Success
+07-10 02:54:50.581 I/bt-l2cap( 2098): L2CA_ConfigReq()  CID 0x0043: fcr_present:0 (mode 0) mtu_present:1 (256)
+07-10 02:54:50.581 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 24
+07-10 02:54:50.581 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:50.581 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=0
+07-10 02:54:50.581 I/bt-sdp  ( 2098): SDP - got conn cnf, sent cfg req, CID: 0x43
+07-10 02:54:50.591 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=0
+07-10 02:54:50.591 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:50.591 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.591 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.601 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 15
+07-10 02:54:50.601 I/bt-l2cap( 2098): L2CAP - Calling Config_Rsp_Cb(), CID: 0x0043
+07-10 02:54:50.601 I/bt-sdp  ( 2098): SDP - Rcvd cfg cfm, CID: 0x43  Result: 0
+07-10 02:54:50.611 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 14
+07-10 02:54:50.611 I/bt-l2cap( 2098): l2c_fcr_process_peer_cfg_req() CFG fcr_present:0 fcr.mode:0 CCB FCR mode:0 preferred: 0 allowed:1
+07-10 02:54:50.611 D/bt-btm  ( 2098): btm_bda_to_acl found
+07-10 02:54:50.611 D/bt-btm  ( 2098): btm_get_max_packet_size
+07-10 02:54:50.611 D/bt-l2cap( 2098): l2cu_adjust_out_mps use 0   Based on peer_cfg.fcr.mps: 0  packet_size: 17
+07-10 02:54:50.611 I/bt-l2cap( 2098): L2CAP - Calling Config_Req_Cb(), CID: 0x0043, C-bit 0
+07-10 02:54:50.611 I/bt-l2cap( 2098): L2CA_ConfigRsp()  CID: 0x0043  Result: 0 MTU present:0 Flush TO:0 FCR:0 FCS:0
+07-10 02:54:50.611 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 25
+07-10 02:54:50.611 D/bt-l2cap( 2098): l2c_link_adjust_chnl_allocation
+07-10 02:54:50.611 D/bt-l2cap( 2098): POOL ID:3, GKI_poolcount = 200, reserved_buff = 0, weighted_chnls = 2, quota_per_weighted_chnls = 101
+07-10 02:54:50.611 I/bt-l2cap( 2098): CID:0x0043 Priority:2 TxDataRate:1 Quota:101
+07-10 02:54:50.611 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:50.611 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=0
+07-10 02:54:50.611 I/bt-sdp  ( 2098): SDP - Rcvd cfg ind, sent cfg cfm, CID: 0x43
+07-10 02:54:50.611 I/bt-l2cap( 2098): L2CA_DataWrite()  CID: 0x0043  Len: 13
+07-10 02:54:50.611 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 30
+07-10 02:54:50.611 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=1
+07-10 02:54:50.611 D/bt-l2cap( 2098): RR service pri=2, quota=4, lcid=0x0043
+07-10 02:54:50.611 D/bt-l2cap( 2098): TotalWin=4,Hndl=0x1,Quota=6,Unack=2,RRQuota=0,RRUnack=0
+07-10 02:54:50.611 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=0
+07-10 02:54:50.631 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=0
+07-10 02:54:50.631 D/bt-l2cap( 2098): TotalWin=5,LinkUnack(0x1)=1,RRCheck=0,RRUnack=0
+07-10 02:54:50.631 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=0
+07-10 02:54:50.631 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:50.631 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.631 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.751 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 20
+07-10 02:54:50.751 I/bt-l2cap( 2098): L2CA_DataWrite()  CID: 0x0043  Len: 19
+07-10 02:54:50.751 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 30
+07-10 02:54:50.751 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=1
+07-10 02:54:50.751 D/bt-l2cap( 2098): RR service pri=2, quota=4, lcid=0x0043
+07-10 02:54:50.751 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:50.751 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=0
+07-10 02:54:50.771 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=0
+07-10 02:54:50.771 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:50.771 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.771 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.861 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 20
+07-10 02:54:50.861 I/bt-l2cap( 2098): L2CA_DataWrite()  CID: 0x0043  Len: 21
+07-10 02:54:50.861 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 30
+07-10 02:54:50.861 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=1
+07-10 02:54:50.861 D/bt-l2cap( 2098): RR service pri=2, quota=4, lcid=0x0043
+07-10 02:54:50.861 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:50.861 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=0
+07-10 02:54:50.881 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=0
+07-10 02:54:50.881 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:50.881 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.881 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:50.981 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 20
+07-10 02:54:50.981 I/bt-l2cap( 2098): L2CA_DataWrite()  CID: 0x0043  Len: 21
+07-10 02:54:50.981 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 30
+07-10 02:54:50.981 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=1
+07-10 02:54:50.981 D/bt-l2cap( 2098): RR service pri=2, quota=4, lcid=0x0043
+07-10 02:54:50.981 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:50.981 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=0
+07-10 02:54:51.001 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=0
+07-10 02:54:51.001 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:51.001 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.001 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.101 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 20
+07-10 02:54:51.101 I/bt-l2cap( 2098): L2CA_DataWrite()  CID: 0x0043  Len: 21
+07-10 02:54:51.101 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 30
+07-10 02:54:51.101 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=1
+07-10 02:54:51.101 D/bt-l2cap( 2098): RR service pri=2, quota=4, lcid=0x0043
+07-10 02:54:51.101 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:51.101 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=0
+07-10 02:54:51.111 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=0
+07-10 02:54:51.111 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:51.111 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.111 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.191 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 20
+07-10 02:54:51.191 W/bt-sdp  ( 2098): process_service_attr_rsp
+07-10 02:54:51.191 I/bt-sdp  ( 2098): SDP - disconnect  CID: 0x43
+07-10 02:54:51.191 I/bt-l2cap( 2098): L2CA_DisconnectReq()  CID: 0x0043
+07-10 02:54:51.191 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 27
+07-10 02:54:51.191 I/bt-btm  ( 2098): BTM_SetPowerMode: pm_id 128 BDA: 4887edbf mode:0x0
+07-10 02:54:51.191 D/bt-btm  ( 2098): BTM_SetPowerMode: mode:0x0 interval 0 max:34, min:0
+07-10 02:54:51.191 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:51.191 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=0
+07-10 02:54:51.211 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0043, q_cout=0
+07-10 02:54:51.211 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:51.211 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.211 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.211 I/bt-l2cap( 2098): L2CAP - st: W4_L2CAP_DISC_RSP evt: 18
+07-10 02:54:51.211 D/bt-l2cap( 2098): l2cu_release_ccb: cid 0x0043  in_use: 1
+07-10 02:54:51.211 D/bt-l2cap( 2098): l2cu_dequeue_ccb  CID: 0x0043
+07-10 02:54:51.211 D/bt-l2cap( 2098): l2cu_no_dynamic_ccbs() starting IDLE timeout: 4
+07-10 02:54:51.211 I/bt-l2cap( 2098): L2CAP - Calling DisconnectCfm_Cb(), CID: 0x0043
+07-10 02:54:51.211 I/bt-sdp  ( 2098): SDP - Rcvd L2CAP disc cfm, CID: 0x43
+07-10 02:54:51.211 I/bt-btm  ( 2098): BTM_SEC_REG[7]: id 32, is_orig 0, psm 0x0011, proto_id 6, chan_id 1
+07-10 02:54:51.211 I/bt-btm  ( 2098):                : sec: 0x1086, service name [] (up to 21 chars saved)
+07-10 02:54:51.211 I/bt-btm  ( 2098): BTM_SEC_REG[7]: id 32, is_orig 1, psm 0x0011, proto_id 6, chan_id 1
+07-10 02:54:51.211 I/bt-btm  ( 2098):                : sec: 0x30b6, service name [] (up to 21 chars saved)
+07-10 02:54:51.211 I/bt-btm  ( 2098): BTM_SEC_REG[8]: id 33, is_orig 0, psm 0x0011, proto_id 6, chan_id 2
+07-10 02:54:51.211 I/bt-btm  ( 2098):                : sec: 0x80, service name [] (up to 21 chars saved)
+07-10 02:54:51.211 I/bt-btm  ( 2098): BTM_SEC_REG[8]: id 33, is_orig 1, psm 0x0011, proto_id 6, chan_id 2
+07-10 02:54:51.211 I/bt-btm  ( 2098):                : sec: 0x80, service name [] (up to 21 chars saved)
+07-10 02:54:51.211 I/bt-btm  ( 2098): BTM_SEC_REG[9]: id 34, is_orig 1, psm 0x0013, proto_id 6, chan_id 0
+07-10 02:54:51.211 I/bt-btm  ( 2098):                : sec: 0x80, service name [] (up to 21 chars saved)
+07-10 02:54:51.211 I/bt-btm  ( 2098): BTM_SEC_REG[9]: id 34, is_orig 0, psm 0x0013, proto_id 6, chan_id 0
+07-10 02:54:51.211 I/bt-btm  ( 2098):                : sec: 0x80, service name [] (up to 21 chars saved)
+07-10 02:54:51.211 I/bt-btm  ( 2098): BTM_SetOutService p_out_serv id 32, psm 0x0011, proto_id 6, chan_id 1
+07-10 02:54:51.211 I/bt-l2cap( 2098): L2CA_ErtmConnectReq()  PSM: 0x0011  BDA: 00224887edbf  p_ertm_info: 0x00000000 allowed:0x0 preferred:0
+07-10 02:54:51.211 D/bt-l2cap( 2098): l2cu_allocate_ccb: cid 0x0000
+07-10 02:54:51.211 D/bt-l2cap( 2098): l2cu_enqueue_ccb CID: 0x0044  priority: 2
+07-10 02:54:51.211 D/bt-l2cap( 2098): l2c_link_adjust_chnl_allocation
+07-10 02:54:51.211 D/bt-l2cap( 2098): POOL ID:3, GKI_poolcount = 200, reserved_buff = 0, weighted_chnls = 2, quota_per_weighted_chnls = 101
+07-10 02:54:51.211 I/bt-l2cap( 2098): CID:0x0044 Priority:2 TxDataRate:1 Quota:101
+07-10 02:54:51.211 I/bt-l2cap( 2098): L2CAP - st: CLOSED evt: 21
+07-10 02:54:51.211 I/bt-btm  ( 2098): BTM_SetPowerMode: pm_id 128 BDA: 4887edbf mode:0x0
+07-10 02:54:51.211 D/bt-btm  ( 2098): BTM_SetPowerMode: mode:0x0 interval 0 max:0, min:0
+07-10 02:54:51.211 D/bt-btm  ( 2098): btm_sec_l2cap_access_req is_originator:1, 0x473eaba4
+07-10 02:54:51.211 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:54:51.211 D/bt-btm  ( 2098): btm_sec_l2cap_access_req()  sm4:0x10, sec_flags:0xb0, security_required:0x30b6 chk:0
+07-10 02:54:51.211 D/bt-btm  ( 2098): no next_serv sm4:0x10, chk:0
+07-10 02:54:51.211 I/bt-btm  ( 2098): Security Manager: l2cap_access_req PSM:17 postponed for multiplexer
+07-10 02:54:51.211 D/bt-l2cap( 2098): l2c_link_sec_comp: 0, 0x473eaba4
+07-10 02:54:51.211 D/bt-l2cap( 2098): ccb timer ticks: 0
+07-10 02:54:51.211 I/bt-l2cap( 2098): L2CAP - st: CLOSED evt: 7
+07-10 02:54:51.211 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:51.211 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0044, q_cout=0
+07-10 02:54:51.211 I/bt-l2cap( 2098): L2CAP - L2CA_conn_req(psm: 0x0011) returned CID: 0x0044
+07-10 02:54:51.211 D/bt-sdp  ( 2098): releasing SDP rsp_list
+07-10 02:54:51.231 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0044, q_cout=0
+07-10 02:54:51.231 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:51.231 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.231 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.231 I/bt-l2cap( 2098): L2CAP - st: W4_L2CAP_CON_RSP evt: 12
+07-10 02:54:51.261 I/bt-l2cap( 2098): L2CAP - st: W4_L2CAP_CON_RSP evt: 11
+07-10 02:54:51.261 I/bt-l2cap( 2098): L2CAP - Calling Connect_Cfm_Cb(), CID: 0x0044, Success
+07-10 02:54:51.261 D/bt-btm  ( 2098): btm_sec_mx_access_request is_originator:1
+07-10 02:54:51.261 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:54:51.261 D/bt-btm  ( 2098): btm_sec_find_mx_serv
+07-10 02:54:51.261 I/bt-btm  ( 2098): Security Manager: mx_access_req proto_id:6 chan_id:1 State:0 Flags:0xb0 Required:0x30b6 Service ID:32
+07-10 02:54:51.261 I/bt-btm  ( 2098): btm_sec_execute_procedure: Required:0x30b6 Flags:0xb0 State:0
+07-10 02:54:51.261 I/bt-btm  ( 2098): Security Manager: Start get name
+07-10 02:54:51.261 D/bt-btm  ( 2098): btm_acl_paging discing:0, paging:0 BDA: 00224887edbf
+07-10 02:54:51.261 D/bt-btm  ( 2098): btm_bda_to_acl found
+07-10 02:54:51.261 I/bt-l2cap( 2098): L2CA_ConfigReq()  CID 0x0044: fcr_present:0 (mode 0) mtu_present:1 (640)
+07-10 02:54:51.261 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 24
+07-10 02:54:51.261 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:51.261 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0044, q_cout=0
+07-10 02:54:51.291 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0044, q_cout=0
+07-10 02:54:51.291 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:51.291 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.291 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.291 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 15
+07-10 02:54:51.291 I/bt-l2cap( 2098): L2CAP - Calling Config_Rsp_Cb(), CID: 0x0044
+07-10 02:54:51.301 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 14
+07-10 02:54:51.301 I/bt-l2cap( 2098): l2c_fcr_process_peer_cfg_req() CFG fcr_present:0 fcr.mode:0 CCB FCR mode:0 preferred: 0 allowed:1
+07-10 02:54:51.301 D/bt-btm  ( 2098): btm_bda_to_acl found
+07-10 02:54:51.301 D/bt-btm  ( 2098): btm_get_max_packet_size
+07-10 02:54:51.301 D/bt-l2cap( 2098): l2cu_adjust_out_mps use 0   Based on peer_cfg.fcr.mps: 0  packet_size: 17
+07-10 02:54:51.301 I/bt-l2cap( 2098): L2CAP - Calling Config_Req_Cb(), CID: 0x0044, C-bit 0
+07-10 02:54:51.301 I/bt-l2cap( 2098): L2CA_ConfigRsp()  CID: 0x0044  Result: 0 MTU present:0 Flush TO:0 FCR:0 FCS:0
+07-10 02:54:51.301 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 25
+07-10 02:54:51.301 D/bt-l2cap( 2098): l2c_link_adjust_chnl_allocation
+07-10 02:54:51.301 D/bt-l2cap( 2098): POOL ID:3, GKI_poolcount = 200, reserved_buff = 0, weighted_chnls = 2, quota_per_weighted_chnls = 101
+07-10 02:54:51.301 I/bt-l2cap( 2098): CID:0x0044 Priority:2 TxDataRate:1 Quota:101
+07-10 02:54:51.301 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:51.301 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0044, q_cout=0
+07-10 02:54:51.321 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0044, q_cout=0
+07-10 02:54:51.321 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:51.321 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.321 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.321 I/bt-btm  ( 2098): BDA 00:22:48:87:ed:bf
+07-10 02:54:51.321 I/bt-btm  ( 2098): Inquire BDA 00:00:00:00:00:00
+07-10 02:54:51.321 I/bt-btm  ( 2098): btm_sec_rmt_name_request_complete
+07-10 02:54:51.321 D/bt-btm  ( 2098): btm_bda_to_acl found
+07-10 02:54:51.321 I/bt-btm  ( 2098): Security Manager: rmt_name_complete PairState: 0  RemName: Microsoft Bluetooth Mobile Keyboard 6000  status: 0 State:3  p_dev_rec: 0x473dbf54
+07-10 02:54:51.321 I/bt-btm  ( 2098): setting BTM_SEC_NAME_KNOWN sec_flags:0xb8
+07-10 02:54:51.321 I/bt-btm  ( 2098): btm_sec_execute_procedure: Required:0x30b6 Flags:0xb8 State:0
+07-10 02:54:51.321 I/bt-btm  ( 2098): Security Manager: Start authentication
+07-10 02:54:51.321 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.321 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.321 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:54:51.321 I/bt-btm  ( 2098): btm_sec_link_key_request()  BDA: 00:22:48:87:ed:bf
+07-10 02:54:51.331 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.331 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.341 I/bt-btm  ( 2098): Security Manager: auth_complete PairState: 0  handle:1  status:0  dev->sec_state: 1  Bda:4887edbf, RName:Microsoft Bluetooth Mobile Keyboard 6000
+07-10 02:54:51.341 I/bt-btm  ( 2098): btm_sec_change_pairing_state  Old: 0
+07-10 02:54:51.341 I/bt-btm  ( 2098): btm_sec_change_pairing_state  New: 0 pairing_flags:0x0
+07-10 02:54:51.341 I/bt-btm  ( 2098): btm_sec_execute_procedure: Required:0x30b6 Flags:0xba State:0
+07-10 02:54:51.341 I/bt-btm  ( 2098): Security Manager: Start encryption
+07-10 02:54:51.341 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.341 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.371 D/bt-btm  ( 2098): btm_acl_encrypt_change handle=1 status=0 encr_enabl=1
+07-10 02:54:51.371 D/bt-btm  ( 2098): btm_handle_to_acl_index
+07-10 02:54:51.371 I/bt-btm  ( 2098): Security Manager: encrypt_change status:0 State:2, encr_enable = 1
+07-10 02:54:51.371 D/bt-btm  ( 2098): before update p_dev_rec->sec_flags=0xba
+07-10 02:54:51.371 D/bt-btm  ( 2098): after update p_dev_rec->sec_flags=0xbe
+07-10 02:54:51.371 I/bt-btm  ( 2098): btm_sec_execute_procedure: Required:0x30b6 Flags:0xbe State:0
+07-10 02:54:51.371 I/bt-btm  ( 2098): Security Manager: trusted:0x00000000
+07-10 02:54:51.371 I/bt-btm  ( 2098): Security Manager: access granted
+07-10 02:54:51.371 I/bt-l2cap( 2098): L2CA_ErtmConnectReq()  PSM: 0x0013  BDA: 00224887edbf  p_ertm_info: 0x00000000 allowed:0x0 preferred:0
+07-10 02:54:51.371 D/bt-l2cap( 2098): l2cu_allocate_ccb: cid 0x0000
+07-10 02:54:51.371 D/bt-l2cap( 2098): l2cu_enqueue_ccb CID: 0x0045  priority: 2
+07-10 02:54:51.371 D/bt-l2cap( 2098): l2c_link_adjust_chnl_allocation
+07-10 02:54:51.371 D/bt-l2cap( 2098): POOL ID:3, GKI_poolcount = 200, reserved_buff = 0, weighted_chnls = 4, quota_per_weighted_chnls = 51
+07-10 02:54:51.371 I/bt-l2cap( 2098): CID:0x0044 Priority:2 TxDataRate:1 Quota:51
+07-10 02:54:51.371 I/bt-l2cap( 2098): CID:0x0045 Priority:2 TxDataRate:1 Quota:51
+07-10 02:54:51.371 I/bt-l2cap( 2098): L2CAP - st: CLOSED evt: 21
+07-10 02:54:51.371 I/bt-btm  ( 2098): BTM_SetPowerMode: pm_id 128 BDA: 4887edbf mode:0x0
+07-10 02:54:51.371 D/bt-btm  ( 2098): BTM_SetPowerMode: mode:0x0 interval 0 max:0, min:0
+07-10 02:54:51.371 D/bt-btm  ( 2098): btm_sec_l2cap_access_req is_originator:1, 0x473ead00
+07-10 02:54:51.371 I/bt-btm  ( 2098): btm_find_or_alloc_dev
+07-10 02:54:51.371 D/bt-btm  ( 2098): btm_sec_l2cap_access_req()  sm4:0x10, sec_flags:0xbe, security_required:0x80 chk:0
+07-10 02:54:51.371 I/bt-btm  ( 2098): Security Manager: l2cap_access_req PSM:19 Handle:1 State:0 Flags:0xbe Required:0x80 Service ID:34
+07-10 02:54:51.371 I/bt-btm  ( 2098): btm_sec_execute_procedure: Required:0x80 Flags:0xbe State:0
+07-10 02:54:51.371 I/bt-btm  ( 2098): Security Manager: trusted:0x00000000
+07-10 02:54:51.371 I/bt-btm  ( 2098): Security Manager: access granted
+07-10 02:54:51.371 D/bt-l2cap( 2098): l2c_link_sec_comp: 0, 0x473ead00
+07-10 02:54:51.371 D/bt-l2cap( 2098): ccb timer ticks: 0
+07-10 02:54:51.371 I/bt-l2cap( 2098): L2CAP - st: CLOSED evt: 7
+07-10 02:54:51.371 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:51.371 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0044, q_cout=0
+07-10 02:54:51.371 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0045, q_cout=0
+07-10 02:54:51.371 I/bt-l2cap( 2098): L2CAP - L2CA_conn_req(psm: 0x0013) returned CID: 0x0045
+07-10 02:54:51.381 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0044, q_cout=0
+07-10 02:54:51.381 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0045, q_cout=0
+07-10 02:54:51.381 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:51.381 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.381 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.381 I/bt-l2cap( 2098): L2CAP - st: W4_L2CAP_CON_RSP evt: 11
+07-10 02:54:51.381 I/bt-l2cap( 2098): L2CAP - Calling Connect_Cfm_Cb(), CID: 0x0045, Success
+07-10 02:54:51.381 I/bt-l2cap( 2098): L2CA_ConfigReq()  CID 0x0045: fcr_present:0 (mode 0) mtu_present:1 (640)
+07-10 02:54:51.391 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 24
+07-10 02:54:51.391 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:51.391 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0044, q_cout=0
+07-10 02:54:51.391 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0045, q_cout=0
+07-10 02:54:51.411 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0044, q_cout=0
+07-10 02:54:51.411 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0045, q_cout=0
+07-10 02:54:51.411 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:51.411 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.411 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.411 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 15
+07-10 02:54:51.411 I/bt-l2cap( 2098): L2CAP - Calling Config_Rsp_Cb(), CID: 0x0045
+07-10 02:54:51.421 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 14
+07-10 02:54:51.421 I/bt-l2cap( 2098): l2c_fcr_process_peer_cfg_req() CFG fcr_present:0 fcr.mode:0 CCB FCR mode:0 preferred: 0 allowed:1
+07-10 02:54:51.421 D/bt-btm  ( 2098): btm_bda_to_acl found
+07-10 02:54:51.421 D/bt-btm  ( 2098): btm_get_max_packet_size
+07-10 02:54:51.421 D/bt-l2cap( 2098): l2cu_adjust_out_mps use 0   Based on peer_cfg.fcr.mps: 0  packet_size: 17
+07-10 02:54:51.421 I/bt-l2cap( 2098): L2CAP - Calling Config_Req_Cb(), CID: 0x0045, C-bit 0
+07-10 02:54:51.421 I/bt-l2cap( 2098): L2CA_ConfigRsp()  CID: 0x0045  Result: 0 MTU present:0 Flush TO:0 FCR:0 FCS:0
+07-10 02:54:51.421 I/bt-l2cap( 2098): L2CAP - st: CONFIG evt: 25
+07-10 02:54:51.421 D/bt-l2cap( 2098): l2c_link_adjust_chnl_allocation
+07-10 02:54:51.421 D/bt-l2cap( 2098): POOL ID:3, GKI_poolcount = 200, reserved_buff = 0, weighted_chnls = 4, quota_per_weighted_chnls = 51
+07-10 02:54:51.421 I/bt-l2cap( 2098): CID:0x0044 Priority:2 TxDataRate:1 Quota:51
+07-10 02:54:51.421 I/bt-l2cap( 2098): CID:0x0045 Priority:2 TxDataRate:1 Quota:51
+07-10 02:54:51.421 D/bt-l2cap( 2098): TotalWin=5,Hndl=0x1,Quota=6,Unack=1,RRQuota=0,RRUnack=0
+07-10 02:54:51.421 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0044, q_cout=0
+07-10 02:54:51.421 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0045, q_cout=0
+07-10 02:54:51.421 I/bt-btif ( 2098): BTA got event 0x1702
+07-10 02:54:51.421 D/bt-btif ( 2098): bta_hh_co_open: uhid fd = 72
+07-10 02:54:51.421 D/bt-btif ( 2098): create_thread: entered
+07-10 02:54:51.421 D/bt-btif ( 2098): create_thread: thread created successfully
+07-10 02:54:51.421 D/bt-btif ( 2098): bta_hh_co_open: Return device status 0
+07-10 02:54:51.421 D/bt-btif ( 2098): SSR parameter changed to: max_latency: 1600 min_tout: 0
+07-10 02:54:51.421 I/bt-l2cap( 2098): L2CA_SetDesireRole() new:x0, disallow_switch:1
+07-10 02:54:51.421 D/bt-btif ( 2098): bta_dm_pm_cback: st(0), id(23), app(2)
+07-10 02:54:51.421 W/bt-btif ( 2098): new conn_srvc id:23, app_id:2
+07-10 02:54:51.421 D/bt-btif ( 2098): bta_dm_pm_set_mode: srvcsid: 23, state: 0, j: 9
+07-10 02:54:51.421 D/bt-btif ( 2098): bta_dm_is_sco_active: SCO active: 0
+07-10 02:54:51.421 D/bt-btif ( 2098): btif_transfer_context event 2, len 8
+07-10 02:54:51.421 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:51.421 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:51.421 D/bt-btif ( 2098): btif_hh_upstreams_evt: event=BTA_HH_OPEN_EVT
+07-10 02:54:51.421 W/bt-btif ( 2098): btif_hh_upstreams_evt: BTA_HH_OPN_EVT: handle=0, status =0
+07-10 02:54:51.421 W/bt-btif ( 2098): BTA_HH_OPEN_EVT: Found device...Getting dscp info for handle ... 0
+07-10 02:54:51.421 D/bt-btif ( 2098): in, bd addr:00:22:48:87:ed:bf, prop type:4, len:4
+07-10 02:54:51.421 D/bt-btif ( 2098): found node, p->name:DevClass, child/value:0x45a57498, bytes:4
+07-10 02:54:51.421 D/bt-btif ( 2098): p->used:4, type:2, p->flag:0
+07-10 02:54:51.421 I/bt-btif ( 2098): BTA got event 0x1708
+07-10 02:54:51.421 I/bt-l2cap( 2098): L2CA_DataWrite()  CID: 0x0044  Len: 2
+07-10 02:54:51.421 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 30
+07-10 02:54:51.421 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0044, q_cout=1
+07-10 02:54:51.421 D/bt-l2cap( 2098): RR service pri=2, quota=4, lcid=0x0044
+07-10 02:54:51.421 D/bt-l2cap( 2098): TotalWin=4,Hndl=0x1,Quota=6,Unack=2,RRQuota=0,RRUnack=0
+07-10 02:54:51.421 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0045, q_cout=0
+07-10 02:54:51.421 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0044, q_cout=0
+07-10 02:54:51.421 I/bt-l2cap( 2098): L2CA_SetDesireRole() new:x0, disallow_switch:1
+07-10 02:54:51.421 D/bt-btif ( 2098): bta_dm_pm_cback: st(7), id(23), app(2)
+07-10 02:54:51.421 D/bt-btif ( 2098): bta_dm_pm_set_mode: srvcsid: 23, state: 7, j: 9
+07-10 02:54:51.421 I/bt-l2cap( 2098): L2CA_SetDesireRole() new:x0, disallow_switch:1
+07-10 02:54:51.421 D/bt-btif ( 2098): bta_dm_pm_cback: st(6), id(23), app(2)
+07-10 02:54:51.421 D/bt-btif ( 2098): bta_dm_pm_set_mode: srvcsid: 23, state: 6, j: 9
+07-10 02:54:51.421 I/bt-btif ( 2098): BTA got event 0x1709
+07-10 02:54:51.421 D/bt-btif ( 2098): btif_transfer_context event 10, len 20
+07-10 02:54:51.421 I/bt-btif ( 2098): HAL bt_hh_callbacks->connection_state_cb
+07-10 02:54:51.421 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:51.421 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:51.421 D/bt-btif ( 2098): btif_hh_upstreams_evt: event=BTA_HH_GET_DSCP_EVT
+07-10 02:54:51.421 W/bt-btif ( 2098): BTA_HH_GET_DSCP_EVT: status = 94, handle = 4
+07-10 02:54:51.421 D/bt-btif ( 2098): BTA_HH_GET_DSCP_EVT: len = 139
+07-10 02:54:51.431 W/bt-btif ( 2098): btif_hh_upstreams_evt: name = Broadcom Bluetooth HID
+07-10 02:54:51.431 W/bt-btif ( 2098): bta_hh_co_send_hid_info: fd = 72, name = [Broadcom Bluetooth HID], dscp_len = 139
+07-10 02:54:51.431 W/bt-btif ( 2098): bta_hh_co_send_hid_info: vendor_id = 0x045e, product_id = 0x0762, version= 0x0013,ctry_code=0x21
+07-10 02:54:51.431 D/HidService( 2098): Connection state 00:22:48:87:ED:BF: 1->2
+07-10 02:54:51.431 D/bt-btif ( 2098): btif_hh_poll_event_thread: Thread created fd = 72
+07-10 02:54:51.431 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:51.431 D/bt-btif ( 2098): btif_hh_poll_event_thread: POLLIN
+07-10 02:54:51.441 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:51.441 D/CachedBluetoothDevice( 2020): onProfileStateChanged: profile HID newProfileState 2
+07-10 02:54:51.441 D/BluetoothAdapterProperties( 2098): CONNECTION_STATE_CHANGE: 00:22:48:87:ED:BF: 1 -> 2
+07-10 02:54:51.441 D/BluetoothAdapterService(741731424)( 2098): Get Bonded Devices being called
+07-10 02:54:51.441 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0045, q_cout=0
+07-10 02:54:51.441 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0044, q_cout=0
+07-10 02:54:51.441 D/bt-l2cap( 2098): TotalWin=5,LinkUnack(0x1)=1,RRCheck=0,RRUnack=0
+07-10 02:54:51.441 D/BluetoothAdapterService(741731424)( 2098): getState(): mAdapterProperties: com.android.bluetooth.btservice.AdapterProperties@2c360588
+07-10 02:54:51.441 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0045, q_cout=0
+07-10 02:54:51.441 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0044, q_cout=0
+07-10 02:54:51.441 D/bt-l2cap( 2098): TotalWin=6,LinkUnack(0x1)=0,RRCheck=0,RRUnack=0
+07-10 02:54:51.441 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.441 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.441 D/EventHub( 1642): No input device configuration file found for device 'Broadcom Bluetooth HID'.
+07-10 02:54:51.461 I/EventHub( 1642): New device: id=4, fd=193, path='/dev/input/event3', name='Broadcom Bluetooth HID', classes=0x80000163, configuration='', keyLayout='/system/usr/keylayout/Broadcom_Bluetooth_HID.kl', keyCharacterMap='/system/usr/keychars/Generic.kcm', builtinKeyboard=false, usingSuspendBlockIoctl=true, usingClockIoctl=true
+07-10 02:54:51.461 I/InputReader( 1642): Device added: id=4, name='Broadcom Bluetooth HID', sources=0x01000711
+07-10 02:54:51.461 I/ActivityManager( 1642): Config changes=1400 {1.0 ?mcc?mnc en_US ldltr sw540dp w960dp h515dp 320dpi lrg long land television -touch qwerty/v/v dpad/v s.7}
+07-10 02:54:51.471 D/bt-btif ( 2098): UHID_START from uhid-dev
+07-10 02:54:51.471 D/bt-btif ( 2098): btif_hh_poll_event_thread: POLLIN
+07-10 02:54:51.471 D/bt-btif ( 2098): UHID_OPEN from uhid-dev
+07-10 02:54:51.471 W/bt-btif ( 2098): bta_hh_co_send_hid_info: fd = 72, dscp_len = 139, result = 0
+07-10 02:54:51.471 D/bt-btif ( 2098): BTA_HH_GET_DSCP_EVT:bda = 00:22:48:87:ed:bf
+07-10 02:54:51.471 I/bt-btif ( 2098): BTA got event 0x170a
+07-10 02:54:51.471 D/bt-btif ( 2098): btif_transfer_context event 11, len 8
+07-10 02:54:51.471 D/bt-btif ( 2098): found node is NULL
+07-10 02:54:51.471 D/bt-btif ( 2098): post cmd type:1, size:0, h:7,
+07-10 02:54:51.471 D/bt-btif ( 2098): cmd.id:4
+07-10 02:54:51.471 D/btif_config_util( 2098): btif_config_save_file(L153): in file name:/data/misc/bluedroid/bt_config.new
+07-10 02:54:51.481 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 20
+07-10 02:54:51.481 I/bt-btif ( 2098): BTA got event 0x1706
+07-10 02:54:51.481 D/bt-btif ( 2098): btif_transfer_context event 9, len 2
+07-10 02:54:51.481 I/bt-l2cap( 2098): L2CA_SetDesireRole() new:x0, disallow_switch:1
+07-10 02:54:51.481 D/bt-btif ( 2098): bta_dm_pm_cback: st(6), id(23), app(2)
+07-10 02:54:51.481 D/bt-btif ( 2098): bta_dm_pm_set_mode: srvcsid: 23, state: 6, j: 9
+07-10 02:54:51.491 D/bt-btm  ( 2098): btm_qos_setup_complete
+07-10 02:54:51.491 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.491 W/bt-btif ( 2098): BTA_HH_GET_DSCP_EVT: Called add device
+07-10 02:54:51.491 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:51.491 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:51.491 D/bt-btif ( 2098): btif_hh_upstreams_evt: event=BTA_HH_ADD_DEV_EVT
+07-10 02:54:51.491 W/bt-btif ( 2098): BTA_HH_ADD_DEV_EVT: status = 0, handle = 0
+07-10 02:54:51.491 D/bt-btif ( 2098): btif task fetched event a001
+07-10 02:54:51.491 D/bt-btif ( 2098): btif_context_switched
+07-10 02:54:51.491 D/bt-btif ( 2098): btif_hh_upstreams_evt: event=BTA_HH_SET_IDLE_EVT
+07-10 02:54:51.491 D/bt-btif ( 2098): BTA_HH_SET_IDLE_EVT: status = 0, handle = 0
+07-10 02:54:51.521 D/bt-btm  ( 2098): btm_handle_to_acl_index
+07-10 02:54:51.521 D/bt-btm  ( 2098): btm_cont_rswitch_or_chglinkkey
+07-10 02:54:51.521 D/bt-btif ( 2098): HC lib lpm deassertion return 0
+07-10 02:54:51.521 I/bt-btif ( 2098): BTA got event 0x10f
+07-10 02:54:51.521 I/bt-btif ( 2098): bta_dm_sm_execute event:0xf
+07-10 02:54:51.521 D/bt-btif ( 2098): bta_dm_pm_btm_status:2
+07-10 02:54:54.671 I/bt-l2cap( 2098): L2CAP - l2c_link_timeout() link state 4 first CCB 0x473eaba4 is_bonding:0
+07-10 02:54:54.671 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0045, q_cout=0
+07-10 02:54:54.671 D/bt-l2cap( 2098): RR scan pri=2, lcid=0x0044, q_cout=0
+07-10 02:55:09.161 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 20
+07-10 02:55:09.161 I/bt-btif ( 2098): BTA got event 0x1704
+07-10 02:55:09.161 D/bt-btif ( 2098): bta_hh_co_data: dev_handle = 0, subclass = 0x40, mode = 0, ctry_code = 33, app_id = 2
+07-10 02:55:09.161 D/bt-btif ( 2098): bta_hh_co_data: UHID write
+07-10 02:55:09.161 D/bt-btif ( 2098): btif_hh_poll_event_thread: POLLIN
+07-10 02:55:09.161 D/bt-btif ( 2098): UHID_OUTPUT_EV from uhid-dev
+07-10 02:55:09.321 I/bt-l2cap( 2098): L2CAP - st: OPEN evt: 20
+07-10 02:55:09.321 I/bt-btif ( 2098): BTA got event 0x1704
+07-10 02:55:09.331 D/bt-btif ( 2098): bta_hh_co_data: dev_handle = 0, subclass = 0x40, mode = 0, ctry_code = 33, app_id = 2
+07-10 02:55:09.331 D/bt-btif ( 2098): bta_hh_co_data: UHID write
+07-10 02:55:09.331 D/bt-btif ( 2098): btif_hh_poll_event_thread: POLLIN
+07-10 02:55:09.331 D/bt-btif ( 2098): UHID_OUTPUT_EV from uhid-dev
