@@ -1,0 +1,217 @@
+//prepare mysql db for gerrit server
+	gerrit2@gerritreview:~$ sudo apt-get install ntp mysql-server mysql-common mysql-client libmysql-java//remember the root password "12345678"
+	gerrit2@gerritreview:~$ mysql -u root -p
+	Enter password:
+	Welcome to the MySQL monitor.  Commands end with ; or \g.
+	Your MySQL connection id is 42
+	Server version: 5.5.41-0ubuntu0.14.04.1 (Ubuntu)
+	
+	Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+	
+	Oracle is a registered trademark of Oracle Corporation and/or its
+	affiliates. Other names may be trademarks of their respective
+	owners.
+	
+	Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+	
+	mysql> CREATE USER 'gerrit2'@'localhost' IDENTIFIED BY '12345678';
+	Query OK, 0 rows affected (0.00 sec)
+	
+	mysql> CREATE DATABASE reviewdb;
+	Query OK, 1 row affected (0.00 sec)
+	
+	mysql> ALTER DATABASE reviewdb charset=latin1;
+	Query OK, 1 row affected (0.00 sec)
+	
+	mysql> GRANT ALL ON reviewdb.* TO 'gerrit2'@'localhost';
+	Query OK, 0 rows affected (0.00 sec)
+	
+	mysql> FLUSH PRIVILEGES;
+	Query OK, 0 rows affected (0.00 sec)
+	
+	mysql> exit
+	Bye
+	
+//make sendmail work:
+	sudo apt-get install postfix mailutils //choose default for all options during installation
+
+//install gerrit server and initiate Schema
+	gerrit2@gerritreview:~$ sudo apt-get install git
+	gerrit2@gerritreview:~$ sudo apt-get install default-jdk
+	$ java -version
+	java version "1.7.0_75"
+	OpenJDK Runtime Environment (IcedTea 2.5.4) (7u75-2.5.4-1~trusty1)
+	OpenJDK 64-Bit Server VM (build 24.75-b04, mixed mode)
+	
+	gerrit2@gerritreview:~$ wget https://gerrit-releases.storage.googleapis.com/gerrit-2.10.war
+	//the gerrit init command may need several round, after first run, do
+		gerrit2@gerritreview:~$ cp /usr/share/java/mysql.jar review-site/lib/ 
+	//to work around the issue "Driver class com.mysql.jdbc.Driver not available"
+	//then copy the gerrit.config below as ~/review-site/etc/gerrit.config, re-run the command, till you see
+	// "Initialized /home/gerrit2/review-site"
+	gerrit2@gerritreview:~$ java -jar gerrit-2.10.war init -d /home/gerrit2/review-site
+	
+	*** Gerrit Code Review 2.10
+	***
+	
+	
+	*** Git Repositories
+	***
+	
+	Location of Git repositories   [git]:
+	
+	*** SQL Database
+	***
+	
+	Database server type           [mysql]:
+	Server hostname                [localhost]:
+	Server port                    [(mysql default)]:
+	Database name                  [reviewdb]:
+	Database username              [gerrit2]:
+	Change gerrit2's password      [y/N]? y
+	gerrit2's password             :
+	              confirm password :
+	
+	*** Index
+	***
+	
+	Type                           [LUCENE/?]:
+	
+	The index must be rebuilt before starting Gerrit:
+	  java -jar gerrit.war reindex -d site_path
+	
+	*** User Authentication
+	***
+	
+	Authentication method          [HTTP/?]:
+	Get username from custom HTTP header [y/N]? N
+	SSO logout URL                 :
+	
+	*** Review Labels
+	***
+	
+	Install Verified label         [y/N]?
+	
+	*** Email Delivery
+	***
+	
+	SMTP server hostname           [localhost]:
+	SMTP server port               [(default)]:
+	SMTP encryption                [NONE/?]:
+	SMTP username                  :
+	
+	*** Container Process
+	***
+	
+	Run as                         [gerrit2]:
+	Java runtime                   [/usr/lib/jvm/java-7-openjdk-amd64/jre]:
+	Upgrade /home/gerrit2/review-site/bin/gerrit.war [Y/n]?
+	Copying gerrit-2.10.war to /home/gerrit2/review-site/bin/gerrit.war
+	
+	*** SSH Daemon
+	***
+	
+	Listen on address              [*]:
+	Listen on port                 [29418]:
+	
+	*** HTTP Daemon
+	***
+	
+	Behind reverse proxy           [Y/n]?
+	Proxy uses SSL (https://)      [Y/n]?
+	Subdirectory on proxy server   [/gerrit]:
+	Listen on address              [localhost]:
+	Listen on port                 [8080]:
+	Canonical URL                  [https://gerritreview.com/gerrit]:
+	
+	*** Plugins
+	***
+	
+	Install plugin commit-message-length-validator version v2.10 [y/N]?
+	Install plugin download-commands version v2.10 [y/N]?
+	Install plugin replication version v2.10 [y/N]?
+	Install plugin reviewnotes version v2.10 [y/N]?
+	Install plugin singleusergroup version v2.10 [y/N]?
+	
+	Initialized /home/gerrit2/review-site
+	gerrit2@gerritreview:~$ cat review-site/etc/gerrit.config
+	[gerrit]
+	        basePath = git
+	        canonicalWebUrl = https://gerritreview.com/gerrit
+	[database]
+	        type = mysql
+	        hostname = localhost
+	        database = reviewdb
+	        username = gerrit2
+	        password = 12345678
+	[auth]
+	        type = HTTP
+	[sendemail]
+	        smtpServer = localhost
+	[container]
+	        user = gerrit2
+	        javaHome = /usr/lib/jvm/java-7-openjdk-amd64/jre
+	[sshd]
+	        listenAddress = *:29418
+	[httpd]
+	        listenUrl = proxy-https://localhost:8080/gerrit
+	[cache]
+	        directory = cache
+	[index]
+	        type = LUCENE
+	
+		
+//set up apache reverse proxy for gerrit server
+	//client access http://samplegerrit.com/gerrit/, while gerrit server running as backend at http://localhost:8080/gerrit/
+	gerrit2@gerritreview:~$ sudo apt-get install apache2 apache2-utils openssl
+	
+	//add reverse-proxy for gerrit server, and let https://samplegerrit.com/ prompt for user authentication
+	gerrit2@gerritreview:~$ sudo cp /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/000-default.conf
+	then change the default site as in apache_site.conf.diff:
+	
+	//create http user account for first user gerrit2
+	gerrit2@gerrit-server:~$ sudo htpasswd -c /etc/apache2/passwords gerrit2 #current "123456"
+
+
+//restart gerrit server by
+	gerrit2@gerritreview:~$ cat restart_gerrit.sh
+	#!/bin/bash
+	
+	${HOME}/review-site/bin/gerrit.sh restart
+	sudo a2enmod proxy proxy_http ssl headers
+	sudo service apache2 restart
+
+
+//how to add a new user:
+	1. create http password for new user:
+	gerrit2@gerrit-server:~$ sudo htpasswd /etc/apache2/passwords ${NEW_USER_NAME}
+	use "date | sha256sum" to generate a strong password. 
+	2. send out the password along with a .netrc to the new user, so he can skip input username/password whenever he trying to fetch from gerrit server
+	gerrit2@client-working-machine:~$ cat ~/.netrc
+	machine ${GERRIT_SERVER_NMAE} login ${NEW_USER_NAME} password ${HTTPS_PASSWORD}
+	3. ask the new user to login to gerrit server, add email (need verification), add ssh public key.
+
+
+//how to deploy with a kvm guest:
+1. create a kvm guest
+	~$ sudo fallocate -l 8G /var/lib/libvirt/images/gerrit-server //choose large disk size if don't want to enlarge lvm later.
+	~$ sudo virt-install --connect qemu:///system --name=gerrit-server --virt-type=kvm --ram=1024 --cpu=host --vcpus=2 -f /var/lib/libvirt/images/gerrit-server --cdrom=${LOCAL_PATH_TO}/ubuntu-14.04.1-server-amd64.iso --description="Gerrit Server VM" --graphics vnc,listen=127.0.0.1,password=${MYVNCPASSWD} --os-type=linux --os-variant=ubuntutrusty --network=bridge:virbr0 --video=cirrus --hvm --accelerate
+	During installation, choose default setup except:
+		set hostname as gerritreview.com (as whatever you want client to see)
+		create user name gerrit2 
+		encrypt your home directory 
+		guided-use entire disk and set up encrypted LVM (note down the Luks password set for encryption)
+		choose OpenSSH server to install when asking for additional package
+
+2. after configuration and test the server, reassign a NIC within an isolated virtual bridge in kvm host, so there's no direct connection between the gerrit server vm and outside the kvm host machine.
+   then set up a static IP for the gerrit server vm, and setup firewall rule on kvm host for tcp 29418 (for gerrit sshd, bidirectional), tcp 443 (for HTTPS,bidirectional), tcp 25 (for sendmail, outbound only),  udp 123 (for ntp, outbound only)
+   for example, to allow bidirectional connection for tcp 29418
+	   /sbin/iptables -I FORWARD -i eth0 -p tcp -m state --state NEW,RELATED,ESTABLISHED -m tcp -d $VM_GUEST_IP/32 -dport 29418 -j ACCEPT //forward kvm host's incoming (from NIC eth0) tcp dst port 29418 to gerrit server vm.
+	   /sbin/iptables -t nat -i eth0 -I PREROUTING -p tcp  --dport 29418 -j DNAT --to $VM_GUEST_IP/32:29418 //any incoming packets from interface eth0, protocol tcp, dst port 29418 will be applied DNAT function (replace the dst addr from kvm host to $VM_GUEST_IP)
+	   /sbin/iptables -t nat -A POSTROUTING -p tcp -o eth0 -s $VM_GUEST_IP/32 --sport 29418 -j MASQUERADE //replace any outboud tcp/29418 packet from $VM_GUEST_IP with kvm host's addr, and push to host's NIC eth0
+	   /sbin/iptables -I FORWARD -o eth0 -p tcp -m state --state NEW,RELATED,ESTABLISHED -m tcp -s $VM_GUEST_IP/32 --sport 29418 -j ACCEPT //forward outgoing tcp/29418 connect from $VM_GUEST_IP to host's NIC eth0
+	   
+	only allow outbound connection on udp 123 to ntp server 174.137.132.100:
+	/sbin/iptables -t nat -A POSTROUTING -p udp -s $VM_GUEST_IP/32 -d 174.137.132.100/32 -dport 123 -j MASQUERADE
+	/sbin/iptables -I FORWARD -p udp -s $VM_GUEST_IP/32 -d 174.137.132.100/32 -dport 123 -j ACCEPT
+	/sbin/iptables -I FORWARD -p udp -d $VM_GUEST_IP/32 -s 174.137.132.100/32 -dport 123 -j ACCEPT
