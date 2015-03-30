@@ -4,7 +4,7 @@
   <title><![CDATA[Yongbing's Blog]]></title>
   <link href="http://yongbingchen.github.com/atom.xml" rel="self"/>
   <link href="http://yongbingchen.github.com/"/>
-  <updated>2015-03-29T18:56:20-07:00</updated>
+  <updated>2015-03-29T19:35:32-07:00</updated>
   <id>http://yongbingchen.github.com/</id>
   <author>
     <name><![CDATA[Yongbing Chen]]></name>
@@ -65,7 +65,7 @@
 </span><span class='line'><span class="nt">&lt;manifest&gt;</span>
 </span><span class='line'>        <span class="nt">&lt;remote</span>  <span class="na">name=</span><span class="s">&quot;my_repo&quot;</span>
 </span><span class='line'>                <span class="na">fetch=</span><span class="s">&quot;ssh://gerritreview.com:29418/&quot;</span>
-</span><span class='line'>                <span class="na">review=</span><span class="s">&quot;http://gerritreview.com/gerrit/&quot;</span>
+</span><span class='line'>                <span class="na">review=</span><span class="s">&quot;https://gerritreview.com/gerrit/&quot;</span>
 </span><span class='line'>                <span class="nt">/&gt;</span>
 </span><span class='line'>        <span class="nt">&lt;default</span> <span class="na">revision=</span><span class="s">&quot;my_working_branch&quot;</span>
 </span><span class='line'>                <span class="na">remote=</span><span class="s">&quot;my_repo&quot;</span>

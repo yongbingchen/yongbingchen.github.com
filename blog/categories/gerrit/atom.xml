@@ -4,7 +4,7 @@
   <title><![CDATA[Category: gerrit | Yongbing's Blog]]></title>
   <link href="http://yongbingchen.github.com/blog/categories/gerrit/atom.xml" rel="self"/>
   <link href="http://yongbingchen.github.com/"/>
-  <updated>2015-03-29T18:56:20-07:00</updated>
+  <updated>2015-03-29T19:35:32-07:00</updated>
   <id>http://yongbingchen.github.com/</id>
   <author>
     <name><![CDATA[Yongbing Chen]]></name>
@@ -50,7 +50,7 @@
     <manifest>
             <remote  name="my_repo"
                     fetch="ssh://gerritreview.com:29418/"
-                    review="http://gerritreview.com/gerrit/"
+                    review="https://gerritreview.com/gerrit/"
                     />
             <default revision="my_working_branch"
                     remote="my_repo"
