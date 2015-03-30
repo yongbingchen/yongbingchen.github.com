@@ -4,7 +4,7 @@
   <title><![CDATA[Yongbing's Blog]]></title>
   <link href="http://yongbingchen.github.com/atom.xml" rel="self"/>
   <link href="http://yongbingchen.github.com/"/>
-  <updated>2015-03-28T09:46:10-07:00</updated>
+  <updated>2015-03-29T18:56:20-07:00</updated>
   <id>http://yongbingchen.github.com/</id>
   <author>
     <name><![CDATA[Yongbing Chen]]></name>
@@ -24,10 +24,10 @@
 <li>As gerrit server administrator, create below pojects in gerrit server
 
 <ol>
-<li>container //for global access control, choose &#8220;Only serve as parent for other projects&#8221;, unselect &#8220;Create initial empty commit&#8221;</li>
-<li>container/repo_1/manifest //repo manifest, access right inherit from &#8220;container&#8221;, unselect &#8220;Only serve as parent for other projects&#8221;, select &#8220;Create initial empty commit&#8221;</li>
-<li>container/repo_1/git_one //child project inside the repo, access right inherit from &#8220;container&#8221;, unselect &#8220;Only serve as parent for other projects&#8221;, select &#8220;Create initial empty commit&#8221;.</li>
-<li>container/repo_1/git_two</li>
+<li><code>container</code>:for global access control, choose &#8220;Only serve as parent for other projects&#8221;, unselect &#8220;Create initial empty commit&#8221;</li>
+<li><code>container/repo_1/manifest</code>:repo manifest, access right inherit from &#8220;container&#8221;, unselect &#8220;Only serve as parent for other projects&#8221;, select &#8220;Create initial empty commit&#8221;</li>
+<li><code>container/repo_1/git_one</code>:child project inside the repo, access right inherit from &#8220;container&#8221;, unselect &#8220;Only serve as parent for other projects&#8221;, select &#8220;Create initial empty commit&#8221;.</li>
+<li><code>container/repo_1/git_two</code></li>
 </ol>
 </li>
 <li>Create my own repo config:
@@ -77,8 +77,8 @@
 </span><span class='line'><span class="nt">&lt;/manifest&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 <p/>
-3. On gerrit server, create a working &#8220;Branch Name&#8221; &#8220;my_working_branch&#8221; on these three projects, with &#8220;Initial Revision&#8221; set to &#8220;master&#8221; in https://gerritreview.com/gerrit/#/admin/projects/container/repo_1/${GIT_NAME},branches
-<p/>
+3. On gerrit server, create a working &#8220;Branch Name&#8221; &#8220;my_working_branch&#8221; on these three projects, with &#8220;Initial Revision&#8221; set to &#8220;master&#8221; in https://gerritreview.com/gerrit/#/admin/projects/container/repo_1/${GIT_NAME},branches <br />
+
 4. On a client&#8217;s working machine, checkout the repo with below command:
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -90,12 +90,12 @@
 <h2> Setup the access control rules for this repo:</h2>
 
 1. define thress group and their access right: <br />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; developers  :can submit CL, checkout code, review +/_ 1  <br />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; reviewers   :can review +/- 2 <br />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; submitters  :can merge CL to working branch <br />
-2. implement these rules in gerrit server: <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>developers</code>: can submit CL, checkout code, review +/_ 1  <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>reviewers</code>: can review +/- 2 <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>submitters</code>: can merge CL to working branch <br />
+2. enforce these rules on gerrit server: <br />
 First delete all default access permission granted for &#8220;Registered Users&#8221; from https://gerritreview.com/gerrit/#/admin/projects/All-Projects,access <br />
-Then create below access rules for the projects under container: <img src="http://yongbingchen.github.com/images/git/repo/gerrit_server_access_control.jpeg" title="" >
+Then create below access rules for the projects under <code>container</code>: <img src="http://yongbingchen.github.com/images/git/repo/gerrit_server_access_control.jpeg" title="" >
 
 ]]></content>
   </entry>
@@ -2664,100 +2664,6 @@ This is useful when debugging some real time issues.</p>
 0x911b in /sys/class/mmc_host/mmc1/mmc1\:0001/mmc1\:0001\:3/device.</li>
 <li>sdio_claim_host() is acting like a lock, I guess this will serialize access to same SD device between different functions, and also between different threads inside same function.</li>
 </ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[git: check ancestor]]></title>
-    <link href="http://yongbingchen.github.com/blog/2013/03/25/git-check-ancestor/"/>
-    <updated>2013-03-25T22:59:00-07:00</updated>
-    <id>http://yongbingchen.github.com/blog/2013/03/25/git-check-ancestor</id>
-    <content type="html"><![CDATA[<p>If you want to check your code base, it&#8217;s wrong to rely on whether the output of <code>git log $CODE_BASE_TAG..HEAD</code> is empty.</p>
-
-<p>Suppose we have a git version tree as below:</p>
-
-<p><img src="http://yongbingchen.github.com/images/git/version-graph.jpg" title="" ></p>
-
-<p>DevBranch0 is branched out from Trunk, merged <code>Trunk</code> node C and <code>DevBranch0</code> node b, current HEAD is <code>DevBranch0_c</code>.</p>
-
-<p>The git history is as below:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>yongbing@ubuntu:~/work/git_ancestor$ git log --oneline --graph
-</span><span class='line'>* 368cfb1 DevBranch0_c
-</span><span class='line'>*   6fecd0a DevBranch0_Merge
-</span><span class='line'>|\
-</span><span class='line'>| * defff5c Trunk_C
-</span><span class='line'>| * 5037bca Trunk_B
-</span><span class='line'>* | 0f45ab0 DevBranch0_b
-</span><span class='line'>* | 38f9ec9 DevBranch0_a
-</span><span class='line'>|/
-</span><span class='line'>* fc18378 Trunk_A
-</span><span class='line'>* 0d3b0bd Init state</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Clearly version <code>Trunk_D</code> is not an ancestor of <code>DevBranch0_c</code>, but <code>git log $Trunk_D..HEAD</code> is not empty:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>yongbing@ubuntu:~/work/git_ancestor$ git tag Trunk_D b25477d
-</span><span class='line'>yongbing@ubuntu:~/work/git_ancestor$ git log Trunk_D..HEAD --oneline
-</span><span class='line'>368cfb1 DevBranch0_c
-</span><span class='line'>6fecd0a DevBranch0_Merge
-</span><span class='line'>0f45ab0 DevBranch0_b
-</span><span class='line'>38f9ec9 DevBranch0_a</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The correct way is to use <code>git rev-list</code> command, then grep the result to see if the code base in really in the ancestor list:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>yongbing@ubuntu:~/work/git_ancestor$ git log -g --oneline
-</span><span class='line'>b25477d HEAD@{1}: commit: Trunk_D
-</span><span class='line'>5037bca HEAD@{9}: commit: Trunk_B
-</span><span class='line'>yongbing@ubuntu:~/work/git_ancestor$ git rev-list -n 10 HEAD |grep 5037bca
-</span><span class='line'>5037bca575ecbf76d9c9d939e52f8858dbaadfe1
-</span><span class='line'>yongbing@ubuntu:~/work/git_ancestor$ git rev-list -n 10 HEAD |grep b25477d
-</span><span class='line'>//Empty output</span></code></pre></td></tr></table></div></figure>
-
-
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[EXODUS]]></title>
-    <link href="http://yongbingchen.github.com/blog/2013/03/24/exodus/"/>
-    <updated>2013-03-24T19:09:00-07:00</updated>
-    <id>http://yongbingchen.github.com/blog/2013/03/24/exodus</id>
-    <content type="html"><![CDATA[<blockquote><p>‘I am the LORD, and I will bring you out from under the burdens of the Egyptians, and I will deliver you from slavery to them, and  I will redeem you with an outstretched arm and with great acts of judgment. I  will take you to be my people, and  I will be your God, and you shall know that  I am the LORD your God, who has brought you out from under the burdens of the Egyptians. I will bring you into the land that I swore to give to Abraham, to Isaac, and to Jacob. I will give it to you for a possession.  I am the LORD.’</p><footer><strong>EXODUS 6</strong></footer></blockquote>
-
-
-
-
-<blockquote><p>They set out from Elim, and all the congregation of the people of Israel came to the wilderness of Sin, which is between Elim and Sinai, on the fifteenth day of the second month after they had departed from the land of Egypt. And the whole congregation of the people of Israel grumbled against Moses and Aaron in the wilderness, and the people of Israel said to them,  “Would that we had died by the hand of the LORD in the land of Egypt,  when we sat by the meat pots and ate bread to the full, for you have brought us out into this wilderness to kill this whole assembly with hunger.”</p><footer><strong>EXODUS 16</strong></footer></blockquote>
-
-
 
 ]]></content>
   </entry>

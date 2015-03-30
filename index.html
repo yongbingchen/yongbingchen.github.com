@@ -9,7 +9,7 @@
   <meta name="author" content="Yongbing Chen">
 
   
-  <meta name="description" content="Create repo manifest: As gerrit server administrator, create below pojects in gerrit server container //for global access control, choose &#8220;Only &hellip;">
+  <meta name="description" content="Create repo manifest: As gerrit server administrator, create below pojects in gerrit server container:for global access control, choose &#8220;Only &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -124,10 +124,10 @@
 <li>As gerrit server administrator, create below pojects in gerrit server
 
 <ol>
-<li>container //for global access control, choose &#8220;Only serve as parent for other projects&#8221;, unselect &#8220;Create initial empty commit&#8221;</li>
-<li>container/repo_1/manifest //repo manifest, access right inherit from &#8220;container&#8221;, unselect &#8220;Only serve as parent for other projects&#8221;, select &#8220;Create initial empty commit&#8221;</li>
-<li>container/repo_1/git_one //child project inside the repo, access right inherit from &#8220;container&#8221;, unselect &#8220;Only serve as parent for other projects&#8221;, select &#8220;Create initial empty commit&#8221;.</li>
-<li>container/repo_1/git_two</li>
+<li><code>container</code>:for global access control, choose &#8220;Only serve as parent for other projects&#8221;, unselect &#8220;Create initial empty commit&#8221;</li>
+<li><code>container/repo_1/manifest</code>:repo manifest, access right inherit from &#8220;container&#8221;, unselect &#8220;Only serve as parent for other projects&#8221;, select &#8220;Create initial empty commit&#8221;</li>
+<li><code>container/repo_1/git_one</code>:child project inside the repo, access right inherit from &#8220;container&#8221;, unselect &#8220;Only serve as parent for other projects&#8221;, select &#8220;Create initial empty commit&#8221;.</li>
+<li><code>container/repo_1/git_two</code></li>
 </ol>
 </li>
 <li>Create my own repo config:
@@ -177,8 +177,8 @@
 </span><span class='line'><span class="nt">&lt;/manifest&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 <p/>
-3. On gerrit server, create a working &#8220;Branch Name&#8221; &#8220;my_working_branch&#8221; on these three projects, with &#8220;Initial Revision&#8221; set to &#8220;master&#8221; in https://gerritreview.com/gerrit/#/admin/projects/container/repo_1/${GIT_NAME},branches
-<p/>
+3. On gerrit server, create a working &#8220;Branch Name&#8221; &#8220;my_working_branch&#8221; on these three projects, with &#8220;Initial Revision&#8221; set to &#8220;master&#8221; in https://gerritreview.com/gerrit/#/admin/projects/container/repo_1/${GIT_NAME},branches <br />
+
 4. On a client&#8217;s working machine, checkout the repo with below command:
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -190,12 +190,12 @@
 <h2> Setup the access control rules for this repo:</h2>
 
 1. define thress group and their access right: <br />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; developers  :can submit CL, checkout code, review +/_ 1  <br />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; reviewers   :can review +/- 2 <br />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; submitters  :can merge CL to working branch <br />
-2. implement these rules in gerrit server: <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>developers</code>: can submit CL, checkout code, review +/_ 1  <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>reviewers</code>: can review +/- 2 <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>submitters</code>: can merge CL to working branch <br />
+2. enforce these rules on gerrit server: <br />
 First delete all default access permission granted for &#8220;Registered Users&#8221; from https://gerritreview.com/gerrit/#/admin/projects/All-Projects,access <br />
-Then create below access rules for the projects under container: <img src="http://yongbingchen.github.com/images/git/repo/gerrit_server_access_control.jpeg" title="" >
+Then create below access rules for the projects under <code>container</code>: <img src="http://yongbingchen.github.com/images/git/repo/gerrit_server_access_control.jpeg" title="" >
 
 </div>
   
@@ -2774,10 +2774,8 @@ This is useful when debugging some real time issues.</p>
         <h1>Categories</h1>
         <ul id="categories">
                 <li class='category'><a href='/blog/categories/android/'>Android (8)</a></li>
-<li class='category'><a href='/blog/categories/bible/'>Bible (1)</a></li>
 <li class='category'><a href='/blog/categories/bluetooth/'>Bluetooth (9)</a></li>
 <li class='category'><a href='/blog/categories/gerrit/'>gerrit (2)</a></li>
-<li class='category'><a href='/blog/categories/git/'>git (1)</a></li>
 <li class='category'><a href='/blog/categories/linux/'>linux (6)</a></li>
 
         </ul>
