@@ -4,7 +4,7 @@
   <title><![CDATA[Yongbing's Blog]]></title>
   <link href="http://yongbingchen.github.com/atom.xml" rel="self"/>
   <link href="http://yongbingchen.github.com/"/>
-  <updated>2015-03-29T19:35:32-07:00</updated>
+  <updated>2015-04-09T18:40:02-07:00</updated>
   <id>http://yongbingchen.github.com/</id>
   <author>
     <name><![CDATA[Yongbing Chen]]></name>
@@ -12,6 +12,303 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Verify the signature of a X.509 certificate]]></title>
+    <link href="http://yongbingchen.github.com/blog/2015/04/09/verify-the-signature-of-a-x-dot-509-certificate/"/>
+    <updated>2015-04-09T12:08:00-07:00</updated>
+    <id>http://yongbingchen.github.com/blog/2015/04/09/verify-the-signature-of-a-x-dot-509-certificate</id>
+    <content type="html"><![CDATA[<h2>Get the certificate</h2>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>openssl s_client -showcerts -connect www.google.com:443 &lt;/dev/null &gt; www.google.com.crt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then extract the top two certificates from www.google.com.crt: <br />
+Google&#8217;s (call it Google.pem):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-----BEGIN CERTIFICATE-----
+</span><span class='line'>MIIEdjCCA16gAwIBAgIIOPbIrrvyFtIwDQYJKoZIhvcNAQEFBQAwSTELMAkGA1UE
+</span><span class='line'>BhMCVVMxEzARBgNVBAoTCkdvb2dsZSBJbmMxJTAjBgNVBAMTHEdvb2dsZSBJbnRl
+</span><span class='line'>cm5ldCBBdXRob3JpdHkgRzIwHhcNMTUwMzI1MTUyNTE0WhcNMTUwNjIzMDAwMDAw
+</span><span class='line'>WjBoMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwN
+</span><span class='line'>TW91bnRhaW4gVmlldzETMBEGA1UECgwKR29vZ2xlIEluYzEXMBUGA1UEAwwOd3d3
+</span><span class='line'>Lmdvb2dsZS5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCSTWLd
+</span><span class='line'>zWsBLTP2zxKl/WKRtJCGerseT381b6i71CRADCg+57sU2o0SaCOYFKSQ99iOul6j
+</span><span class='line'>qe2N/ua2/4QUBalk1HsfdttvOaaZD9AkBgJI+oiVgCcdbdpqet6xU4QlJo+qjC2C
+</span><span class='line'>SGXaPzD3jUiIfUyQ2G8KipXwqcyVG3Vi/JjskdEywclBgYIEVlK/UQ01fxeSIBEm
+</span><span class='line'>3yMM12vKWLNnowCI5mBv57gCZVgr2aI182rGCipsJmd1l5tSUBNVxRx5J6ul3Q/6
+</span><span class='line'>+jnfokCz8hgmGIqYGLXpdh044VrKmA7xK6FL7gDKPYx/ZhErVs7c4sqL5n3YrKi1
+</span><span class='line'>lNkGyudSIX9nQZ5ZAgMBAAGjggFBMIIBPTAdBgNVHSUEFjAUBggrBgEFBQcDAQYI
+</span><span class='line'>KwYBBQUHAwIwGQYDVR0RBBIwEIIOd3d3Lmdvb2dsZS5jb20waAYIKwYBBQUHAQEE
+</span><span class='line'>XDBaMCsGCCsGAQUFBzAChh9odHRwOi8vcGtpLmdvb2dsZS5jb20vR0lBRzIuY3J0
+</span><span class='line'>MCsGCCsGAQUFBzABhh9odHRwOi8vY2xpZW50czEuZ29vZ2xlLmNvbS9vY3NwMB0G
+</span><span class='line'>A1UdDgQWBBRRAvQ0zUd+a1XkMqsEqYzLoPJ6FDAMBgNVHRMBAf8EAjAAMB8GA1Ud
+</span><span class='line'>IwQYMBaAFErdBhYbvPZotXb1gba7Yhq6WoEvMBcGA1UdIAQQMA4wDAYKKwYBBAHW
+</span><span class='line'>eQIFATAwBgNVHR8EKTAnMCWgI6Ahhh9odHRwOi8vcGtpLmdvb2dsZS5jb20vR0lB
+</span><span class='line'>RzIuY3JsMA0GCSqGSIb3DQEBBQUAA4IBAQB+xWJQGlk2iKfjkj694iLpUPYqDW9z
+</span><span class='line'>fg/BAcfZa8gpwL7TmBCFxAxxxW84+22gQM8sH9pqeeHpNCTmTLbtx6XREH+UKeHn
+</span><span class='line'>u1zFhYFTrc0WDGXOR9RbZGEiXESCEwmZKL1/3/s9+rFfX3AV1BS7ickw3QzNHqzW
+</span><span class='line'>d8xvLuSdkCGui0/q+UXX2sGkJET9ZTT9fuy6UGA7zOOCMaAuGtXQaiZMCwo5IRmO
+</span><span class='line'>godUOFa70CaggZm9s4Cci0+JzwIBl7T7459NgtZaIvoRj/DVByboBaBFNkfcJmzb
+</span><span class='line'>cIDZKTG45MHEWZJNzacNjUg+KPCqf1bTMYKjTxSs1bkYy4cTYrg1NvHv
+</span><span class='line'>-----END CERTIFICATE-----</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and the issuer&#8217;s (call it Issuer.pem):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-----BEGIN CERTIFICATE-----
+</span><span class='line'>MIID8DCCAtigAwIBAgIDAjp2MA0GCSqGSIb3DQEBBQUAMEIxCzAJBgNVBAYTAlVT
+</span><span class='line'>MRYwFAYDVQQKEw1HZW9UcnVzdCBJbmMuMRswGQYDVQQDExJHZW9UcnVzdCBHbG9i
+</span><span class='line'>YWwgQ0EwHhcNMTMwNDA1MTUxNTU1WhcNMTYxMjMxMjM1OTU5WjBJMQswCQYDVQQG
+</span><span class='line'>EwJVUzETMBEGA1UEChMKR29vZ2xlIEluYzElMCMGA1UEAxMcR29vZ2xlIEludGVy
+</span><span class='line'>bmV0IEF1dGhvcml0eSBHMjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
+</span><span class='line'>AJwqBHdc2FCROgajguDYUEi8iT/xGXAaiEZ+4I/F8YnOIe5a/mENtzJEiaB0C1NP
+</span><span class='line'>VaTOgmKV7utZX8bhBYASxF6UP7xbSDj0U/ck5vuR6RXEz/RTDfRK/J9U3n2+oGtv
+</span><span class='line'>h8DQUB8oMANA2ghzUWx//zo8pzcGjr1LEQTrfSTe5vn8MXH7lNVg8y5Kr0LSy+rE
+</span><span class='line'>ahqyzFPdFUuLH8gZYR/Nnag+YyuENWllhMgZxUYi+FOVvuOAShDGKuy6lyARxzmZ
+</span><span class='line'>EASg8GF6lSWMTlJ14rbtCMoU/M4iarNOz0YDl5cDfsCx3nuvRTPPuj5xt970JSXC
+</span><span class='line'>DTWJnZ37DhF5iR43xa+OcmkCAwEAAaOB5zCB5DAfBgNVHSMEGDAWgBTAephojYn7
+</span><span class='line'>qwVkDBF9qn1luMrMTjAdBgNVHQ4EFgQUSt0GFhu89mi1dvWBtrtiGrpagS8wEgYD
+</span><span class='line'>VR0TAQH/BAgwBgEB/wIBADAOBgNVHQ8BAf8EBAMCAQYwNQYDVR0fBC4wLDAqoCig
+</span><span class='line'>JoYkaHR0cDovL2cuc3ltY2IuY29tL2NybHMvZ3RnbG9iYWwuY3JsMC4GCCsGAQUF
+</span><span class='line'>BwEBBCIwIDAeBggrBgEFBQcwAYYSaHR0cDovL2cuc3ltY2QuY29tMBcGA1UdIAQQ
+</span><span class='line'>MA4wDAYKKwYBBAHWeQIFATANBgkqhkiG9w0BAQUFAAOCAQEAJ4zP6cc7vsBv6JaE
+</span><span class='line'>+5xcXZDkd9uLMmCbZdiFJrW6nx7eZE4fxsggWwmfq6ngCTRFomUlNz1/Wm8gzPn6
+</span><span class='line'>8R2PEAwCOsTJAXaWvpv5Fdg50cUDR3a4iowx1mDV5I/b+jzG1Zgo+ByPF5E0y8tS
+</span><span class='line'>etH7OiDk4Yax2BgPvtaHZI3FCiVCUe+yOLjgHdDh/Ob0r0a678C/xbQF9ZR1DP6i
+</span><span class='line'>vgK66oZb+TWzZvXFjYWhGiN3GhkXVBNgnwvhtJwoKvmuAjRtJZOcgqgXe/GFsNMP
+</span><span class='line'>WOH7sf6coaPo/ck/9Ndx3L2MpBngISMjVROPpBYCCX65r+7bU2S9cS+5Oc4wt7S8
+</span><span class='line'>VOBHBw==
+</span><span class='line'>-----END CERTIFICATE-----</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then extract the signature from Google.pem, and the RSA public key (used to decode the signature) from Issuer.pem:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ openssl x509 -in Google.pem -noout -text
+</span><span class='line'>    Signature Algorithm: sha1WithRSAEncryption
+</span><span class='line'>         7e:c5:62:50:1a:59:36:88:a7:e3:92:3e:bd:e2:22:e9:50:f6:
+</span><span class='line'>         2a:0d:6f:73:7e:0f:c1:01:c7:d9:6b:c8:29:c0:be:d3:98:10:
+</span><span class='line'>         85:c4:0c:71:c5:6f:38:fb:6d:a0:40:cf:2c:1f:da:6a:79:e1:
+</span><span class='line'>         e9:34:24:e6:4c:b6:ed:c7:a5:d1:10:7f:94:29:e1:e7:bb:5c:
+</span><span class='line'>         c5:85:81:53:ad:cd:16:0c:65:ce:47:d4:5b:64:61:22:5c:44:
+</span><span class='line'>         82:13:09:99:28:bd:7f:df:fb:3d:fa:b1:5f:5f:70:15:d4:14:
+</span><span class='line'>         bb:89:c9:30:dd:0c:cd:1e:ac:d6:77:cc:6f:2e:e4:9d:90:21:
+</span><span class='line'>         ae:8b:4f:ea:f9:45:d7:da:c1:a4:24:44:fd:65:34:fd:7e:ec:
+</span><span class='line'>         ba:50:60:3b:cc:e3:82:31:a0:2e:1a:d5:d0:6a:26:4c:0b:0a:
+</span><span class='line'>         39:21:19:8e:82:87:54:38:56:bb:d0:26:a0:81:99:bd:b3:80:
+</span><span class='line'>         9c:8b:4f:89:cf:02:01:97:b4:fb:e3:9f:4d:82:d6:5a:22:fa:
+</span><span class='line'>         11:8f:f0:d5:07:26:e8:05:a0:45:36:47:dc:26:6c:db:70:80:
+</span><span class='line'>         d9:29:31:b8:e4:c1:c4:59:92:4d:cd:a7:0d:8d:48:3e:28:f0:
+</span><span class='line'>         aa:7f:56:d3:31:82:a3:4f:14:ac:d5:b9:18:cb:87:13:62:b8:
+</span><span class='line'>         35:36:f1:ef</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ openssl x509 -in Issuer.pem -noout -text
+</span><span class='line'>        Subject Public Key Info:
+</span><span class='line'>            Public Key Algorithm: rsaEncryption
+</span><span class='line'>                Public-Key: (2048 bit)
+</span><span class='line'>                Modulus:
+</span><span class='line'>                    00:9c:2a:04:77:5c:d8:50:91:3a:06:a3:82:e0:d8:
+</span><span class='line'>                    50:48:bc:89:3f:f1:19:70:1a:88:46:7e:e0:8f:c5:
+</span><span class='line'>                    f1:89:ce:21:ee:5a:fe:61:0d:b7:32:44:89:a0:74:
+</span><span class='line'>                    0b:53:4f:55:a4:ce:82:62:95:ee:eb:59:5f:c6:e1:
+</span><span class='line'>                    05:80:12:c4:5e:94:3f:bc:5b:48:38:f4:53:f7:24:
+</span><span class='line'>                    e6:fb:91:e9:15:c4:cf:f4:53:0d:f4:4a:fc:9f:54:
+</span><span class='line'>                    de:7d:be:a0:6b:6f:87:c0:d0:50:1f:28:30:03:40:
+</span><span class='line'>                    da:08:73:51:6c:7f:ff:3a:3c:a7:37:06:8e:bd:4b:
+</span><span class='line'>                    11:04:eb:7d:24:de:e6:f9:fc:31:71:fb:94:d5:60:
+</span><span class='line'>                    f3:2e:4a:af:42:d2:cb:ea:c4:6a:1a:b2:cc:53:dd:
+</span><span class='line'>                    15:4b:8b:1f:c8:19:61:1f:cd:9d:a8:3e:63:2b:84:
+</span><span class='line'>                    35:69:65:84:c8:19:c5:46:22:f8:53:95:be:e3:80:
+</span><span class='line'>                    4a:10:c6:2a:ec:ba:97:20:11:c7:39:99:10:04:a0:
+</span><span class='line'>                    f0:61:7a:95:25:8c:4e:52:75:e2:b6:ed:08:ca:14:
+</span><span class='line'>                    fc:ce:22:6a:b3:4e:cf:46:03:97:97:03:7e:c0:b1:
+</span><span class='line'>                    de:7b:af:45:33:cf:ba:3e:71:b7:de:f4:25:25:c2:
+</span><span class='line'>                    0d:35:89:9d:9d:fb:0e:11:79:89:1e:37:c5:af:8e:
+</span><span class='line'>                    72:69
+</span><span class='line'>                Exponent: 65537 (0x10001)</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h2>Decode certificate&#8217;s signature with issuer&#8217;s RSA public key</h2>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ python
+</span><span class='line'>>>> signature = 0x7ec562501a593688a7e3923ebde222e950f62a0d6f737e0fc101c7d96bc829c0bed3981085c40c71c56f38fb6da040cf2c1fda6a79e1e93424e64cb6edc7a5d1107f9429e1e7bb5cc5858153adcd160c65ce47d45b6461225c448213099928bd7fdffb3dfab15f5f7015d414bb89c930dd0ccd1eacd677cc6f2ee49d9021ae8b4feaf945d7dac1a42444fd6534fd7eecba50603bcce38231a02e1ad5d06a264c0b0a3921198e8287543856bbd026a08199bdb3809c8b4f89cf020197b4fbe39f4d82d65a22fa118ff0d50726e805a0453647dc266cdb7080d92931b8e4c1c459924dcda70d8d483e28f0aa7f56d33182a34f14acd5b918cb871362b83536f1ef
+</span><span class='line'>>>> modulus = 0x009c2a04775cd850913a06a382e0d85048bc893ff119701a88467ee08fc5f189ce21ee5afe610db7324489a0740b534f55a4ce826295eeeb595fc6e1058012c45e943fbc5b4838f453f724e6fb91e915c4cff4530df44afc9f54de7dbea06b6f87c0d0501f28300340da0873516c7fff3a3ca737068ebd4b1104eb7d24dee6f9fc3171fb94d560f32e4aaf42d2cbeac46a1ab2cc53dd154b8b1fc819611fcd9da83e632b8435696584c819c54622f85395bee3804a10c62aecba972011c739991004a0f0617a95258c4e5275e2b6ed08ca14fcce226ab34ecf46039797037ec0b1de7baf4533cfba3e71b7def42525c20d35899d9dfb0e1179891e37c5af8e7269
+</span><span class='line'>>>> print "%x" % pow( signature, 65537, modulus )
+</span><span class='line'>1ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff003021300906052b0e03021a05000414f97eff4a56c70bf2a2cdf0546b1efedcb2d8c870</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The leading &#8220;1fff&#8230;&#8221; of the result is the standard RSA algorithm padding, following &#8220;3021300906052b0e03021a05000414&#8221; is the &#8220;ASN.1 BER SHA1 algorithm designator prefix&#8221;, so the actual decoded SHA1 hash value is the remaining &#8220;f97eff4a56c70bf2a2cdf0546b1efedcb2d8c870&#8221;.</p>
+
+<h2>Compare the decoded signature value with certificate&#8217;s hash</h2>
+
+
+<p>As defined in RFC 3280, X.509 certificate&#8217;s ANS.1 format is</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Certificate  ::=  SEQUENCE  {
+</span><span class='line'>     tbsCertificate       TBSCertificate,
+</span><span class='line'>     signatureAlgorithm   AlgorithmIdentifier,
+</span><span class='line'>     signatureValue       BIT STRING  }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The decoded SHA1 hash value is tbsCertificate&#8217;s hash value, not the whols certificate&#8217;s hash value (the output of &#8220;openssl x509 -noout -in Google.pem -fingerprint -sha1&#8221;).</p>
+
+<p>To extract tbsCertificate from the certificate, we need to convert it from PEM format to DER format (the binary format) first:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ openssl x509 -in Google.pem -inform PEM -out Google.crt -outform DER</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then use &#8220;openssl asn1parse&#8221; to find the offset and size of tbsCertificate in the certificate:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ openssl asn1parse -inform der -in Google.crt
+</span><span class='line'>    0:d=0  hl=4 l=1142 cons: SEQUENCE
+</span><span class='line'>    4:d=1  hl=4 l= 862 cons: SEQUENCE
+</span><span class='line'>    8:d=2  hl=2 l=   3 cons: cont [ 0 ]
+</span><span class='line'>   10:d=3  hl=2 l=   1 prim: INTEGER           :02
+</span><span class='line'>   13:d=2  hl=2 l=   8 prim: INTEGER           :38F6C8AEBBF216D2
+</span><span class='line'>   23:d=2  hl=2 l=  13 cons: SEQUENCE
+</span><span class='line'>   25:d=3  hl=2 l=   9 prim: OBJECT            :sha1WithRSAEncryption
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Based on certificate&#8217;s ANS.1 definition, the second line represents tbsCertificate&#8217;s offset (in the binary format DER) 4, size 866( head length 4, body length 862).
+So it can be extracted by:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>dd <span class="k">if</span><span class="o">=</span>Google.crt <span class="nv">of</span><span class="o">=</span>Google.tbsCertificate <span class="nv">skip</span><span class="o">=</span>4 <span class="nv">bs</span><span class="o">=</span>1 <span class="nv">count</span><span class="o">=</span>866
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And its SHA1 hash matches the decoded value:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sha1sum Google.tbsCertificate
+</span><span class='line'>f97eff4a56c70bf2a2cdf0546b1efedcb2d8c870  Google.tbsCertificate
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[create my own repo to manage bundle of git repositories]]></title>

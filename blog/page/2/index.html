@@ -9,7 +9,7 @@
   <meta name="author" content="Yongbing Chen">
 
   
-  <meta name="description" content="1 Get Android defined A2DP interface btav_interface_t from bt_interface_t get_bluetooth_interface(). 1
+  <meta name="description" content="Item A. Connect a remote A2DP device: 1 Android system will try to reconnect paired A2DP device automatically after BT enable. 1
 2
 3
 4
@@ -18,8 +18,7 @@
 7
 8
 9
-10
-04-25 01:56:30.530 I/ &hellip;">
+04- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +94,331 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-iv-a2dp-traffic/">Dissect Bluedroid From A2DP: Part IV: Connect and Communication</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-07T04:50:00-07:00" pubdate data-updated="true">May 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/07/dissect-bluedroid-from-a2dp-part-iv-a2dp-traffic/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>Item A. Connect a remote A2DP device:</h3>
+
+<p><img class="center" src="http://yongbingchen.github.com/images/bluedroid/a2dp_connect.jpg" title="" >
+1 Android system will try to reconnect paired A2DP device automatically after BT enable.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="mo">04</span><span class="o">-</span><span class="mi">25</span> <span class="mo">01</span><span class="o">:</span><span class="mi">56</span><span class="o">:</span><span class="mf">31.080</span> <span class="n">D</span><span class="o">/</span><span class="n">BluetoothAdapterService</span><span class="p">(</span> <span class="mi">2093</span><span class="p">)</span><span class="o">:</span> <span class="n">Auto</span> <span class="n">Connecting</span> <span class="n">A2DP</span> <span class="n">Profile</span> <span class="n">with</span> <span class="n">device</span> <span class="mi">50</span><span class="o">:</span><span class="nl">C9:</span><span class="mi">71</span><span class="o">:</span><span class="mi">0</span><span class="nl">D:D2:</span><span class="n">D9</span>
+</span><span class='line'>  <span class="n">packages</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">Bluetooth</span><span class="o">/</span><span class="n">jni</span><span class="o">/</span><span class="n">com_android_bluetooth_a2dp</span><span class="p">.</span><span class="n">cpp</span> 
+</span><span class='line'>  <span class="k">static</span> <span class="n">jboolean</span> <span class="n">connectA2dpNative</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jobject</span> <span class="n">object</span><span class="p">,</span> <span class="n">jbyteArray</span> <span class="n">address</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">const</span> <span class="n">bt_interface_t</span><span class="o">*</span> <span class="n">btInf</span><span class="o">=</span> <span class="n">getBluetoothInterface</span><span class="p">();</span>
+</span><span class='line'>      <span class="k">const</span> <span class="n">btav_interface_t</span> <span class="o">*</span><span class="n">sBluetoothA2dpInterface</span> <span class="o">=</span> <span class="p">(</span><span class="n">btav_interface_t</span> <span class="o">*</span><span class="p">)</span><span class="n">btInf</span><span class="o">-&gt;</span><span class="n">get_profile_interface</span><span class="p">(</span><span class="n">BT_PROFILE_ADVANCED_AUDIO_ID</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">status</span> <span class="o">=</span> <span class="n">sBluetoothA2dpInterface</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">((</span><span class="n">bt_bdaddr_t</span> <span class="o">*</span><span class="p">)</span><span class="n">addr</span><span class="p">)</span>
+</span><span class='line'>          <span class="n">external</span><span class="o">/</span><span class="n">bluetooth</span><span class="o">/</span><span class="n">bluedroid</span><span class="o">/</span><span class="n">btif</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">btif_av</span><span class="p">.</span><span class="n">c</span>
+</span><span class='line'>          <span class="n">btif_queue_connect</span><span class="p">(</span><span class="n">UUID_SERVCLASS_AUDIO_SOURCE</span><span class="p">,</span> <span class="n">bd_addr</span><span class="p">,</span> <span class="n">connect_int</span><span class="p">);</span><span class="c1">//This will trigger an event in btu_task, now the caller thread returned.</span>
+</span><span class='line'>              <span class="n">GKI_send_msg</span><span class="p">(</span><span class="n">BTIF_TASK</span><span class="p">,</span> <span class="n">BTU_BTIF_MBOX</span><span class="p">,</span> <span class="n">p_msg</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2 This will later trigger a A2DP server event API_CONNECT_REQ_EVT in state CCB_IDLE_ST:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="mo">05</span><span class="o">-</span><span class="mo">02</span> <span class="mo">01</span><span class="o">:</span><span class="mi">54</span><span class="o">:</span><span class="mf">33.342</span> <span class="n">I</span><span class="o">/</span><span class="n">bt</span><span class="o">-</span><span class="n">avp</span>  <span class="p">(</span> <span class="mi">2093</span><span class="p">)</span><span class="o">:</span> <span class="n">CCB</span> <span class="n">ccb</span><span class="o">=</span><span class="mi">0</span> <span class="n">event</span><span class="o">=</span><span class="n">API_CONNECT_REQ_EVT</span> <span class="n">state</span><span class="o">=</span><span class="n">CCB_IDLE_ST</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3 A2DP server handle this event in bellow two actions:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">external</span><span class="o">/</span><span class="n">bluetooth</span><span class="o">/</span><span class="n">bluedroid</span><span class="o">/</span><span class="n">stack</span><span class="o">/</span><span class="n">avdt</span><span class="o">/</span><span class="n">avdt_ccb</span><span class="p">.</span><span class="n">c</span>
+</span><span class='line'><span class="mi">129</span> <span class="k">const</span> <span class="n">UINT8</span> <span class="n">avdt_ccb_st_idle</span><span class="p">[][</span><span class="n">AVDT_CCB_NUM_COLS</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'><span class="mi">130</span> <span class="cm">/* Event                      Action 1                    Action 2                    Next state */</span>
+</span><span class='line'><span class="mi">139</span> <span class="cm">/* API_CONNECT_REQ_EVT */</span>    <span class="p">{</span><span class="n">AVDT_CCB_SET_CONN</span><span class="p">,</span>          <span class="n">AVDT_CCB_CHAN_OPEN</span><span class="p">,</span>         <span class="n">AVDT_CCB_OPENING_ST</span><span class="p">},</span>
+</span><span class='line'><span class="c1">//3.1 Set CCB variables associated with AVDT_ConnectReq().</span>
+</span><span class='line'><span class="mi">996</span> <span class="kt">void</span> <span class="n">avdt_ccb_set_conn</span><span class="p">(</span><span class="n">tAVDT_CCB</span> <span class="o">*</span><span class="n">p_ccb</span><span class="p">,</span> <span class="n">tAVDT_CCB_EVT</span> <span class="o">*</span><span class="n">p_data</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">BTM_SetSecurityLevel</span><span class="p">(</span><span class="n">TRUE</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">BTM_SEC_SERVICE_AVDTP</span><span class="p">,</span> <span class="n">p_data</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">.</span><span class="n">sec_mask</span><span class="p">,</span><span class="n">AVDT_PSM</span><span class="p">,</span> <span class="n">BTM_SEC_PROTO_AVDT</span><span class="p">,</span> <span class="n">AVDT_CHAN_SIG</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//3.2 initiate a signaling channel connection.</span>
+</span><span class='line'><span class="mi">87</span> <span class="kt">void</span> <span class="n">avdt_ccb_chan_open</span><span class="p">(</span><span class="n">tAVDT_CCB</span> <span class="o">*</span><span class="n">p_ccb</span><span class="p">,</span> <span class="n">tAVDT_CCB_EVT</span> <span class="o">*</span><span class="n">p_data</span><span class="p">)</span>
+</span><span class='line'>                  <span class="n">BTM_SetOutService</span><span class="p">(</span><span class="n">p_ccb</span><span class="o">-&gt;</span><span class="n">peer_addr</span><span class="p">,</span> <span class="n">BTM_SEC_SERVICE_AVDTP</span><span class="p">,</span> <span class="n">AVDT_CHAN_SIG</span><span class="p">);</span>
+</span><span class='line'>                  <span class="n">avdt_ad_open_req</span><span class="p">(</span><span class="n">AVDT_CHAN_SIG</span><span class="p">,</span> <span class="n">p_ccb</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">AVDT_INT</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>4 How L2CAP handle this channel connection:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">external</span><span class="o">/</span><span class="n">bluetooth</span><span class="o">/</span><span class="n">bluedroid</span><span class="o">/</span><span class="n">stack</span><span class="o">/</span><span class="n">l2cap</span><span class="o">/</span><span class="n">l2c_api</span><span class="p">.</span><span class="n">c</span>                     
+</span><span class='line'><span class="mi">229</span> <span class="n">UINT16</span> <span class="n">L2CA_ErtmConnectReq</span> <span class="p">(</span><span class="n">UINT16</span> <span class="n">psm</span><span class="p">,</span> <span class="n">BD_ADDR</span> <span class="n">p_bd_addr</span><span class="p">,</span> <span class="n">tL2CAP_ERTM_INFO</span> <span class="o">*</span><span class="n">p_ertm_info</span><span class="p">)</span>                      
+</span><span class='line'>  <span class="n">p_lcb</span> <span class="o">=</span> <span class="n">l2cu_allocate_lcb</span> <span class="p">(</span><span class="n">p_bd_addr</span><span class="p">,</span> <span class="n">FALSE</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">l2cu_create_conn</span><span class="p">(</span><span class="n">p_lcb</span><span class="p">);</span><span class="c1">//This function initiates an acl connection via HCI</span>
+</span><span class='line'>      <span class="mi">2180</span> <span class="n">BOOLEAN</span> <span class="n">l2cu_create_conn_after_switch</span> <span class="p">(</span><span class="n">tL2C_LCB</span> <span class="o">*</span><span class="n">p_lcb</span><span class="p">)</span>
+</span><span class='line'>          <span class="c1">//external/bluetooth/bluedroid/stack/hcic/hcicmds.c</span>
+</span><span class='line'>          <span class="n">btsnd_hcic_create_conn</span> <span class="p">(</span><span class="n">p_lcb</span><span class="o">-&gt;</span><span class="n">remote_bd_addr</span><span class="p">,</span><span class="n">HCI_PKT_TYPES_MASK_DM1</span> <span class="o">+</span> <span class="n">HCI_PKT_TYPES_MASK_DH1</span><span class="p">,</span><span class="n">page_scan_rep_mode</span><span class="p">,</span><span class="n">page_scan_mode</span><span class="p">,</span><span class="n">clock_offset</span><span class="p">,</span><span class="n">allow_switch</span><span class="p">));</span>
+</span><span class='line'>              <span class="n">HCI_CMD_TO_LOWER</span><span class="p">(</span><span class="n">p_buf</span><span class="p">);</span>
+</span><span class='line'>                  <span class="c1">//external/bluetooth/bluedroid/main/bte_main.c</span>
+</span><span class='line'>                  <span class="n">bt_hc_if</span><span class="o">-&gt;</span><span class="n">transmit_buf</span><span class="p">((</span><span class="n">TRANSAC</span><span class="p">)</span><span class="n">p_msg</span><span class="p">,</span> <span class="err">\</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="p">(</span><span class="n">p_msg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="err">\</span><span class="n">p_msg</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">);</span>
+</span><span class='line'>                      <span class="n">utils_enqueue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tx_q</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span> <span class="n">transac</span><span class="p">);</span>
+</span><span class='line'>                       <span class="n">bthc_signal_event</span><span class="p">(</span><span class="n">HC_EVENT_TX</span><span class="p">);</span>
+</span><span class='line'>          <span class="n">btu_start_timer</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">p_lcb</span><span class="o">-&gt;</span><span class="n">timer_entry</span><span class="p">,</span> <span class="n">BTU_TTYPE_L2CAP_LINK</span><span class="p">,</span><span class="n">L2CAP_LINK_CONNECT_TOUT</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>5 This command will trigger connection establish process between local and remote device, accomplished by a event-driven state machine in BT stack.</p>
+
+<h3>Item B. a2dp_write data path:</h3>
+
+<p><img class="center" src="http://yongbingchen.github.com/images/bluedroid/a2dp_write.jpg" title="" >
+1 A2DP client writes to A2DP data socket will trigger API_WRITE_REQ_EVT in SCB_STREAM_ST state:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="mo">05</span><span class="o">-</span><span class="mo">02</span> <span class="mo">01</span><span class="o">:</span><span class="mi">14</span><span class="o">:</span><span class="mf">03.134</span> <span class="n">I</span><span class="o">/</span><span class="n">bt</span><span class="o">-</span><span class="n">avp</span>  <span class="p">(</span> <span class="mi">2139</span><span class="p">)</span><span class="o">:</span> <span class="n">SCB</span> <span class="n">hdl</span><span class="o">=</span><span class="mi">1</span> <span class="n">event</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">API_WRITE_REQ_EVT</span> <span class="n">state</span><span class="o">=</span><span class="n">SCB_STREAM_ST</span>
+</span><span class='line'><span class="mi">394</span> <span class="cm">/* state table for streaming state */</span>
+</span><span class='line'><span class="mi">395</span> <span class="k">const</span> <span class="n">UINT8</span> <span class="n">avdt_scb_st_stream</span><span class="p">[][</span><span class="n">AVDT_SCB_NUM_COLS</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'><span class="mi">396</span> <span class="cm">/* Event                     Action 1                       Action 2                    Next state */</span>
+</span><span class='line'><span class="mi">398</span> <span class="cm">/* API_WRITE_REQ_EVT */</span>     <span class="p">{</span><span class="n">AVDT_SCB_HDL_WRITE_REQ</span><span class="p">,</span>        <span class="n">AVDT_SCB_CHK_SND_PKT</span><span class="p">,</span>       <span class="n">AVDT_SCB_STREAM_ST</span><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2 A2DP server handle this with bellow two actions:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="c1">//2.1 build a new media packet and stores it in the SCB.</span>
+</span><span class='line'><span class="n">external</span><span class="o">/</span><span class="n">bluetooth</span><span class="o">/</span><span class="n">bluedroid</span><span class="o">/</span><span class="n">stack</span><span class="o">/</span><span class="n">avdt</span><span class="o">/</span><span class="n">avdt_scb_act</span><span class="p">.</span><span class="n">c</span>
+</span><span class='line'><span class="mi">1320</span> <span class="kt">void</span> <span class="n">avdt_scb_hdl_write_req</span><span class="p">(</span><span class="n">tAVDT_SCB</span> <span class="o">*</span><span class="n">p_scb</span><span class="p">,</span> <span class="n">tAVDT_SCB_EVT</span> <span class="o">*</span><span class="n">p_data</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//2.2 send this stored media packet to L2CAP layer.</span>
+</span><span class='line'><span class="mi">1921</span> <span class="kt">void</span> <span class="n">avdt_scb_chk_snd_pkt</span><span class="p">(</span><span class="n">tAVDT_SCB</span> <span class="o">*</span><span class="n">p_scb</span><span class="p">,</span> <span class="n">tAVDT_SCB_EVT</span> <span class="o">*</span><span class="n">p_data</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">avdt_ad_write_req</span><span class="p">(</span><span class="n">AVDT_CHAN_MEDIA</span><span class="p">,</span> <span class="n">p_scb</span><span class="o">-&gt;</span><span class="n">p_ccb</span><span class="p">,</span> <span class="n">p_scb</span><span class="p">,</span> <span class="n">p_pkt</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">L2CA_DataWrite</span><span class="p">(</span><span class="n">avdt_cb</span><span class="p">.</span><span class="n">ad</span><span class="p">.</span><span class="n">rt_tbl</span><span class="p">[</span><span class="n">avdt_ccb_to_idx</span><span class="p">(</span><span class="n">p_ccb</span><span class="p">)][</span><span class="n">tcid</span><span class="p">].</span><span class="n">lcid</span><span class="p">,</span> <span class="n">p_buf</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3 L2CAP to HCI layer</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">bluedroid</span><span class="o">/</span><span class="n">stack</span><span class="o">/</span><span class="n">l2cap</span><span class="o">/</span><span class="n">l2c_api</span><span class="p">.</span><span class="n">c</span>
+</span><span class='line'><span class="mi">1633</span> <span class="n">UINT8</span> <span class="n">L2CA_DataWrite</span> <span class="p">(</span><span class="n">UINT16</span> <span class="n">cid</span><span class="p">,</span> <span class="n">BT_HDR</span> <span class="o">*</span><span class="n">p_data</span><span class="p">)</span>
+</span><span class='line'><span class="mi">1636</span>     <span class="k">return</span> <span class="n">l2c_data_write</span> <span class="p">(</span><span class="n">cid</span><span class="p">,</span> <span class="n">p_data</span><span class="p">,</span> <span class="n">L2CAP_FLUSHABLE_CH_BASED</span><span class="p">);</span>
+</span><span class='line'>                  <span class="n">p_ccb</span> <span class="o">=</span> <span class="n">l2cu_find_ccb_by_cid</span> <span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="n">cid</span><span class="p">);</span>
+</span><span class='line'>                  <span class="n">l2c_csm_execute</span> <span class="p">(</span><span class="n">p_ccb</span><span class="p">,</span> <span class="n">L2CEVT_L2CA_DATA_WRITE</span><span class="p">,</span> <span class="n">p_data</span><span class="p">);</span>
+</span><span class='line'>                      <span class="mi">935</span> <span class="k">static</span> <span class="kt">void</span> <span class="n">l2c_csm_open</span> <span class="p">(</span><span class="n">tL2C_CCB</span> <span class="o">*</span><span class="n">p_ccb</span><span class="p">,</span> <span class="n">UINT16</span> <span class="n">event</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">p_data</span><span class="p">)</span><span class="c1">//Just consider channel connected state</span>
+</span><span class='line'>                      <span class="mi">1050</span>     <span class="k">case</span> <span class="nl">L2CEVT_L2CA_DATA_WRITE:</span>                    <span class="cm">/* Upper layer data to send */</span>
+</span><span class='line'>                      <span class="mi">1051</span>         <span class="n">l2c_enqueue_peer_data</span> <span class="p">(</span><span class="n">p_ccb</span><span class="p">,</span> <span class="p">(</span><span class="n">BT_HDR</span> <span class="o">*</span><span class="p">)</span><span class="n">p_data</span><span class="p">);</span>
+</span><span class='line'>                      <span class="mi">1052</span>         <span class="n">l2c_link_check_send_pkts</span> <span class="p">(</span><span class="n">p_ccb</span><span class="o">-&gt;</span><span class="n">p_lcb</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'>                      <span class="mi">1053</span>         <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>                              <span class="n">l2c_link_check_send_pkts</span> <span class="p">(</span><span class="n">p_lcb</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'>                                  <span class="n">l2c_link_send_to_lower</span> <span class="p">(</span><span class="n">p_lcb</span><span class="p">,</span> <span class="n">p_buf</span><span class="p">);</span>
+</span><span class='line'>                                  <span class="mi">1341</span> <span class="err">#</span><span class="k">if</span> <span class="n">BLE_INCLUDED</span> <span class="o">==</span> <span class="n">TRUE</span>
+</span><span class='line'>                                  <span class="mi">1342</span>         <span class="k">if</span> <span class="p">(</span><span class="n">p_lcb</span><span class="o">-&gt;</span><span class="n">is_ble_link</span><span class="p">)</span>
+</span><span class='line'>                                  <span class="mi">1344</span>             <span class="n">L2C_LINK_SEND_BLE_ACL_DATA</span><span class="p">(</span><span class="n">p_buf</span><span class="p">);</span>
+</span><span class='line'>                                  <span class="mi">1346</span>         <span class="k">else</span>
+</span><span class='line'>                                  <span class="mi">1349</span>             <span class="n">L2C_LINK_SEND_ACL_DATA</span> <span class="p">(</span><span class="n">p_buf</span><span class="p">);</span>
+</span><span class='line'>                                                      <span class="n">bte_main_hci_send</span><span class="p">((</span><span class="n">BT_HDR</span> <span class="o">*</span><span class="p">)(</span><span class="n">p</span><span class="p">),</span> <span class="n">BT_EVT_TO_LM_HCI_ACL</span><span class="p">);</span>
+</span><span class='line'>                                                          <span class="n">bt_hc_if</span><span class="o">-&gt;</span><span class="n">transmit_buf</span><span class="p">((</span><span class="n">TRANSAC</span><span class="p">)</span><span class="n">p_msg</span><span class="p">,</span> <span class="err">\</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="p">(</span><span class="n">p_msg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span><span class="n">p_msg</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">);</span>
+</span><span class='line'>                                                              <span class="n">bluedroid</span><span class="o">/</span><span class="n">hci</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">bt_hci_bdroid</span><span class="p">.</span><span class="nl">c:</span><span class="mi">249</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">transmit_buf</span><span class="p">(</span><span class="n">TRANSAC</span> <span class="n">transac</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">p_buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span>
+</span><span class='line'>                                                                  <span class="n">utils_enqueue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tx_q</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span> <span class="n">transac</span><span class="p">);</span>
+</span><span class='line'>                                                                  <span class="n">bthc_signal_event</span><span class="p">(</span><span class="n">HC_EVENT_TX</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>4 HCI content write to hardware device driver</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="mi">339</span> <span class="k">static</span> <span class="kt">void</span> <span class="o">*</span><span class="n">bt_hc_worker_thread</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">events</span> <span class="o">&amp;</span> <span class="n">HC_EVENT_TX</span><span class="p">)</span>
+</span><span class='line'>          <span class="n">p_hci_if</span><span class="o">-&gt;</span><span class="n">send</span><span class="p">(</span><span class="n">sending_msg_que</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'>          <span class="mi">593</span> <span class="kt">void</span> <span class="n">hci_h4_send_msg</span><span class="p">(</span><span class="n">HC_BT_HDR</span> <span class="o">*</span><span class="n">p_msg</span><span class="p">)</span>
+</span><span class='line'>              <span class="n">bytes_sent</span> <span class="o">=</span> <span class="n">userial_write</span><span class="p">(</span><span class="n">event</span><span class="p">,(</span><span class="n">uint8_t</span> <span class="o">*</span><span class="p">)</span> <span class="n">p</span><span class="p">,</span><span class="n">bytes_to_send</span><span class="p">);</span>
+</span><span class='line'>                   <span class="n">ret</span> <span class="o">=</span> <span class="n">write</span><span class="p">(</span><span class="n">userial_cb</span><span class="p">.</span><span class="n">fd</span><span class="p">,</span> <span class="n">p_data</span><span class="o">+</span><span class="n">total</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Item C. Incoming data/event path:</h3>
+
+<p>0 Init vendor (BT chip vendor, like MRVL/TI) implement of bt_vendor_interface_t interface.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'>  <span class="mi">187</span> <span class="kt">void</span> <span class="n">init_vnd_if</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">local_bdaddr</span><span class="p">)</span>
+</span><span class='line'>          <span class="n">dlhandle</span> <span class="o">=</span> <span class="n">dlopen</span><span class="p">(</span><span class="s">&quot;libbt-vendor.so&quot;</span><span class="p">,</span> <span class="n">RTLD_NOW</span><span class="p">);</span>               
+</span><span class='line'>          <span class="n">GLOBAL</span> <span class="n">bt_vendor_interface_t</span> <span class="o">*</span><span class="n">bt_vnd_if</span> <span class="o">=</span> <span class="p">(</span><span class="n">bt_vendor_interface_t</span> <span class="o">*</span><span class="p">)</span> <span class="n">dlsym</span><span class="p">(</span><span class="n">dlhandle</span><span class="p">,</span> <span class="s">&quot;BLUETOOTH_VENDOR_LIB_INTERFACE&quot;</span><span class="p">);</span>
+</span><span class='line'>          <span class="n">bt_vnd_if</span><span class="o">-&gt;</span><span class="n">init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vnd_callbacks</span><span class="p">,</span> <span class="n">local_bdaddr</span><span class="p">);</span>
+</span><span class='line'>          
+</span><span class='line'>  <span class="mi">306</span> <span class="n">uint8_t</span> <span class="n">userial_open</span><span class="p">(</span><span class="n">uint8_t</span> <span class="n">port</span><span class="p">)</span>
+</span><span class='line'>          <span class="n">result</span> <span class="o">=</span> <span class="n">bt_vendor_interface_t</span> <span class="o">*</span> <span class="n">bt_vnd_if</span><span class="o">-&gt;</span><span class="n">op</span><span class="p">(</span><span class="n">BT_VND_OP_USERIAL_OPEN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">fd_array</span><span class="p">);</span>
+</span><span class='line'>              <span class="kt">int</span> <span class="n">bt_vnd_mrvl_if_op</span><span class="p">(</span><span class="n">bt_vendor_opcode_t</span> <span class="n">opcode</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">param</span><span class="p">)</span>
+</span><span class='line'>                  <span class="n">mchar_fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&quot;/dev/mbtchar0&quot;</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span>
+</span><span class='line'>  <span class="mi">363</span>     <span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="n">userial_cb</span><span class="p">.</span><span class="n">read_thread</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">thread_attr</span><span class="p">,</span> <span class="n">userial_read_thread</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>1 Got a packet from hardware device driver, in HCI layer.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">bluedroid</span><span class="o">/</span><span class="n">hci</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">userial</span><span class="p">.</span><span class="nl">c:</span><span class="mi">210</span>
+</span><span class='line'><span class="k">static</span> <span class="kt">void</span> <span class="o">*</span><span class="n">userial_read_thread</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">rx_length</span> <span class="o">=</span> <span class="n">select_read</span><span class="p">(</span><span class="n">userial_cb</span><span class="p">.</span><span class="n">fd</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">READ_LIMIT</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">ret</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">pbuf</span><span class="p">,</span> <span class="p">(</span><span class="n">size_t</span><span class="p">)</span><span class="n">len</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">utils_enqueue</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="n">userial_cb</span><span class="p">.</span><span class="n">rx_q</span><span class="p">),</span> <span class="n">p_buf</span><span class="p">);</span>
+</span><span class='line'>  <span class="c1">//bluedroid/hci/src/bt_hci_bdroid.c</span>
+</span><span class='line'>  <span class="n">bthc_signal_event</span><span class="p">(</span><span class="n">HC_EVENT_RX</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2 Transfer this to L2CAP layer.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">bluedroid</span><span class="o">/</span><span class="n">hci</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">bt_hci_bdroid</span><span class="p">.</span><span class="n">c</span>  
+</span><span class='line'><span class="mi">339</span> <span class="k">static</span> <span class="kt">void</span> <span class="o">*</span><span class="n">bt_hc_worker_thread</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">events</span> <span class="o">&amp;</span> <span class="n">HC_EVENT_RX</span><span class="p">)</span>
+</span><span class='line'>       <span class="n">p_hci_if</span><span class="o">-&gt;</span><span class="n">rcv</span><span class="p">();</span>
+</span><span class='line'>          <span class="n">uint16_t</span> <span class="n">hci_h4_receive_msg</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="c1">//Construct HCI EVENT/ACL packets and send them to stack</span>
+</span><span class='line'> <span class="mi">957</span>             <span class="k">if</span> <span class="p">(</span><span class="n">p_cb</span><span class="o">-&gt;</span><span class="n">p_rcv_msg</span><span class="o">-&gt;</span><span class="n">event</span> <span class="o">!=</span> <span class="n">MSG_HC_TO_STACK_HCI_ACL</span><span class="p">)</span>
+</span><span class='line'> <span class="mi">958</span>                 <span class="n">btsnoop_capture</span><span class="p">(</span><span class="n">p_cb</span><span class="o">-&gt;</span><span class="n">p_rcv_msg</span><span class="p">,</span> <span class="n">TRUE</span><span class="p">);</span><span class="c1">//dump to HCI trace file/socket.</span>
+</span><span class='line'> <span class="mi">960</span>             <span class="k">if</span> <span class="p">(</span><span class="n">p_cb</span><span class="o">-&gt;</span><span class="n">p_rcv_msg</span><span class="o">-&gt;</span><span class="n">event</span> <span class="o">==</span> <span class="n">MSG_HC_TO_STACK_HCI_EVT</span><span class="p">)</span>
+</span><span class='line'> <span class="mi">965</span>                 <span class="n">bt_hc_cbacks</span><span class="o">-&gt;</span><span class="n">data_ind</span><span class="p">((</span><span class="n">TRANSAC</span><span class="p">)</span> <span class="n">p_cb</span><span class="o">-&gt;</span><span class="n">p_rcv_msg</span><span class="p">,</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="p">(</span><span class="n">p_cb</span><span class="o">-&gt;</span><span class="n">p_rcv_msg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">p_cb</span><span class="o">-&gt;</span><span class="n">p_rcv_msg</span><span class="o">-&gt;</span><span class="n">len</span> <span class="o">+</span> <span class="n">BT_HC_HDR_SIZE</span><span class="p">);</span>
+</span><span class='line'>                          <span class="n">bluedroid</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">bte_main</span><span class="p">.</span><span class="nl">c:</span><span class="mi">504</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">data_ind</span><span class="p">(</span><span class="n">TRANSAC</span> <span class="n">transac</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">p_buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span>
+</span><span class='line'>                              <span class="n">GKI_send_msg</span> <span class="p">(</span><span class="n">BTU_TASK</span><span class="p">,</span> <span class="n">BTU_HCI_RCV_MBOX</span><span class="p">,</span> <span class="n">transac</span><span class="p">);</span><span class="c1">//handle in btu_task.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Reference:</p>
+
+<blockquote><p></p><footer><strong>logcat:A2DP</strong> <cite><a href='http://yongbingchen.github.com/txt/bluedroid/a2dp-init-logcat.txt'>yongbingchen.github.com/txt/&hellip;</a></cite></footer></blockquote>
+
+
+<blockquote><p></p><footer><strong>air log: LMP</strong> <cite><a href='http://yongbingchen.github.com/images/bluedroid/A2DP-connect-LMP.jpg'>yongbingchen.github.com/images/&hellip;</a></cite></footer></blockquote>
+
+
+<blockquote><p></p><footer><strong>air log: L2CAP</strong> <cite><a href='http://yongbingchen.github.com/images/bluedroid/A2DP-connect-L2CAP.jpg'>yongbingchen.github.com/images/&hellip;</a></cite></footer></blockquote>
+
+
+<blockquote><p></p><footer><strong>source code reading note</strong> <cite><a href='http://yongbingchen.github.com/txt/bluedroid/a2dp-source-code-reading-note.txt'>yongbingchen.github.com/txt/&hellip;</a></cite></footer></blockquote>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1289,6 +1613,10 @@ For Java class who claims system resource in its construction method, we must de
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/09/verify-the-signature-of-a-x-dot-509-certificate/">Verify the signature of a X.509 certificate</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/03/27/create-my-own-repo-to-manage-bundle-of-git-repositories/">create my own repo to manage bundle of git repositories</a>
       </li>
     
@@ -1304,10 +1632,6 @@ For Java class who claims system resource in its construction method, we must de
         <a href="/blog/2013/07/24/atomic-file-write/">atomic file writing</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/07/12/android-bluetooth-pair-a-hid-device/">Android Bluetooth: pairing a HID device</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -1317,6 +1641,7 @@ For Java class who claims system resource in its construction method, we must de
 <li class='category'><a href='/blog/categories/bluetooth/'>Bluetooth (9)</a></li>
 <li class='category'><a href='/blog/categories/gerrit/'>gerrit (2)</a></li>
 <li class='category'><a href='/blog/categories/linux/'>linux (6)</a></li>
+<li class='category'><a href='/blog/categories/security/'>security (1)</a></li>
 
         </ul>
 </section>

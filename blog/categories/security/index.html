@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Dissect Bluedroid from A2DP  Part I: use case - Yongbing's Blog</title>
+  <title>Category: security - Yongbing's Blog</title>
   <meta name="author" content="Yongbing Chen">
 
   
-  <meta name="description" content="Android framework defined two hardware interfaces for operating audio output devices, they are audio_hw_device_t and audio_stream_out_t, AudioFlinger &hellip;">
+  <meta name="description" content="Category: security">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yongbingchen.github.com/blog/2013/05/03/dissect-bluedroid-from-a2dp-part-i-use-case/">
+  <link rel="canonical" href="http://yongbingchen.github.comblog/categories/security/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -84,117 +84,36 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      
-        <h1 class="entry-title">Dissect Bluedroid From A2DP Part I: Use Case</h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-03T22:05:00-07:00" pubdate data-updated="true">May 3<span>rd</span>, 2013</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
+    <h1 class="entry-title">Category: Security</h1>
     
   </header>
-
-
-<div class="entry-content"><p>Android framework defined two hardware interfaces for operating audio output devices, they are audio_hw_device_t and audio_stream_out_t, AudioFlinger is the only user of these interfaces. Bluedroid implemented these two interface in external/bluetooth/bluedroid/audio_a2dp_hw/audio_a2dp_hw.c, AudioFlinger can output audio sample to a connected A2DP sink device if this implementation has been registered to Android.</p>
-
-<p><img src="http://yongbingchen.github.com/images/bluedroid/A2dp_use_case.jpg" title="" ></p>
-
-<p>In Bluedroid&#8217;s A2DP hardware implementation, it will use two sockets to communicate with A2DP server.</p>
-
-<p><img class="center" src="http://yongbingchen.github.com/images/bluedroid/audio_a2dp_hw_bluedroid.jpg" title="" ></p>
-
-<p>Reference:</p>
-
-<blockquote><p></p><footer><strong>Source Code</strong> <cite><a href='http://androidxref.com/4.2.2_r1'>androidxref.com/4.2.2_r1/&hellip;</a></cite></footer></blockquote>
-
-
-<blockquote><p></p><footer><strong>logcat:A2DP</strong> <cite><a href='http://yongbingchen.github.com/txt/bluedroid/a2dp-init-logcat.txt'>yongbingchen.github.com/txt/&hellip;</a></cite></footer></blockquote>
-
-
-
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Yongbing Chen</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2015</h2>
+
+<article>
+  
+<h1><a href="/blog/2015/04/09/verify-the-signature-of-a-x-dot-509-certificate/">Verify the signature of a X.509 certificate</a></h1>
+<time datetime="2015-04-09T12:08:00-07:00" pubdate><span class='month'>Apr</span> <span class='day'>09</span> <span class='year'>2015</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/security/'>security</a></span>
+</footer>
 
 
-<time datetime="2013-05-03T22:05:00-07:00" pubdate data-updated="true">May 3<span>rd</span>, 2013</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/android/'>Android</a>, <a class='category' href='/blog/categories/bluetooth/'>Bluetooth</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yongbingchen.github.com/blog/2013/05/03/dissect-bluedroid-from-a2dp-part-i-use-case/" data-via="" data-counturl="http://yongbingchen.github.com/blog/2013/05/03/dissect-bluedroid-from-a2dp-part-i-use-case/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left articlenav" href="/blog/2013/04/23/skeleton-of-a-bluetooth-sdio-driver/" title="Previous Post: Skeleton of a Bluetooth SDIO driver">&laquo; Skeleton of a Bluetooth SDIO driver</a>
-      
-      
-        <a class="basic-alignment right articlenav" href="/blog/2013/05/04/dissect-bluedroid-from-a2dp-part-ii-init-bluetooth-adapter/" title="Next Post: Dissect Bluedroid from A2DP: Part II: Init Bluetooth Adapter">Dissect Bluedroid from A2DP: Part II: Init Bluetooth Adapter &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -261,10 +180,7 @@
       var disqus_shortname = 'yongbingchengithub';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://yongbingchen.github.com/blog/2013/05/03/dissect-bluedroid-from-a2dp-part-i-use-case/';
-        var disqus_url = 'http://yongbingchen.github.com/blog/2013/05/03/dissect-bluedroid-from-a2dp-part-i-use-case/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
